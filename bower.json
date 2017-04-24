@@ -1,0 +1,22 @@
+{
+  "name": "first_project",
+  "homepage": "https://github.com/moonlight8978/first-project",
+  "authors": [
+    "Le Si Bich <moonlight8978@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "^4.7.0",
+    "bootstrap": "v4.0.0-alpha.6",
+    "flux-slider": "^1.4.4"
+  }
+}

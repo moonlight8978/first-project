@@ -1,0 +1,1 @@
+$("#hint a").tooltip()
