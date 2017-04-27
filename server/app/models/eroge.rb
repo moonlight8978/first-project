@@ -1,0 +1,2 @@
+class Eroge < ApplicationRecord
+end

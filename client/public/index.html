@@ -1,9 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi" ng-app="app" ng-cloak>
 <head>
 	<title>にょろにょろショップ</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- libraries stylesheets -->
+	<link rel="stylesheet" href="bower_components/tether/dist/css/tether.min.css">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+
+	<!-- fonts -->
+	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
+
+	<!-- app's stylesheets -->
+	<link rel="stylesheet" href="/assets/css/application.css">
+
+	<!-- app's javascripts -->
+	<script src="assets/js/bootstrap.js" async></script>
 </head>
 <body>
-	<h1>今日は！</h1>
+	<div class="container">
+		<a data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">今日は！</a>
+		<div ui-view="navbar">
+
+		</div>
+		<div ui-view="content">
+
+		</div>
+	</div>
+	<!-- libraries -->
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/tether/dist/js/tether.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+	<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="bower_components/flux-slider/js/flux.min.js"></script>
+	<script src="bower_components/jquery_lazyload/jquery.lazyload.js"></script>
+	<script src="bower_components/lazysizes/lazysizes.min.js"></script>
+	<script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+	<script src="bower_components/ngstorage/ngStorage.min.js"></script>
+
+	<!-- app inject -->
+	<script src="app/app.module.js"></script>
+
 </body>
 </html>
