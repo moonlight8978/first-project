@@ -1,10 +1,3 @@
 class ApplicationController < ActionController::API
-  def index
-    @eroges = Eroge.all
-    render json: @eroges
-  end
-
-  def create
-    render plain: params.inspect
-  end
+  include ActionController::HttpAuthentication::Token::ControllerMethods
 end

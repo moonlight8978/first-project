@@ -1,0 +1,15 @@
+<form id="eroge" ng-submit="vm.submit()">
+  <label for="title">Title</label>
+  <input type="text" name="title" ng-model="vm.eroge.title">
+  <br>
+  <label for="original_title">Original Title</label>
+  <input type="text" name="original_title" ng-model="vm.eroge.original_title">
+  <button type="submit" name="button">Save</button>
+</form>
+
+<div>Eroge is going to create:</div>
+<div> {{ vm.eroge.title }} </div>
+<div> {{ vm.eroge.original_title }} </div>
+<div class="">
+  {{ vm.test }}
+</div>
