@@ -1,4 +1,4 @@
-export function formState($stateProvider) {
+function formState($stateProvider) {
     $stateProvider.state('form', {
         parent: 'app',
         url: '/form',
@@ -13,3 +13,5 @@ export function formState($stateProvider) {
 }
 
 formState.$inject = ['$stateProvider'];
+
+export default formState;

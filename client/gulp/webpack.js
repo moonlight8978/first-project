@@ -1,13 +1,15 @@
-let gulp = require('gulp'),
-	babel = require('gulp-babel'),
-	concat = require('gulp-concat'),
-	webpack = require('webpack-stream'),
-	uglify = require('gulp-uglify');
+'use strict';
+
+let gulp = require('gulp');
+let babel = require('gulp-babel');
+let concat = require('gulp-concat');
+let webpack = require('webpack-stream');
+let uglify = require('gulp-uglify');
 
 let config = require('./config');
 
 let compile = function compile() {
-	return gulp.src(config.app + 'app/app.module.js')
+	return gulp.src(config.app + 'app/index.js')
 		.pipe(webpack({
 			module: {
 				loaders: [{
@@ -20,7 +22,7 @@ let compile = function compile() {
                 }]
 			}
         }))
-		.pipe(uglify())
+		// .pipe(uglify())
 		.pipe(concat('application.js'))
 		.pipe(gulp.dest(config.build + 'js'));
 }

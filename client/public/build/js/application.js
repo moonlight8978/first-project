@@ -46,17 +46,35 @@
 
 	'use strict';
 
-	var _eroges = __webpack_require__(1);
+	var _app = __webpack_require__(1);
 
-	var _form = __webpack_require__(2);
+	var _app2 = _interopRequireDefault(_app);
 
-	var _app = __webpack_require__(3);
+	var _eroges = __webpack_require__(2);
 
-	var _eroges2 = __webpack_require__(4);
+	var _eroges2 = _interopRequireDefault(_eroges);
 
-	var _form2 = __webpack_require__(5);
+	var _form = __webpack_require__(3);
 
-	angular.module('app', ['ui.router', 'ngMap', 'angular-loading-bar', 'ngStorage', 'ngResource', 'ui.bootstrap']).config(_app.appState).controller('ErogesController', _eroges.ErogesController).config(_eroges2.erogesState).controller('FormController', _form.FormController).config(_form2.formState);
+	var _form2 = _interopRequireDefault(_form);
+
+	var _app3 = __webpack_require__(4);
+
+	var _app4 = _interopRequireDefault(_app3);
+
+	var _eroges3 = __webpack_require__(5);
+
+	var _eroges4 = _interopRequireDefault(_eroges3);
+
+	var _form3 = __webpack_require__(6);
+
+	var _form4 = _interopRequireDefault(_form3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	_app2.default.controller('ErogesController', _eroges2.default).controller('FormController', _form2.default);
+
+	_app2.default.config(_app4.default).config(_eroges4.default).config(_form4.default);
 
 /***/ }),
 /* 1 */
@@ -67,10 +85,25 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	angular.module('app', ['ui.router', 'ngMap', 'angular-loading-bar', 'ngStorage', 'ngResource', 'ui.bootstrap']);
+
+	var appModule = angular.module('app');
+
+	exports.default = appModule;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var ErogesController = exports.ErogesController = function ErogesController($resource) {
+	var ErogesController = function ErogesController($resource) {
 	    var _this = this;
 
 	    _classCallCheck(this, ErogesController);
@@ -84,8 +117,10 @@
 
 	ErogesController.$inject = ['$resource'];
 
+	exports.default = ErogesController;
+
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -98,27 +133,23 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var FormController = exports.FormController = function () {
+	var FormController = function () {
 	    function FormController($resource, $q) {
 	        _classCallCheck(this, FormController);
 
 	        this.$resource = $resource;
-	        this.eroge = {
+	        this.product = {
+	            price: 0,
 	            title: '',
-	            original_title: ''
+	            original: '',
+	            product_type: ''
 	        };
-	        var x = $resource('http://localhost:3000/eroges/:id', { 'get': { method: 'GET' } }).get({ id: 2 });
-	        $q.when(x.$promise).then(function (response) {
-	            console.log(response);
-	        }, function (response) {
-	            console.log('Error!');
-	        });
 	    }
 
 	    _createClass(FormController, [{
 	        key: 'submit',
 	        value: function submit() {
-	            this.$resource('http://localhost:3000/eroges/:id', { 'save': { method: 'POST' } }).save(this.eroge, function (response) {
+	            this.$resource('http://localhost:3000/products/:id', { 'save': { method: 'POST' } }).save(this.product, function (response) {
 	                console.log('Success!');
 	            });
 	        }
@@ -129,8 +160,10 @@
 
 	FormController.$inject = ['$resource', '$q'];
 
+	exports.default = FormController;
+
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -138,9 +171,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.appState = appState;
-	appState.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
-
 	function appState($stateProvider, $urlRouterProvider, $locationProvider) {
 	    $stateProvider.state('app', {
 	        url: '',
@@ -155,8 +185,12 @@
 	    $urlRouterProvider.otherwise('/');
 	};
 
+	appState.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+
+	exports.default = appState;
+
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -164,9 +198,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.erogesState = erogesState;
-	erogesState.$inject = ['$stateProvider'];
-
 	function erogesState($stateProvider) {
 	    $stateProvider.state('eroges', {
 	        parent: 'app',
@@ -181,8 +212,12 @@
 	    });
 	}
 
+	erogesState.$inject = ['$stateProvider'];
+
+	exports.default = erogesState;
+
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -190,7 +225,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.formState = formState;
 	function formState($stateProvider) {
 	    $stateProvider.state('form', {
 	        parent: 'app',
@@ -206,6 +240,8 @@
 	}
 
 	formState.$inject = ['$stateProvider'];
+
+	exports.default = formState;
 
 /***/ })
 /******/ ]);

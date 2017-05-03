@@ -1,4 +1,4 @@
-export class ErogesController {
+class ErogesController {
     constructor($resource) {
         this.eroges = [];
         $resource('http://localhost:3000/eroges/:id', { 'query': { method: 'GET', isArray: true } })
@@ -10,3 +10,5 @@ export class ErogesController {
 }
 
 ErogesController.$inject = ['$resource'];
+
+export default ErogesController;

@@ -10,23 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427144425) do
+ActiveRecord::Schema.define(version: 20170502063425) do
 
-  create_table "eroges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "title"
-    t.string   "original_title"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+  create_table "cd_product_refs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_cd_product_refs_on_product_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.string   "token"
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["token"], name: "index_users_on_token", using: :btree
+  create_table "cds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "cd_product_ref_id"
+    t.string   "title"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["cd_product_ref_id"], name: "index_cds_on_cd_product_ref_id", using: :btree
+  end
+
+  create_table "game_product_refs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_game_product_refs_on_product_id", using: :btree
+  end
+
+  create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "game_product_ref_id"
+    t.string   "title"
+    t.string   "original"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["game_product_ref_id"], name: "index_games_on_game_product_ref_id", using: :btree
+  end
+
+  create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "price"
+    t.string   "product_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end

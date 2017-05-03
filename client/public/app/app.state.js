@@ -1,6 +1,4 @@
-appState.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
-
-export function appState($stateProvider, $urlRouterProvider, $locationProvider) {
+function appState($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider.state('app', {
         url: '',
         views: {
@@ -15,3 +13,7 @@ export function appState($stateProvider, $urlRouterProvider, $locationProvider) 
     $locationProvider.hashPrefix('');
     $urlRouterProvider.otherwise('/');  
 };
+
+appState.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+
+export default appState;

@@ -1,6 +1,4 @@
-erogesState.$inject = ['$stateProvider'];
-
-export function erogesState($stateProvider) {
+function erogesState($stateProvider) {
     $stateProvider.state('eroges', {
         parent: 'app',
         url: '/eroges',
@@ -13,3 +11,7 @@ export function erogesState($stateProvider) {
         }
     });
 }
+
+erogesState.$inject = ['$stateProvider'];
+
+export default erogesState;

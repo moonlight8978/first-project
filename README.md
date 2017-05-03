@@ -1,4 +1,4 @@
-# __Project__
+# __< Project name >__
 
 (Ruby on Rails (Rails API), AngularJS (ES6), Bootstrap 4, JWT Authentication....)
 
@@ -9,6 +9,9 @@
 ## Environment:
 
 NodeJS, RailsInstaller (Ruby 2.3, Rails 5), XAMPP
+
+###### NodeJS global package: 
+* `$ npm i -g gulp bower`
 
 ###### Server
 * `$ bundle install`
@@ -24,7 +27,7 @@ NodeJS, RailsInstaller (Ruby 2.3, Rails 5), XAMPP
 
 * `$ npm install`
 
-* run: `$ http-server` or `$npm run start`
+* run: `$ http-server -c-1` or `$ npm run start`
 
 ###### MySQL
 * user: `root`
@@ -32,9 +35,9 @@ NodeJS, RailsInstaller (Ruby 2.3, Rails 5), XAMPP
 
 ## Dev Support Tool
 ###### Build sass, ES6
-* `$ gulp es6:build`
+* `$ gulp js:build`
 
-* `$ gulp sass:build`
+* `$ gulp css:build`
 
 ###### Build on saving
 * `$ gulp js:watch`

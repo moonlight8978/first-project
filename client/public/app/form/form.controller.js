@@ -1,26 +1,23 @@
-export class FormController {
+class FormController {
     constructor($resource, $q) {
         this.$resource = $resource;
-        this.eroge = {
+        this.product = {
+            price: 0,
             title: '',
-            original_title: ''
+            original: '',
+            product_type: ''
         };
-        let x = 
-            $resource('http://localhost:3000/eroges/:id', { 'get': { method: 'GET' } })
-                .get({ id: 2});
-        $q.when(x.$promise).then((response) => {
-            console.log(response);
-        }, (response) => {
-            console.log('Error!');
-        });
+
     }
 
     submit() {
-        this.$resource('http://localhost:3000/eroges/:id', { 'save': { method:'POST' } })
-            .save(this.eroge, (response) => {
+        this.$resource('http://localhost:3000/products/:id', { 'save': { method:'POST' } })
+            .save(this.product, (response) => {
                 console.log('Success!');
             });
     }
 }
 
 FormController.$inject = ['$resource', '$q'];
+
+export default FormController;
