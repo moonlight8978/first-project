@@ -5,3 +5,64 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+admin = User.create(
+  user_name: 'admin',
+  password: 'admin',
+  email: 'admin@gmail.com',
+  phone_number: '0999999999',
+  address: '12　東京',
+  activated: true,
+  profile_image_url: 'https://40.media.tumblr.com/59ffcfc171694ffe29f5f3399e2b03c6/tumblr_nip773wOu31rhrl68o4_400.png',
+  birthday: DateTime.parse('1997-12-18'),
+  about: 'こんにちは！',
+  signature: 'これは俺のシグネチャー。',
+  country: '日本',
+  first_name: 'ひろし',
+  last_name: '鈴木'
+)
+
+user = User.create(
+  user_name: 'user',
+  password: 'user',
+  email: 'user@gmail.com',
+  phone_number: '0988888888',
+  address: '12　東京',
+  activated: true,
+  profile_image_url: 'https://40.media.tumblr.com/59ffcfc171694ffe29f5f3399e2b03c6/tumblr_nip773wOu31rhrl68o4_400.png',
+  birthday: DateTime.parse('1997-12-18'),
+  about: 'こんにちは！',
+  signature: 'これは俺のシグネチャー。',
+  country: '日本',
+  first_name: 'ひろし',
+  last_name: '鈴木'
+)
+
+moderator = User.create(
+  user_name: 'moderator',
+  password: 'moderator',
+  email: 'moderator@gmail.com',
+  phone_number: '0977777777',
+  address: '12　東京',
+  activated: true,
+  profile_image_url: 'https://40.media.tumblr.com/59ffcfc171694ffe29f5f3399e2b03c6/tumblr_nip773wOu31rhrl68o4_400.png',
+  birthday: DateTime.parse('1997-12-18'),
+  about: 'こんにちは！',
+  signature: 'これは俺のシグネチャー。',
+  country: '日本',
+  first_name: 'ひろし',
+  last_name: '鈴木'
+)
+
+Role.create(role: 'ROLE_USER')
+Role.create(role: 'ROLE_MODERATOR')
+Role.create(role: 'ROLE_ADMIN')
+
+admin.authorities.create(role_id: 1)
+admin.authorities.create(role_id: 2)
+admin.authorities.create(role_id: 3)
+
+moderator.authorities.create(role_id: 1)
+moderator.authorities.create(role_id: 2)
+
+user.authorities.create(role_id: 1)
