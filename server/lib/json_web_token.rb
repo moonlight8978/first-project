@@ -1,7 +1,9 @@
 class JsonWebToken
   ALGORITHM = 'HS256'
+  EXPIRATION = 30 * 60
 
   def self.encode(payload)
+    payload[:exp] = Time.now.to_i + EXPIRATION
     JWT.encode(payload, secret_key, ALGORITHM)
   end
 

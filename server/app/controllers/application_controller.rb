@@ -21,13 +21,13 @@ private
   end
 
   def authenticated?
-    true if curr_user
+    curr_user ? true : false
   end
 
   def curr_user
     begin
       user_from_request = JsonWebToken.decode(token_from_request).symbolize_keys
-    rescue JWT::DecodeError, JWT::VerificationError
+    rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
       return nil
     end
 
