@@ -4,4 +4,8 @@ class UsersController < ApplicationController
     render json: @users, key_transform: :camel_lower
   end
 
+  def show
+    @current_user = curr_user
+    render json: @current_user, key_transform: :camel_lower
+  end
 end
