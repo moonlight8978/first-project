@@ -23,6 +23,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :reset_password_token, null: true
       t.string :forget_password_token, null: true
       t.string :activate_account_token, null: true
+      t.datetime :password_updated_at, default: Time.zone.now, null: false
 
       t.timestamps
     end
@@ -38,6 +39,11 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.belongs_to :user, index: true, null: false
 
       t.timestamps
+    end
+
+    create_table :invalid_tokens do |t|
+      t.string :token, null: false
+      t.datetime :expiration, null: false
     end
   end
 end

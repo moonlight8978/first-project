@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   post 'login', to: 'auth#login'
 
   post 'register', to: 'auth#register'
+
+  post 'logout', to: 'auth#logout'
+
+  delete 'remove', to: 'auth#destroy'
   
   resource :user, only: [:index, :show]
 end

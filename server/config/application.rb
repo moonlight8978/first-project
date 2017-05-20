@@ -27,6 +27,10 @@ module NyoroNyoro
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    # Time zone
+    config.time_zone = 'Asia/Bangkok'
+    config.active_record.default_timezone = :local
+
     # Load all lib files
     config.autoload_paths << Rails.root.join('lib')
   end
