@@ -1,18 +1,18 @@
 class CreateUsers < ActiveRecord::Migration[5.0]
   def change
     create_table :users do |t|
-      t.string :user_name, null: false, unique: true
-      t.string :password_digest, null: false
-      t.string :email, null: false, unique: true
-      t.string :phone_number, null: true
-      t.string :address, null: true
+      t.string  :user_name, null: false, unique: true
+      t.string  :password_digest, null: false
+      t.string  :email, null: false, unique: true
+      t.string  :phone_number, null: true
+      t.string  :address, null: true
       t.boolean :activated, null: true, default: false
 
       t.string :first_name, null: true
       t.string :last_name, null: true
       t.string :profile_image_url, null: true
-      t.date :birthday, null: true
-      t.text :about, null: true
+      t.date   :birthday, null: true
+      t.text   :about, null: true
       t.string :signature, null: true
       t.string :country, null: true
 
@@ -20,9 +20,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :twitter_url, null: true
       t.string :gmail_url, null: true
 
-      t.string :reset_password_token, null: true
-      t.string :forget_password_token, null: true
-      t.string :activate_account_token, null: true
+      t.string   :activate_account_token, null: true
       t.datetime :password_updated_at, default: Time.zone.now, null: false
 
       t.timestamps
@@ -42,8 +40,16 @@ class CreateUsers < ActiveRecord::Migration[5.0]
     end
 
     create_table :invalid_tokens do |t|
-      t.string :token, null: false
+      t.string   :token, null: false
       t.datetime :expiration, null: false
+    end
+
+    create_table :reset_password_tokens do |t|
+      t.belongs_to :user,       null: false, index: true
+      t.string     :token,      null: false
+      t.datetime   :expiration, null: false
+
+      t.timestamps
     end
   end
 end

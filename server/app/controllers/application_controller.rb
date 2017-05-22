@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
-protected
+private
+  # Main authenticate helpers
   def authenticate
     render_unauthorized unless authenticated?
   end
@@ -16,14 +17,14 @@ protected
 
   def curr_user
     token = TokenService.new(token_from_request)
-    return @current_user unless token.payload.present?
+    return @current_user unless token.decode_success?
     user = User.find(token.user_id)
     if user
       @current_user ||= user
     end
   end
 
-private
+  # Supported
   def authenticated?
     token_not_in_black_list? &&
     curr_user.present? &&
@@ -55,7 +56,12 @@ private
     end
   end
 
+  # Render methods
   def render_unauthorized
     render json: { message: 'Unauthorized' }, status: :unauthorized
+  end
+
+  def render_not_found
+    render json: { message: 'Not found!' }, status: :not_found
   end
 end

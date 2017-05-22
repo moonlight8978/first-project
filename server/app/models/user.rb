@@ -1,12 +1,9 @@
 class User < ApplicationRecord
-  has_secure_password
-
   has_many :authorities
   has_many :roles, through: :authorities
+  has_many :reset_password_token
 
-  # def as_json(options = {})
-  #   super(options.merge({ include: :roles }))
-  # end
+  has_secure_password
 
   def token
     JsonWebToken.encode({ id: self.id })

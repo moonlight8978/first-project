@@ -1,15 +1,26 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :api do
+    scope module: :entity do
+      resources :users, only: [:index]
+    end
 
-  get 'users', to: 'users#index'
+    scope module: :security do
+      scope module: :auth do
+        post 'login'
+        post 'logout'
+        post 'register'
+      end
 
-  post 'login', to: 'auth#login'
+      namespace :account do
+        put   'password',        action: :change_password
+        post  'password',        action: :send_token
+        put   'password/:token', action: :reset_password
+      end
+    end
 
-  post 'register', to: 'auth#register'
-
-  post 'logout', to: 'auth#logout'
-
-  delete 'remove', to: 'auth#destroy'
-  
-  resource :user, only: [:index, :show]
+    namespace :schedule do
+      resource :token, only: :destroy
+    end
+  end
 end
