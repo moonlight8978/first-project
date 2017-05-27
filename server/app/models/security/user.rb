@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_many :authorities
   has_many :roles, through: :authorities
-  has_many :reset_password_token
+    alias_method :original_roles, :roles
+  has_many :reset_password_tokens
 
   has_secure_password
 
@@ -10,6 +11,6 @@ class User < ApplicationRecord
   end
 
   def roles
-    Role.joins(:authorities).where('authorities.user_id' => self.id).pluck(:role)
+    self.original_roles.map { |e| e.role }
   end
 end

@@ -20,7 +20,10 @@ NodeJS, RailsInstaller (Ruby 2.3, Rails 5), XAMPP
 
 * `$ rake db:migrate`
 
-* run: `$ rails s`
+* run: 
+**`$ rails s`
+**`$ redis-server`
+**`$ bundle exec sidekiq -C config/sidekiq.yml`
 
 ###### Client
 * `$ bower install`

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170516121034) do
+ActiveRecord::Schema.define(version: 20170526093331) do
 
   create_table "authorities", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "role_id", null: false
@@ -21,9 +21,49 @@ ActiveRecord::Schema.define(version: 20170516121034) do
     t.index ["user_id"], name: "index_authorities_on_user_id"
   end
 
+  create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "original_name", null: false
+    t.string "country", null: false
+    t.string "link", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "product_id"
+    t.string "title"
+    t.string "original_title", null: false
+    t.string "aliases"
+    t.integer "length", null: false
+    t.text "description"
+    t.string "image", null: false
+    t.boolean "image_nsfw", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_games_on_product_id"
+  end
+
   create_table "invalid_tokens", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "token", null: false
     t.datetime "expiration", null: false
+  end
+
+  create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "type"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "publishers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "company_id", null: false
+    t.bigint "game_id", null: false
+    t.date "released", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_publishers_on_company_id"
+    t.index ["game_id"], name: "index_publishers_on_game_id"
   end
 
   create_table "reset_password_tokens", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -37,6 +77,12 @@ ActiveRecord::Schema.define(version: 20170516121034) do
 
   create_table "roles", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "role", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -58,10 +104,8 @@ ActiveRecord::Schema.define(version: 20170516121034) do
     t.string "facebook_url"
     t.string "twitter_url"
     t.string "gmail_url"
-    t.string "reset_password_token"
-    t.string "forget_password_token"
     t.string "activate_account_token"
-    t.datetime "password_updated_at", default: "2017-05-22 12:23:59", null: false
+    t.datetime "password_updated_at", default: "2017-05-27 15:14:57", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -2,32 +2,31 @@ class Api::Security::AuthController < ApplicationController
   before_action :authenticate, only: :logout
 
   def register
-    @users = User.where(
-      "user_name = :user_name or email = :email",
-      { user_name: params[:user_name], email: params[:email] }
-    )
-    if @users.empty?
-      if User.create(register_params)
-        head :ok
-      else
-        head :unauthorized
-      end
-    else
+    @user_svc = RegisterService.new(register_params)
+    if @user_svc.user_already_exist?
       head :conflict
+    else
+      render_unauthorized and return unless @user_svc.register?
+      ApplicationMailer::Security::RegisterMailer
+        .complete_register(@user_svc.user)
+        .deliver_later
+      head :ok
+    end
+  end
+
+  def register_confirm
+    @confirm_svc = ConfirmService.new(confirm_token)
+    if @confirm_svc.activate?
+      head :ok
+    else
+      render_unauthorized
     end
   end
 
   def login
-    if params.fetch(:user_name, {}).present?
-      @user = User.find_by_user_name(params[:user_name])
-    elsif params.fetch(:email, {}).present?
-      @user = User.find_by_email(params[:email])
-    else
-      render_unauthorized and return
-    end
-
-    if @user && @user.authenticate(params[:password])
-      token = @user.token
+    @session_svc = SessionService::Login.new(login_params)
+    if @session_svc.login?
+      token = @session_svc.user.token
       render json: { token: token }, status: :ok
     else
       render_unauthorized
@@ -35,17 +34,28 @@ class Api::Security::AuthController < ApplicationController
   end
 
   def logout
-    token = TokenService.new(token_from_request)
-    head :unauthorized and return unless token.decode_success?
-    @token = InvalidToken.new(
-      token:      token.token,
-      expiration: token.expire_at
-    )
-    @token.save
+    @session_svc = SessionService::Logout.new(token_from_request)
+    @session_svc.logout? && (head :ok and return)
+    render_unauthorized
+  end
+
+  def test
+    @user = User.find(7)
+    ApplicationMailer::Security::RegisterMailer
+      .complete_register(@user)
+      .deliver_later(wait: 10.seconds)
   end
 
 private
+  def login_params
+    params.permit(:login, :password)
+  end
+
   def register_params
-    params.require(:auth).permit(:email, :user_name, :password)
+    params.permit(:user_name, :email, :password)
+  end
+
+  def confirm_token
+    params.permit(:token)[:token]
   end
 end

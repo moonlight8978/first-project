@@ -28,6 +28,7 @@ private
   def authenticated?
     token_not_in_black_list? &&
     curr_user.present? &&
+    user_activated?(curr_user) &&
     token_created_after_changing_password?
   end
 
@@ -37,6 +38,10 @@ private
     render_unauthorized and return unless @current_user.present?
     roles = @current_user.roles
     render_unauthorized and return unless roles.include?(role)
+  end
+
+  def user_activated?(current_user)
+    current_user.activated
   end
 
   def token_created_after_changing_password?

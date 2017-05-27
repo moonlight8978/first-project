@@ -31,7 +31,22 @@ module NyoroNyoro
     config.time_zone = 'Asia/Bangkok'
     config.active_record.default_timezone = :local
 
-    # Load all lib files
     config.autoload_paths << Rails.root.join('lib')
+    config.autoload_paths += Dir[Rails.root.join('app', 'models', '*/')]
+    config.autoload_paths += Dir[Rails.root.join('app', 'services', '*/')]
+
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.delivery_method = :smtp
+
+    ActionMailer::Base.smtp_settings = {
+      :address        => 'smtp.gmail.com',
+      :domain         => 'mail.google.com',
+      :port           => 587,
+      :user_name      => 'moonlight8978@gmail.com',
+      :password       => '',
+      :authentication => :plain,
+      :enable_starttls_auto => true
+    }
   end
 end
