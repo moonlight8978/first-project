@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-admin = User.create(
+admin = Security::User.create(
   user_name: 'admin',
   password: 'admin',
   email: 'admin@gmail.com',
@@ -22,7 +22,7 @@ admin = User.create(
   last_name: '鈴木'
 )
 
-moderator = User.create(
+moderator = Security::User.create(
   user_name: 'moderator',
   password: 'moderator',
   email: 'moderator@gmail.com',
@@ -38,7 +38,7 @@ moderator = User.create(
   last_name: '鈴木'
 )
 
-user = User.create(
+user = Security::User.create(
   user_name: 'user',
   password: 'user',
   email: 'user@gmail.com',
@@ -54,15 +54,15 @@ user = User.create(
   last_name: '鈴木'
 )
 
-Role.create(role: 'ROLE_USER')
-Role.create(role: 'ROLE_MODERATOR')
-Role.create(role: 'ROLE_ADMIN')
+Security::Role.create(role: 'ROLE_USER')
+Security::Role.create(role: 'ROLE_MODERATOR')
+Security::Role.create(role: 'ROLE_ADMIN')
 
-Authority.create(user_id: 1, role_id: 1)
-Authority.create(user_id: 1, role_id: 2)
-Authority.create(user_id: 1, role_id: 3)
+Security::Authority.create(user_id: 1, role_id: 1)
+Security::Authority.create(user_id: 1, role_id: 2)
+Security::Authority.create(user_id: 1, role_id: 3)
 
-Authority.create(user_id: 2, role_id: 1)
-Authority.create(user_id: 2, role_id: 2)
+Security::Authority.create(user_id: 2, role_id: 1)
+Security::Authority.create(user_id: 2, role_id: 2)
 
-Authority.create(user_id: 3, role_id: 1)
+Security::Authority.create(user_id: 3, role_id: 1)

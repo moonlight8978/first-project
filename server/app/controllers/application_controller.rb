@@ -18,7 +18,7 @@ private
   def curr_user
     token = TokenService.new(token_from_request)
     return @current_user unless token.decode_success?
-    user = User.find(token.user_id)
+    user = Security::User.find(token.user_id)
     if user
       @current_user ||= user
     end
@@ -46,12 +46,12 @@ private
 
   def token_created_after_changing_password?
     token = TokenService.new(token_from_request)
-    @current_user = User.find(token.user_id)
+    @current_user = Security::User.find(token.user_id)
     token.created_at >= @current_user[:password_updated_at]
   end
 
   def token_not_in_black_list?
-    token = InvalidToken.find_by_token(token_from_request)
+    token = Security::InvalidToken.find_by_token(token_from_request)
     token.nil?
   end
 

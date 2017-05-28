@@ -1,4 +1,4 @@
-class User < ApplicationRecord
+class Security::User < ApplicationRecord
   has_many :authorities
   has_many :roles, through: :authorities
     alias_method :original_roles, :roles

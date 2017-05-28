@@ -1,4 +1,4 @@
-class Role < ApplicationRecord
+class Security::Role < ApplicationRecord
   has_many :authorities
   has_many :users, through: :authorities
 end
