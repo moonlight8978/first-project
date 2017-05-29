@@ -1,43 +1,43 @@
 Rails.application.routes.draw do
-  namespace :bussiness do
-    resources :types
-  end
-  namespace :bussiness do
-    resources :products
-  end
-  namespace :vndb do
-    resources :people
-  end
-  namespace :vndb do
-    resources :characters
-  end
-  namespace :vndb do
-    resources :publishes
-  end
-  namespace :vndb do
-    resources :companies
-  end
-  namespace :vndb do
-    resources :novels
-  end
-  namespace :security do
-    resources :reset_password_tokens
-  end
-  namespace :security do
-    resources :activate_account_tokens
-  end
-  namespace :security do
-    resources :invalid_tokens
-  end
-  namespace :security do
-    resources :authorities
-  end
-  namespace :security do
-    resources :users
-  end
-  namespace :security do
-    resources :roles
-  end
+  # namespace :bussiness do
+  #   resources :types
+  # end
+  # namespace :bussiness do
+  #   resources :products
+  # end
+  # namespace :vndb do
+  #   resources :people
+  # end
+  # namespace :vndb do
+  #   resources :characters
+  # end
+  # namespace :vndb do
+  #   resources :publishes
+  # end
+  # namespace :vndb do
+  #   resources :companies
+  # end
+  # namespace :vndb do
+  #   resources :novels
+  # end
+  # namespace :security do
+  #   resources :reset_password_tokens
+  # end
+  # namespace :security do
+  #   resources :activate_account_tokens
+  # end
+  # namespace :security do
+  #   resources :invalid_tokens
+  # end
+  # namespace :security do
+  #   resources :authorities
+  # end
+  # namespace :security do
+  #   resources :users
+  # end
+  # namespace :security do
+  #   resources :roles
+  # end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api do
     scope module: :entity do

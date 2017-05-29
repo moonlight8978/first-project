@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20170528104722) do
     t.string "twitter_url"
     t.string "gmail_url"
     t.string "activate_account_token"
-    t.datetime "password_updated_at", default: "2017-05-28 17:56:36", null: false
+    t.datetime "password_updated_at", default: "2017-05-29 12:09:04", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

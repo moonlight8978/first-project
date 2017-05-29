@@ -1,4 +1,4 @@
-class Api::Security::AccountController < ApplicationController
+class Security::AccountController < ApplicationController
   before_action :authenticate, only: [:change_password, :show]
 
   def show

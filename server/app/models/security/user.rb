@@ -6,6 +6,10 @@ class Security::User < ApplicationRecord
 
   has_secure_password
 
+  searchable do
+    text :first_name
+  end
+
   def token
     JsonWebToken.encode({ id: self.id })
   end

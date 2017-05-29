@@ -1,4 +1,4 @@
-class Api::Security::ResetPasswordController < ApplicationController
+class Security::ResetPasswordController < ApplicationController
   def send_token
     @reset_svc = ResetPasswordService::GenerateToken.new(forget_password_params)
     if @reset_svc.represent_user? && @reset_svc.generate_token?

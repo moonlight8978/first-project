@@ -21,10 +21,15 @@ class Security::RegisterController < ApplicationController
   end
 
   def test
-    @user = Security::User.find(7)
-    ApplicationMailer::Security::RegisterMailer
-      .complete_register(@user)
-      .deliver_later(wait: 10.seconds)
+    @search = Security::User.search do
+      fulltext 'ひろ'
+    end
+    # @search = Security::User.search do
+    #   with(:user_name, params[:search])
+    # end
+    @users = @search.results
+    # @users = Security::User.find_by_first_name('ひろし')
+    render json: @users, status: :ok
   end
 
 private
@@ -33,6 +38,6 @@ private
   end
 
   def confirm_token
-    params.permit(:token)[:token]
+    params.permit(:token)
   end
 end
