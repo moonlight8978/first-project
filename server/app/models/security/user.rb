@@ -15,6 +15,6 @@ class Security::User < ApplicationRecord
   end
 
   def roles
-    self.original_roles.map { |e| e.role }
+    self.original_roles.map(&:role)
   end
 end

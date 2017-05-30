@@ -21,7 +21,6 @@ admin = Security::User.create(
   first_name: 'ひろし',
   last_name: '鈴木'
 )
-
 moderator = Security::User.create(
   user_name: 'moderator',
   password: 'moderator',
@@ -37,7 +36,6 @@ moderator = Security::User.create(
   first_name: 'ひろし',
   last_name: '鈴木'
 )
-
 user = Security::User.create(
   user_name: 'user',
   password: 'user',
@@ -54,15 +52,106 @@ user = Security::User.create(
   last_name: '鈴木'
 )
 
-Security::Role.create(role: 'ROLE_USER')
-Security::Role.create(role: 'ROLE_MODERATOR')
-Security::Role.create(role: 'ROLE_ADMIN')
+role_user = Security::Role.create(role: 'ROLE_USER')
+role_moderator = Security::Role.create(role: 'ROLE_MODERATOR')
+role_admin = Security::Role.create(role: 'ROLE_ADMIN')
 
-Security::Authority.create(user_id: 1, role_id: 1)
-Security::Authority.create(user_id: 1, role_id: 2)
-Security::Authority.create(user_id: 1, role_id: 3)
+user.roles << role_user
+moderator.roles << role_user << role_moderator
+admin.roles << role_user << role_moderator << role_admin
 
-Security::Authority.create(user_id: 2, role_id: 1)
-Security::Authority.create(user_id: 2, role_id: 2)
+novel = Vndb::Novel.create(
+  title: 'Koi Suru Doll to Omoi no Kiseki ~Poupee de Souhaits~',
+  original_title: '恋する少女と想いのキセキ～Poupee de souhaits～',
+  aliases: 'Koisuru Shoujo to Omoi no Kiseki, 恋するドールと想いのキセキ',
+  length: 2,
+  description: 'When he was a young boy, Tomoki met the puppet master Asuha',
+  image: 'https://s.vndb.org/cv/85/23185.jpg',
+  image_nsfw: false
+)
 
-Security::Authority.create(user_id: 3, role_id: 1)
+country = General::Country.create(
+  name: 'Japan',
+  original_name: '日本'
+)
+
+company = Vndb::Company.new(
+  name: 'Sugar Pot',
+  original_name: '',
+  link: 'http://www.sugarpot-hp.com/'
+)
+
+company.country = country
+company.save
+
+novel.characters.create(
+  name: 'Ena',
+  original_name: 'エナ',
+  birthday_day: 1,
+  birthday_month: 11,
+  gender: 'Female',
+  height: 145,
+  bust: 72,
+  waist: 52,
+  hip: 74
+)
+
+novel.characters.create(
+  name: 'Himekawa Mitomo',
+  original_name: '姫川 美朋',
+  birthday_day: 10,
+  birthday_month: 3,
+  gender: 'Female',
+  height: 160,
+  bust: 93,
+  waist: 59,
+  hip: 91
+)
+
+novel.characters.create(
+  name: 'Komakuri Amane',
+  original_name: '駒久利 天音',
+  birthday_day: 25,
+  birthday_month: 8,
+  gender: 'Female',
+  height: 150,
+  bust: 81,
+  waist: 55,
+  hip: 80
+)
+
+novel.characters.create(
+  name: 'Shuri',
+  original_name: '珠璃',
+  birthday_day: 22,
+  birthday_month: 2,
+  gender: 'Female',
+  height: 150,
+  bust: 90,
+  waist: 58,
+  hip: 88
+)
+
+novel.characters.create(
+  name: 'Towa',
+  original_name: 'トワ',
+  birthday_day: 8,
+  birthday_month: 10,
+  gender: 'Female',
+  height: 156,
+  bust: 88,
+  waist: 56,
+  hip: 85
+)
+
+novel.characters.create(
+  name: 'Yoshino Sara',
+  original_name: '吉野 紗良',
+  birthday_day: 4,
+  birthday_month: 6,
+  gender: 'Female',
+  height: 155,
+  bust: 86,
+  waist: 58,
+  hip: 84
+)

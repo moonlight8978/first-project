@@ -16,8 +16,9 @@ class Security::AccountController < ApplicationController
     head :not_found
   end
 
-  private
-    def password_params
-      params.permit(:password)
-    end
+private
+
+  def password_params
+    params.permit(:password)
+  end
 end

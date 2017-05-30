@@ -17,8 +17,9 @@ class Security::SessionController < ApplicationController
     render_unauthorized
   end
 
-  private
-    def login_params
-      params.permit(:login, :password)
-    end
+private
+
+  def login_params
+    params.permit(:login, :password)
+  end
 end

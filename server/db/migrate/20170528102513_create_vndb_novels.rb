@@ -7,6 +7,7 @@ class CreateVndbNovels < ActiveRecord::Migration[5.1]
       t.string     :aliases
       t.integer    :length        , null: false
       t.text       :description
+      t.text       :original_description
       t.string     :image         , null: false
       t.boolean    :image_nsfw    , null: false
 

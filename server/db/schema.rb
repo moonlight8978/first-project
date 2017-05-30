@@ -10,17 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170528104722) do
+ActiveRecord::Schema.define(version: 20170530060429) do
 
   create_table "bussiness_products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "type"
-    t.integer "price"
+    t.bigint "type_id", null: false
+    t.integer "price", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type_id"], name: "index_bussiness_products_on_type_id"
+  end
+
+  create_table "bussiness_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "bussiness_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "type"
+  create_table "general_countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", null: false
+    t.string "original_name", null: false
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -83,23 +92,38 @@ ActiveRecord::Schema.define(version: 20170528104722) do
     t.string "twitter_url"
     t.string "gmail_url"
     t.string "activate_account_token"
-    t.datetime "password_updated_at", default: "2017-05-29 12:09:04", null: false
+    t.datetime "password_updated_at", default: "2017-05-30 13:37:42", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "vndb_characters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "novel_id", null: false
+    t.string "name", null: false
+    t.string "original_name", null: false
+    t.integer "birthday_day", null: false
+    t.integer "birthday_month", null: false
+    t.string "gender", null: false
+    t.integer "weight"
+    t.integer "height"
+    t.integer "bust"
+    t.integer "waist"
+    t.integer "hip"
+    t.string "blood_type"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["novel_id"], name: "index_vndb_characters_on_novel_id"
   end
 
   create_table "vndb_companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "original_name", null: false
-    t.string "country", null: false
+    t.bigint "country_id", null: false
     t.string "link", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_vndb_companies_on_country_id"
   end
 
   create_table "vndb_novels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -109,6 +133,7 @@ ActiveRecord::Schema.define(version: 20170528104722) do
     t.string "aliases"
     t.integer "length", null: false
     t.text "description"
+    t.text "original_description"
     t.string "image", null: false
     t.boolean "image_nsfw", null: false
     t.datetime "created_at", null: false
@@ -117,18 +142,21 @@ ActiveRecord::Schema.define(version: 20170528104722) do
   end
 
   create_table "vndb_people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "original_name"
+    t.string "birthday"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "vndb_publishes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "vndb_publishers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "company_id", null: false
     t.bigint "game_id", null: false
     t.date "released", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_vndb_publishes_on_company_id"
-    t.index ["game_id"], name: "index_vndb_publishes_on_game_id"
+    t.index ["company_id"], name: "index_vndb_publishers_on_company_id"
+    t.index ["game_id"], name: "index_vndb_publishers_on_game_id"
   end
 
 end

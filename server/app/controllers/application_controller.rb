@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
-private
   # Main authenticate helpers
   def authenticate
     render_unauthorized unless authenticated?
@@ -24,6 +23,26 @@ private
     end
   end
 
+  def token_from_request
+    authenticate_or_request_with_http_token do |token, _options|
+      token
+    end
+  end
+
+  # Render methods
+  def render_unauthorized
+    render json: { message: 'Unauthorized' }, status: :unauthorized
+  end
+
+  def render_ok(data = { message: 'Everythingは大丈夫です！'})
+    render json: data, status: :ok
+  end
+
+  def render_not_found
+    render json: { message: 'Not found!' }, status: :not_found
+  end
+
+private
   # Supported
   def authenticated?
     token_not_in_black_list? &&
@@ -53,20 +72,5 @@ private
   def token_not_in_black_list?
     token = Security::InvalidToken.find_by_token(token_from_request)
     token.nil?
-  end
-
-  def token_from_request
-    authenticate_or_request_with_http_token do |token, _options|
-      token
-    end
-  end
-
-  # Render methods
-  def render_unauthorized
-    render json: { message: 'Unauthorized' }, status: :unauthorized
-  end
-
-  def render_not_found
-    render json: { message: 'Not found!' }, status: :not_found
   end
 end

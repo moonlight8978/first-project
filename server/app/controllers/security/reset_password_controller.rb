@@ -17,12 +17,13 @@ class Security::ResetPasswordController < ApplicationController
     end
   end
 
-  private
-    def forget_password_params
-      params.permit(:user_name, :email)
-    end
+private
 
-    def reset_password_params
-      params.permit(:token, :password)
-    end
+  def forget_password_params
+    params.permit(:user_name, :email)
+  end
+
+  def reset_password_params
+    params.permit(:token, :password)
+  end
 end

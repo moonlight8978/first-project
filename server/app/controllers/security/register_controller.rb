@@ -21,18 +21,15 @@ class Security::RegisterController < ApplicationController
   end
 
   def test
-    @search = Security::User.search do
-      fulltext 'ひろ'
+    @search = Vndb::Novel.search do
+      fulltext NetworkKanjiFilter.to_hiragana('きセキ')
     end
-    # @search = Security::User.search do
-    #   with(:user_name, params[:search])
-    # end
-    @users = @search.results
-    # @users = Security::User.find_by_first_name('ひろし')
-    render json: @users, status: :ok
+    @novels = @search.results
+    render json: @novels, status: :ok
   end
 
 private
+
   def register_params
     params.permit(:user_name, :email, :password)
   end
