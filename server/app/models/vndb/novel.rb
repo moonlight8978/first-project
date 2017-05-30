@@ -1,12 +1,20 @@
 class Vndb::Novel < ApplicationRecord
-  has_many :companies, through: :publishers
-  has_many :publishers
-  has_many :characters
+  belongs_to :product, class_name: 'Bussiness::Product', optional: true
 
-  searchable do
-    text :title
-    text :original_title do
-      NetworkKanjiFilter.to_hiragana(original_title)
-    end
-  end
+  has_many :releases
+  has_many :characters
+  has_many :staffs
+  has_many :people, through: :staffs
+
+
+  has_and_belongs_to_many :tags, join_table: :vndb_novels_vndb_tags
+
+
+
+  # searchable do
+  #   text :title
+  #   text :original_title do
+  #     NetworkKanjiFilter.to_hiragana(original_title)
+  #   end
+  # end
 end

@@ -1,6 +1,10 @@
 class Vndb::Company < ApplicationRecord
-  has_many :games, through: :publishers
-  has_many :publishers
+  belongs_to :country, class_name: 'General::Country', optional: true
 
-  belongs_to :country, class_name: 'General::Country'
+  has_many :publishers
+  has_many :releases, through: :publishers
+  # class_name: 'Release'
+
+  # has_many :developers
+  # has_many :released, class_name: 'Release', through: :developers
 end

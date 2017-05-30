@@ -17,7 +17,6 @@ admin = Security::User.create(
   birthday: DateTime.parse('1997-12-18'),
   about: 'こんにちは！',
   signature: 'これは俺のシグネチャー。',
-  country: '日本',
   first_name: 'ひろし',
   last_name: '鈴木'
 )
@@ -32,7 +31,6 @@ moderator = Security::User.create(
   birthday: DateTime.parse('1997-12-18'),
   about: 'こんにちは！',
   signature: 'これは俺のシグネチャー。',
-  country: '日本',
   first_name: 'ひろし',
   last_name: '鈴木'
 )
@@ -47,7 +45,6 @@ user = Security::User.create(
   birthday: DateTime.parse('1997-12-18'),
   about: 'こんにちは！',
   signature: 'これは俺のシグネチャー。',
-  country: '日本',
   first_name: 'ひろし',
   last_name: '鈴木'
 )
@@ -84,7 +81,7 @@ company = Vndb::Company.new(
 company.country = country
 company.save
 
-novel.characters.create(
+ena = novel.characters.create(
   name: 'Ena',
   original_name: 'エナ',
   birthday_day: 1,
@@ -93,7 +90,8 @@ novel.characters.create(
   height: 145,
   bust: 72,
   waist: 52,
-  hip: 74
+  hip: 74,
+  role: 1
 )
 
 novel.characters.create(
@@ -105,7 +103,8 @@ novel.characters.create(
   height: 160,
   bust: 93,
   waist: 59,
-  hip: 91
+  hip: 91,
+  role: 1
 )
 
 novel.characters.create(
@@ -117,7 +116,8 @@ novel.characters.create(
   height: 150,
   bust: 81,
   waist: 55,
-  hip: 80
+  hip: 80,
+  role: 1
 )
 
 novel.characters.create(
@@ -129,7 +129,8 @@ novel.characters.create(
   height: 150,
   bust: 90,
   waist: 58,
-  hip: 88
+  hip: 88,
+  role: 1
 )
 
 novel.characters.create(
@@ -141,7 +142,8 @@ novel.characters.create(
   height: 156,
   bust: 88,
   waist: 56,
-  hip: 85
+  hip: 85,
+  role: 1
 )
 
 novel.characters.create(
@@ -153,5 +155,48 @@ novel.characters.create(
   height: 155,
   bust: 86,
   waist: 58,
-  hip: 84
+  hip: 84,
+  role: 2
 )
+
+ringo = Vndb::Person.create(
+  name: 'Aoba Ringo',
+  original_name: '青葉 りんご',
+  link: 'http://ameblo.jp/aobaringorongoronstundup/'
+)
+
+nao = Vndb::Person.create(
+  name: 'nao',
+  original_name: 'なお',
+  link: 'http://ameblo.jp/dg-naoblog/'
+)
+
+ena.people << ringo
+
+nao_vocal = novel.staffs.build(
+  position: 'Vocals',
+  note: 'OP "オープニング「永遠なる絆と思いのキセキ"'
+)
+
+nao_vocal.person = nao
+
+nao_vocal.save
+
+release = novel.releases.build(
+  voiced: 2,
+  animation_story: 0,
+  animation_ero: 0,
+  released: Date.new(2014, 06, 06)
+)
+
+release.save
+
+release.companies << company
+
+# release.developed_by << company
+
+tag = Vndb::Tag.create(tag: 'Same Roof')
+
+novel.tags << tag
+
+

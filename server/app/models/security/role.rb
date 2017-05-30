@@ -1,4 +1,4 @@
 class Security::Role < ApplicationRecord
-  has_many :authorities
-  has_many :users, through: :authorities
+  has_and_belongs_to_many :users,
+    join_table: 'security_roles_security_users'
 end

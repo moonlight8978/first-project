@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530060429) do
+ActiveRecord::Schema.define(version: 20170530130622) do
 
   create_table "bussiness_products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "type_id", null: false
@@ -43,15 +43,6 @@ ActiveRecord::Schema.define(version: 20170530060429) do
     t.index ["user_id"], name: "index_security_activate_account_tokens_on_user_id"
   end
 
-  create_table "security_authorities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "role_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["role_id"], name: "index_security_authorities_on_role_id"
-    t.index ["user_id"], name: "index_security_authorities_on_user_id"
-  end
-
   create_table "security_invalid_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "token", null: false
     t.datetime "expiration", null: false
@@ -74,6 +65,12 @@ ActiveRecord::Schema.define(version: 20170530060429) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "security_roles_security_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "role_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id", "role_id"], name: "index_security_roles_security_users_on_user_id_and_role_id"
+  end
+
   create_table "security_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "user_name", null: false
     t.string "password_digest", null: false
@@ -87,22 +84,24 @@ ActiveRecord::Schema.define(version: 20170530060429) do
     t.date "birthday"
     t.text "about"
     t.string "signature"
-    t.string "country"
+    t.bigint "country_id"
     t.string "facebook_url"
     t.string "twitter_url"
     t.string "gmail_url"
-    t.string "activate_account_token"
-    t.datetime "password_updated_at", default: "2017-05-30 13:37:42", null: false
+    t.datetime "password_updated_at", default: "2017-05-30 21:32:14", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_security_users_on_country_id"
+    t.index ["email"], name: "index_security_users_on_email"
+    t.index ["user_name"], name: "index_security_users_on_user_name"
   end
 
   create_table "vndb_characters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "novel_id", null: false
     t.string "name", null: false
     t.string "original_name", null: false
-    t.integer "birthday_day", null: false
-    t.integer "birthday_month", null: false
+    t.integer "birthday_day"
+    t.integer "birthday_month"
     t.string "gender", null: false
     t.integer "weight"
     t.integer "height"
@@ -111,6 +110,7 @@ ActiveRecord::Schema.define(version: 20170530060429) do
     t.integer "hip"
     t.string "blood_type"
     t.string "image"
+    t.integer "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["novel_id"], name: "index_vndb_characters_on_novel_id"
@@ -124,6 +124,15 @@ ActiveRecord::Schema.define(version: 20170530060429) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_vndb_companies_on_country_id"
+  end
+
+  create_table "vndb_developers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "company_id", null: false
+    t.bigint "release_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_vndb_developers_on_company_id"
+    t.index ["release_id"], name: "index_vndb_developers_on_release_id"
   end
 
   create_table "vndb_novels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -141,22 +150,69 @@ ActiveRecord::Schema.define(version: 20170530060429) do
     t.index ["product_id"], name: "index_vndb_novels_on_product_id"
   end
 
+  create_table "vndb_novels_vndb_tags", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "novel_id", null: false
+    t.bigint "tag_id", null: false
+    t.index ["novel_id", "tag_id"], name: "index_vndb_novels_vndb_tags_on_novel_id_and_tag_id"
+  end
+
   create_table "vndb_people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "country_id"
     t.string "name"
     t.string "original_name"
     t.string "birthday"
+    t.string "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_vndb_people_on_country_id"
   end
 
   create_table "vndb_publishers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "company_id", null: false
-    t.bigint "game_id", null: false
-    t.date "released", null: false
+    t.bigint "release_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_vndb_publishers_on_company_id"
-    t.index ["game_id"], name: "index_vndb_publishers_on_game_id"
+    t.index ["release_id"], name: "index_vndb_publishers_on_release_id"
+  end
+
+  create_table "vndb_releases", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "novel_id", null: false
+    t.integer "voiced"
+    t.integer "animation_story"
+    t.integer "animation_ero"
+    t.date "released", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["novel_id"], name: "index_vndb_releases_on_novel_id"
+  end
+
+  create_table "vndb_staffs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "person_id", null: false
+    t.bigint "novel_id", null: false
+    t.string "position", default: "Staff", null: false
+    t.string "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["novel_id"], name: "index_vndb_staffs_on_novel_id"
+    t.index ["person_id"], name: "index_vndb_staffs_on_person_id"
+  end
+
+  create_table "vndb_tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "tag", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag"], name: "index_vndb_tags_on_tag"
+  end
+
+  create_table "vndb_voice_actresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "person_id", null: false
+    t.bigint "character_id", null: false
+    t.string "alias"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_vndb_voice_actresses_on_character_id"
+    t.index ["person_id"], name: "index_vndb_voice_actresses_on_person_id"
   end
 
 end

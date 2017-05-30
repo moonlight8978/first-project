@@ -21,11 +21,14 @@ class Security::RegisterController < ApplicationController
   end
 
   def test
-    @search = Vndb::Novel.search do
-      fulltext NetworkKanjiFilter.to_hiragana('きセキ')
-    end
-    @novels = @search.results
-    render json: @novels, status: :ok
+    # @search = Vndb::Novel.search do
+    #   fulltext NetworkKanjiFilter.to_hiragana('きセキ')
+    # end
+    # @novels = @search.results
+    # render json: @novels, status: :ok
+    @user = Security::User.find(1)
+    @role = Security::Role.find(1)
+    @user.roles << @role
   end
 
 private
