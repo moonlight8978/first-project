@@ -1,9 +1,9 @@
 class Vndb::Release < ApplicationRecord
   belongs_to :novel
 
-  has_many :publishers
-  has_many :companies, through: :publishers
-  # class_name: 'Company'
-  # has_many :developers
-  # has_many :developed_by, class_name: 'Company', through: :developers
+  has_and_belongs_to_many :developers, class_name: 'Company',
+    join_table: :vndb_developeds_vndb_developers
+
+  has_and_belongs_to_many :publishers, class_name: 'Company',
+    join_table: :vndb_publisheds_vndb_publishers
 end

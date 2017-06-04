@@ -9,6 +9,7 @@ class CreateSecurityUsers < ActiveRecord::Migration[5.1]
       t.boolean :activated,       null: true,  default: false
 
       t.string :first_name,         null: true
+      t.string :middle_name,        null: true
       t.string :last_name,          null: true
       t.string :profile_image_url,  null: true
       t.date   :birthday,           null: true

@@ -2,18 +2,19 @@ class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
   # Main authenticate helpers
+  # Allow logged users access to resources
   def authenticate
     render_unauthorized unless authenticated?
   end
-
+  # Admin-specific resources
   def require_admin
     require_role('ROLE_ADMIN')
   end
-
+  # Moderator up to Admin can access
   def require_moderator
     require_role('ROLE_MODERATOR')
   end
-
+  # Return user that send request by fetching JWT
   def curr_user
     token = TokenService.new(token_from_request)
     return @current_user unless token.decode_success?
@@ -22,7 +23,7 @@ class ApplicationController < ActionController::API
       @current_user ||= user
     end
   end
-
+  # Get token from request header
   def token_from_request
     authenticate_or_request_with_http_token do |token, _options|
       token
@@ -44,31 +45,32 @@ class ApplicationController < ActionController::API
 
 private
   # Supported
+  # Check if user has been logged or not
   def authenticated?
     token_not_in_black_list? &&
     curr_user.present? &&
     user_activated?(curr_user) &&
     token_created_after_changing_password?
   end
-
+  # User must have specific roles to continue
   def require_role(role)
     render_unauthorized and return unless authenticated?
     @current_user = curr_user
     render_unauthorized and return unless @current_user.present?
-    roles = @current_user.roles
+    roles = @current_user.roles.map(&:role)
     render_unauthorized and return unless roles.include?(role)
   end
-
+  # Check if user's account has been activated
   def user_activated?(current_user)
     current_user.activated
   end
-
+  # Check if token is valid (create after changing password)
   def token_created_after_changing_password?
     token = TokenService.new(token_from_request)
     @current_user = Security::User.find(token.user_id)
     token.created_at >= @current_user[:password_updated_at]
   end
-
+  # Check if token in black list (logout, change password)
   def token_not_in_black_list?
     token = Security::InvalidToken.find_by_token(token_from_request)
     token.nil?

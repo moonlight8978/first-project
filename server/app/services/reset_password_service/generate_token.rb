@@ -14,13 +14,12 @@ class ResetPasswordService::GenerateToken
     @user.present? ? true : false
   end
 
-  def generate_token?
+  def perform
     @token = SecureRandom.urlsafe_base64(128)
-    service = Security::ResetPasswordToken.new(
-      user_id: @user.id,
-      token: @token,
+    @user.reset_password_tokens.build(
+      token:      @token,
       expiration: EXPIRATION
     )
-    service.save
+    @user.save
   end
 end

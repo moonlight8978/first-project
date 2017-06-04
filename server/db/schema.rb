@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530130622) do
+ActiveRecord::Schema.define(version: 20170531172419) do
 
   create_table "bussiness_products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "type_id", null: false
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20170530130622) do
     t.string "address"
     t.boolean "activated", default: false
     t.string "first_name"
+    t.string "middle_name"
     t.string "last_name"
     t.string "profile_image_url"
     t.date "birthday"
@@ -88,7 +89,7 @@ ActiveRecord::Schema.define(version: 20170530130622) do
     t.string "facebook_url"
     t.string "twitter_url"
     t.string "gmail_url"
-    t.datetime "password_updated_at", default: "2017-05-30 21:32:14", null: false
+    t.datetime "password_updated_at", default: "2017-06-04 00:02:53", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_security_users_on_country_id"
@@ -126,20 +127,16 @@ ActiveRecord::Schema.define(version: 20170530130622) do
     t.index ["country_id"], name: "index_vndb_companies_on_country_id"
   end
 
-  create_table "vndb_developers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "vndb_developeds_vndb_developers", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "company_id", null: false
     t.bigint "release_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_vndb_developers_on_company_id"
-    t.index ["release_id"], name: "index_vndb_developers_on_release_id"
+    t.index ["company_id", "release_id"], name: "index_developeds_developers"
   end
 
   create_table "vndb_novels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "product_id"
     t.string "title"
     t.string "original_title", null: false
-    t.string "aliases"
     t.integer "length", null: false
     t.text "description"
     t.text "original_description"
@@ -160,20 +157,20 @@ ActiveRecord::Schema.define(version: 20170530130622) do
     t.bigint "country_id"
     t.string "name"
     t.string "original_name"
-    t.string "birthday"
+    t.integer "birthday_day"
+    t.integer "birthday_month"
+    t.integer "birthday_year"
     t.string "link"
+    t.string "twitter_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_vndb_people_on_country_id"
   end
 
-  create_table "vndb_publishers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "vndb_publisheds_vndb_publishers", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "company_id", null: false
     t.bigint "release_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_vndb_publishers_on_company_id"
-    t.index ["release_id"], name: "index_vndb_publishers_on_release_id"
+    t.index ["company_id", "release_id"], name: "index_publisheds_publishers"
   end
 
   create_table "vndb_releases", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -209,6 +206,7 @@ ActiveRecord::Schema.define(version: 20170530130622) do
     t.bigint "person_id", null: false
     t.bigint "character_id", null: false
     t.string "alias"
+    t.string "original_alias"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["character_id"], name: "index_vndb_voice_actresses_on_character_id"

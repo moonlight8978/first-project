@@ -60,7 +60,6 @@ admin.roles << role_user << role_moderator << role_admin
 novel = Vndb::Novel.create(
   title: 'Koi Suru Doll to Omoi no Kiseki ~Poupee de Souhaits~',
   original_title: '恋する少女と想いのキセキ～Poupee de souhaits～',
-  aliases: 'Koisuru Shoujo to Omoi no Kiseki, 恋するドールと想いのキセキ',
   length: 2,
   description: 'When he was a young boy, Tomoki met the puppet master Asuha',
   image: 'https://s.vndb.org/cv/85/23185.jpg',
@@ -96,7 +95,7 @@ ena = novel.characters.create(
 
 novel.characters.create(
   name: 'Himekawa Mitomo',
-  original_name: '姫川 美朋',
+  original_name: '姫川美朋',
   birthday_day: 10,
   birthday_month: 3,
   gender: 'Female',
@@ -109,7 +108,7 @@ novel.characters.create(
 
 novel.characters.create(
   name: 'Komakuri Amane',
-  original_name: '駒久利 天音',
+  original_name: '駒久利天音',
   birthday_day: 25,
   birthday_month: 8,
   gender: 'Female',
@@ -148,7 +147,7 @@ novel.characters.create(
 
 novel.characters.create(
   name: 'Yoshino Sara',
-  original_name: '吉野 紗良',
+  original_name: '吉野紗良',
   birthday_day: 4,
   birthday_month: 6,
   gender: 'Female',
@@ -159,29 +158,6 @@ novel.characters.create(
   role: 2
 )
 
-ringo = Vndb::Person.create(
-  name: 'Aoba Ringo',
-  original_name: '青葉 りんご',
-  link: 'http://ameblo.jp/aobaringorongoronstundup/'
-)
-
-nao = Vndb::Person.create(
-  name: 'nao',
-  original_name: 'なお',
-  link: 'http://ameblo.jp/dg-naoblog/'
-)
-
-ena.people << ringo
-
-nao_vocal = novel.staffs.build(
-  position: 'Vocals',
-  note: 'OP "オープニング「永遠なる絆と思いのキセキ"'
-)
-
-nao_vocal.person = nao
-
-nao_vocal.save
-
 release = novel.releases.build(
   voiced: 2,
   animation_story: 0,
@@ -191,12 +167,116 @@ release = novel.releases.build(
 
 release.save
 
-release.companies << company
+release.developers << company
 
-# release.developed_by << company
+release.publishers << company
 
 tag = Vndb::Tag.create(tag: 'Same Roof')
 
 novel.tags << tag
 
+Vndb::Person.create(
+  name: 'Aoba Ringo',
+  original_name: '青葉りんご',
+  link: 'http://ameblo.jp/aobaringorongoronstundup/'
+)
 
+Vndb::Person.create(
+  name: 'Ogura Yui',
+  original_name: '小倉結衣',
+  link: 'https://twitter.com/ogurayui1017'
+)
+
+Vndb::Person.create(
+  name: 'Miruno Jun',
+  original_name: 'ミルノ純',
+  link: 'https://twitter.com/mirumirumiruno'
+)
+
+Vndb::Person.create(
+  name: 'Sakata Yuki',
+  original_name: '坂田有希',
+  link: 'http://ameblo.jp/snow11snow22/'
+)
+
+Vndb::Person.create(
+  name: 'Mizusawa Kei',
+  original_name: '瑞沢渓',
+  link: 'http://y-tail.jp/profile/mizusawa.html'
+)
+
+Vndb::Person.create(
+  name: 'Hayase Yayoi',
+  original_name: '早瀬ゃょぃ',
+  link: 'https://twitter.com/hayaseyayoi'
+)
+
+Vndb::VoiceActress.create(
+  person_id: 1,
+  character_id: 1
+)
+
+Vndb::VoiceActress.create(
+  person_id: 2,
+  character_id: 2
+)
+
+Vndb::VoiceActress.create(
+  person_id: 3,
+  character_id: 3,
+  alias: 'Moka Choko',
+  original_alias: '萌花ちょこ'
+)
+
+Vndb::VoiceActress.create(
+  person_id: 4,
+  character_id: 4
+)
+
+Vndb::VoiceActress.create(
+  person_id: 5,
+  character_id: 5,
+  alias: 'Kawashima Rino',
+  original_alias: 'かわしまりの'
+)
+
+Vndb::VoiceActress.create(
+  person_id: 6,
+  character_id: 6
+)
+
+nao = Vndb::Person.create(
+  name: 'nao',
+  original_name: 'なお',
+  link: 'http://ameblo.jp/dg-naoblog/'
+)
+
+nao_vocal = novel.staffs.build(
+  position: 'Vocals',
+  note: 'オープニング「永遠なる絆と思いのキセキ'
+)
+
+nao_vocal.person = nao
+
+nao_vocal.save
+
+Vndb::Staff.create(
+  person_id: 3,
+  novel_id: 1,
+  position: 'Vocals',
+  note: 'エンディング「茜色の奇跡」'
+)
+
+nao = Vndb::Person.create(
+  name: 'Arai Kenji',
+  original_name: '新井健史',
+  link: 'http://hemuri.com/',
+  twitter_url: 'https://twitter.com/arakeso'
+)
+
+Vndb::Staff.create(
+  person_id: 8,
+  novel_id: 1,
+  position: 'Composer',
+  note: 'BGM'
+)

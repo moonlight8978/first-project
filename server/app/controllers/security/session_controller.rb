@@ -2,18 +2,23 @@ class Security::SessionController < ApplicationController
   before_action :authenticate, only: :logout
 
   def login
-    @session_svc = SessionService::Login.new(login_params)
-    if @session_svc.login?
-      token = @session_svc.user.token
+    @login_svc = SessionService::Login.new(login_params)
+    if @login_svc.perform
+      token = @login_svc.token
       render json: { token: token }, status: :ok
+    elsif @login_svc.account_not_activated?
+      @activate_token_svc = RegisterService::GenerateToken.new(@login_svc.user)
+      @activate_token_svc.perform
+      RegisterMailer.complete_register(@login_svc.user, @activate_token_svc.token)
+        .deliver_later
     else
       render_unauthorized
     end
   end
 
   def logout
-    @session_svc = SessionService::Logout.new(token_from_request)
-    @session_svc.logout? && (head :ok and return)
+    @logout_svc = SessionService::Logout.new(token_from_request)
+    @logout_svc.perform && (head :ok and return)
     render_unauthorized
   end
 

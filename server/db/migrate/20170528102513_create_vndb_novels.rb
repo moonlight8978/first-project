@@ -4,7 +4,6 @@ class CreateVndbNovels < ActiveRecord::Migration[5.1]
       t.belongs_to :product       , index: true
       t.string     :title
       t.string     :original_title, null: false
-      t.string     :aliases
       t.integer    :length        , null: false
       t.text       :description
       t.text       :original_description

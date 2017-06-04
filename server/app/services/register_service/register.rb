@@ -1,14 +1,16 @@
 class RegisterService::Register
-  attr_accessor :user, :params
+  attr_accessor :user, :params, :token
+
 
   def initialize(params)
     @params = params
     @user = Security::User.new(@params)
   end
 
-  def register?
-    @user.activate_account_token = SecureRandom.urlsafe_base64(128)
-    @user.save
+  def perform
+    return false unless @user.save
+    generate_token_svc = RegisterService::GenerateToken.new(@user)
+    @generate_token_svc.perform
   end
 
   def user_already_exist?

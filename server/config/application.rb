@@ -43,8 +43,8 @@ module NyoroNyoro
       :port           => 587,
       :user_name      => 'moonlight8978@gmail.com',
       :password       => '',
-      :authentication => :plain,
-      :enable_starttls_auto => true
+      :authentication => :plain
+      # :enable_starttls_auto => true
     }
   end
 end

@@ -8,9 +8,19 @@ class SessionService::Login
     )
   end
 
-  def login?
+  def perform
     @user.present? &&
-    @user.activated &&
-    @user.authenticate(@params[:password])
+    @user.authenticate(@params[:password]) &&
+    @user.activated
+  end
+
+  def account_not_activated?
+    @user.present? &&
+    @user.authenticate(@params[:password]) &&
+    !@user.activated
+  end
+
+  def token
+    @user.token
   end
 end

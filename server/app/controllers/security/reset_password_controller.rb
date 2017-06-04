@@ -1,8 +1,8 @@
 class Security::ResetPasswordController < ApplicationController
   def send_token
-    @reset_svc = ResetPasswordService::GenerateToken.new(forget_password_params)
-    if @reset_svc.represent_user? && @reset_svc.generate_token?
-      render json: { token: @reset_svc.token }, status: :ok
+    @generate_rspw_token_svc = ResetPasswordService::GenerateToken.new(forget_password_params)
+    if @generate_rspw_token_svc.represent_user? && @generate_rspw_token_svc.perform
+      render json: { token: @generate_rspw_token_svc.token }, status: :ok
     else
       head :not_found
     end
@@ -10,7 +10,7 @@ class Security::ResetPasswordController < ApplicationController
 
   def reset_password
     @reset_svc = ResetPasswordService::RequestReset.new(reset_password_params)
-    if @reset_svc.represent_user? && @reset_svc.reset?
+    if @reset_svc.represent_user? && @reset_svc.perform
       head :no_content
     else
       render_unauthorized

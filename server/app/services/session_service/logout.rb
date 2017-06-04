@@ -3,7 +3,7 @@ class SessionService::Logout
     @token = TokenService.new(token)
   end
 
-  def logout?
+  def perform
     return false unless @token.decode_success?
     Security::InvalidToken.new(token: @token.token, expiration: @token.expire_at)
       .save

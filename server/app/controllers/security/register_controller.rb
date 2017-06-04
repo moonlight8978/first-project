@@ -1,19 +1,19 @@
 class Security::RegisterController < ApplicationController
   def register
-    @user_svc = RegisterService::Register.new(register_params)
-    if @user_svc.user_already_exist?
+    @register_svc = RegisterService::Register.new(register_params)
+    if @register_svc.user_already_exist?
       head :conflict
     else
-      render_unauthorized and return unless @user_svc.register?
-      RegisterMailer.complete_register(@user_svc.user)
+      render_unauthorized and return unless @register_svc.perform
+      RegisterMailer.complete_register(@register_svc.user, @register_svc.token)
         .deliver_later
       head :ok
     end
   end
 
   def register_confirm
-    @confirm_svc = RegisterService::Confirm.new(confirm_token)
-    if @confirm_svc.activate?
+    @confirm_register_svc = RegisterService::Confirm.new(confirm_token)
+    if @confirm_register_svc.perform
       head :ok
     else
       render_unauthorized
@@ -38,6 +38,6 @@ private
   end
 
   def confirm_token
-    params.permit(:token)
+    params.permit(:token)[:token]
   end
 end

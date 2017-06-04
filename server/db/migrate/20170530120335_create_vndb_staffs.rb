@@ -5,6 +5,7 @@ class CreateVndbStaffs < ActiveRecord::Migration[5.1]
       t.belongs_to :novel,    null: false, index: true
       t.string     :position, null: false, default: 'Staff'
       t.string     :note
+      t.string     :alias
 
       t.timestamps
     end
