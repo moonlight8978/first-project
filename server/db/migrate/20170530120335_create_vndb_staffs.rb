@@ -6,6 +6,7 @@ class CreateVndbStaffs < ActiveRecord::Migration[5.1]
       t.string     :position, null: false, default: 'Staff'
       t.string     :note
       t.string     :alias
+      t.string     :alias_en
 
       t.timestamps
     end

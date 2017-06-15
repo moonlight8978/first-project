@@ -1,5 +1,5 @@
 class Api::V1::Vndb::Novel::CharacterSerializer < ActiveModel::Serializer
-  role = ['Protagonist', 'Main character', 'Side character']
+  # role = ['Protagonist', 'Main character', 'Side character']
   # role = ['主人公', '']
   # birthday_day = [
   #   'ゼロ', '一日', '二日', '三日', '四日', '五日', '六花', '七日', '八日', '九日',
@@ -13,25 +13,21 @@ class Api::V1::Vndb::Novel::CharacterSerializer < ActiveModel::Serializer
   #   '十一月', '十二月'
   # ]
 
-  gender = { 'Female' => 0, 'Male' => 1 }
+  attributes :id, :novel_id, :name, :name_en, :weight, :height, :blood_type, 
+    :three_sizes, :birthday, :image, :gender, :description, :description_en, :role
+  
+  belongs_to :novel
+  has_many :voice_actresses
 
-  attributes :id, :name, :original_name, :weight, :height, :blood_type, :image
+  # def role
+  #   role[object.role]
+  # end
 
-  attribute :gender do
-    gender[object.gender]
-  end
-
-  attribute :three_sizes do
+  def three_sizes
     "#{object.bust}-#{object.waist}-#{object.hip}"
   end
 
-  attribute :role do
-    role[object.role]
-  end
-
-  attribute :birthday do
+  def birthday
     "#{object.birthday_month}月#{object.birthday_day}日"
   end
-
-  has_many :voice_actresses
 end

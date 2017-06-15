@@ -1,7 +1,7 @@
 class Api::V1::Vndb::Novel::StaffSerializer < ActiveModel::Serializer
   UNKNOWN = '不明'
 
-  attributes :note, :position
+  attributes :note, :position, :alias, :alias_en
 
   attribute :id do
     object.person.id
@@ -11,16 +11,16 @@ class Api::V1::Vndb::Novel::StaffSerializer < ActiveModel::Serializer
     object.person.name
   end
 
-  attribute :original_name do
-    object.person.original_name
+  attribute :name_en do
+    object.person.name_en
   end
 
   attribute :country_name do
     (object.person.country && object.person.country.name) || UNKNOWN
   end
 
-  attribute :country_original_name do
-    (object.person.country && object.person.country.original_name) || UNKNOWN
+  attribute :country_name_en do
+    (object.person.country && object.person.country.name_en) || UNKNOWN
   end
 
   attribute :birthday do
@@ -33,7 +33,7 @@ class Api::V1::Vndb::Novel::StaffSerializer < ActiveModel::Serializer
     object.person.link || UNKNOWN
   end
 
-  attribute :twitter_url do
-    object.person.twitter_url || UNKNOWN
+  attribute :twitter do
+    object.person.twitter || UNKNOWN
   end
 end

@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20170531172419) do
 
   create_table "general_countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
-    t.string "original_name", null: false
+    t.string "name_en", null: false
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -79,17 +79,17 @@ ActiveRecord::Schema.define(version: 20170531172419) do
     t.string "address"
     t.boolean "activated", default: false
     t.string "first_name"
-    t.string "middle_name"
     t.string "last_name"
-    t.string "profile_image_url"
+    t.string "middle_name"
+    t.string "profile_image"
     t.date "birthday"
     t.text "about"
     t.string "signature"
     t.bigint "country_id"
-    t.string "facebook_url"
-    t.string "twitter_url"
-    t.string "gmail_url"
-    t.datetime "password_updated_at", default: "2017-06-04 00:02:53", null: false
+    t.string "facebook"
+    t.string "twitter"
+    t.string "gmail"
+    t.datetime "password_updated_at", default: "2017-06-15 21:50:19", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_security_users_on_country_id"
@@ -100,10 +100,10 @@ ActiveRecord::Schema.define(version: 20170531172419) do
   create_table "vndb_characters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "novel_id", null: false
     t.string "name", null: false
-    t.string "original_name", null: false
+    t.string "name_en", null: false
     t.integer "birthday_day"
     t.integer "birthday_month"
-    t.string "gender", null: false
+    t.integer "gender", null: false
     t.integer "weight"
     t.integer "height"
     t.integer "bust"
@@ -112,14 +112,16 @@ ActiveRecord::Schema.define(version: 20170531172419) do
     t.string "blood_type"
     t.string "image"
     t.integer "role"
+    t.text "description"
+    t.text "description_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["novel_id"], name: "index_vndb_characters_on_novel_id"
   end
 
   create_table "vndb_companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name"
-    t.string "original_name", null: false
+    t.string "name", null: false
+    t.string "name_en"
     t.bigint "country_id", null: false
     t.string "link", null: false
     t.datetime "created_at", null: false
@@ -135,12 +137,13 @@ ActiveRecord::Schema.define(version: 20170531172419) do
 
   create_table "vndb_novels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "product_id"
-    t.string "title"
-    t.string "original_title", null: false
+    t.string "title", null: false
+    t.string "title_en"
     t.integer "length", null: false
     t.text "description"
-    t.text "original_description"
+    t.text "description_en"
     t.string "image", null: false
+    t.string "image_description"
     t.boolean "image_nsfw", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -155,13 +158,14 @@ ActiveRecord::Schema.define(version: 20170531172419) do
 
   create_table "vndb_people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "country_id"
-    t.string "name"
-    t.string "original_name"
+    t.string "name", null: false
+    t.string "name_en", null: false
+    t.integer "gender"
     t.integer "birthday_day"
     t.integer "birthday_month"
     t.integer "birthday_year"
     t.string "link"
-    t.string "twitter_url"
+    t.string "twitter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_vndb_people_on_country_id"
@@ -175,13 +179,18 @@ ActiveRecord::Schema.define(version: 20170531172419) do
 
   create_table "vndb_releases", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "novel_id", null: false
+    t.string "title", null: false
+    t.string "title_en"
+    t.integer "status", null: false
     t.integer "voiced"
     t.integer "animation_story"
     t.integer "animation_ero"
     t.date "released", null: false
+    t.integer "age_rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["novel_id"], name: "index_vndb_releases_on_novel_id"
+    t.index ["status"], name: "index_vndb_releases_on_status"
   end
 
   create_table "vndb_staffs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -189,6 +198,8 @@ ActiveRecord::Schema.define(version: 20170531172419) do
     t.bigint "novel_id", null: false
     t.string "position", default: "Staff", null: false
     t.string "note"
+    t.string "alias"
+    t.string "alias_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["novel_id"], name: "index_vndb_staffs_on_novel_id"
@@ -197,16 +208,20 @@ ActiveRecord::Schema.define(version: 20170531172419) do
 
   create_table "vndb_tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "tag", null: false
+    t.string "tag_en", null: false
+    t.text "description"
+    t.text "description_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tag"], name: "index_vndb_tags_on_tag"
+    t.index ["tag_en"], name: "index_vndb_tags_on_tag_en"
   end
 
   create_table "vndb_voice_actresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "person_id", null: false
     t.bigint "character_id", null: false
     t.string "alias"
-    t.string "original_alias"
+    t.string "alias_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["character_id"], name: "index_vndb_voice_actresses_on_character_id"

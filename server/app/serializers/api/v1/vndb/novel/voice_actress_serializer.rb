@@ -1,23 +1,44 @@
 class Api::V1::Vndb::Novel::VoiceActressSerializer < ActiveModel::Serializer
-  attributes :alias, :original_alias
+  UNKNOWN = '不明'
 
-  attribute :id do
+  attributes :id, :name, :name_en, :gender, :birthday, :alias, :alias_en,
+    :country_name, :country_name_en, :link, :twitter
+
+  def id
     object.person.id
   end
 
-  attribute :name do
+  def name
     object.person.name
   end
 
-  attribute :original_name do
-    object.person.original_name
+  def name_en
+    object.person.name_en
   end
 
-  attribute :link do
+  def gender
+    object.person.gender
+  end
+
+  def link
     object.person.link
   end
 
-  attribute :twitter_url do
-    object.person.twitter_url
+  def twitter
+    object.person.twitter
+  end
+
+  def country_name
+    (object.person.country && object.person.country.name) || UNKNOWN
+  end
+
+  def country_name_en
+    (object.person.country && object.person.country.name_en) || UNKNOWN
+  end
+
+  def birthday
+    "#{object.person.birthday_year || UNKNOWN}年"\
+    "#{object.person.birthday_month || UNKNOWN}月"\
+    "#{object.person.birthday_day || UNKNOWN}日"
   end
 end

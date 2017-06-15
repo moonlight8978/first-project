@@ -42,15 +42,30 @@ Rails.application.routes.draw do
   namespace :api do
     scope module: :v1 do
       scope module: :vndb do
-        resources :novels do
+        resources :novels, shallow: true do
+          resources :characters
+          resources :releases
+          resources :staffs
+          resources :publications
+          resources :tags
+        end
+        resources :companies do
           member do
-            get 'characters'
-            get 'releases'
-            get 'staffs'
+            get 'novels'
           end
         end
-        resources :companies
-        resources :people
+        resources :releases do
+          member do
+            get 'companies'
+          end
+        end
+        resources :people do
+          member do
+            get 'voiceds'
+            get 'credits'
+            get 'graph', to: 'graph/people#show'
+          end
+        end
       end
     end
 

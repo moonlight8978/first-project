@@ -1,15 +1,11 @@
 class Api::V1::Vndb::NovelsController < ApplicationController
+  before_action :require_moderator, only: :update
+  before_action :require_admin, only: [:create, :destroy]
+
   def index
     @novels = ::Vndb::Novel.all
     render json: @novels, key_transform: :camel_lower, status: :ok,
-      include: [
-        'releases.developers', 'releases.publishers',
-        'characters.seiyuus', 'staffs.person'
-      ],
-      each_serializer: Api::V1::Vndb::NovelSerializer
-    # @companies = ::Vndb::Company.includes(:developeds, :publisheds).all
-    # render json: @companies, key_transform: :camel_lower, status: :ok,
-    #   each_serializer: Api::V1::Vndb::CompanySerializer
+      each_serializer: Api::V1::Vndb::Novel::NovelSerializer
   end
 
   def show
@@ -18,39 +14,55 @@ class Api::V1::Vndb::NovelsController < ApplicationController
       serializer: Api::V1::Vndb::Novel::NovelSerializer
   end
 
-  def characters
-    @novel = ::Vndb::Novel.includes(characters: :people).find(params[:id])
-    @characters = @novel.characters
-    render json: @characters, key_transform: :camel_lower, status: :ok,
-      each_serializer: Api::V1::Vndb::Novel::CharacterSerializer
+  def create
+    create_novel_svc = VndbService::Novel::CreateNovel.new(create_novel_params)
+    create_novel_svc.perform
+    if create_novel_svc.error?
+      head :conflict
+    else
+      render_ok(novel_id: create_novel_svc.novel.id)
+    end
   end
 
-  def staffs
-    @novel = ::Vndb::Novel.includes(:people).find(params[:id])
-    @staffs = @novel.staffs.group_by(&:position)
-    @staff_serializers = @staffs.map do |position, staffs|
-      [position.camelcase(:lower), staff_serializer(staffs)]
-    end.to_h
-    render json: @staff_serializers
+  def update
+    @novel = ::Vndb::Novel.find(params[:id])
+    update_novel_svc = VndbService::Novel::UpdateNovel.new(@novel, update_novel_params)
+    update_novel_svc.perform
+    if update_novel_svc.error?
+      head :conflict
+    else
+      render_ok
+    end
   end
 
-  def releases
-    @novel = ::Vndb::Novel.includes(releases: [:developers, :publishers]).find(params[:id])
-    @releases = @novel.releases
-    render json: @releases, key_transform: :camel_lower, status: :ok,
-      each_serializer: Api::V1::Vndb::Novel::ReleaseSerializer
+  def destroy
+    @novel = ::Vndb::Novel.find(params[:id])
+    destroy_novel_svc = VndbService::Novel::DestroyNovel.new(@novel)
+    destroy_novel_svc.perform
+    if destroy_novel_svc.error?
+      head :conflict
+    else
+      render_ok
+    end
   end
 
 private
+  def create_novel_params
+    params.permit(
+      :title, :title_en, :length, :description, :description_en, 
+      :image, :image_description, :image_nsfw,
+      characters: [
+        :name, :name_en, :birthday_day, :birthday_month, :gender,
+        :weight, :height, :bust, :waist, :hip, :blood_type, :image, :role,
+        :description, :description_en
+      ]
+    )
+  end
 
-  def staff_serializer(staffs)
-    staffs.map do |staff|
-      ActiveModelSerializers::SerializableResource.new(
-        staff,
-        serializer: Api::V1::Vndb::Novel::StaffSerializer,
-        root: false,
-        key_transform: :camel_lower
-      )
-    end
+  def update_novel_params
+    params.permit(
+      :title, :title_en, :length, :description, :description_en, 
+      :image, :image_description, :image_nsfw
+    )
   end
 end
