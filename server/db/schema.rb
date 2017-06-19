@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531172419) do
+ActiveRecord::Schema.define(version: 20170616224617) do
 
   create_table "bussiness_products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "type_id", null: false
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 20170531172419) do
     t.string "facebook"
     t.string "twitter"
     t.string "gmail"
-    t.datetime "password_updated_at", default: "2017-06-15 21:50:19", null: false
+    t.datetime "password_updated_at", default: "2017-06-19 13:16:10", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_security_users_on_country_id"
@@ -97,8 +97,70 @@ ActiveRecord::Schema.define(version: 20170531172419) do
     t.index ["user_name"], name: "index_security_users_on_user_name"
   end
 
+  create_table "vgmdb_albums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "novel_id"
+    t.bigint "format_id"
+    t.string "title", null: false
+    t.string "title_en"
+    t.string "code"
+    t.date "released"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["format_id"], name: "index_vgmdb_albums_on_format_id"
+    t.index ["novel_id"], name: "index_vgmdb_albums_on_novel_id"
+  end
+
+  create_table "vgmdb_albums_vgmdb_classifications", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "album_id", null: false
+    t.bigint "classification_id", null: false
+    t.index ["album_id", "classification_id"], name: "index_albums_classifications"
+  end
+
+  create_table "vgmdb_classifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "type", null: false
+    t.string "type_en", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "vgmdb_discs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "album_id"
+    t.integer "disc", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_vgmdb_discs_on_album_id"
+  end
+
+  create_table "vgmdb_formats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "vgmdb_songs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "disc_id", null: false
+    t.string "name", null: false
+    t.string "name_en"
+    t.integer "length_second", null: false
+    t.integer "length_minute", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["disc_id"], name: "index_vgmdb_songs_on_disc_id"
+  end
+
+  create_table "vgmdb_staffs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "person_id", null: false
+    t.bigint "song_id", null: false
+    t.string "position", null: false
+    t.string "alias"
+    t.string "alias_en"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_vgmdb_staffs_on_person_id"
+    t.index ["song_id"], name: "index_vgmdb_staffs_on_song_id"
+  end
+
   create_table "vndb_characters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "novel_id", null: false
     t.string "name", null: false
     t.string "name_en", null: false
     t.integer "birthday_day"
@@ -116,7 +178,6 @@ ActiveRecord::Schema.define(version: 20170531172419) do
     t.text "description_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["novel_id"], name: "index_vndb_characters_on_novel_id"
   end
 
   create_table "vndb_companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -136,7 +197,6 @@ ActiveRecord::Schema.define(version: 20170531172419) do
   end
 
   create_table "vndb_novels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "product_id"
     t.string "title", null: false
     t.string "title_en"
     t.integer "length", null: false
@@ -147,7 +207,12 @@ ActiveRecord::Schema.define(version: 20170531172419) do
     t.boolean "image_nsfw", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_vndb_novels_on_product_id"
+  end
+
+  create_table "vndb_novels_vndb_releases", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "novel_id", null: false
+    t.bigint "release_id", null: false
+    t.index ["novel_id", "release_id"], name: "index_novels_releases"
   end
 
   create_table "vndb_novels_vndb_tags", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -171,6 +236,12 @@ ActiveRecord::Schema.define(version: 20170531172419) do
     t.index ["country_id"], name: "index_vndb_people_on_country_id"
   end
 
+  create_table "vndb_platforms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "platform", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "vndb_publisheds_vndb_publishers", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "company_id", null: false
     t.bigint "release_id", null: false
@@ -178,7 +249,7 @@ ActiveRecord::Schema.define(version: 20170531172419) do
   end
 
   create_table "vndb_releases", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "novel_id", null: false
+    t.bigint "platform_id", null: false
     t.string "title", null: false
     t.string "title_en"
     t.integer "status", null: false
@@ -189,8 +260,17 @@ ActiveRecord::Schema.define(version: 20170531172419) do
     t.integer "age_rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["novel_id"], name: "index_vndb_releases_on_novel_id"
+    t.index ["platform_id"], name: "index_vndb_releases_on_platform_id"
     t.index ["status"], name: "index_vndb_releases_on_status"
+  end
+
+  create_table "vndb_screenshots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "novel_id"
+    t.string "image", null: false
+    t.boolean "image_nsfw", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["novel_id"], name: "index_vndb_screenshots_on_novel_id"
   end
 
   create_table "vndb_staffs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -218,13 +298,15 @@ ActiveRecord::Schema.define(version: 20170531172419) do
   end
 
   create_table "vndb_voice_actresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "person_id", null: false
     t.bigint "character_id", null: false
+    t.bigint "novel_id", null: false
+    t.bigint "person_id"
     t.string "alias"
     t.string "alias_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["character_id"], name: "index_vndb_voice_actresses_on_character_id"
+    t.index ["novel_id"], name: "index_vndb_voice_actresses_on_novel_id"
     t.index ["person_id"], name: "index_vndb_voice_actresses_on_person_id"
   end
 

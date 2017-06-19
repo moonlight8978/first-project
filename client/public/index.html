@@ -10,7 +10,6 @@
 	<link rel="stylesheet" href="bower_components/tether/dist/css/tether.min.css">
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="bower_components/vis/dist/vis.min.css">
 
 	<!-- fonts -->
 	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
@@ -19,10 +18,8 @@
 	<link rel="stylesheet" href="/build/css/application.css">
 </head>
 <body>
+	<a ui-sref="novels">Novels</a>
 	<div class="container">
-		<a data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">今日は！</a>
-		<a ui-sref="form">Go to form</a>
-		<a ui-sref="eroges">Go to all Eroges</a>
 		<div ui-view="navbar">
 
 		</div>
@@ -35,10 +32,10 @@
 	</div>
 	<!-- libraries -->
 	<script src="bower_components/angular/angular.min.js"></script>
+
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/tether/dist/js/tether.min.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="bower_components/vis/dist/vis.min.js"></script>
 	<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
 	<script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
 	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
@@ -50,7 +47,19 @@
 	<script src="bower_components/ngstorage/ngStorage.min.js"></script>
 
 	<!-- app inject -->
-	<script src="build/js/application.js"></script>
+	<script src="app/app.module.js"></script>
+	<script src="app/app.constants.js"></script>
+	<script src="app/config/header.config.js"></script>
+
+	<script src="app/resources/novel.service.js"></script>
+	<!-- <script src="app/resources/resource_interceptor.service.js"></script> -->
+
+	<script src="app/database/vndb/novels/novels.controller.js"></script>
+
+	<script src="app/app.state.js"></script>
+	<script src="app/database/database.state.js"></script>
+	<script src="app/database/vndb/vndb.state.js"></script>
+	<script src="app/database/vndb/novels/novels.state.js"></script>
 
 	<!-- app's javascripts -->
 	<script src="assets/js/bootstrap.js"></script>

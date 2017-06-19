@@ -1,13 +1,14 @@
-angular
-    .module('app', [
-        'ui.router',
-        'ngMap',
-        'angular-loading-bar',
-        'ngStorage',
-        'ngResource',
-        'ui.bootstrap'
-    ]);
+(function () {
+    'use strict';
 
-let appModule = angular.module('app');
+    angular
+        .module('app', [
+            'ui.router',
+            'ngMap',
+            'angular-loading-bar',
+            'ngStorage',
+            'ngResource',
+            'ui.bootstrap'
+        ]);
+})();
 
-export default appModule;

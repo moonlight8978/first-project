@@ -13,10 +13,9 @@ class Api::V1::Vndb::Novel::CharacterSerializer < ActiveModel::Serializer
   #   '十一月', '十二月'
   # ]
 
-  attributes :id, :novel_id, :name, :name_en, :weight, :height, :blood_type, 
+  attributes :id, :name, :name_en, :weight, :height, :blood_type,
     :three_sizes, :birthday, :image, :gender, :description, :description_en, :role
-  
-  belongs_to :novel
+
   has_many :voice_actresses
 
   # def role

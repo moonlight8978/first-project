@@ -1,22 +1,35 @@
-class Api::V1::Vndb::CompaniesController < ApplicationController
+class Api::V1::Vndb::CompaniesController < ApplicationControlle
+  def index
+    @companies = ::Vndb::Company.all
+
+    paginate json: @companies, key_transform: :camel_lower, status: :ok,
+      each_serializer: Api::V1::Vndb::Company::CompanySerializer
+  end
+
   def show
     @company = ::Vndb::Company.find(params[:id])
+
     render json: @company, key_transform: :camel_lower, status: :ok,
       serializer: Api::V1::Vndb::Company::CompanySerializer
   end
 
-  def novels
-    render_unauthorized and return unless params[:type].present?
-    @company = ::Vndb::Company.find(params[:id])
-    if params[:type] == 'publisheds'
-      @novels = @company.publisheds
-    elsif params[:type] == 'developeds'
-      @novels = @company.developeds
-    end
-    # .map do |published|
-    #   published.novel
-    # end
-    render json: @novels, key_transform: :camel_lower, status: :ok,
-      each_serializer: Api::V1::Vndb::Company::ReleaseSerializer
+  def create
+
+  end
+
+  def update
+
+  end
+
+  def destroy
+
+  end
+
+  def index_published
+
+  end
+
+  def index_developed
+
   end
 end

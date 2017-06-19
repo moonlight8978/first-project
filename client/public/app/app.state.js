@@ -1,19 +1,19 @@
-function appState($stateProvider, $urlRouterProvider, $locationProvider) {
-    $stateProvider.state('app', {
-        url: '',
-        views: {
+(function () {
+    'use strict';
 
-        }
-    });
+    angular
+        .module('app')
+        .config(stateConfig);
 
-    // $locationProvider.html5Mode({
-    //     enabled: true,
-    //     requireBase: false
-    // });
-    $locationProvider.hashPrefix('');
-    $urlRouterProvider.otherwise('/');  
-};
+    stateConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
-appState.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+    function stateConfig($stateProvider, $urlRouterProvider, $locationProvider) {
+        $stateProvider.state('app', {
+            url: '',
+            abstract: true
+        });
 
-export default appState;
+        $locationProvider.hashPrefix('');
+        $urlRouterProvider.otherwise('/');
+    }
+})();

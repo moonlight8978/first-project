@@ -1,9 +1,9 @@
 class Api::V1::Vndb::Novel::ReleaseSerializer < ActiveModel::Serializer
-  voiced = ['No voiced', 'Partial voiced', 'Fully voiced']
-  animation_story = ['No animation', 'Simple animations']
-  animation_ero = ['No animation', 'Simple animations']
+  VOICED = ['No voiced', 'Partial voiced', 'Fully voiced']
+  ANIMATION_ERO = ['No animation', 'Simple animations']
+  ANIMATION_STORY = ['No animation', 'Simple animations']
 
-  attributes :id, :released, :title, :title_en, :status, :animation_ero, 
+  attributes :id, :released, :title, :title_en, :status, :animation_ero,
     :animation_story, :voiced, :age_rating
 
   has_many :developers
@@ -11,14 +11,14 @@ class Api::V1::Vndb::Novel::ReleaseSerializer < ActiveModel::Serializer
   has_many :publishers
 
   def voiced
-    voiced[object.voiced]
+    object.voiced && VOICED[object.voiced]
   end
 
   def animation_story
-    animation_story[object.animation_story]
+    object.animation_story && ANIMATION_STORY[object.animation_story]
   end
 
   def animation_ero
-    animation_ero[object.animation_ero]
+    object.animation_story && ANIMATION_ERO[object.animation_story]
   end
 end

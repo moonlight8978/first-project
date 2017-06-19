@@ -1,17 +1,14 @@
 class Api::V1::Vndb::CharactersController < ApplicationController
-  ROLE = {
-    0 => :protagonist,
-    1 => :main,
-    2 => :side
-  }
+  ROLE = { 0 => :protagonist, 1 => :main, 2 => :side }
 
   def index
-    @novel = ::Vndb::Novel.includes(characters: :people).find(params[:novel_id])
-    characters = @novel.characters.group_by(&:role)
-    @characters = characters.map do |role, characters|
-      [ROLE[role], serialize(characters)]
-    end.to_h
-    render json: @characters, status: :ok
+    @characters = ::Vndb::Character.all
+
+    paginate json: @characters, key_transform: :camel_lower, status: :ok,
+      per_page: params[:per_page],
+      except: [:novel, :voice_actresses],
+      per_page: params[:per_page],
+      each_serializer: Api::V1::Vndb::CharacterSerializer
   end
 
   def show
@@ -22,15 +19,39 @@ class Api::V1::Vndb::CharactersController < ApplicationController
       serializer: Api::V1::Vndb::Novel::CharacterSerializer
   end
 
-private
-  def serialize(characters)
-    characters.map do |character|
-      ActiveModelSerializers::SerializableResource.new(
-        character,
-        serializer: Api::V1::Vndb::Novel::CharacterSerializer,
-        root: false,
-        key_transform: :camel_lower
-      )
+  def create
+
+  end
+
+  def update
+
+  end
+
+  def destroy
+
+  end
+
+  def index_novel
+    @novel = ::Vndb::Novel.includes(characters: :people).find(params[:novel_id])
+    characters_need_to_serialize = @novel.characters.group_by(&:role)
+    @characters = GroupSerializeService
+      .new(characters_need_to_serialize, ROLE, Api::V1::Vndb::Novel::CharacterSerializer)
+      .perform
+      .result
+
+    render json: @characters, status: :ok
+  end
+
+  def index_person
+    @person = ::Vndb::Person
+      .includes({ characters: { novels: :releases } }, :country)
+      .find(params[:person_id])
+    @voiceds = @person.voice_actresses.sort_by do |voice_actress|
+      voice_actress.novel.first_release.released
     end
+
+    paginate json: @voiceds, key_transform: :camel_lower, status: :ok,
+      per_page: params[:per_page],
+      each_serializer: Api::V1::Vndb::Person::VoicedSerializer
   end
 end

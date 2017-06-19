@@ -4,7 +4,7 @@ class Api::V1::Vndb::Novel::NovelSerializer < ActiveModel::Serializer
     'Long (30 - 50 hours)', 'Very long (> 50 hours)'
   ]
 
-  attributes :product_id, :id, :title, :title_en, :description, :description_en,
+  attributes :id, :title, :title_en, :description, :description_en,
     :image, :image_nsfw, :image_description
 
   attribute :length do

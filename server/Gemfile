@@ -16,6 +16,8 @@ gem 'rack-cors', 				        '~> 0.4.1'
 gem 'sidekiq',                  '~> 5.0'
 gem 'tzinfo-data', 				      '~> 1.2017', '>= 1.2017.2', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'groupdate',                '~> 3.2'
+gem 'kaminari',                 '~> 1.0', '>= 1.0.1'
+gem 'api-pagination',           '~> 4.6', '>= 4.6.3'
 # gem 'delayed_job',              '~> 4.1', '>= 4.1.2'
 
 group :development, :test do
@@ -23,6 +25,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'hirb',                   '~> 0.7.3'
+  gem 'hirb-unicode',           '~> 0.0.5'
   gem 'listen',                 '>= 3.0.5', '< 3.2'
   gem 'sunspot_solr',           '~> 2.2', '>= 2.2.7'
   # gem 'rails-erd',              '~> 1.5', '>= 1.5.2'

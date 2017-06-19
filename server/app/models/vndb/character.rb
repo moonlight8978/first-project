@@ -1,8 +1,7 @@
 class Vndb::Character < ApplicationRecord
-  belongs_to :novel
-
   has_many :voice_actresses
   has_many :people, through: :voice_actresses
+  has_many :novels, through: :voice_actresses
 
 private
 

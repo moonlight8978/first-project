@@ -42,30 +42,37 @@ Rails.application.routes.draw do
   namespace :api do
     scope module: :v1 do
       scope module: :vndb do
-        resources :novels, shallow: true do
-          resources :characters
-          resources :releases
-          resources :staffs
-          resources :publications
-          resources :tags
+        resources :novels do
+          resources :characters,   except: :index, shallow: true
+          resources :releases,     only: :create
+          resources :publications, only: :index
+          get    'tags',       to: 'tags#index_novel'
+          post   'tags',       to: 'tags#create_novel'
+          delete 'tags/:id',   to: 'tags#destroy_novel'
+          get    'staffs',     to: 'staffs#index_novel'
+          post   'staffs',     to: 'staffs#create_novel'
+          delete 'staffs/:id', to: 'staffs#destroy_novel'
+          get    'characters', to: 'characters#index_novel'
+          get    'releases',   to: 'releases#index_novel'
         end
+
         resources :companies do
-          member do
-            get 'novels'
-          end
+          get 'novels', to: 'novels#index_company'
         end
-        resources :releases do
-          member do
-            get 'companies'
-          end
-        end
+
         resources :people do
-          member do
-            get 'voiceds'
-            get 'credits'
-            get 'graph', to: 'graph/people#show'
-          end
+          get 'voiceds', to: 'characters#index_person'
+          get 'credits', to: 'staffs#index_person'
+          # get 'graph', to: 'graph/people#show'
         end
+
+        resources :releases, except: :create do
+          get 'publishers', to: 'companies#index_published'
+          get 'developers', to: 'companies#index_developed'
+        end
+
+        resources :characters, only: :index
+        resources :tags
       end
     end
 

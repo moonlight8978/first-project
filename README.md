@@ -1,6 +1,6 @@
 # __< Project name >__
 
-(Ruby on Rails (Rails API), AngularJS (ES6), Bootstrap 4, JWT Authentication....)
+(Ruby on Rails (Rails API), AngularJS (maybe React), Bootstrap 4, JWT Authentication....)
 
 #### (This  is for studying. Everything is fiction.)
 
@@ -10,7 +10,7 @@
 
 NodeJS, RailsInstaller (Ruby 2.3, Rails 5), XAMPP
 
-###### NodeJS global package: 
+###### NodeJS global package:
 * `$ npm i -g gulp bower`
 
 ###### Server
@@ -20,7 +20,7 @@ NodeJS, RailsInstaller (Ruby 2.3, Rails 5), XAMPP
 
 * `$ rake db:migrate`
 
-* run: 
+* run:
 **`$ rails s`
 **`$ redis-server`
 **`$ bundle exec sidekiq -C config/sidekiq.yml`

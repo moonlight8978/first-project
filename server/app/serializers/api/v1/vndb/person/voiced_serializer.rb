@@ -9,11 +9,11 @@ class Api::V1::Vndb::Person::VoicedSerializer < ActiveModel::Serializer
   end
 
   def novel_title
-    object.character.novel.title
+    object.novel.title
   end
 
   def novel_title_en
-    object.character.novel.title_en
+    object.novel.title_en
   end
 
   def name
@@ -33,7 +33,7 @@ class Api::V1::Vndb::Person::VoicedSerializer < ActiveModel::Serializer
   end
 
   def released
-    first_release = object.character.novel.first_release
+    first_release = object.novel.first_release
     first_release && first_release.released
   end
 end

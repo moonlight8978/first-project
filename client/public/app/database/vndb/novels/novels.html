@@ -1,0 +1,44 @@
+<h2>Hello</h2>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+  </tr>
+  <tr>
+    <td>{{ vm.novel.id }}</td>
+    <td>{{ vm.novel.title }}</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Position</th>
+  </tr>
+  <tr ng-repeat="artist in vm.staffs.artists">
+    <td>{{ artist.id }}</td>
+    <td>{{ artist.name }}</td>
+    <td>{{ artist.position }}</td>
+  </tr>
+  <tr ng-repeat="composer in vm.staffs.composers">
+    <td>{{ composer.id }}</td>
+    <td>{{ composer.name }}</td>
+    <td>{{ composer.position }}</td>
+  </tr>
+  <tr ng-repeat="scenario in vm.staffs.scenarios">
+    <td>{{ scenario.id }}</td>
+    <td>{{ scenario.name }}</td>
+    <td>{{ scenario.position }}</td>
+  </tr>
+  <tr ng-repeat="vocal in vm.staffs.vocals">
+    <td>{{ vocal.id }}</td>
+    <td>{{ vocal.name }}</td>
+    <td>{{ vocal.position }}</td>
+  </tr>
+  <tr ng-repeat="staff in vm.staffs.staffs">
+    <td>{{ staff.id }}</td>
+    <td>{{ staff.name }}</td>
+    <td>{{ staff.position }}</td>
+  </tr>
+</table>

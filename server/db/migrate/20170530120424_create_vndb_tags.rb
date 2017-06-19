@@ -8,5 +8,9 @@ class CreateVndbTags < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
+
+    create_join_table :novels, :tags, id: false, table_name: :vndb_novels_vndb_tags do |t|
+      t.index [:novel_id, :tag_id]
+    end
   end
 end

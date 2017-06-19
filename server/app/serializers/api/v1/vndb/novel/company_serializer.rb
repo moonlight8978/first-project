@@ -1,13 +1,9 @@
 class Api::V1::Vndb::Novel::CompanySerializer < ActiveModel::Serializer
   UNKNOWN = '不明'
 
-  attributes :id, :name, :name_en, :link
+  attributes :id, :name, :name_en, :flag
 
-  attribute :country_name do
-    (object.country && object.country.name) || UNKNOWN
-  end
-
-  attribute :country_name_en do
-    (object.country && object.country.name_en) || UNKNOWN
+  def flag
+    object.country && object.country.image
   end
 end
