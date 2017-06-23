@@ -1,0 +1,15 @@
+<a href="/">Home</a><br><br>
+
+<table>
+  <tr>
+    <th>Image</th>
+    <th>Title</th>
+    <th>Length</th>
+  </tr>
+  <tr ng-repeat="novel in vm.novels">
+    <td><img ng-src="{{ novel.image }}" style="width: 200px;"></td>
+    <td><a ui-sref="novelDetail({ id: novel.id })">{{ novel.title }}</a></td>
+    <td>{{ vm.length[novel.length] }}</td>
+    <!-- <td>{{ novel.titleEn }}</td> -->
+  </tr>
+</table>

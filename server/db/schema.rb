@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616224617) do
+ActiveRecord::Schema.define(version: 20170623140345) do
 
   create_table "bussiness_products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "type_id", null: false
@@ -24,6 +24,28 @@ ActiveRecord::Schema.define(version: 20170616224617) do
     t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "feature_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.bigint "user_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_feature_comments_on_commentable_type_and_commentable_id"
+    t.index ["user_id"], name: "index_feature_comments_on_user_id"
+  end
+
+  create_table "feature_ratings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "rateable_type"
+    t.bigint "rateable_id"
+    t.bigint "user_id"
+    t.integer "star"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rateable_type", "rateable_id"], name: "index_feature_ratings_on_rateable_type_and_rateable_id"
+    t.index ["user_id"], name: "index_feature_ratings_on_user_id"
   end
 
   create_table "general_countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -89,7 +111,7 @@ ActiveRecord::Schema.define(version: 20170616224617) do
     t.string "facebook"
     t.string "twitter"
     t.string "gmail"
-    t.datetime "password_updated_at", default: "2017-06-19 13:16:10", null: false
+    t.datetime "password_updated_at", default: "2017-06-22 07:22:33", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_security_users_on_country_id"

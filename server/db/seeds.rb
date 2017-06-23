@@ -170,16 +170,16 @@ releases.each do |release|
   release.save
 end
 
-novels[0].screenshots.create(image: 'https://s.vndb.org/st/93/99693.jpg', image_nsfw: false)
-novels[0].screenshots.create(image: 'https://s.vndb.org/st/94/99694.jpg', image_nsfw: false)
-novels[0].screenshots.create(image: 'https://s.vndb.org/st/94/99695.jpg', image_nsfw: false)
-novels[0].screenshots.create(image: 'https://s.vndb.org/st/94/99697.jpg', image_nsfw: false)
-novels[0].screenshots.create(image: 'https://s.vndb.org/st/94/99700.jpg', image_nsfw: false)
-novels[0].screenshots.create(image: 'https://s.vndb.org/st/94/99701.jpg', image_nsfw: false)
-novels[0].screenshots.create(image: 'https://s.vndb.org/st/94/99702.jpg', image_nsfw: false)
-novels[0].screenshots.create(image: 'https://s.vndb.org/st/94/99703.jpg', image_nsfw: true)
-novels[0].screenshots.create(image: 'https://s.vndb.org/st/94/99704.jpg', image_nsfw: true)
-novels[0].screenshots.create(image: 'https://s.vndb.org/st/94/99705.jpg', image_nsfw: true)
+novels[0].screenshots.create(image: 'https://s.vndb.org/sf/93/99693.jpg', image_nsfw: false)
+novels[0].screenshots.create(image: 'https://s.vndb.org/sf/94/99694.jpg', image_nsfw: false)
+novels[0].screenshots.create(image: 'https://s.vndb.org/sf/95/99695.jpg', image_nsfw: false)
+novels[0].screenshots.create(image: 'https://s.vndb.org/sf/97/99697.jpg', image_nsfw: false)
+novels[0].screenshots.create(image: 'https://s.vndb.org/sf/00/99700.jpg', image_nsfw: false)
+novels[0].screenshots.create(image: 'https://s.vndb.org/sf/01/99701.jpg', image_nsfw: false)
+novels[0].screenshots.create(image: 'https://s.vndb.org/sf/02/99702.jpg', image_nsfw: false)
+novels[0].screenshots.create(image: 'https://s.vndb.org/sf/03/99703.jpg', image_nsfw: true)
+novels[0].screenshots.create(image: 'https://s.vndb.org/sf/04/99704.jpg', image_nsfw: true)
+novels[0].screenshots.create(image: 'https://s.vndb.org/sf/05/99705.jpg', image_nsfw: true)
 
 tag = [
   Vndb::Tag.create(
@@ -426,7 +426,7 @@ Vndb::Person.create(
 )
 
 Vndb::Staff.create(
-  person_id: 9,
+  person_id: 10,
   novel_id: 1,
   position: 'Artist'
 )
@@ -438,7 +438,7 @@ Vndb::Person.create(
 )
 
 Vndb::Staff.create(
-  person_id: 10,
+  person_id: 11,
   novel_id: 1,
   position: 'Scenario'
 )
@@ -451,7 +451,7 @@ Vndb::Person.create(
 )
 
 Vndb::Staff.create(
-  person_id: 11,
+  person_id: 12,
   novel_id: 1,
   position: 'Staff',
   note: 'Movie'
@@ -465,7 +465,7 @@ Vndb::Person.create(
 )
 
 Vndb::Staff.create(
-  person_id: 12,
+  person_id: 13,
   novel_id: 1,
   position: 'Staff',
   note: 'Backgrounds'
@@ -478,14 +478,14 @@ Vndb::Person.create(
 )
 
 Vndb::Staff.create(
-  person_id: 13,
+  person_id: 14,
   novel_id: 1,
   position: 'Staff',
   note: 'Planning'
 )
 
 Vndb::Staff.create(
-  person_id: 9,
+  person_id: 10,
   novel_id: 1,
   position: 'Staff',
   note: 'Planning'
@@ -499,7 +499,7 @@ Vndb::Person.create(
 )
 
 Vndb::Staff.create(
-  person_id: 14,
+  person_id: 15,
   novel_id: 1,
   position: 'Staff',
   note: 'OP lyrics'

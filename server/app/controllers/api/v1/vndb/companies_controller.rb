@@ -1,4 +1,4 @@
-class Api::V1::Vndb::CompaniesController < ApplicationControlle
+class Api::V1::Vndb::CompaniesController < ApplicationController
   def index
     @companies = ::Vndb::Company.all
 

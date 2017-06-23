@@ -7,14 +7,11 @@ class Security::User < ApplicationRecord
 
   has_many :reset_password_tokens
   has_many :activate_account_tokens
+  has_many :comments, class_name: 'Feature::Comment'
 
   has_secure_password
 
   def token
     JsonWebToken.encode({ id: self.id })
   end
-
-  # def roles
-  #   self.original_roles.map(&:role)
-  # end
 end

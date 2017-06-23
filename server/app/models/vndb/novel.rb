@@ -1,4 +1,7 @@
 class Vndb::Novel < ApplicationRecord
+  attr_accessor :full_info
+  attr_accessor :characters_grouped, :producers, :staffs_grouped
+
   voiced = { none: 0, partial: 1, fully: 2 }
   STATUS = { trial: 0, completed: 1 }
 
@@ -11,6 +14,9 @@ class Vndb::Novel < ApplicationRecord
   has_many :voice_actresses
   has_many :characters, through: :voice_actresses
 
+  has_many :comments, as: :commentable, class_name: 'Feature::Comment'
+  has_many :ratings,  as: :rateable,    class_name: 'Feature::Rating'
+
   has_and_belongs_to_many :releases, -> { released_asc },
     join_table: :vndb_novels_vndb_releases
   has_and_belongs_to_many :tags,
@@ -18,12 +24,12 @@ class Vndb::Novel < ApplicationRecord
   has_and_belongs_to_many :platforms,
     join_table: :vndb_novels_vndb_platforms
 
-  # searchable do
-  #   text :title
-  #   text :original_title do
-  #     NetworkKanjiFilter.to_hiragana(original_title)
-  #   end
-  # end
+  searchable do
+    text :title do
+      NetworkKanjiFilter.to_hiragana(title)
+    end
+    text :title_en
+  end
 
   def first_release
     self.releases.where(status: STATUS[:completed]).first

@@ -1,0 +1,27 @@
+<table ng-if="staffs">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td ng-switch="type">
+            <h4 ng-switch-when="artists">Artists</h4>
+            <h4 ng-switch-when="composers">Composers</h4>
+            <h4 ng-switch-when="scenarios">Scenarios</h4>
+            <h4 ng-switch-when="vocals">Vocals</h4>
+            <h4 ng-switch-when="staffs">Staffs</h4>
+          </td>
+        </tr>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Note</th>
+        </tr>
+        <tr ng-repeat="staff in staffs">
+          <td>{{ staff.id }}</td>
+          <td>{{ staff.name }}</td>
+          <td>{{ staff.note }}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

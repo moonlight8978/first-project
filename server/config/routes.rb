@@ -46,6 +46,7 @@ Rails.application.routes.draw do
           resources :characters,   except: :index, shallow: true
           resources :releases,     only: :create
           resources :publications, only: :index
+          resources :screenshots,  except: [:show, :update]
           get    'tags',       to: 'tags#index_novel'
           post   'tags',       to: 'tags#create_novel'
           delete 'tags/:id',   to: 'tags#destroy_novel'
@@ -73,6 +74,10 @@ Rails.application.routes.draw do
 
         resources :characters, only: :index
         resources :tags
+
+        namespace :search do
+          get 'novels'
+        end
       end
     end
 

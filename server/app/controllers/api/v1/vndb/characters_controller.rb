@@ -7,7 +7,6 @@ class Api::V1::Vndb::CharactersController < ApplicationController
     paginate json: @characters, key_transform: :camel_lower, status: :ok,
       per_page: params[:per_page],
       except: [:novel, :voice_actresses],
-      per_page: params[:per_page],
       each_serializer: Api::V1::Vndb::CharacterSerializer
   end
 

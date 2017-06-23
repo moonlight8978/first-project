@@ -1,0 +1,20 @@
+<a ui-sref="home">Home</a><br><br>
+
+<img ng-src="{{ vm.character.image }}" ng-hide="vm.hideNsfw && vm.character.imageNsfw">
+<h2>{{ vm.character.name }}</h2>
+<table>
+  <tr>
+    <td>Birthday</td>
+    <td>{{ vm.character.birthday }}</td>
+  </tr>
+  <tr>
+    <td>Three-sizes</td>
+    <td>{{ vm.character.threeSizes }}cm</td>
+  </tr>
+  <tr>
+    <td rowspan="{{ vm.character.voiceActresses.size }}">Voiced by</td>
+    <td ng-repeat="seiyuu in vm.character.voiceActresses">
+      {{ seiyuu.alias || seiyuu.name }}
+    </td>
+  </tr>
+</table>

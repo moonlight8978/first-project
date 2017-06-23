@@ -2,6 +2,20 @@ class Api::V1::Vndb::NovelsController < ApplicationController
   before_action :require_moderator, only: :update
   before_action :require_admin, only: [:create, :destroy]
   after_action :before, only: :index_company
+
+  ROLE = {
+    0 => :protagonist,
+    1 => :main,
+    2 => :side
+  }
+  POSITIONS = {
+    'Staff'    => :staffs,
+    'Vocals'   => :vocals,
+    'Composer' => :composers,
+    'Artist'   => :artists,
+    'Scenario' => :scenarios
+  }
+
   def before
     puts "Params la: #{params.inspect}"
   end
@@ -11,13 +25,40 @@ class Api::V1::Vndb::NovelsController < ApplicationController
 
     paginate json: @novels, key_transform: :camel_lower, status: :ok,
       per_page: params[:per_page],
-      each_serializer: Api::V1::Vndb::Novel::NovelSerializer
+      each_serializer: Api::V1::Vndb::Novel::ListSerializer
   end
 
   def show
-    @novel = ::Vndb::Novel.find(params[:id])
+    if params[:full_info].present?
+      @novel = ::Vndb::Novel
+        .includes(
+          :tags, :screenshots, :people,
+          { characters: { people: :country } },
+          { releases: [{ developers: :country }, { publishers: :country }] }
+        )
+        .find(params[:id])
+      @novel.full_info = true
+
+      @novel.characters_grouped = GroupSerializeService
+        .new(@novel.characters, :role, ROLE, Api::V1::Vndb::Novel::CharacterSerializer)
+        .perform
+        .result
+
+      @novel.staffs_grouped = GroupSerializeService
+        .new(@novel.staffs, :position, POSITIONS, Api::V1::Vndb::Novel::StaffSerializer)
+        .perform
+        .result
+
+      get_producers_svc = VndbService::Novel::GetProducers.new(@novel)
+      @novel.producers = { publishers: [], developers: [] }
+      @novel.producers[:publishers] = get_producers_svc.perform(:publishers, serialize: true).result
+      @novel.producers[:developers] = get_producers_svc.perform(:developers, serialize: true).result
+    else
+      @novel = ::Vndb::Novel.find(params[:id])
+    end
+
     render json: @novel, key_transform: :camel_lower, status: :ok,
-      serializer: Api::V1::Vndb::Novel::NovelSerializer
+      serializer: Api::V1::Vndb::Novel::DetailSerializer
   end
 
   def create

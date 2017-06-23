@@ -18,7 +18,6 @@
 	<link rel="stylesheet" href="/build/css/application.css">
 </head>
 <body>
-	<a ui-sref="novels">Novels</a>
 	<div class="container">
 		<div ui-view="navbar">
 
@@ -47,19 +46,36 @@
 	<script src="bower_components/ngstorage/ngStorage.min.js"></script>
 
 	<!-- app inject -->
+	<!-- <script src=""></script> -->
 	<script src="app/app.module.js"></script>
 	<script src="app/app.constants.js"></script>
 	<script src="app/config/header.config.js"></script>
 
-	<script src="app/resources/novel.service.js"></script>
+	<script src="app/resources/vndb/novel.service.js"></script>
+	<script src="app/resources/vndb/company.service.js"></script>
+	<script src="app/resources/vndb/tag.service.js"></script>
+	<script src="app/resources/vndb/character.service.js"></script>
+	<script src="app/resources/vndb/release.service.js"></script>
 	<!-- <script src="app/resources/resource_interceptor.service.js"></script> -->
 
-	<script src="app/database/vndb/novels/novels.controller.js"></script>
+	<script src="app/directives/database/vndb/novel/staff/staff.directive.js"></script>
+	<script src="app/directives/database/vndb/novel/character/character.directive.js"></script>
+
+	<script src="app/home/home.controller.js"></script>
+	<script src="app/database/vndb/novel/detail/novel-detail.controller.js"></script>
+	<script src="app/database/vndb/novel/list/all/novel-list.controller.js"></script>
+	<script src="app/database/vndb/novel/list/search/novel-search.controller.js"></script>
+	<script src="app/home/home.controller.js"></script>
+	<script src="app/database/vndb/character/detail/character-detail.controller.js"></script>
 
 	<script src="app/app.state.js"></script>
+	<script src="app/home/home.state.js"></script>
 	<script src="app/database/database.state.js"></script>
 	<script src="app/database/vndb/vndb.state.js"></script>
-	<script src="app/database/vndb/novels/novels.state.js"></script>
+	<script src="app/database/vndb/novel/detail/novel-detail.state.js"></script>
+	<script src="app/database/vndb/novel/list/all/novel-list.state.js"></script>
+	<script src="app/database/vndb/novel/list/search/novel-search.state.js"></script>
+	<script src="app/database/vndb/character/detail/character-detail.state.js"></script>
 
 	<!-- app's javascripts -->
 	<script src="assets/js/bootstrap.js"></script>

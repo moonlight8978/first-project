@@ -1,0 +1,8 @@
+<a ui-sref="novelDetail({ id: 1 })">Novel no.1</a><br>
+<a ui-sref="novelList">All Novels</a>
+<form ng-submit="vm.search(vm.query)">
+  <input type="text" ng-model="vm.query" placeholder="探しましょう。。。" required>
+  <button type="submit">探す！</button>
+</form>
+<br><br>
+<a ui-sref="characterDetail({ id: 1 })">Character no.1</a>

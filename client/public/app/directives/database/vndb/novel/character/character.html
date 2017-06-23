@@ -1,0 +1,21 @@
+<table ng-if="characters">
+  <tr ng-switch="type">
+    <th ng-switch-when="protagonist">Protagonists</th>
+    <th ng-switch-when="side">Side characters</th>
+    <th ng-switch-when="main">Main characters</th>
+  </tr>
+  <tr>
+    <td>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Three-size</th>
+      </tr>
+      <tr ng-repeat="character in characters">
+        <td>{{ character.id }}</td>
+        <td>{{ character.name }}</td>
+        <td>{{ character.threeSizes }}cm</td>
+      </tr>
+    </td>
+  </tr>
+</table>

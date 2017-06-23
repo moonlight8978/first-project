@@ -1,0 +1,66 @@
+<a ui-sref="home">Home</a><br><br>
+
+<h1>{{ vm.novel.title }}</h1>
+<h4>(Length: {{ vm.length[vm.novel.length] }})</h4>
+<h4>Novel ID: {{ vm.novel.id }}</h4>
+
+<h3>Staffs:</h3>
+<novel-staff staffs="vm.novel.staffs.artists"   type="'artists'"></novel-staff>
+<novel-staff staffs="vm.novel.staffs.composers" type="'composers'"></novel-staff>
+<novel-staff staffs="vm.novel.staffs.scenarios" type="'scenarios'"></novel-staff>
+<novel-staff staffs="vm.novel.staffs.vocals"    type="'vocals'"></novel-staff>
+<novel-staff staffs="vm.novel.staffs.staffs"    type="'staffs'"></novel-staff>
+
+<h3>Characters:</h3>
+<novel-character characters="vm.novel.characters.protagonist" type="'protagonist'"></novel-character>
+<novel-character characters="vm.novel.characters.main"        type="'main'"></novel-character>
+<novel-character characters="vm.novel.characters.side"        type="'side'"></novel-character>
+
+<h3>Tags:</h3>
+<table>
+  <tr ng-repeat="tag in vm.novel.tags">
+    <td>{{ tag.tag }}</td>
+    <td>{{ tag.tag_en }}</td>
+  </tr>
+</table>
+
+<h3>Releases:</h3>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Date</th>
+  </tr>
+  <tr ng-repeat="release in vm.novel.releases">
+    <td>{{ release.title }}</td>
+    <td>{{ release.released }}</td>
+  </tr>
+</table>
+
+<h3>Publishers:</h3>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Flag</th>
+  </tr>
+  <tr ng-repeat="publisher in vm.novel.producers.publishers">
+    <td>{{ publisher.name }}</td>
+    <td>{{ publisher.flag }}</td>
+  </tr>
+</table>
+
+<h3>Developers:</h3>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Country</th>
+  </tr>
+  <tr ng-repeat="developer in vm.novel.producers.developers">
+    <td>{{ developer.name }}</td>
+    <td>{{ developer.flag }}</td>
+  </tr>
+</table>
+
+<h3>Screenshots</h3>
+<input type="checkbox" ng-model="vm.hideNsfw"> Hide NSFW images<br>
+<img ng-repeat="screenshot in vm.novel.screenshots" style="width: 136px; height: 79px"
+  ng-src="{{ screenshot.image }}" ng-hide="vm.hideNsfw && screenshot.imageNsfw">
