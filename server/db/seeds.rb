@@ -41,23 +41,23 @@ user = Security::User.create(
   last_name: '鈴木'
 )
 
-role_user = Security::Role.create(role: 'ROLE_USER')
-role_moderator = Security::Role.create(role: 'ROLE_MODERATOR')
-role_admin = Security::Role.create(role: 'ROLE_ADMIN')
+role_user = Security::User::Role.create(role: 'ROLE_USER')
+role_moderator = Security::User::Role.create(role: 'ROLE_MODERATOR')
+role_admin = Security::User::Role.create(role: 'ROLE_ADMIN')
 
 user.roles << role_user
 moderator.roles << role_user << role_moderator
 admin.roles << role_user << role_moderator << role_admin
 
-win = Vndb::Platform.create(platform: 'Windows')
-linux = Vndb::Platform.create(platform: 'Linux')
-ps = Vndb::Platform.create(platform: 'Playstations')
-ios = Vndb::Platform.create(platform: 'iOS')
-android = Vndb::Platform.create(platform: 'Android')
-dvd = Vndb::Platform.create(platform: 'DVD Player')
+win = Db::Novel::Release::Platform.create(platform: 'Windows')
+linux = Db::Novel::Release::Platform.create(platform: 'Linux')
+ps = Db::Novel::Release::Platform.create(platform: 'Playstations')
+ios = Db::Novel::Release::Platform.create(platform: 'iOS')
+android = Db::Novel::Release::Platform.create(platform: 'Android')
+dvd = Db::Novel::Release::Platform.create(platform: 'DVD Player')
 
 novels = [
-  Vndb::Novel.create(
+  Db::Novel.create(
     title_en: 'Koi Suru Doll to Omoi no Kiseki ~Poupee de Souhaits~',
     title: '恋する少女と想いのキセキ～Poupee de souhaits～',
     length: 2,
@@ -72,7 +72,7 @@ novels = [
     image: 'https://s.vndb.org/cv/85/23185.jpg',
     image_nsfw: false
   ),
-  Vndb::Novel.create(
+  Db::Novel.create(
     title_en: 'Hime-sama Love Life! -Motto! Ichaicha ☆ Paradise!-',
     title: '姫様LOVEライフ！ -もーっと！イチャイチャ☆ぱらだいす！-',
     length: 2,
@@ -81,12 +81,12 @@ novels = [
   )
 ]
 
-country = General::Country.create(
+country = Country.create(
   name_en: 'Japan',
   name: '日本'
 )
 
-company = Vndb::Company.new(
+company = Db::Company.new(
   name: 'Sugar Pot',
   name_en: 'Sugar Pot',
   link: 'http://www.sugarpot-hp.com/'
@@ -127,7 +127,8 @@ releases = [
     title_en: 'Koisuru Doll to Omoi no Kiseki ~Poupee de Souhaits~ Package Edition',
     status: 1,
     age_rating: 3,
-    platform: win
+    platform: win,
+    jan_num: '4571346000116'
   ),
   novels[0].releases.create(
     voiced: 2,
@@ -160,7 +161,8 @@ releases = [
     title_en: 'Shugapo ☆ Best Selection!!',
     status: 1,
     age_rating: 3,
-    platform: win
+    platform: win,
+    jan_num: '4571346000161'
   )
 ]
 
@@ -182,14 +184,14 @@ novels[0].screenshots.create(image: 'https://s.vndb.org/sf/04/99704.jpg', image_
 novels[0].screenshots.create(image: 'https://s.vndb.org/sf/05/99705.jpg', image_nsfw: true)
 
 tag = [
-  Vndb::Tag.create(
+  Db::Novel::Tag.create(
     tag: '同じ屋根',
     tag_en: 'Same Roof',
     description_en:
       'The protagonist lives in the same building as one of the heroines/heroes '\
       'for an extended period.'
   ),
-  Vndb::Tag.create(
+  Db::Novel::Tag.create(
     tag: 'ロリ',
     tag_en: 'Loli',
     description_en:
@@ -200,40 +202,40 @@ tag = [
 
 novels[0].tags << tag[0] << tag[1]
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Aoba Ringo',
   name: '青葉りんご',
   link: 'http://ameblo.jp/aobaringorongoronstundup/',
   twitter: 'https://twitter.com/aobaringo'
 )
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Ogura Yui',
   name: '小倉結衣',
   link: 'http://ameblo.jp/bisyouzyoge-mu-seiyuu/',
   twitter: 'https://twitter.com/ogurayui1017'
 )
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Miruno Jun',
   name: 'ミルノ純',
   link: 'http://synchronist.net/',
   twitter: 'https://twitter.com/mirumirumiruno'
 )
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Sakata Yuki',
   name: '坂田有希',
   link: 'http://ameblo.jp/snow11snow22/'
 )
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Mizusawa Kei',
   name: '瑞沢渓',
   link: 'http://y-tail.jp/profile/mizusawa.html'
 )
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Hayase Yayoi',
   name: '早瀬ゃょぃ',
   link: 'http://ameblo.jp/hayase-yayoi/',
@@ -241,7 +243,7 @@ Vndb::Person.create(
 )
 
 characters = [
-  Vndb::Character.create(
+  Db::Novel::Character.create(
     name_en: 'Ena',
     name: 'エナ',
     birthday_day: 1,
@@ -253,7 +255,7 @@ characters = [
     hip: 74,
     role: 1
   ),
-  Vndb::Character.create(
+  Db::Novel::Character.create(
     name_en: 'Himekawa Mitomo',
     name: '姫川美朋',
     birthday_day: 10,
@@ -265,7 +267,7 @@ characters = [
     hip: 91,
     role: 1
   ),
-  Vndb::Character.create(
+  Db::Novel::Character.create(
     name_en: 'Komakuri Amane',
     name: '駒久利天音',
     birthday_day: 25,
@@ -277,7 +279,7 @@ characters = [
     hip: 80,
     role: 1
   ),
-  Vndb::Character.create(
+  Db::Novel::Character.create(
     name_en: 'Shuri',
     name: '珠璃',
     birthday_day: 22,
@@ -289,7 +291,7 @@ characters = [
     hip: 88,
     role: 1
   ),
-  Vndb::Character.create(
+  Db::Novel::Character.create(
     name_en: 'Towa',
     name: 'トワ',
     birthday_day: 8,
@@ -301,7 +303,7 @@ characters = [
     hip: 85,
     role: 1
   ),
-  Vndb::Character.create(
+  Db::Novel::Character.create(
     name_en: 'Yoshino Sara',
     name: '吉野紗良',
     birthday_day: 4,
@@ -313,7 +315,7 @@ characters = [
     hip: 84,
     role: 2
   ),
-  Vndb::Character.create(
+  Db::Novel::Character.create(
     name_en: 'Ou Maika',
     name: '王舞華',
     birthday_day: 3,
@@ -327,19 +329,19 @@ characters = [
   )
 ]
 
-Vndb::VoiceActress.create(
+Db::Novel::Character::VoiceActress.create(
   person_id: 1,
   character: characters[0],
   novel_id: 1
 )
 
-Vndb::VoiceActress.create(
+Db::Novel::Character::VoiceActress.create(
   person_id: 2,
   character: characters[1],
   novel_id: 1
 )
 
-Vndb::VoiceActress.create(
+Db::Novel::Character::VoiceActress.create(
   person_id: 3,
   character: characters[2],
   alias_en: 'Moka Choko',
@@ -347,13 +349,13 @@ Vndb::VoiceActress.create(
   novel_id: 1
 )
 
-Vndb::VoiceActress.create(
+Db::Novel::Character::VoiceActress.create(
   person_id: 4,
   character: characters[3],
   novel_id: 1
 )
 
-Vndb::VoiceActress.create(
+Db::Novel::Character::VoiceActress.create(
   person_id: 5,
   character: characters[4],
   alias_en: 'Kawashima Rino',
@@ -361,13 +363,13 @@ Vndb::VoiceActress.create(
   novel_id: 1
 )
 
-Vndb::VoiceActress.create(
+Db::Novel::Character::VoiceActress.create(
   person_id: 6,
   character: characters[5],
   novel_id: 1
 )
 
-nao = Vndb::Person.create(
+nao = Db::Person.create(
   name_en: 'nao',
   name: 'なお',
   link: 'http://ameblo.jp/dg-naoblog/'
@@ -382,7 +384,7 @@ nao_vocal.person = nao
 
 nao_vocal.save
 
-Vndb::Staff.create(
+Db::Novel::Staff.create(
   person_id: 3,
   novel_id: 1,
   position: 'Vocals',
@@ -391,114 +393,114 @@ Vndb::Staff.create(
   alias_en: 'miru'
 )
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Arai Kenji',
   name: '新井健史',
   link: 'http://hemuri.com/',
   twitter: 'https://twitter.com/arakeso'
 )
 
-Vndb::Staff.create(
+Db::Novel::Staff.create(
   person_id: 8,
   novel_id: 1,
   position: 'Composer',
   note: 'BGM'
 )
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Naruse Mamoru',
   name: '成瀬守',
   link: 'http://theflyers.sakura.ne.jp/',
   twitter: 'https://twitter.com/mamo_su'
 )
 
-Vndb::Staff.create(
+Db::Novel::Staff.create(
   person_id: 9,
   novel_id: 1,
   position: 'Artist'
 )
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Tsukishima Yuko',
   name: '月嶋ゆうこ',
   link: 'http://roritora.k-server.org/',
   twitter: 'https://twitter.com/yuko_tsukishima'
 )
 
-Vndb::Staff.create(
+Db::Novel::Staff.create(
   person_id: 10,
   novel_id: 1,
   position: 'Artist'
 )
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Oumiya Yuu',
   name: '近江谷宥',
   link: 'http://oumiyayuu.blog.fc2.com/'
 )
 
-Vndb::Staff.create(
+Db::Novel::Staff.create(
   person_id: 11,
   novel_id: 1,
   position: 'Scenario'
 )
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Dosei',
   name: 'どせい',
   link: 'http://www111.sakura.ne.jp/~hotaru/',
   twitter: 'https://twitter.com/dosei_s'
 )
 
-Vndb::Staff.create(
+Db::Novel::Staff.create(
   person_id: 12,
   novel_id: 1,
   position: 'Staff',
   note: 'Movie'
 )
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Minami Makoto',
   name: '南誠',
   link: 'http://www.fsinet.or.jp/~makochin/',
   twitter: 'https://twitter.com/saburo_m'
 )
 
-Vndb::Staff.create(
+Db::Novel::Staff.create(
   person_id: 13,
   novel_id: 1,
   position: 'Staff',
   note: 'Backgrounds'
 )
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Oumiya Yuu',
   name: '江谷宥',
   link: 'http://oumiyayuu.blog.fc2.com/'
 )
 
-Vndb::Staff.create(
+Db::Novel::Staff.create(
   person_id: 14,
   novel_id: 1,
   position: 'Staff',
   note: 'Planning'
 )
 
-Vndb::Staff.create(
+Db::Novel::Staff.create(
   person_id: 10,
   novel_id: 1,
   position: 'Staff',
   note: 'Planning'
 )
 
-Vndb::Person.create(
+Db::Person.create(
   name_en: 'Yamashita Shinichirou',
   name: '山下慎一狼',
   link: 'http://ameblo.jp/phoenrill/',
   twitter: 'https://twitter.com/oh_sama'
 )
 
-Vndb::Staff.create(
+Db::Novel::Staff.create(
   person_id: 15,
   novel_id: 1,
   position: 'Staff',
@@ -523,7 +525,7 @@ hmll = novels[1].releases.create(
   platform: win
 )
 
-princess_sugar = Vndb::Company.create(
+princess_sugar = Db::Company.create(
   name: 'Princess Sugar',
   name_en: 'Princess Sugar',
   link: 'http://www.s-digi.jp/princess-sugar/',
