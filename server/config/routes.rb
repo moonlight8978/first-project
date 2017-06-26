@@ -3,46 +3,46 @@ Rails.application.routes.draw do
     scope module: :v1 do
       scope module: :db do
         resources :novels do
-          resources :characters,   except: :index, shallow: true
-          resources :releases,     only: :create
-          resources :screenshots,  except: [:show, :update]
-          get    'tags',       to: 'tags#index_novel'
-          post   'tags',       to: 'tags#create_novel'
-          delete 'tags/:id',   to: 'tags#destroy_novel'
-          get    'staffs',     to: 'staffs#index_novel'
-          post   'staffs',     to: 'staffs#create_novel'
-          delete 'staffs/:id', to: 'staffs#destroy_novel'
-          get    'characters', to: 'characters#index_novel'
-          get    'releases',   to: 'releases#index_novel'
+          resources :screenshots, except: :show, controller: 'novels/screenshots'
+          resources :staffs,      except: :show, controller: 'novels/people'
+
+          get    'tags',     to: 'novels/tags#index_novel'
+          delete 'tags/:id', to: 'novels/tags#destroy_novel'
+          put    'tags/:id', to: 'novels/tags#update_novel'
+
+          # get    'staffs',     to: 'novels/people#index_novel'
+          # delete 'staffs/:id', to: 'novels/people#destroy_novel'
+          # put    'staffs/:id', to: 'novels/people#update_novel'
+          # post   'staffs/:id', to:
+
+          get    'characters',     to: 'novels/characters#index_novel'
+          put    'characters/:id', to: 'novels/characters#update_novel'
+          post   'characters',     to: 'novels/characters#create_novel'
+          delete 'characters/:id', to: 'novels/characters#destroy_novel'
+          resources :characters, only: [:destroy, :create] do
+            resources :voice_actresses, except: :show,
+              controller: 'novels/characters/people'
+          end
+
+          get 'releases',     to: 'novels/releases#index_novel'
+          put 'releases/:id', to: 'novels/releases#update_novel'
+          resources :releases, only: [:destroy, :create] do
+            resources :producers, except: [:show, :create],
+              controller: 'novels/releases/producers'
+
+            get    'platforms',     to: 'novels/releases/platforms#index_release'
+            put    'platforms/:id', to: 'novels/releases/platforms#update_release'
+            delete 'platforms/:id', to: 'novels/releases/platforms#destroy_release'
+          end
         end
 
-        resources :companies do
-          get 'novels', to: 'novels#index_company'
-        end
-
-        resources :people do
-          get 'voiceds', to: 'characters#index_person'
-          get 'credits', to: 'staffs#index_person'
-          # get 'graph', to: 'graph/people#show'
-        end
-
-        resources :releases, except: :create do
-          get 'publishers', controller: '/api/v1/vndb/companies', action: :index_published
-          get 'developers', to: 'companies#index_developed'
-        end
-
-        resources :characters, only: :index
-        resources :tags
-
-        namespace :search do
-          get 'novels'
+        namespace :novels do
+          resources :tags
+          resources :characters, except: [:create, :destroy]
+          resources :releases,   except: [:create, :destroy]
+          resources :platforms, controller: 'releases/platforms'
         end
       end
-    end
-
-    scope module: :database do
-      resources :people
-      resources :companies
     end
 
     scope module: :entity do
