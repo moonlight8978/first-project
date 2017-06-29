@@ -5,9 +5,13 @@ class Api::V1::Db::NovelsController < ApplicationController
   def index
     @novels = ::Db::Novel.all
 
+    if params[:length].present?
+      @novels = @novels.where(length: params[:length])
+    end
+
     paginate json: @novels, key_transform: :camel_lower, status: :ok,
       per_page: params[:per_page],
-      each_serializer: Api::V1::Vndb::Novel::ListSerializer
+      each_serializer: Api::V1::Db::Novel::NovelListSerializer
   end
 
   def show
@@ -15,11 +19,11 @@ class Api::V1::Db::NovelsController < ApplicationController
     if params[:full_info].present?
       @novel = @get_novel_svc.perform(full_info: true).result
     else
-      @novel = @get_novel_svc.perform(full_info: true).result
+      @novel = @get_novel_svc.perform.result
     end
 
     render json: @novel, key_transform: :camel_lower, status: :ok,
-      serializer: Api::V1::Vndb::Novel::DetailSerializer
+      serializer: Api::V1::Db::Novel::NovelDetailSerializer
   end
 
   def create

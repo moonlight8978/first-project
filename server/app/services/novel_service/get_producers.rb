@@ -9,7 +9,7 @@ class NovelService::GetProducers
       @companies = @companies.map do |company|
         ActiveModelSerializers::SerializableResource.new(
           company,
-          serializer: Api::V1::Vndb::Novel::CompanySerializer,
+          serializer: Api::V1::Db::Novel::ProducerSerializer,
           root: false,
           key_transform: :camel_lower
         )

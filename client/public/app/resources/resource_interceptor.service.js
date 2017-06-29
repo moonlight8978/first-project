@@ -1,26 +1,24 @@
-(function () {
-    'use strict';
+// (function () {
+//     'use strict';
 
-    angular
-        .module('app')
-        .factory('ResourceInterceptor', ResourceInterceptor);
+//     angular
+//         .module('app')
+//         .factory('ResourceInterceptor', ResourceInterceptor);
 
-    ResourceInterceptor.$inject = [];
+//     function ResourceInterceptor() {
+//         var interceptor = {
+//             request: function(config) {
+//                 config.headers['Content-Type'] = 'application/json';
+//                 return config;
+//             }
+//         };
 
-    function ResourceInterceptor() {
-        var interceptor = {
-            request: function(config) {
-                config.headers['Content-Type'] = 'application/json';
-                return config;
-            }
-        };
+//         return interceptor;
+//     }
 
-        return interceptor;
-    }
-
-    angular
-        .module('app')
-        .config(['$httpProvider', function($httpProvider) {
-            $httpProvider.interceptors.push('ResourceInterceptor');
-        }]);
-})();
+//     // angular
+//     //     .module('app')
+//     //     .config(['$httpProvider', function($httpProvider) {
+//     //         $httpProvider.interceptors.push('ResourceInterceptor');
+//     //     }]);
+// })();

@@ -7,7 +7,7 @@ class NovelService::GetInfo
     if full_info
       @novel = Db::Novel
         .includes(
-          :tags, :screenshots, :people,
+          :tags, :screenshots,{ people: :country },
           { characters: { people: :country } },
           { releases: [{ developers: :country }, { publishers: :country }] }
         )
@@ -18,7 +18,11 @@ class NovelService::GetInfo
       group_staffs
       get_producers
     else
-      @novel = ::Vndb::Novel.find(@novel_id)
+      @novel = Db::Novel
+        .includes(releases: [{ developers: :country }, { publishers: :country }])
+        .find(@novel_id)
+
+      get_producers
     end
 
     self
@@ -31,13 +35,8 @@ class NovelService::GetInfo
 private
 
   def group_characters
-    roles = {
-      0 => :protagonist,
-      1 => :main,
-      2 => :side
-    }
     @novel.characters_grouped = GroupSerializeService
-      .new(@novel.characters, :role, roles, Api::V1::Vndb::Novel::CharacterSerializer)
+      .new(@novel.characters, :role, Api::V1::Db::Novel::CharacterSerializer)
       .perform
       .result
   end
@@ -51,7 +50,7 @@ private
       'Scenario' => :scenarios
     }
     @novel.staffs_grouped = GroupSerializeService
-      .new(@novel.staffs, :position, positions, Api::V1::Vndb::Novel::StaffSerializer)
+      .new(@novel.staffs, :position, Api::V1::Db::Novel::StaffSerializer, positions)
       .perform
       .result
   end

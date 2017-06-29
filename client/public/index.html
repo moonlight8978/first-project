@@ -45,37 +45,36 @@
 	<script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
 	<script src="bower_components/ngstorage/ngStorage.min.js"></script>
 
-	<!-- app inject -->
-	<!-- <script src=""></script> -->
-	<script src="app/app.module.js"></script>
-	<script src="app/app.constants.js"></script>
-	<script src="app/config/header.config.js"></script>
-
-	<script src="app/resources/vndb/novel.service.js"></script>
-	<script src="app/resources/vndb/company.service.js"></script>
-	<script src="app/resources/vndb/tag.service.js"></script>
-	<script src="app/resources/vndb/character.service.js"></script>
-	<script src="app/resources/vndb/release.service.js"></script>
-	<!-- <script src="app/resources/resource_interceptor.service.js"></script> -->
-
-	<script src="app/directives/database/vndb/novel/staff/staff.directive.js"></script>
-	<script src="app/directives/database/vndb/novel/character/character.directive.js"></script>
-
-	<script src="app/home/home.controller.js"></script>
-	<script src="app/database/vndb/novel/detail/novel-detail.controller.js"></script>
-	<script src="app/database/vndb/novel/list/all/novel-list.controller.js"></script>
-	<script src="app/database/vndb/novel/list/search/novel-search.controller.js"></script>
-	<script src="app/home/home.controller.js"></script>
-	<script src="app/database/vndb/character/detail/character-detail.controller.js"></script>
-
-	<script src="app/app.state.js"></script>
-	<script src="app/home/home.state.js"></script>
-	<script src="app/database/database.state.js"></script>
-	<script src="app/database/vndb/vndb.state.js"></script>
-	<script src="app/database/vndb/novel/detail/novel-detail.state.js"></script>
-	<script src="app/database/vndb/novel/list/all/novel-list.state.js"></script>
-	<script src="app/database/vndb/novel/list/search/novel-search.state.js"></script>
-	<script src="app/database/vndb/character/detail/character-detail.state.js"></script>
+	<!-- inject:js -->
+  <script src="app/app.module.js"></script>
+  <script src="app/search/search.state.js"></script>
+  <script src="app/search/novel/novel-search.state.js"></script>
+  <script src="app/search/novel/novel-search.controller.js"></script>
+  <script src="app/resources/resource_interceptor.service.js"></script>
+  <script src="app/resources/db/novel/tag.service.js"></script>
+  <script src="app/resources/db/novel/release.service.js"></script>
+  <script src="app/resources/db/novel/novel.service.js"></script>
+  <script src="app/resources/db/novel/company.service.js"></script>
+  <script src="app/resources/db/novel/character.service.js"></script>
+  <script src="app/home/home.state.js"></script>
+  <script src="app/home/home.controller.js"></script>
+  <script src="app/directives/novel/staffs-data/staff.directive.js"></script>
+  <script src="app/directives/novel/characters-data/character.directive.js"></script>
+  <script src="app/db/novel/novel/novel.state.js"></script>
+  <script src="app/db/novel/novel/list/novel-list.state.js"></script>
+  <script src="app/db/novel/novel/list/novel-list.controller.js"></script>
+  <script src="app/db/novel/novel/detail/novel-detail.state.js"></script>
+  <script src="app/db/novel/novel/detail/novel-detail.controller.js"></script>
+  <script src="app/db/novel/character/list/character-list.state.js"></script>
+  <script src="app/db/novel/character/list/character-list.controller.js"></script>
+  <script src="app/db/novel/character/detail/character-detail.state.js"></script>
+  <script src="app/db/novel/character/detail/character-detail.controller.js"></script>
+  <script src="app/db/novel/character/character.state.js"></script>
+  <script src="app/db/db.state.js"></script>
+  <script src="app/config/header.config.js"></script>
+  <script src="app/app.state.js"></script>
+  <script src="app/app.constants.js"></script>
+  <!-- endinject -->
 
 	<!-- app's javascripts -->
 	<script src="assets/js/bootstrap.js"></script>

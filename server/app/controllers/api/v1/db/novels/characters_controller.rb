@@ -5,7 +5,7 @@ class Api::V1::Db::Novels::CharactersController < ApplicationController
     paginate json: @characters, key_transform: :camel_lower, status: :ok,
       per_page: params[:per_page],
       except: [:novel, :voice_actresses],
-      each_serializer: Api::V1::Vndb::CharacterSerializer
+      each_serializer: Api::V1::Db::Novel::Character::CharacterListSerializer
   end
 
   def show
@@ -13,7 +13,7 @@ class Api::V1::Db::Novels::CharactersController < ApplicationController
 
     render json: @character, key_transform: :camel_lower, status: :ok,
       include: [:novel, :voice_actresses],
-      serializer: Api::V1::Vndb::Novel::CharacterSerializer
+      serializer: Api::V1::Db::Novel::Character::CharacterDetailSerializer
   end
 
   def create
@@ -29,10 +29,9 @@ class Api::V1::Db::Novels::CharactersController < ApplicationController
   end
 
   def index_novel
-    @novel = ::Db::Novel.includes(characters: :people).find(params[:novel_id])
-    characters_need_to_serialize = @novel.characters.group_by(&:role)
+    novel = ::Db::Novel.includes(characters: :people).find(params[:novel_id])
     @characters = GroupSerializeService
-      .new(characters_need_to_serialize, ROLE, Api::V1::Vndb::Novel::CharacterSerializer)
+      .new(novel.characters, :role, Api::V1::Db::Novel::CharacterSerializer)
       .perform
       .result
 

@@ -1,4 +1,9 @@
 class Db::Novel::Release < ApplicationRecord
+  enum status: [:trial, :complete]
+  enum voiced: [:no, :partial, :fully]
+  enum animation_story: [:no, :simple], _prefix: :animation_story
+  enum animation_ero:   [:no, :simple], _prefix: :animation_ero
+
   belongs_to :platform
 
   has_and_belongs_to_many :novels,

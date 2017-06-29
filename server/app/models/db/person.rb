@@ -1,4 +1,6 @@
 class Db::Person < ApplicationRecord
+  enum gender: [:female, :male]
+
   belongs_to :country, class_name: 'Country', optional: true
 
   has_many :voice_actresses, class_name: 'Db::Novel::Character::VoiceActress'

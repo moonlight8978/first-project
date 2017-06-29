@@ -14,7 +14,7 @@
         this.search = search;
 
         function search(query) {
-            $state.go('novelSearch', { q: this.query });
+            $state.go('search.novel', { q: this.query });
         }
     }
 })();

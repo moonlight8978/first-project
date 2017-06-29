@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   namespace :api do
     scope module: :v1 do
-      scope module: :db do
-        resources :novels do
+      namespace :db do
+        resources :novels, id: /[0-9\.]?/ do
           resources :screenshots, except: :show, controller: 'novels/screenshots'
-          resources :staffs,      except: :show, controller: 'novels/people'
+          resources :staffs,      except: :show, controller: 'novels/staffs'
 
           get    'tags',     to: 'novels/tags#index_novel'
           delete 'tags/:id', to: 'novels/tags#destroy_novel'
@@ -24,15 +24,15 @@ Rails.application.routes.draw do
               controller: 'novels/characters/people'
           end
 
-          get 'releases',     to: 'novels/releases#index_novel'
-          put 'releases/:id', to: 'novels/releases#update_novel'
+          get 'releases', to: 'novels/releases#index_novel'
+          put 'releases', to: 'novels/releases#update_novel'
           resources :releases, only: [:destroy, :create] do
             resources :producers, except: [:show, :create],
               controller: 'novels/releases/producers'
 
-            get    'platforms',     to: 'novels/releases/platforms#index_release'
-            put    'platforms/:id', to: 'novels/releases/platforms#update_release'
-            delete 'platforms/:id', to: 'novels/releases/platforms#destroy_release'
+            # get    'platforms',     to: 'novels/releases/platforms#index_release'
+            # put    'platforms/:id', to: 'novels/releases/platforms#update_release'
+            # delete 'platforms/:id', to: 'novels/releases/platforms#destroy_release'
           end
         end
 
@@ -42,6 +42,13 @@ Rails.application.routes.draw do
           resources :releases,   except: [:create, :destroy]
           resources :platforms, controller: 'releases/platforms'
         end
+      end
+
+      namespace :search do
+        get 'novels',     to: 'novels#index'
+        get 'characters', to: 'characters#index'
+        get 'releases',   to: 'releases#index'
+        get 'tags',       to: 'tags#index'
       end
     end
 

@@ -1,14 +1,15 @@
 class GroupSerializeService
-  def initialize(collection, key, keys, serializer)
+  def initialize(collection, key, serializer, grouping_keys = {})
     @collection = collection
     @key = key
-    @keys = keys
     @serializer = serializer
+    @grouping_keys = grouping_keys
   end
 
   def perform
     @result = @collection.group_by(&@key).map do |key, collection|
-      [@keys[key], serialize(collection)]
+      [(@grouping_keys && @grouping_keys[key]) || key,
+       serialize(collection)]
     end.to_h
     self
   end
