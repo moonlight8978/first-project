@@ -1,15 +1,55 @@
-<a href="/">Home</a><br><br>
+<div class="list-banner parallax-effect">
+  <div class="title">
+    <h1>全てのノベル</h1>
+    <h4>All novels</h4>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th>Image</th>
-    <th>Title</th>
-    <th>Length</th>
-  </tr>
-  <tr ng-repeat="novel in vm.novels">
-    <td><img ng-src="{{ novel.image }}" style="width: 200px;"></td>
-    <td><a ui-sref="novel.detail({ id: novel.id })">{{ novel.title }}</a></td>
-    <td>{{ vm.length[novel.length] }}</td>
-    <!-- <td>{{ novel.titleEn }}</td> -->
-  </tr>
-</table>
+<div class="site-body container">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a ui-sref="home">メインページ</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a>データベース</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a ui-sref="novel.list({ page: 1 })">全てのノベル</a>
+    </li>
+    <li class="breadcrumb-item active">
+      <a>ページ {{ vm.page }}/{{ vm.totalPages }}</a>
+    </li>
+  </ol>
+
+  <div class="row">
+    <div class="item-wrap col-lg-3 col-md-4 col-sm-6 col-6" ng-repeat="novel in vm.novels">
+      <div class="linear-frame">
+        <div class="item">
+          <div class="head-and-image-wrap">
+            <div class="head">
+              <span class="tag length pull-left">{{ vm.length[novel.length] }}</span>
+              <span class="tag score pull-right">
+                <i class="fa fa-star"></i>
+                10.00
+              </span>
+              <div class="clearfix"></div>
+            </div>
+            <div class="image">
+              <span class="vertical-middle-helper"></span>
+              <img class="img-fluid" ng-src="{{ novel.image }}">
+            </div>
+          </div>
+          <div class="content">
+            <a class="title" ui-sref="novel.detail({ id: novel.id })">{{ novel.title}}</a>
+            <div class="release">発売日: {{ (novel.released && vm.formatDate(novel.released)) || '不明' }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ul uib-pagination total-items="vm.totalNovels" ng-model="vm.page" max-size="8"
+    items-per-page="vm.perPage" ng-change="vm.pageChange()"
+    rotate="true" force-ellipses="true" boundary-link-numbers="true">
+  </ul>
+</div>

@@ -8,6 +8,7 @@ class Api::V1::Search::NovelsController < ApplicationController
 
     paginate json: @novels, key_transform: :camel_lower, status: :ok,
       per_page: params[:per_page],
+      page: params[:page],
       each_serializer: Api::V1::Db::Novel::NovelListSerializer
   end
 end

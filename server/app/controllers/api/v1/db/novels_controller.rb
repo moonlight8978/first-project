@@ -3,14 +3,13 @@ class Api::V1::Db::NovelsController < ApplicationController
   before_action :require_admin, only: [:create, :destroy]
 
   def index
-    @novels = ::Db::Novel.all
+    @novels = ::Db::Novel.all.page(params[:page]).per(params[:per_page])
 
     if params[:length].present?
       @novels = @novels.where(length: params[:length])
     end
 
     paginate json: @novels, key_transform: :camel_lower, status: :ok,
-      per_page: params[:per_page],
       each_serializer: Api::V1::Db::Novel::NovelListSerializer
   end
 
