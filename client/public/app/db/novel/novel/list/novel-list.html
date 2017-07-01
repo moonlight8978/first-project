@@ -1,12 +1,12 @@
-<div class="list-banner parallax-effect">
-  <div class="title">
+<div class="list-banner parallax"  data-stellar-background-ratio="0.5">
+  <div class="title animated fadeIn">
     <h1>全てのノベル</h1>
     <h4>All novels</h4>
   </div>
 </div>
 
 <div class="site-body container">
-  <ol class="breadcrumb">
+  <ol class="breadcrumb animated fadeInLeft">
     <li class="breadcrumb-item">
       <a ui-sref="home">メインページ</a>
     </li>
@@ -14,7 +14,7 @@
       <a>データベース</a>
     </li>
     <li class="breadcrumb-item">
-      <a ui-sref="novel.list({ page: 1 })">全てのノベル</a>
+      <a ui-sref="novel.list({ page: 1, length: null })">全てのノベル</a>
     </li>
     <li class="breadcrumb-item active">
       <a>ページ {{ vm.page }}/{{ vm.totalPages }}</a>

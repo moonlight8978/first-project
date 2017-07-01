@@ -30,6 +30,11 @@
             return `${year}年${month}月${date}日`;
         }
 
+        $.stellar({
+            horizontalScrolling: false,
+            verticalOffset: -250
+        });
+
         // let request = {
         //     length: $stateParams.length,
         //     perPage: this.perPage,
