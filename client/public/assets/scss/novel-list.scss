@@ -1,22 +1,19 @@
 ////// パソコンとタブレット
 @media (min-width: 768px) {
 
-#parallax {
-  // background-attachment: fixed;
-}
-
 .list-banner {
   position: relative;
   background-image: url('/assets/img/novel-list-banner.png');
   min-height: 400px;
-  background-repeat: no-repeat;
-  background-position: center 25%;
+  background-position: center -100px;
   background-size: cover;
+  background-attachment: fixed;
   .title {
     position: absolute;
     z-index: 10;
     bottom: 20%;
     left: 5%;
+    text-shadow: 2px 4px 10px #000;
     h1, h4 {
       color: #fff;
       text-transform: uppercase;
@@ -32,19 +29,20 @@
     content: '';
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
   }
 }
 
 .item-wrap {
-  padding: 20px 10px;
+  padding: 20px 20px;
 }
 
 .linear-frame {
   padding: 1px;
   background: linear-gradient(to bottom right,
                               red, orange, yellow, green, blue, indigo, violet);
-  transition: transform 0.3s ease;
+  box-shadow: 0 3px 5px #777;
+  transition: all 0.3s ease;
   &:hover {
     position: relative;
     transform: scale(1.05);
@@ -78,7 +76,7 @@
   }
   .image {
     margin: 20px 0;
-    height: 300px;
+    height: 260px;
     overflow: hidden;
     white-space: nowrap;
     text-align: center;
@@ -95,8 +93,8 @@
     text-align: center;
     .title {
       display: block;
-      height: 2.5em;
-      line-height: 1.3;
+      height: 2.8em;
+      line-height: 1.5;
       overflow: hidden;
       margin-bottom: 7px;
       transition: color 0.3s ease;
@@ -108,15 +106,37 @@
   }
 }
 
+// pagination
+.pagination {
+  margin-top: 1rem;
+  .pagination-page {
+    border-bottom: solid 2px #737373;
+    &.active {
+      border-bottom: solid 4px #31773a;
+    }
+  }
+  li {
+    padding: 4px 12px;
+    transition: all 0.3s ease;
+    a {
+      color: #737373;
+      font-size: 0.9em;
+      transition: color 0.3s ease;
+    }
+    &.active a {
+      font-weight: bold;
+      color: #31773a;
+    }
+    &:hover {
+      border-bottom: solid 4px #009aab;
+      a {
+        color: #009aab;
+      }
+    }
+  }
+  .pagination-last, .pagination-first {
+    padding: 4px 5px;
+  }
 }
 
-
-// pagination
-.pagination .pagination-page {
-  padding: 10px;
-  background: green;
-  color: #fff;
-  &.active {
-    background: #000;
-  }
 }

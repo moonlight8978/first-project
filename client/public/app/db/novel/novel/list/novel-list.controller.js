@@ -20,8 +20,7 @@
         this.formatDate = formatDate;
 
         function pageChange() {
-            console.log(this.page);
-            $state.go('novel.list', { page: this.page }, { reload: true });
+            $state.go('novel.list', { page: this.page }, { reload: 'novel.list' });
         }
 
         function formatDate(dateString) {
@@ -29,11 +28,6 @@
             [year, month, date] = dateString.split("-")
             return `${year}年${month}月${date}日`;
         }
-
-        $.stellar({
-            horizontalScrolling: false,
-            verticalOffset: -250
-        });
 
         // let request = {
         //     length: $stateParams.length,

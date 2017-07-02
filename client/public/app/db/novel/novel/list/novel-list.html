@@ -1,5 +1,5 @@
-<div class="list-banner parallax"  data-stellar-background-ratio="0.5">
-  <div class="title animated fadeIn">
+<div class="list-banner" data-stellar-background-ratio="0.5">
+  <div class="title animated rubberBand">
     <h1>全てのノベル</h1>
     <h4>All novels</h4>
   </div>
@@ -22,7 +22,8 @@
   </ol>
 
   <div class="row">
-    <div class="item-wrap col-lg-3 col-md-4 col-sm-6 col-6" ng-repeat="novel in vm.novels">
+    <div class="item-wrap col-lg-3 col-md-4 col-sm-6 col-6"
+      ng-repeat="novel in vm.novels">
       <div class="linear-frame">
         <div class="item">
           <div class="head-and-image-wrap">
@@ -36,7 +37,7 @@
             </div>
             <div class="image">
               <span class="vertical-middle-helper"></span>
-              <img class="img-fluid" ng-src="{{ novel.image }}">
+              <img image-preload class="img-fluid fade" ng-src="{{ novel.image }}">
             </div>
           </div>
           <div class="content">
@@ -49,7 +50,11 @@
   </div>
 
   <ul uib-pagination total-items="vm.totalNovels" ng-model="vm.page" max-size="8"
-    items-per-page="vm.perPage" ng-change="vm.pageChange()"
-    rotate="true" force-ellipses="true" boundary-link-numbers="true">
+    items-per-page="vm.perPage" ng-change="vm.pageChange()" boundary-links="true"
+    rotate="true" force-ellipses="true" boundary-link-numbers="true"
+    first-text="最初" last-text="最後" next-text="»" previous-text="«"
+    class="pull-right">
   </ul>
+
+  <div class="clearfix"></div>
 </div>

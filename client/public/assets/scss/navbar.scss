@@ -1,15 +1,144 @@
-nav {
-  padding: .5rem 0;
-  font-weight: 900;
-  font-size: 16px;
-  background: rgba(27,31,35,0.3);
-  // background: rgba(27,31,35,0.7);
+$text-color__nav: #fff;
+
+@mixin transition-std($properties) {
+  transition-property: $properties;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 
-.navbar-inverse .navbar-nav .nav-link {
-  color: #fff;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+// overriding Bootstrap
+
+.navbar {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  padding: 0;
+  font-weight: 900;
+  font-size: 16px;
+  padding: 0.75rem 0;
+}
+
+.fixed-top {
+  position: fixed !important;
+  background: rgba(27,31,35,0.7);
+}
+
+.hide {
+  opacity: 0 !important;
+}
+
+.show {
+  opacity: 1 !important;
+}
+
+.nav-item {
+  @include transition-std(opacity);
+  opacity: 1;
+  .dropdown-menu {
+    margin: 0.75rem 0 0;
+    border: 0;
+    padding: 0;
+    background: rgba(27,31,35,0.7);
+  }
+  .dropdown-item {
+    padding: 0.75rem 1rem;
+    border-left-style: solid;
+    border-left-width: 2px;
+    border-left-color: transparent;
+    &:hover {
+      background-color: transparent;
+      border-left-color: red;
+    }
+  }
+}
+
+.nav-item.dropdown .dropdown-menu a, .navbar-inverse .navbar-nav .nav-link {
+  @include transition-std(all);
+  color: $text-color__nav;
+  font-weight: 900;
+  text-shadow: 2px 3px 5px rgba(0,0,0,0.3);
+  cursor: pointer;
   &:hover {
     color: #b8c6c6 !important;
   }
+}
+
+.navbar-inverse .navbar-nav .nav-link {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.navbar-collapse{
+  flex: none;
+  justify-content: space-between;
+}
+
+nav .-main {
+  position: relative;
+  display: flex;
+}
+
+nav .-user {
+  display: flex;
+}
+
+// search bar
+.custom-select {
+  position: absolute;
+  left: 0%;
+  height: auto;
+  opacity: 0;
+  z-index: 100;
+  font-size: 0.9rem;
+  padding: .5rem .75rem;
+  background-color: transparent;
+  border: 0;
+  color: #fff;
+  width: 25%;
+  border-bottom-style: solid;
+  border-bottom-color: #fff;
+  border-bottom-width: 1px;
+  &:focus {
+    border-color: #fff;
+    box-shadow: 0 4px 5px -4px #fff;
+  }
+  &.show {
+    display: absolute !important;
+  }
+}
+.stylish-input-group {
+  position: absolute;
+  margin-left: 1rem;
+  left: 100%;
+  width: 50%;
+  transition: all 0.5s ease;
+}
+.stylish-input-group .form-control {
+  font-size: 0.9rem;
+  color: #fff;
+  border: 0;
+  width: 100%;
+  background-color: transparent;
+  border-bottom-style: solid;
+  border-bottom-color: #fff;
+  border-bottom-width: 1px;
+  &:focus {
+    box-shadow: 0 4px 5px -4px #fff;
+  }
+  &::placeholder {
+    color: #fff;
+    opacity: 1;
+  }
+}
+.stylish-input-group.active {
+  left: 25%;
+  width: 125%;
+}
+.stylish-input-group button {
+  position: absolute;
+  right: 15px;
+  border: 0;
+  background-color: transparent;
+  color: #fff;
+  text-shadow: 2px 3px 5px rgba(0,0,0,0.3);
 }

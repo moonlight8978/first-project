@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-inverse navbar-toggleable-sm">
+<nav nav-bar class="navbar navbar-inverse navbar-toggleable-sm animated fadeInDown">
   <div class="container">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
       data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
@@ -7,43 +7,78 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul class="navbar-nav" href="#">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle animated fadeInDown" id="navbarDropdownShop"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            ショップ
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownShop">
-            <a class="dropdown-item">ビジュアルノベル</a>
-            <a class="dropdown-item" href="#">アルバム</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle animated fadeInDown" id="navbarDropdownDatabase"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            データベース
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownDatabase">
-            <a class="dropdown-item" ui-sref="novel.list">ビジュアルノベル</a>
-            <a class="dropdown-item" href="#">アルバム</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link animated fadeInDown">
-            最近の活動
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link animated fadeInDown">
-            企業情報
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link animated fadeInDown">
-            接触
-          </a>
-        </li>
-      </ul>
+      <div class="-main">
+        <select class="custom-select" id="searchCate">
+          <option value="volvo">ビジュアルノベル</option>
+          <option value="volvo">ノベルの発売</option>
+          <option value="saab">アルバム</option>
+          <option value="volvo">アルバムの発売</option>
+          <option value="opel">美少女ゲーム(製品)</option>
+          <option value="audi">アルバム(製品)</option>
+          <option value="volvo">キュラクター</option>
+          <option value="volvo">タグ</option>
+        </select>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownShop"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              ショップ
+            </a>
+            <div class="dropdown-menu animated fadeIn" aria-labelledby="navbarDropdownShop">
+              <a class="dropdown-item">ビジュアルノベル</a>
+              <a class="dropdown-item" href="#">アルバム</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownDatabase"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              データベース
+            </a>
+            <div class="dropdown-menu animated fadeIn" aria-labelledby="navbarDropdownDatabase">
+              <a class="dropdown-item" ui-sref="novel.list">ビジュアルノベル</a>
+              <a class="dropdown-item" href="#">アルバム</a>
+              <a class="dropdown-item" href="#">最近の活動</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              企業情報
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              接触
+            </a>
+          </li>
+        </ul>
+        <!-- END navbar left -->
+        <form class="form-inline stylish-input-group" id="searchForm">
+          <input class="form-control mr-sm-2" id="searchInput" type="text"
+            placeholder="探しましょう...">
+          <button id="searchSubmit">
+            <i class="fa fa-search"></i>
+          </button>
+        </form>
+      </div>
+      <!-- main section -->
+      <div class="-user">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link">
+              ログイン
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <i class="fa fa-shopping-cart"></i>
+              0
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- user section -->
     </div>
+    <!-- END nav collapse -->
   </div>
+  <!-- container -->
 </nav>

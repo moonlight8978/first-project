@@ -18,10 +18,18 @@
 html {
   height: 100%;
 }
-body {
+
+body, input, input::placeholder {
   font-family: 'Segoe UI', 'Roboto', sans-serif, 'Noto Sans CJK JP';
 }
 
+button:active, button:focus {
+  outline: 0;
+}
+
+* {
+  border-radius: 0 !important;
+}
 // Global
 
 .site-body {
