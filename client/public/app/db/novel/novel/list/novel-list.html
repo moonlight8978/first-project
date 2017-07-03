@@ -1,4 +1,4 @@
-<div class="list-banner" data-stellar-background-ratio="0.5">
+<div class="list-banner banner" data-stellar-background-ratio="0.5">
   <div class="title animated rubberBand">
     <h1>全てのノベル</h1>
     <h4>All novels</h4>
@@ -21,7 +21,28 @@
     </li>
   </ol>
 
-  <div class="row">
+  <div class="novel-filter-container">
+    <div class="sort">
+      <span>SORT BY</span>
+      <select class="custom-select">
+        <option value="">名前(ローマ字)</option>
+        <option value="">発売日</option>
+        <option value="">スコア</option>
+        <option value="">長さ</option>
+      </select>
+    </div>
+    <div class="nsfw">
+      <span>NSFW</span>
+      <span>
+        <label class="switch-button">
+          <input type="checkbox" ng-model="vm.hideNsfw">
+          <div class="slider"></div>
+        </label>
+      </span>
+    </div>
+  </div>
+
+  <div class="row list-container">
     <div class="item-wrap col-lg-3 col-md-4 col-sm-6 col-6"
       ng-repeat="novel in vm.novels">
       <div class="linear-frame">

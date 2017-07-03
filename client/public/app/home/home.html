@@ -1,6 +1,7 @@
 <a ui-sref="novel.detail({ id: 1 })">Novel no.1</a><br>
 <a ui-sref="novel.list">All Novels</a><br>
-<a ui-sref="novel.list({ length: ['short', 'medium'] })">All Novels have short/medium length</a>
+<a ui-sref="novel.list({ length: ['short', 'medium'] })">All Novels have short/medium length</a><br>
+<a ui-sref="index">Index page</a><br>
 <form ng-submit="vm.search(vm.query)">
   <input type="text" ng-model="vm.query" placeholder="探しましょう。。。" required>
   <button type="submit">探す！</button>

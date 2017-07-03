@@ -13,7 +13,9 @@
             abstract: true,
             views: {
                 'navbar@': {
-                    templateUrl: 'app/layouts/navbar/navbar.html'
+                    templateUrl: 'app/layouts/navbar/navbar.html',
+                    controller: 'NavbarController',
+                    controllerAs: 'vm'
                 },
                 'footer@': {
                     templateUrl: 'app/layouts/footer/footer.html'
@@ -22,6 +24,6 @@
         });
 
         $locationProvider.hashPrefix('');
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/index');
     }
 })();

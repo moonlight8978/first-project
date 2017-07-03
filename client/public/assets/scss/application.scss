@@ -1,5 +1,6 @@
 @import 'novel-list';
 @import 'navbar';
+@import 'index';
 
 @font-face {
   font-family: 'Noto Sans CJK JP';
@@ -15,25 +16,18 @@
   font-weight: 400;
 }
 
-html {
+// Global
+
+html, body {
   height: 100%;
 }
 
-body, input, input::placeholder {
-  font-family: 'Segoe UI', 'Roboto', sans-serif, 'Noto Sans CJK JP';
-}
-
-button:active, button:focus {
-  outline: 0;
-}
-
-* {
-  border-radius: 0 !important;
-}
-// Global
-
 .site-body {
   padding-top: 40px;
+}
+
+html, body, input, input::placeholder, select {
+  font-family: 'Segoe UI', 'Roboto', sans-serif, 'Noto Sans CJK JP';
 }
 
 // Bootstrap overiding
@@ -48,9 +42,18 @@ a {
   }
 }
 
+button:active, button:focus {
+  outline: 0;
+}
+
+* {
+  border-radius: 0 !important;
+}
+
 .breadcrumb {
   background-color: transparent;
   padding: .75rem 0;
+  margin-bottom: 0;
   a {
     transition: color 0.3s ease;
   }

@@ -26,7 +26,7 @@
                     var deferred = $q.defer();
 
                     NovelResource.novel.query({
-                        perPage: 4,
+                        perPage: 12,
                         page: $stateParams.page,
                         'length[]': $stateParams.length
                     }, (novels, headers) => {

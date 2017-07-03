@@ -19,16 +19,14 @@
 	<link rel="stylesheet" href="/build/css/application.css">
 </head>
 <body>
-	<div>
-		<div ui-view="navbar">
+	<div ui-view="navbar">
 
-		</div>
-		<div ui-view="content">
+	</div>
+	<div class="view-content" ui-view="content">
 
-		</div>
-		<div ui-view="footer">
+	</div>
+	<div ui-view="footer">
 
-		</div>
 	</div>
 	<!-- libraries -->
 	<script src="bower_components/angular/angular.min.js"></script>
@@ -60,8 +58,12 @@
   <script src="app/resources/db/novel/novel.service.js"></script>
   <script src="app/resources/db/novel/company.service.js"></script>
   <script src="app/resources/db/novel/character.service.js"></script>
+  <script src="app/layouts/navbar/navbar.controller.js"></script>
+  <script src="app/index/index.state.js"></script>
+  <script src="app/index/index.controller.js"></script>
   <script src="app/home/home.state.js"></script>
   <script src="app/home/home.controller.js"></script>
+  <script src="app/directives/search-form.directive.js"></script>
   <script src="app/directives/parallax.directive.js"></script>
   <script src="app/directives/novel/staffs-data/staff.directive.js"></script>
   <script src="app/directives/novel/characters-data/character.directive.js"></script>

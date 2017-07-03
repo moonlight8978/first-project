@@ -1,4 +1,5 @@
 $text-color__nav: #fff;
+$background-color__nav-fixed: rgba(27,31,35,0.7);
 
 @mixin transition-std($properties) {
   transition-property: $properties;
@@ -20,7 +21,7 @@ $text-color__nav: #fff;
 
 .fixed-top {
   position: fixed !important;
-  background: rgba(27,31,35,0.7);
+  background-color: $background-color__nav-fixed;
 }
 
 .hide {
@@ -38,7 +39,7 @@ $text-color__nav: #fff;
     margin: 0.75rem 0 0;
     border: 0;
     padding: 0;
-    background: rgba(27,31,35,0.7);
+    background-color: $background-color__nav-fixed;
   }
   .dropdown-item {
     padding: 0.75rem 1rem;
@@ -83,18 +84,30 @@ nav .-user {
 }
 
 // search bar
-.custom-select {
+.search-form {
   position: absolute;
   left: 0%;
+  top: 3px;
+  width: 150%;
+}
+
+.navbar select {
+  position: absolute;
   height: auto;
+  top: 0%;
+  left: 0%;
   opacity: 0;
   z-index: 100;
+  display: none;
   font-size: 0.9rem;
-  padding: .5rem .75rem;
+  padding: .5rem 1rem .5rem .75rem;
   background-color: transparent;
+  background-image: url('/assets/img/down-arrow--white--small.png');
+  background-position: right 2px center;
+  background-repeat: no-repeat;
   border: 0;
   color: #fff;
-  width: 25%;
+  width: 18%;
   border-bottom-style: solid;
   border-bottom-color: #fff;
   border-bottom-width: 1px;
@@ -102,15 +115,20 @@ nav .-user {
     border-color: #fff;
     box-shadow: 0 4px 5px -4px #fff;
   }
-  &.show {
-    display: absolute !important;
+}
+
+.navbar select option {
+  color: #000;
+  &:checked {
+    color: red;
   }
 }
+
 .stylish-input-group {
   position: absolute;
-  margin-left: 1rem;
-  left: 100%;
-  width: 50%;
+  width: 33%;
+  right: 0%;
+  top: 0%;
   transition: all 0.5s ease;
 }
 .stylish-input-group .form-control {
@@ -130,13 +148,13 @@ nav .-user {
     opacity: 1;
   }
 }
-.stylish-input-group.active {
-  left: 25%;
-  width: 125%;
+.search-form.active .stylish-input-group {
+  width: 80%;
 }
 .stylish-input-group button {
   position: absolute;
-  right: 15px;
+  top: 5px;
+  right: 5px;
   border: 0;
   background-color: transparent;
   color: #fff;
