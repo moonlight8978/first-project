@@ -1,4 +1,5 @@
-<div class="list-banner banner" data-stellar-background-ratio="0.5">
+<div class="lazy list-banner banner"
+  data-original="/assets/img/novel-list-banner.png">
   <div class="title animated rubberBand">
     <h1>全てのノベル</h1>
     <h4>All novels</h4>
@@ -24,15 +25,16 @@
   <div class="novel-filter-container">
     <div class="sort">
       <span>SORT BY</span>
-      <select class="custom-select">
-        <option value="">名前(ローマ字)</option>
-        <option value="">発売日</option>
-        <option value="">スコア</option>
-        <option value="">長さ</option>
+      <select class="custom-select" ng-model="vm.filter.sort">
+        <option value="">SORT</option>
+        <option value="name">名前(ローマ字)</option>
+        <option value="released">発売日</option>
+        <option value="score">スコア</option>
+        <option value="length">長さ</option>
       </select>
     </div>
     <div class="nsfw">
-      <span>NSFW</span>
+      <span>HIDE NSFW</span>
       <span>
         <label class="switch-button">
           <input type="checkbox" ng-model="vm.hideNsfw">
@@ -56,10 +58,13 @@
               </span>
               <div class="clearfix"></div>
             </div>
-            <div class="image">
+            <div class="image-wrap image-placeholder ratio-3_4">
+              <div image-thumb class="image-thumb" condition="vm.hideNsfw && novel.imageNsfw" nsfw="/assets/img/image-nsfw.jpg" image="{{ novel.image }}"></div>
+            </div>
+            <!-- <div class="image">
               <span class="vertical-middle-helper"></span>
               <img image-preload class="img-fluid fade" ng-src="{{ novel.image }}">
-            </div>
+            </div> -->
           </div>
           <div class="content">
             <a class="title" ui-sref="novel.detail({ id: novel.id })">{{ novel.title}}</a>

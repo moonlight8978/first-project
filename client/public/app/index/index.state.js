@@ -18,6 +18,9 @@
                 },
                 'content@': {
                     templateUrl: 'app/index/index.html'
+                },
+                'footer@': {
+                    templateUrl: 'app/layouts/footer/footer.html'
                 }
             }
         });

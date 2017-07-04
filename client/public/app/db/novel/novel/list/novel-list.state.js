@@ -9,9 +9,10 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('novel.list', {
-            url: '/novels?length&page',
+            url: '/novels?length&sort&page',
             params: {
                 length: null,
+                sort: null,
                 page: '1'
             },
             views: {
@@ -26,7 +27,7 @@
                     var deferred = $q.defer();
 
                     NovelResource.novel.query({
-                        perPage: 12,
+                        perPage: 4,
                         page: $stateParams.page,
                         'length[]': $stateParams.length
                     }, (novels, headers) => {

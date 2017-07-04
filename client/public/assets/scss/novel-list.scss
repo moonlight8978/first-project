@@ -1,9 +1,11 @@
+@import 'variables';
+@import 'transition';
+
 ////// パソコンとタブレット
 @media (min-width: 768px) {
 
 .list-banner {
   position: relative;
-  background-image: url('/assets/img/novel-list-banner.png');
   min-height: 400px;
   background-position: center -100px;
   background-size: cover;
@@ -137,21 +139,21 @@
       }
     }
   }
-  .image {
-    margin: 20px 0;
-    height: 260px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-align: center;
-    .vertical-middle-helper {
-      display: inline-block;
-      vertical-align: middle;
-      height: 100%;
-    }
-    img {
-      vertical-align: middle;
-    }
-  }
+  // .image {
+  //   margin: 20px 0;
+  //   height: 260px;
+  //   overflow: hidden;
+  //   white-space: nowrap;
+  //   text-align: center;
+  //   .vertical-middle-helper {
+  //     display: inline-block;
+  //     vertical-align: middle;
+  //     height: 100%;
+  //   }
+  //   img {
+  //     vertical-align: middle;
+  //   }
+  // }
   .content {
     text-align: center;
     .title {
@@ -167,6 +169,28 @@
       padding-bottom: 7px;
     }
   }
+}
+
+.image-wrap {
+  position: relative;
+  margin: 20px 0;
+  .image-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center center;
+    background-image: url('/assets/img/loading.gif');
+    height: 100%;
+    width: 100%;
+    transition: background-image .75s ease-in-out;
+  }
+}
+
+.ratio-3_4 {
+  padding: 0;
+  padding-bottom: 4 / 3 * 100%;
 }
 
 // pagination

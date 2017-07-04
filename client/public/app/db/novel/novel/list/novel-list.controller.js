@@ -5,10 +5,14 @@
         .module('app')
         .controller('NovelListController', NovelListController);
 
-    NovelListController.$inject = ['$state', 'NovelResource', 'LENGTH', 'data'];
+    NovelListController.$inject = ['$state', '$stateParams', 'NovelResource', 'LENGTH', 'data'];
 
-    function NovelListController($state, NovelResource, length, data) {
+    function NovelListController($state, $stateParams, NovelResource, length, data) {
         this.length = length;
+        this.filter = {
+            sort: $stateParams.sort,
+            length: $stateParams.length
+        }
 
         this.novels = data.novels;
         this.totalNovels = data.headers["x-total"];
@@ -21,7 +25,7 @@
         this.formatDate = formatDate;
 
         function pageChange() {
-            $state.go('novel.list', { page: this.page }, { reload: 'novel.list' });
+            $state.go('novel.list', { page: this.page, sort: this.filter.sort, length: this.filter.length }, { reload: 'novel.list' });
         }
 
         function formatDate(dateString) {

@@ -1,12 +1,5 @@
-$text-color__nav: #fff;
-$background-color__nav-fixed: rgba(27,31,35,0.7);
-
-@mixin transition-std($properties) {
-  transition-property: $properties;
-  transition-duration: 0.3s;
-  transition-timing-function: ease;
-}
-
+@import 'variables';
+@import 'transition';
 // overriding Bootstrap
 
 .navbar {
