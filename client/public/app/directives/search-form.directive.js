@@ -16,17 +16,17 @@
 
                     searchForm.focusin(function () {
                         navItem.each(function () {
-                            $(this).addClass('hide');
+                            $(this).addClass('invisible');
                         });
                         $(this).addClass('active');
-                        searchCate.fadeIn().addClass('show');
+                        searchCate.fadeIn().addClass('visible');
                     });
 
                     searchForm.focusout(function () {
-                        searchCate.fadeOut().removeClass('show');
+                        searchCate.fadeOut().removeClass('visible');
                         $(this).removeClass('active');
                         navItem.each(function () {
-                            $(this).removeClass('hide');
+                            $(this).removeClass('invisible');
                         });
                     });
                 });

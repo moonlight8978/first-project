@@ -2,6 +2,9 @@
 @import 'transition';
 // overriding Bootstrap
 
+////// パソコンとタブレット
+@media (min-width: map-get($grid-breakpoints, md)) {
+
 .navbar {
   position: absolute;
   z-index: 1000;
@@ -17,11 +20,11 @@
   background-color: $background-color__nav-fixed;
 }
 
-.hide {
+.invisible {
   opacity: 0 !important;
 }
 
-.show {
+.visible {
   opacity: 1 !important;
 }
 
@@ -81,7 +84,7 @@ nav .-user {
   position: absolute;
   left: 0%;
   top: 3px;
-  width: 150%;
+  width: 135%;
 }
 
 .navbar select {
@@ -119,9 +122,9 @@ nav .-user {
 
 .stylish-input-group {
   position: absolute;
-  width: 33%;
-  right: 0%;
-  top: 0%;
+  width: 25.555555%;
+  right: 0;
+  top: 0;
   transition: all 0.5s ease;
 }
 .stylish-input-group .form-control {
@@ -152,4 +155,25 @@ nav .-user {
   background-color: transparent;
   color: #fff;
   text-shadow: 2px 3px 5px rgba(0,0,0,0.3);
+}
+
+@media (min-width: map-get($grid-breakpoints, lg)) {
+  .search-form {
+    width: 150%;
+  }
+  .stylish-input-group {
+    width: 33.333333%;
+  }
+
+}
+
+@media (min-width: map-get($grid-breakpoints, xl)) {
+  .search-form {
+    width: 180%;
+  }
+  .stylish-input-group {
+    width: 44.444444%;
+  }
+}
+
 }

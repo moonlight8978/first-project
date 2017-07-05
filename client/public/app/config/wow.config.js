@@ -6,6 +6,9 @@
         .config(wowConfig);
 
     function wowConfig() {
-        new WOW().init();
+        let wow = new WOW({
+          offset: 100
+        });
+        wow.init();
     }
 })();
