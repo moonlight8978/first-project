@@ -12,7 +12,13 @@
             'category': '',
             'query': ''
         };
+
         this.goSearch = goSearch;
+
+        this.user = {
+            'name': '鈴木ひろし',
+            'profileImage': '/assets/img/vanilla.png'
+        };
 
         function goSearch() {
             if (this.search.category == 'novel')

@@ -17,7 +17,7 @@
         return service;
 
         function characterRsrc() {
-            return $resource(characterUrl, {
+            return $resource(characterUrl, {}, {
                 'query':  { method: 'GET', isArray: true },
                 'update': { method: 'PUT' },
                 'get':    { method: 'GET' }

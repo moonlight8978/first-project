@@ -81,8 +81,7 @@
 
 .content-inside,
 .content-between-parallax {
-  h1,
-  h2 {
+  h1, h2 {
     text-transform: uppercase;
   }
 }
@@ -118,8 +117,11 @@
 }
 
 .content-inside.top-content {
-  transform: translateY(-50.4%); // fix blurry
-  @include responsive(xl) {
+  transform: translateY(-50.2%); // fix blurry
+  @include responsive(md) {
+    transform: translateY(-50.2%); // fix blurry
+  }
+  @include responsive(lg) {
     transform: translateY(-50.4%); // fix blurry
   }
 
@@ -199,6 +201,7 @@
     display: inline-block;
     line-height: 80px;
     font-size: 1.2em;
+    font-family: 'Raleway';
     &:before {
       position: absolute;
       width: 100%;
@@ -215,7 +218,7 @@
   }
 
   h6 {
-    margin-top: 1.67rem;
+    margin-top: 2.33rem;
     margin-bottom: 1rem;
   }
 
@@ -262,7 +265,7 @@
 // the team
 
 .content-inside.the-team {
-  transform: translateY(-49.8%);
+  transform: translateY(-50%);
 
   h2 {
     font-weight: 200;

@@ -16,6 +16,10 @@ footer {
   }
 
   .about-us {
+    h4 {
+      font-family: 'Montserrat';
+    }
+
     p, span {
       font-weight: 500;
     }
@@ -34,7 +38,11 @@ footer {
 
   .meet-us,
   .follow-us {
-    h4, h5, h6 { color: $footer-gray; }
+    h4, h5, h6 {
+      font-family: 'Raleway';
+      color: $footer-gray;
+      font-weight: 500;
+    }
 
     a {
       color: $footer-light-gray;

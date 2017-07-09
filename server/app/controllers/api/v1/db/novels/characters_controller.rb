@@ -21,7 +21,7 @@ class Api::V1::Db::Novels::CharactersController < ApplicationController
   end
 
   def update
-
+    p params
   end
 
   def destroy
