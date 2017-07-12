@@ -1,5 +1,6 @@
 class Api::V1::Search::NovelsController < ApplicationController
   def index
+    (render json: [], status: :ok and return) unless params[:q]
     query = NetworkKanjiFilter.to_hiragana(params[:q])
 
     @novels = ::Db::Novel.search do

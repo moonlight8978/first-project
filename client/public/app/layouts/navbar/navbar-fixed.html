@@ -1,6 +1,6 @@
 <nav delay-show time="1000" search-form class="navbar fixed-top navbar-inverse navbar-toggleable-sm animated fadeInDown hide" id="navFixed">
   <button class="navbar-toggler navbar-toggler-left" type="button"
-    id="toggler" enable-sidebar target="#sidebarLeft" container="#sidebarLeftWrap"
+    id="toggler" sidebar-toggler target="#sidebarLeftWrap"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -45,7 +45,7 @@
         <!-- END navbar left -->
         <form class="form-inline search-form" id="searchForm"
           ng-submit="vm.goSearch()">
-          <select class="custom-select" id="searchCate" ng-model="vm.search.category">
+          <select class="custom-select" id="searchCate" ng-model="vm.search.category" required>
             <option value="">カテゴリ</option>
             <option value="novel">ビジュアルノベル</option>
             <option value="novelRelease">ノベルの発売</option>
@@ -56,12 +56,32 @@
             <option value="character">キュラクター</option>
             <option value="tag">タグ</option>
           </select>
-          <div class="stylish-input-group">
+          <div class="stylish-input-group" id="inputGroup">
             <input class="form-control mr-sm-2" id="searchInput" type="text"
-              placeholder="探しましょう" ng-model="vm.search.query" required>
-            <button id="searchSubmit">
+              placeholder="探しましょう" ng-model="vm.search.query"
+              autocomplete="off" ng-change="vm.search()" ng-trim="false" required>
+            <button type="button" class="clear-search-input" ng-click="vm.clearInput()">
+              &#10006;
+            </button>
+            <button type="submit" id="searchSubmit">
               <i class="fa fa-search"></i>
             </button>
+            <div class="live-search-results animated fadeIn" ng-show="vm.search.results">
+              <a ui-sref="novel.detail({ id: novel.id })" class="animated fadeIn"
+                ng-repeat="novel in vm.search.results">
+                <div class="result">
+                  <div class="result-image-wrap image-placeholder ratio-3_4">
+                    <div class="image-thumb"
+                      ng-style="{ 'background-image': 'url({{ novel.image }})' }"></div>
+                  </div>
+                  <div class="result-info">
+                    <div class="title">{{ novel.title }}</div>
+                    <div class="title-en">{{ novel.titleEn }}</div>
+                    <div class="length">{{ novel.length }}</div>
+                  </div>
+                </div>
+              </a>
+            </div>
           </div>
           <div class="clearfix"></div>
         </form>
@@ -87,122 +107,124 @@
     <!-- END nav collapse -->
   </div>
   <!-- container -->
-  <div class="sidebar-left-wrap" id="sidebarLeftWrap">
-  <div class="sidebar-left" id="sidebarLeft">
-    <ul class="list-group main-menu">
-      <li class="list-group-item">
-        <div class="avatar">
-          <div class="avatar-thumb" ng-style="{ 'background-image': 'url({{ vm.user.profileImage || '/assets/img/unknown-user.png'}})' }"></div>
-        </div>
-        <div class="utility-container">
-          <a ui-sref="index" class="text-can-be-overflow user-name">
-            {{ (vm.user.name && vm.user.name + '様') || 'ゲストさん' }}
-          </a>
-          <div class="utilities">
-            <span>
-              <i class="fa fa-envelope"></i>
-            </span>
-            <span>
-              <i class="fa fa-shopping-cart"></i>
-              0
-            </span>
+  <div sidebar class="sidebar-left-wrap" id="sidebarLeftWrap">
+    <div class="sidebar-left" id="sidebarLeft">
+      <div class="sidebar-toggler" id="sidebarToggler"
+        sidebar-toggler target="#sidebarLeftWrap">&#10006;</div>
+      <ul class="list-group main-menu">
+        <li class="list-group-item">
+          <div class="avatar image-placeholder ratio-1_1">
+            <div class="avatar-thumb image-thumb" ng-style="vm.user.profileImage ? { 'background-image': 'url({{ vm.user.profileImage }})' } : {}"></div>
           </div>
-        </div>
-      </li>
-      <a ui-sref="index" class="list-item-wrap link">
-        <li class="list-group-item">
-          <i class="fa fa-pagelines"></i>
-          ホムページ
-        </li>
-      </a>
-      <a ui-sref="index" data-toggle="collapse" data-target="#productList"
-        class="list-item-wrap link" aria-expanded="false">
-        <li class="list-group-item has-sub-menu">
-          <i class="fa fa-pagelines"></i>
-          製品
-        </li>
-      </a>
-      <div class="collapse" id="productList">
-        <ul class="list-group sub-menu">
-          <a ui-sref="index" class="list-item-wrap link">
-            <li class="list-group-item">
-              美少女ゲーム
-            </li>
-          </a>
-          <a ui-sref="index" class="list-item-wrap link">
-            <li class="list-group-item">
-              アルバム
-            </li>
-          </a>
-        </ul>
-      </div>
-      <a ui-sref="index" data-toggle="collapse" data-target="#databaseList"
-        class="list-item-wrap link" aria-expanded="false">
-        <li class="list-group-item has-sub-menu">
-          <i class="fa fa-pagelines"></i>
-          データベース
-        </li>
-      </a>
-      <div class="collapse" id="databaseList">
-        <ul class="list-group sub-menu">
-          <a ui-sref="index" class="list-item-wrap link">
-            <li class="list-group-item">
-              ビジュアルノベル
-            </li>
-          </a>
-          <a ui-sref="index" class="list-item-wrap link">
-            <li class="list-group-item">
-              キャラクター
-            </li>
-          </a>
-          <a ui-sref="index" class="list-item-wrap link">
-            <li class="list-group-item">
-              <span class="text-can-be-overflow">
-                ビジュアルノベルのリリースasdladoasdjasoijdasiojdasdasdasjdaso
+          <div class="utility-container">
+            <a ui-sref="index" class="text-can-be-overflow user-name">
+              {{ (vm.user.name && vm.user.name + '様') || 'ゲストさん' }}
+            </a>
+            <div class="utilities">
+              <span>
+                <i class="fa fa-envelope"></i>
               </span>
-            </li>
-          </a>
-          <a ui-sref="index" class="list-item-wrap link">
-            <li class="list-group-item">
-              <span class="text-can-be-overflow">
+              <span>
+                <i class="fa fa-shopping-cart"></i>
+                0
+              </span>
+            </div>
+          </div>
+        </li>
+        <a ui-sref="index" class="list-item-wrap link">
+          <li class="list-group-item">
+            <i class="fa fa-pagelines"></i>
+            ホムページ
+          </li>
+        </a>
+        <a ui-sref="index" data-toggle="collapse" data-target="#productList"
+          class="list-item-wrap link" aria-expanded="false">
+          <li class="list-group-item has-sub-menu">
+            <i class="fa fa-pagelines"></i>
+            製品
+          </li>
+        </a>
+        <div class="collapse" id="productList">
+          <ul class="list-group sub-menu">
+            <a ui-sref="index" class="list-item-wrap link">
+              <li class="list-group-item">
+                美少女ゲーム
+              </li>
+            </a>
+            <a ui-sref="index" class="list-item-wrap link">
+              <li class="list-group-item">
                 アルバム
-              </span>
-            </li>
-          </a>
-          <a ui-sref="index" class="list-item-wrap link">
-            <li class="list-group-item">
-              <span class="text-can-be-overflow">
-                アルバムのリリース
-              </span>
-            </li>
-          </a>
-        </ul>
-      </div>
-      <a ui-sref="index" class="list-item-wrap link">
-        <li class="list-group-item">
-          <i class="fa fa-pagelines"></i>
-          <span class="text-can-be-overflow">ローレンイプサム</span>
-        </li>
-      </a>
-      <a ui-sref="index" class="list-item-wrap link">
-        <li class="list-group-item">
-          <i class="fa fa-pagelines"></i>
-          ローレンイプサム
-        </li>
-      </a>
-      <a ui-sref="index" class="list-item-wrap link">
-        <li class="list-group-item">
-          <i class="fa fa-pagelines"></i>
-          ローレンイプサム
-        </li>
-      </a>
-      <a ui-sref="index" class="list-item-wrap link">
-        <li class="list-group-item">
-          <i class="fa fa-pagelines"></i>
-          ローレンイプサム
-        </li>
-      </a>
-    </ul>
-  </div>
+              </li>
+            </a>
+          </ul>
+        </div>
+        <a ui-sref="index" data-toggle="collapse" data-target="#databaseList"
+          class="list-item-wrap link" aria-expanded="false">
+          <li class="list-group-item has-sub-menu">
+            <i class="fa fa-pagelines"></i>
+            データベース
+          </li>
+        </a>
+        <div class="collapse" id="databaseList">
+          <ul class="list-group sub-menu">
+            <a ui-sref="index" class="list-item-wrap link">
+              <li class="list-group-item">
+                ビジュアルノベル
+              </li>
+            </a>
+            <a ui-sref="index" class="list-item-wrap link">
+              <li class="list-group-item">
+                キャラクター
+              </li>
+            </a>
+            <a ui-sref="index" class="list-item-wrap link">
+              <li class="list-group-item">
+                <span class="text-can-be-overflow">
+                  ビジュアルノベルのリリースasdladoasdjasoijdasiojdasdasdasjdaso
+                </span>
+              </li>
+            </a>
+            <a ui-sref="index" class="list-item-wrap link">
+              <li class="list-group-item">
+                <span class="text-can-be-overflow">
+                  アルバム
+                </span>
+              </li>
+            </a>
+            <a ui-sref="index" class="list-item-wrap link">
+              <li class="list-group-item">
+                <span class="text-can-be-overflow">
+                  アルバムのリリース
+                </span>
+              </li>
+            </a>
+          </ul>
+        </div>
+        <a ui-sref="index" class="list-item-wrap link">
+          <li class="list-group-item">
+            <i class="fa fa-pagelines"></i>
+            <span class="text-can-be-overflow">ローレンイプサム</span>
+          </li>
+        </a>
+        <a ui-sref="index" class="list-item-wrap link">
+          <li class="list-group-item">
+            <i class="fa fa-pagelines"></i>
+            ローレンイプサム
+          </li>
+        </a>
+        <a ui-sref="index" class="list-item-wrap link">
+          <li class="list-group-item">
+            <i class="fa fa-pagelines"></i>
+            ローレンイプサム
+          </li>
+        </a>
+        <a ui-sref="index" class="list-item-wrap link">
+          <li class="list-group-item">
+            <i class="fa fa-pagelines"></i>
+            ローレンイプサム
+          </li>
+        </a>
+      </ul>
+    </div>
   </div>
 </nav>

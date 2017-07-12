@@ -1,24 +1,7 @@
-<table ng-if="characters">
-  <tr ng-switch="type">
-    <th ng-switch-when="protagonist">Protagonists</th>
-    <th ng-switch-when="side">Side characters</th>
-    <th ng-switch-when="main">Main characters</th>
-  </tr>
-  <tr>
-    <td>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Three-size</th>
-        <th>Edit</th>
-      </tr>
-      <tr ng-repeat="character in characters">
-        <td>{{ character.id }}</td>
-        <td>{{ character.name }}</td>
-        <td>{{ character.threeSizes }}cm</td>
-        <td><input type="text" ng-model="character.name"></td>
-        <td><button ng-click="vm.update(character)">Update</button></td>
-      </tr>
-    </td>
-  </tr>
-</table>
+<div ng-switch="type">
+  <span ng-switch-when="protagonist">Protagonists</span>
+  <span ng-switch-when="side">Side characters</span>
+  <span ng-switch-when="main">Main characters</span>
+</div>
+
+<character-info character="character" ng-repeat="character in characters"></character-info>

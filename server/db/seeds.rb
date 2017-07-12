@@ -83,7 +83,8 @@ novels = [
 
 country = Country.create(
   name_en: 'Japan',
-  name: '日本'
+  name: '日本',
+  image: 'https://images-na.ssl-images-amazon.com/images/I/21cA7eE4dzL._SL500_AC_SS350_.jpg'
 )
 
 company = Db::Company.new(

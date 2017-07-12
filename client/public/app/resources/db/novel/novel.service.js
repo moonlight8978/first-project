@@ -9,12 +9,12 @@
 
     function NovelResource($resource, server) {
         let novelUrl      = server.api + '/db/novels/:id';
-        let staffUrl      = server.api + '/db/novels/:id/staffs';
-        let characterUrl  = server.api + '/db/novels/:id/characters';
-        let releaseUrl    = server.api + '/db/novels/:id/releases';
-        let tagUrl        = server.api + '/db/novels/:id/tags';
-        let producerUrl   = server.api + '/db/novels/:id/publications';
-        let screenshotUrl = server.api + '/db/novels/:id/screenshots';
+        let staffUrl      = server.api + '/db/novels/:novelId/staffs';
+        let characterUrl  = server.api + '/db/novels/:novelId/characters';
+        let releaseUrl    = server.api + '/db/novels/:novelId/releases/:id';
+        let tagUrl        = server.api + '/db/novels/:novelId/tags/:id';
+        let producerUrl   = server.api + '/db/novels/:novelId/publications';
+        let screenshotUrl = server.api + '/db/novels/:novelId/screenshots';
         let searchUrl     = server.search + '/novels'
 
         let service = {

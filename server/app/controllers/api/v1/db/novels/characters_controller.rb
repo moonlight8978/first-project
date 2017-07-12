@@ -9,7 +9,9 @@ class Api::V1::Db::Novels::CharactersController < ApplicationController
   end
 
   def show
-    @character = ::Db::Novel::Character.find(params[:id])
+    @character = ::Db::Novel::Character
+      .includes(people: :country)
+      .find(params[:id])
 
     render json: @character, key_transform: :camel_lower, status: :ok,
       include: [:novel, :voice_actresses],
@@ -21,12 +23,12 @@ class Api::V1::Db::Novels::CharactersController < ApplicationController
   end
 
   def update
-    p params
+    p update_character_params
   end
 
-  def destroy
+  # def destroy
 
-  end
+  # end
 
   def index_novel
     novel = ::Db::Novel.includes(characters: :people).find(params[:novel_id])
@@ -36,5 +38,32 @@ class Api::V1::Db::Novels::CharactersController < ApplicationController
       .result
 
     render json: @characters, status: :ok
+  end
+
+  # Add existing character to novel
+  def create_novel
+
+  end
+
+  # Remove a character from novel (if character was in another novel), else destroy
+  def destroy_novel
+
+  end
+
+private
+  def create_character_params
+    params.permit(
+      :name, :name_en, :birthday_day, :birthday_month, :gender,
+      :weight, :height, :bust, :waist, :hip, :blood_type, :image, :role,
+      :description, :description_en
+    )
+  end
+
+  def update_character_params
+    params.permit(
+      :name, :name_en, :birthday_day, :birthday_month, :gender,
+      :weight, :height, :bust, :waist, :hip, :blood_type, :image, :role,
+      :description, :description_en
+    )
   end
 end

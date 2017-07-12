@@ -13,6 +13,9 @@ class NovelService::GetInfo
         )
         .find(@novel_id)
       @novel.full_info = true
+      @novel.characters.map do |character|
+        character.voice_actresses_in_novel = character.voice_actresses.in_novel(@novel.id)
+      end
 
       group_characters
       group_staffs

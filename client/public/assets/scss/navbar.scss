@@ -165,6 +165,51 @@ nav .-user {
   text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
+.search-form {
+  .live-search-results {
+    display: none;
+  }
+
+  .clear-search-input {
+    display: none;
+    right: 40px;
+  }
+
+  &.active {
+    .live-search-results, .clear-search-input {
+      display: block;
+      z-index: 3000;
+    }
+  }
+}
+
+.live-search-results .result {
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  border-bottom: 1px solid #777;
+  padding: 10px;
+
+  .result-image-wrap {
+    width: 60px;
+    flex: 0 0 auto;
+  }
+
+  .result-info {
+    padding: 0 15px;
+    flex: 1 1 auto;
+    min-width: 0;
+    color: #999;
+
+    .title { color: #fff; }
+
+    .title-en {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
 // sidebar
 
 .text-can-be-overflow {
@@ -179,7 +224,7 @@ nav .-user {
   height: 100vh;
   width: 100%;
   position: fixed;
-  z-index: 9999;
+  z-index: 5555;
   top: 0;
   left: -100%;
   transition: left 0.5s ease;
@@ -190,7 +235,8 @@ nav .-user {
 }
 
 .sidebar-left {
-  width: 300px;
+  position: relative;
+  width: 100%;
   height: 100%;
   background-color: rgba(10, 10, 10, 1);
   overflow-x: hidden;
@@ -198,12 +244,16 @@ nav .-user {
   -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;
   white-space: nowrap;
+  @include responsive-px(310px) { width: 300px; }
+
   &::-webkit-scrollbar {
     display: none;
   }
 
+
   i, a, span {
     color: #c1c1c1;
+    cursor: pointer;
     &:active, &:visited, &:focus {
       color: #c1c1c1;
     }
@@ -212,6 +262,17 @@ nav .-user {
   a:hover {
     color: #eaeaea;
     i, a, span { color: #eaeaea; }
+  }
+
+  .sidebar-toggler {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #fff;
+    display: inline-block;
+    padding: 10px;
+    z-index: 5678;
+    cursor: pointer;
   }
 
   .list-item-wrap.link {
@@ -277,18 +338,11 @@ nav .-user {
   }
 
   .avatar {
-    position: relative;
     width: 60px;
     height: 60px;
 
     .avatar-thumb {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-repeat: no-repeat;
-      background-size: cover;
+      background-image: url('/assets/img/unknown-user.png');
       border: solid 1px #fff;
       border-radius: 50% !important;
       box-shadow: 0px 0px 2px 1px rgba(170, 170, 170, 0.7);
@@ -297,7 +351,7 @@ nav .-user {
 
   .utility-container {
     margin-left: 2rem;
-    flex: 1 0 auto !important;
+    flex: 1 1 auto !important;
     min-width: 0;
     text-align: center !important;
 
@@ -312,6 +366,10 @@ nav .-user {
       }
     }
   }
+}
+
+.ratio-1_1::before {
+  padding-bottom: 1 / 1 * 100%;
 }
 
 body {

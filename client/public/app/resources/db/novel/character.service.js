@@ -8,7 +8,7 @@
     CharacterResource.$inject = ['$resource', 'SERVER'];
 
     function CharacterResource($resource, server) {
-        let characterUrl      = server.api + '/db/novels/characters/:id';
+        let characterUrl      = server.api + '/db/characters/:id';
 
         let service = {
             character: characterRsrc()

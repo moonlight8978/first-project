@@ -3,29 +3,23 @@
 
     angular
         .module('app')
-        .directive('enableSidebar', enableSidebar);
+        .directive('sidebarToggler', sidebarToggler);
 
-    function enableSidebar() {
+    function sidebarToggler() {
         return {
             restrict: 'A',
             scope: {
-              target: '@',
-              container: '@'
+              target: '@'
             },
             link: function (scope, element, attrs) {
                 angular.element(document).ready(function () {
-                    let container = $(scope.container);
+                    let sidebar = $(scope.target);
 
                     $(element).click(() => {
                         // $('body').toggleClass('active');
                         // $('.sidebar-left-wrap').toggleClass('active');
                         // $(scope.target).toggleClass('active');
-                        container.addClass('active');
-                    });
-
-                    $(window).click((event) => {
-                        if (('#' + event.target.id) == scope.container)
-                            container.removeClass('active');
+                        sidebar.toggleClass('active');
                     });
                 });
             }

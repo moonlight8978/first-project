@@ -1,4 +1,15 @@
 class Db::Novel < ApplicationRecord
+  after_initialize :default_values
+
+  validates :title, :title_en, presence: true
+  validates :length, inclusion: { in: %w(very_short short medium long very_long) }
+  validates :image, presence: true,
+    format: { with: /\Ahttp\:\/\/|https\:\/\//,
+              message: 'Must be URL http://... or https://...' }
+  validates :image,
+    format: { with: /.jpg|.png|.jpeg\Z/,
+              message: 'Image must be one of following type: .jpg, .png or .jpeg' }
+
   attr_accessor :full_info
   attr_accessor :characters_grouped, :producers, :staffs_grouped
 
@@ -29,5 +40,9 @@ class Db::Novel < ApplicationRecord
 
   def first_release
     self.releases.where(status: :complete).first
+  end
+
+  def default_values
+    self.image_nsfw ||= false
   end
 end

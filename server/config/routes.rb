@@ -2,45 +2,46 @@ Rails.application.routes.draw do
   namespace :api do
     scope module: :v1 do
       namespace :db do
-        resources :novels, id: /[0-9\.]?/ do
-          resources :screenshots, except: :show, controller: 'novels/screenshots'
-          resources :staffs,      except: :show, controller: 'novels/staffs'
+        resources :novels do
+          resources :screenshots, controller: 'novels/screenshots'
 
-          get    'tags',     to: 'novels/tags#index_novel'
-          delete 'tags/:id', to: 'novels/tags#destroy_novel'
-          put    'tags/:id', to: 'novels/tags#update_novel'
-
-          # get    'staffs',     to: 'novels/people#index_novel'
-          # delete 'staffs/:id', to: 'novels/people#destroy_novel'
-          # put    'staffs/:id', to: 'novels/people#update_novel'
-          # post   'staffs/:id', to:
-
-          get    'characters',     to: 'novels/characters#index_novel'
-          put    'characters/:id', to: 'novels/characters#update_novel'
-          post   'characters',     to: 'novels/characters#create_novel'
+          post   'characters',     to: 'novels/characters#create'
+          # Add existing character to novel
+          post   'characters/:id', to: 'novels/characters#create_novel'
+          # Remove a character from novel (if character was in another novel), else destroy
           delete 'characters/:id', to: 'novels/characters#destroy_novel'
-          resources :characters, only: [:destroy, :create] do
-            resources :voice_actresses, except: :show,
-              controller: 'novels/characters/people'
-          end
 
-          get 'releases', to: 'novels/releases#index_novel'
-          put 'releases', to: 'novels/releases#update_novel'
-          resources :releases, only: [:destroy, :create] do
-            resources :producers, except: [:show, :create],
-              controller: 'novels/releases/producers'
+          # Add a tag to novel
+          post   'tags/:id', to: 'novels/tags#create_novel'
+          # Remove a tag from novel
+          delete 'tags/:id', to: 'novels/tags#destroy_novel'
 
-            # get    'platforms',     to: 'novels/releases/platforms#index_release'
-            # put    'platforms/:id', to: 'novels/releases/platforms#update_release'
-            # delete 'platforms/:id', to: 'novels/releases/platforms#destroy_release'
+          post   'releases',     to: 'novels/releases#create'
+          # Add a release to novel
+          post   'releases/:id', to: 'novels/releases#create_novel'
+          # Remove a release from novel
+          delete 'releases/:id', to: 'novels/releases#destroy_novel'
+        end
+
+        scope module: :novels do
+          resources :novel_releases, only: [:update, :show], controller: 'releases'
+          resources :novel_staffs, except: [:show, :index], controller: 'staffs'
+          resources :novel_tags, except: :delete, controller: 'tags'
+          resources :characters, except: :delete
+          resources :voice_actresses, only: :update do
+            # Add more seiyuu to character
+            post   'people/:id', to: 'characters/voice_actresses#create'
+            # Remove seiyuu from character
+            delete 'people/:id', to: 'characters/voice_actresses#destroy'
           end
         end
 
-        namespace :novels do
-          resources :tags
-          resources :characters, except: [:create, :destroy]
-          resources :releases,   except: [:create, :destroy]
-          resources :platforms, controller: 'releases/platforms'
+        resources :producers do
+
+        end
+
+        resources :people do
+
         end
       end
 
@@ -51,37 +52,32 @@ Rails.application.routes.draw do
         get 'tags',       to: 'tags#index'
       end
     end
-
-    scope module: :entity do
-      resources :users, only: [:index]
-      resources :products
-    end
   end
 
-  scope module: :security do
-    scope module: :register do
-      post 'register'
-      get  'register/:token', action: :register_confirm
-      get  'test'
-    end
+  # scope module: :security do
+  #   scope module: :register do
+  #     post 'register'
+  #     get  'register/:token', action: :register_confirm
+  #     get  'test'
+  #   end
 
-    scope module: :session do
-      post 'login'
-      post 'logout'
-    end
+  #   scope module: :session do
+  #     post 'login'
+  #     post 'logout'
+  #   end
 
-    namespace :account do
-      get '', action: :show
-      put 'password', action: :change_password
-    end
+  #   namespace :account do
+  #     get '', action: :show
+  #     put 'password', action: :change_password
+  #   end
 
-    scope module: :reset_password do
-      post  'reset-password',        action: :send_token
-      get   'reset-password/:token', action: :reset_password
-    end
-  end
+  #   scope module: :reset_password do
+  #     post  'reset-password',        action: :send_token
+  #     get   'reset-password/:token', action: :reset_password
+  #   end
+  # end
 
-  namespace :schedule do
-    resource :token, only: :destroy
-  end
+  # namespace :schedule do
+  #   resource :token, only: :destroy
+  # end
 end

@@ -8,26 +8,35 @@
     function searchForm() {
         return {
             controller: function() {
-                $(function() {
+                $(() => {
                     let searchForm = $('#searchForm');
                     let searchInput = $('#searchInput');
                     let navItem = $('.-main .nav-item');
                     let searchCate = $('#searchCate');
+                    let inputGroup = $('#inputGroup');
 
-                    searchForm.focusin(function () {
+                    searchForm.focusin(() => {
                         navItem.each(function () {
                             $(this).addClass('invisible');
                         });
-                        $(this).addClass('active');
+                        searchForm.addClass('active');
                         searchCate.fadeIn().addClass('visible');
                     });
 
-                    searchForm.focusout(function () {
-                        searchCate.fadeOut().removeClass('visible');
-                        $(this).removeClass('active');
-                        navItem.each(function () {
-                            $(this).removeClass('invisible');
+                    $('#searchForm').focusout(() => {
+                        $(window).on('click.checkFocusin', (event) => {
+                            let trigger = $(event.target).closest('#searchForm');
+                            $(window).off("click.checkFocusin")
+                            // console.log(trigger);
+                            if (trigger[0] != searchForm[0]) {
+                                searchCate.fadeOut().removeClass('visible');
+                                searchForm.removeClass('active');
+                                navItem.each(function () {
+                                    $(this).removeClass('invisible');
+                                });
+                            }
                         });
+
                     });
                 });
             }
