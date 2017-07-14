@@ -12,7 +12,7 @@ function angular() {
         .pipe(inject(
             gulp.src([config.app + 'app/**/*.js'])
                 .pipe(naturalSort())
-                .pipe(babel({ presets: ['es2015'] }))
+                .pipe(babel({ presets: ['es2015', 'es2016', 'es2017'] }))
                 .pipe(angularFilesort()),
             { relative: true }
         ))

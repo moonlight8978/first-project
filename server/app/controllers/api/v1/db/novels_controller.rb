@@ -1,6 +1,6 @@
 class Api::V1::Db::NovelsController < ApplicationController
-  before_action :require_moderator, only: :update
-  before_action :require_admin, only: [:create, :destroy]
+  # before_action :require_moderator, only: :update
+  # before_action :require_admin, only: [:create, :destroy]
 
   def index
     @novels = ::Db::Novel.all.page(params[:page]).per(params[:per_page])
@@ -26,13 +26,12 @@ class Api::V1::Db::NovelsController < ApplicationController
   end
 
   def create
-    create_novel_svc = NovelService::CreateNovel.new(create_novel_params)
-    create_novel_svc.perform
+    novel = ::Db::Novel.create(create_novel_params)
 
-    if create_novel_svc.error?
-      head :conflict
+    if novel.errors.any?
+      render json: novel.errors, status: :ok, key_transform: :camel_lower
     else
-      render_ok(novel_id: create_novel_svc.novel.id)
+      render_ok
     end
   end
 

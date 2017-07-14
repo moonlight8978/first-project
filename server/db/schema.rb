@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170625053127) do
+ActiveRecord::Schema.define(version: 20170713115930) do
 
   create_table "countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
@@ -125,16 +125,23 @@ ActiveRecord::Schema.define(version: 20170625053127) do
     t.index ["company_id", "release_id"], name: "index_developers_releases"
   end
 
-  create_table "db_novel_character_voice_actresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "db_novel_character_novels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "character_id", null: false
     t.bigint "novel_id", null: false
-    t.bigint "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_db_novel_character_novels_on_character_id"
+    t.index ["novel_id"], name: "index_db_novel_character_novels_on_novel_id"
+  end
+
+  create_table "db_novel_character_voice_actresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "character_novel_id", null: false
+    t.bigint "person_id", null: false
     t.string "alias"
     t.string "alias_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["character_id"], name: "index_db_novel_character_voice_actresses_on_character_id"
-    t.index ["novel_id"], name: "index_db_novel_character_voice_actresses_on_novel_id"
+    t.index ["character_novel_id"], name: "index_db_novel_character_voice_actresses_on_character_novel_id"
     t.index ["person_id"], name: "index_db_novel_character_voice_actresses_on_person_id"
   end
 
@@ -148,7 +155,7 @@ ActiveRecord::Schema.define(version: 20170625053127) do
     t.integer "height"
     t.integer "bust"
     t.integer "waist"
-    t.integer "hip"
+    t.integer "hips"
     t.string "blood_type"
     t.string "image"
     t.integer "role"
@@ -338,7 +345,7 @@ ActiveRecord::Schema.define(version: 20170625053127) do
     t.string "twitter"
     t.string "gmail"
     t.boolean "activated", default: false, null: false
-    t.datetime "password_updated_at", default: "2017-06-25 15:06:59"
+    t.datetime "password_updated_at", default: "2017-07-14 09:46:15"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_security_users_on_country_id"

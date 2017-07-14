@@ -9,7 +9,7 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('novel.detail', {
-            url: '/novels/{id:int}',
+            url: '/{id:int}',
             views: {
                 'content@': {
                     templateUrl: 'app/db/novel/novel/detail/novel-detail.html',

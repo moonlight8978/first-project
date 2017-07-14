@@ -11,8 +11,7 @@ private
   def standardized
     text_field = %w(tag tag_en description description_en)
     text_field.map do |key|
-      self[key].strip!
-      self[key].gsub!(/ +/, ' ')
+      self[key] && self[key].strip! && self[key].gsub!(/ +/, ' ')
     end
   end
 end

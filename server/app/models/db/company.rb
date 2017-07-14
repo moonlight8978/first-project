@@ -6,7 +6,7 @@ class Db::Company < ApplicationRecord
     format: { with: /\Ahttp\:\/\/|https\:\/\//,
               message: 'Must be URL http://... or https://...' }
   validates :country,
-    if: -> { self.country_id || self.country }
+    if: -> { self.country_id || self.country },
     presence: true
 
   belongs_to :country, class_name: 'Country', optional: true

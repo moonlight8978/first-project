@@ -10,20 +10,34 @@ class Api::V1::Db::Novels::CharactersController < ApplicationController
 
   def show
     @character = ::Db::Novel::Character
-      .includes(people: :country)
+      .includes(character_novels: [:novel, :people])
       .find(params[:id])
 
     render json: @character, key_transform: :camel_lower, status: :ok,
-      include: [:novel, :voice_actresses],
+      include: [novels: :voice_actresses],
       serializer: Api::V1::Db::Novel::Character::CharacterDetailSerializer
   end
 
   def create
+    create_svc = NovelService::AddCharacter.new(params[:novel_id], create_character_params)
 
+    create_svc.perform
+    if create_svc.errors?
+      render json: create_svc.errors, status: :bad_request
+    else
+      render_ok
+    end
   end
 
   def update
-    p update_character_params
+    update_svc = CharacterService::UpdateCharacter.new(params[:id], update_character_params)
+
+    update_svc.perform
+    if update_svc.errors?
+      render json: update_svc.errors, status: :bad_request
+    else
+      render_ok
+    end
   end
 
   # def destroy
@@ -54,7 +68,7 @@ private
   def create_character_params
     params.permit(
       :name, :name_en, :birthday_day, :birthday_month, :gender,
-      :weight, :height, :bust, :waist, :hip, :blood_type, :image, :role,
+      :weight, :height, :bust, :waist, :hips, :blood_type, :image, :role,
       :description, :description_en
     )
   end
@@ -62,7 +76,7 @@ private
   def update_character_params
     params.permit(
       :name, :name_en, :birthday_day, :birthday_month, :gender,
-      :weight, :height, :bust, :waist, :hip, :blood_type, :image, :role,
+      :weight, :height, :bust, :waist, :hips, :blood_type, :image, :role,
       :description, :description_en
     )
   end

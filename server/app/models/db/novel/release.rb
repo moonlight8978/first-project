@@ -35,6 +35,6 @@ class Db::Novel::Release < ApplicationRecord
 
 private
   def standardized
-    self.jan_num.upcase!
+    self.jan_num && self.jan_num.upcase!
   end
 end

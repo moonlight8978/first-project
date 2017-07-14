@@ -4,6 +4,15 @@ Rails.application.routes.draw do
       namespace :db do
         resources :novels do
           resources :screenshots, controller: 'novels/screenshots'
+          resources :characters, only: [] do
+            # Add more seiyuu to character
+            post   'voice_actresses/:id', to: 'novels/characters/voice_actresses#create'
+            # Update seiyuu alias
+            patch  'voice_actresses/:id', to: 'novels/characters/voice_actresses#update'
+            put    'voice_actresses/:id', to: 'novels/characters/voice_actresses#update'
+            # Remove seiyuu from character
+            delete 'voice_actresses/:id', to: 'novels/characters/voice_actresses#destroy'
+          end
 
           post   'characters',     to: 'novels/characters#create'
           # Add existing character to novel
@@ -28,12 +37,12 @@ Rails.application.routes.draw do
           resources :novel_staffs, except: [:show, :index], controller: 'staffs'
           resources :novel_tags, except: :delete, controller: 'tags'
           resources :characters, except: :delete
-          resources :voice_actresses, only: :update do
-            # Add more seiyuu to character
-            post   'people/:id', to: 'characters/voice_actresses#create'
-            # Remove seiyuu from character
-            delete 'people/:id', to: 'characters/voice_actresses#destroy'
-          end
+          # resources :voice_actresses, only: :update do
+          #   # Add more seiyuu to character
+          #   post   'people/:id', to: 'characters/voice_actresses#create'
+          #   # Remove seiyuu from character
+          #   delete 'people/:id', to: 'characters/voice_actresses#destroy'
+          # end
         end
 
         resources :producers do

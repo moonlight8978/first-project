@@ -253,7 +253,7 @@ characters = [
     height: 145,
     bust: 72,
     waist: 52,
-    hip: 74,
+    hips: 74,
     role: 1
   ),
   Db::Novel::Character.create(
@@ -265,7 +265,7 @@ characters = [
     height: 160,
     bust: 93,
     waist: 59,
-    hip: 91,
+    hips: 91,
     role: 1
   ),
   Db::Novel::Character.create(
@@ -277,7 +277,7 @@ characters = [
     height: 150,
     bust: 81,
     waist: 55,
-    hip: 80,
+    hips: 80,
     role: 1
   ),
   Db::Novel::Character.create(
@@ -289,7 +289,7 @@ characters = [
     height: 150,
     bust: 90,
     waist: 58,
-    hip: 88,
+    hips: 88,
     role: 1
   ),
   Db::Novel::Character.create(
@@ -301,7 +301,7 @@ characters = [
     height: 156,
     bust: 88,
     waist: 56,
-    hip: 85,
+    hips: 85,
     role: 1
   ),
   Db::Novel::Character.create(
@@ -313,7 +313,7 @@ characters = [
     height: 155,
     bust: 86,
     waist: 58,
-    hip: 84,
+    hips: 84,
     role: 2
   ),
   Db::Novel::Character.create(
@@ -325,49 +325,55 @@ characters = [
     height: 148,
     bust: 80,
     waist: 51,
-    hip: 82,
+    hips: 82,
     role: 1
   )
 ]
 
-Db::Novel::Character::VoiceActress.create(
-  person_id: 1,
+Db::Novel::CharacterNovel.create(
   character: characters[0],
   novel_id: 1
+).voice_actresses.create(
+  person_id: 1
 )
 
-Db::Novel::Character::VoiceActress.create(
-  person_id: 2,
+Db::Novel::CharacterNovel.create(
   character: characters[1],
   novel_id: 1
+).voice_actresses.create(
+  person_id: 2
 )
 
-Db::Novel::Character::VoiceActress.create(
-  person_id: 3,
+Db::Novel::CharacterNovel.create(
   character: characters[2],
-  alias_en: 'Moka Choko',
-  alias: '萌花ちょこ',
   novel_id: 1
+).voice_actresses.create(
+  person_id: 3,
+  alias_en: 'Moka Choko',
+  alias: '萌花ちょこ'
 )
 
-Db::Novel::Character::VoiceActress.create(
-  person_id: 4,
+Db::Novel::CharacterNovel.create(
   character: characters[3],
   novel_id: 1
+).voice_actresses.create(
+  person_id: 4
 )
 
-Db::Novel::Character::VoiceActress.create(
-  person_id: 5,
+Db::Novel::CharacterNovel.create(
   character: characters[4],
-  alias_en: 'Kawashima Rino',
-  alias: 'かわしまりの',
   novel_id: 1
+).voice_actresses.create(
+  person_id: 5,
+  alias_en: 'Kawashima Rino',
+  alias: 'かわしまりの'
 )
 
-Db::Novel::Character::VoiceActress.create(
-  person_id: 6,
+Db::Novel::CharacterNovel.create(
   character: characters[5],
   novel_id: 1
+).voice_actresses.create(
+  person_id: 6
 )
 
 nao = Db::Person.create(
@@ -377,7 +383,7 @@ nao = Db::Person.create(
 )
 
 nao_vocal = novels[0].staffs.build(
-  position: 'Vocals',
+  position: 'vocals',
   note: 'オープニング「永遠なる絆と思いのキセキ'
 )
 
@@ -388,7 +394,7 @@ nao_vocal.save
 Db::Novel::Staff.create(
   person_id: 3,
   novel_id: 1,
-  position: 'Vocals',
+  position: 'vocals',
   note: 'エンディング「茜色の奇跡」',
   alias: 'miru',
   alias_en: 'miru'
@@ -404,7 +410,7 @@ Db::Person.create(
 Db::Novel::Staff.create(
   person_id: 8,
   novel_id: 1,
-  position: 'Composer',
+  position: 'composer',
   note: 'BGM'
 )
 
@@ -418,7 +424,7 @@ Db::Person.create(
 Db::Novel::Staff.create(
   person_id: 9,
   novel_id: 1,
-  position: 'Artist'
+  position: 'artist'
 )
 
 Db::Person.create(
@@ -431,7 +437,7 @@ Db::Person.create(
 Db::Novel::Staff.create(
   person_id: 10,
   novel_id: 1,
-  position: 'Artist'
+  position: 'artist'
 )
 
 Db::Person.create(
@@ -443,7 +449,7 @@ Db::Person.create(
 Db::Novel::Staff.create(
   person_id: 11,
   novel_id: 1,
-  position: 'Scenario'
+  position: 'scenario'
 )
 
 Db::Person.create(
@@ -456,7 +462,7 @@ Db::Person.create(
 Db::Novel::Staff.create(
   person_id: 12,
   novel_id: 1,
-  position: 'Staff',
+  position: 'staff',
   note: 'Movie'
 )
 
@@ -470,7 +476,7 @@ Db::Person.create(
 Db::Novel::Staff.create(
   person_id: 13,
   novel_id: 1,
-  position: 'Staff',
+  position: 'staff',
   note: 'Backgrounds'
 )
 
@@ -483,14 +489,14 @@ Db::Person.create(
 Db::Novel::Staff.create(
   person_id: 14,
   novel_id: 1,
-  position: 'Staff',
+  position: 'staff',
   note: 'Planning'
 )
 
 Db::Novel::Staff.create(
   person_id: 10,
   novel_id: 1,
-  position: 'Staff',
+  position: 'staff',
   note: 'Planning'
 )
 
@@ -504,14 +510,15 @@ Db::Person.create(
 Db::Novel::Staff.create(
   person_id: 15,
   novel_id: 1,
-  position: 'Staff',
+  position: 'staff',
   note: 'OP lyrics'
 )
 
-novels[1].voice_actresses.create(
-  person_id: 1,
+Db::Novel::CharacterNovel.create(
   character: characters[6],
   novel_id: 2
+).voice_actresses.create(
+  person_id: 1
 )
 
 hmll = novels[1].releases.create(

@@ -1,5 +1,5 @@
 class Api::V1::Db::Novel::Character::VoiceActressSerializer < ActiveModel::Serializer
-  attributes :id, :person_id, :novel_id, :name, :name_en, :country_flag,
+  attributes :id, :person_id, :name, :name_en, :country_flag,
     :country_name, :country_name_en
 
   def name

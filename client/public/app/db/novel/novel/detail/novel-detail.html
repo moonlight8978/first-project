@@ -12,6 +12,38 @@
 <novel-staff staffs="vm.novel.staffs.staffs"    type="'staffs'"></novel-staff>
 
 <h3>Characters:</h3>
+<form id="characterForm" ng-submit="vm.submit()">
+  <h1>Create new Char</h1>
+  <select ng-model="vm.req.character.role" name="role">
+    <option value="">Role</option>
+    <option value="protagonist">Protagonist</option>
+    <option value="main">Main Character</option>
+    <option value="side">Side Character</option>
+  </select>
+  <label>Name<input type="text" name="name" ng-model="vm.req.character.name"></label>
+  <label>Name English<input type="text" name="name" ng-model="vm.req.character.nameEn"></label>
+  <select ng-model="vm.req.character.gender" name="gender">
+    <option value="">Gender</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+  <label>Birthday<input type="date" name="bday" ng-model="vm.req.character.birthday"></label>
+  <label>Height<input type="number" name="height" ng-model="vm.req.character.height"></label>
+  <label>Weight<input type="number" name="weight" ng-model="vm.req.character.weight"></label>
+  <label>Bust<input type="number" name="bust" ng-model="vm.req.character.bust"></label>
+  <label>Hip<input type="number" name="hip" ng-model="vm.req.character.hip"></label>
+  <label>Waist<input type="number" name="waist" ng-model="vm.req.character.waist"></label>
+  <select ng-model="vm.req.character.bloodType" name="bloodType">
+    <option value="">Blood Type</option>
+    <option value="a">A</option>
+    <option value="b">B</option>
+    <option value="ab">AB</option>
+    <option value="o">O</option>
+  </select>
+  <label>Image<input type="text" name="image" ng-model="vm.req.character.image"></label>
+  <img ng-src="{{ vm.req.character.image }}">
+  <button>Submit</button>
+</form>
 <novel-character characters="vm.novel.characters.protagonist" type="'protagonist'"></novel-character>
 <novel-character characters="vm.novel.characters.main"        type="'main'"></novel-character>
 <novel-character characters="vm.novel.characters.side"        type="'side'"></novel-character>

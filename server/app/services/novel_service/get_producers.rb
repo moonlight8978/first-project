@@ -5,7 +5,7 @@ class NovelService::GetProducers
 
   def perform(type, options = {})
     @companies = @novel.releases.map(&type).flatten.uniq(&:id)
-    if options[:serialize] == true
+    if options[:serialize] == true && @companies
       @companies = @companies.map do |company|
         ActiveModelSerializers::SerializableResource.new(
           company,

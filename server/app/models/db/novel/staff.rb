@@ -13,9 +13,7 @@ private
   def standardized
     text_field = %w(position note alias alias_en)
     text_field.map do |key|
-      self[key].strip!
-      self[key].gsub!(/ +/, ' ')
-      self.position.capitalize
+      self[key] && self[key].strip! && self[key].gsub!(/ +/, ' ')
     end
   end
 end

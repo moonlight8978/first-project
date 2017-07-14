@@ -9,7 +9,7 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('novel.list', {
-            url: '/novels?length&sort&page',
+            url: '?length&sort&page',
             params: {
                 length: null,
                 sort: null,

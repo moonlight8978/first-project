@@ -19,6 +19,6 @@ class Api::V1::Db::Novel::NovelDetailSerializer < ActiveModel::Serializer
   end
 
   def released
-    object.first_release.released
+    object.first_release && object.first_release.released
   end
 end

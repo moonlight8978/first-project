@@ -35,8 +35,8 @@ class Db::Person < ApplicationRecord
   has_many :voice_actresses, class_name: 'Db::Novel::Character::VoiceActress'
   has_many :staffs,          class_name: 'Db::Novel::Staff'
 
-  has_many :characters, class_name: 'Db::Novel::Character', through: :voice_actresses
-  has_many :novels,                                         through: :staffs
+  has_many :character_novels, class_name: 'Db::Novel::CharacterNovel', through: :voice_actresses
+  has_many :novels,                                                    through: :staffs
 
 private
   def birthday_cannot_be_in_the_future

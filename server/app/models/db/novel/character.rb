@@ -9,7 +9,7 @@ class Db::Novel::Character < ApplicationRecord
   validates :birthday_month,
     allow_nil: true,
     numericality: { only_integer: true, greater_than: 0, less_than: 13 }
-  validates :bust, :hip, :waist,
+  validates :bust, :hips, :waist,
     allow_nil: true,
     numericality: { only_integer: true, greater_than: 0 }
   validates :gender,
@@ -20,7 +20,7 @@ class Db::Novel::Character < ApplicationRecord
     numericality: { greater_than: 0 }
   validates :blood_type,
     allow_nil: true,
-    inclusion: { in: %w(a b ab o) }
+    inclusion: { in: %w(a A b B ab AB o O) }
   validates :image,
     allow_nil: true,
     format: { with: /\Ahttp\:\/\/|https\:\/\//,
@@ -33,26 +33,25 @@ class Db::Novel::Character < ApplicationRecord
     presence: true,
     inclusion: { in: %w(protagonist main side) }
 
-
   attr_accessor :voice_actresses_in_novel
 
   enum role: [:protagonist, :main, :side]
+  enum gender: [:female, :male]
 
-  has_many :voice_actresses, class_name: 'Db::Novel::Character::VoiceActress'
+  has_many :character_novels
 
-  has_many :people, class_name: 'Db::Person', through: :voice_actresses
-  has_many :novels,                           through: :voice_actresses
+  has_many :novels, through: :character_novels
 
   has_many :comments, class_name: 'Feature::Comment', as: :commentable
   has_many :ratings,  class_name: 'Feature::Rating',  as: :rateable
 
-private
-
-  def three_sizes
-    "#{self.bust}-#{self.waist}-#{self.hip}cm"
+  def voice_actresses_in(novel_id)
+    self.voice_actresses.select { |voice_actress| voice_actress.novel_id == novel_id }
   end
 
+private
+
   def standardized
-    self.blood_type.upcase!
+    self.blood_type && self.blood_type.upcase!
   end
 end

@@ -10,7 +10,7 @@ class CreateDbNovelCharacters < ActiveRecord::Migration[5.1]
       t.integer    :height
       t.integer    :bust
       t.integer    :waist
-      t.integer    :hip
+      t.integer    :hips
       t.string     :blood_type
       t.string     :image
       t.integer    :role

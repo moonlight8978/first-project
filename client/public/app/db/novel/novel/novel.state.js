@@ -10,6 +10,7 @@
     function stateConfig($stateProvider) {
         $stateProvider.state('novel', {
             parent: 'db',
+            url: '/novels',
             abstract: true
         });
     }

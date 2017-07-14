@@ -1,5 +1,6 @@
 class Db::Novel < ApplicationRecord
   after_initialize :default_values
+  before_save :standardized
 
   validates :title, :title_en, presence: true
   validates :length, inclusion: { in: %w(very_short short medium long very_long) }
@@ -18,9 +19,9 @@ class Db::Novel < ApplicationRecord
   has_many :albums,          class_name: 'Db::Album'
   has_many :screenshots
   has_many :staffs
-  has_many :voice_actresses, class_name: 'Db::Novel::Character::VoiceActress'
+  has_many :character_novels
 
-  has_many :characters,                           through: :voice_actresses
+  has_many :characters,                           through: :character_novels
   has_many :people,     class_name: 'Db::Person', through: :staffs
 
   has_many :comments, class_name: 'Feature::Comment', as: :commentable
@@ -39,10 +40,21 @@ class Db::Novel < ApplicationRecord
   end
 
   def first_release
-    self.releases.where(status: :complete).first
+    self.releases.select { |release| release.status == :complete }.first
   end
 
   def default_values
     self.image_nsfw ||= false
+  end
+
+private
+
+  def standardized
+    text_fields = [:title, :title_en, :description, :description_en]
+    text_fields.map do |key|
+      return unless self[key]
+      self[key].strip!
+      self[key].gsub!(/ +/, ' ')
+    end
   end
 end
