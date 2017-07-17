@@ -1,23 +1,42 @@
-domain = 'http://localhost:3000/'
-api = 'api/'
-get = 'GET'
-entity = {
-  novel: :novels
+novel = {
+
 }
 
-puts 'VERB / URI'
-puts "#{get} #{domain}#{api}#{entity[:novel]}/:id/publications?type"
+character = {
+  url: {
+    create: [:novel_id],
+    update: [:character_id]
+    [:add_char_to_novel, :destroy] => [:novel_id, :character_id]
+  },
+  body: {
+    [:create, :update] => [
+      :name, :name_en, :birthday_day, :birthday_month, :gender,
+      :weight, :height, :bust, :waist, :hips, :blood_type, :image, :role,
+      :description, :description_en
+    ]
+  }
+}
 
+voice_actress = {
+  url: {
+    create: [:novel_id, :character_id, :person_id]
+    [:update, :destroy] => [:voice_actress_id]
+  },
+  body: {
+    [:create, :update] => [:alias, :alias_en]
+  }
+}
 
-novel: {
-  characters:
-    [:create, :index_novel, :destroy, :show, :index],
-  staffs:
-    [:create, :index, :destroy],
-  publications:
-    [:index],
-  tags:
-    [:create_novel, :index_novel, :destroy_novel],
-  releases:
-    [:create, :destroy_novel, :index_novel]
+release = {
+  url: {
+    create: [:novel_id]
+    update: [:release_id]
+    [:add_release_to_novel, :destroy] => [:novel_id, :release_id]
+  },
+  body: {
+    [:create, :update] => [
+      :PLATFORM_ID, :title, :title_en, :status, :voiced, :animation_ero,
+      :animation_story, :jan_num, :released, :age_rating
+    ]
+  }
 }

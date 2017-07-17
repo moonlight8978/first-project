@@ -4,8 +4,8 @@ class Api::V1::Db::Novel::NovelDetailSerializer < ActiveModel::Serializer
 
   attribute :characters, if: -> { object.full_info }
   attribute :staffs,     if: -> { object.full_info }
-  attribute :producers
 
+  has_many :producers,   serializer: Api::V1::Db::Novel::ProducerSerializer
   has_many :releases,    if: -> { object.full_info }
   has_many :screenshots, if: -> { object.full_info }
   has_many :tags,        if: -> { object.full_info }

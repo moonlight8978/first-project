@@ -16,13 +16,10 @@ class NovelService::GetInfo
 
       group_characters
       group_staffs
-      get_producers
     else
       @novel = Db::Novel
         .includes(releases: [{ developers: :country }, { publishers: :country }])
         .find(@novel_id)
-
-      get_producers
     end
 
     self
@@ -44,31 +41,24 @@ private
 
   def group_staffs
     return unless @novel.staffs
-    positions = {
-      'staff'    => :staffs,
-      'vocals'   => :vocals,
-      'composer' => :composers,
-      'artist'   => :artists,
-      'scenario' => :scenarios
-    }
     @novel.staffs_grouped = GroupSerializeService
-      .new(@novel.staffs, Api::V1::Db::Novel::StaffSerializer, positions)
+      .new(@novel.staffs, Api::V1::Db::Novel::StaffSerializer)
       .perform(&:position)
       .result
   end
 
-  def get_producers
-    return unless @novel.releases
-    get_producers_svc = NovelService::GetProducers.new(@novel)
-    @novel.producers = { publishers: [], developers: [] }
+  # def get_producers
+  #   return unless @novel.releases
+  #   get_producers_svc = NovelService::GetProducers.new(@novel)
+  #   @novel.producers = { publishers: [], developers: [] }
 
-    if @novel.releases
-      @novel.producers[:publishers] = get_producers_svc
-        .perform(:publishers, serialize: true)
-        .result
-      @novel.producers[:developers] = get_producers_svc
-        .perform(:developers, serialize: true)
-        .result
-    end
-  end
+  #   if @novel.releases
+  #     @novel.producers[:publishers] = get_producers_svc
+  #       .perform(:publishers, serialize: true)
+  #       .result
+  #     @novel.producers[:developers] = get_producers_svc
+  #       .perform(:developers, serialize: true)
+  #       .result
+  #   end
+  # end
 end

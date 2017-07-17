@@ -16,6 +16,9 @@ class Db::Novel::Release < ApplicationRecord
   validates :platform,
     if: -> { self.platform_id || self.platform },
     presence: true
+  validates :age_rating,
+    presence: true,
+    inclusion: { in: (0..18).to_a }
 
   enum status: [:trial, :complete]
   enum voiced: [:no, :partial, :fully]
@@ -32,6 +35,10 @@ class Db::Novel::Release < ApplicationRecord
     join_table: :db_publishers_novel_releases
 
   scope :released_asc, -> { order(released: :asc) }
+
+  def producers
+    (developers + publishers).uniq(&:id)
+  end
 
 private
   def standardized

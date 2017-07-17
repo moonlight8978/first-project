@@ -15,16 +15,26 @@ class Api::V1::Db::Novels::ReleasesController < ApplicationController
   end
 
   def create
-    @novel = ::Db::Novel.find(params[:novel_id])
+    add_svc = ReleaseService::CreateRelease.new(params[:novel_id], create_release_params)
+
+    add_svc.perform
+    if add_svc.errors?
+      render json: add_svc.errors, status: :bad_request
+    else
+      render_ok
+    end
   end
 
   def update
-    @release = ::Db::Novel::Release.find(params[:id])
-  end
+    p update_release_params
+    update_svc = ReleaseService::UpdateRelease.new(params[:id], update_release_params)
 
-  def destroy
-    @release = ::Db::Novel::Release.find(params[:id])
-    p @release.novels
+    update_svc.perform
+    if update_svc.errors?
+      render json: update_svc.errors, status: :bad_request
+    else
+      render_ok
+    end
   end
 
   # def index_novel
@@ -39,27 +49,43 @@ class Api::V1::Db::Novels::ReleasesController < ApplicationController
 
   # Add a release to novel
   def create_novel
+    add_to_novel_svc = ReleaseService::AddReleaseToNovel
+      .new(params[:novel_id], params[:id])
 
+    add_to_novel_svc.perform
+    if add_to_novel_svc.errors?
+      render json: add_to_novel_svc.errors, status: :bad_request
+    else
+      render_ok
+    end
   end
 
-  # Remove a release from novel
+  # If release exists in more than 1 novel, remove it
+  # Else, destroy it
   def destroy_novel
+    destroy_svc = ReleaseService::DestroyRelease.new(params[:novel_id], params[:id])
 
+    destroy_svc.perform
+    if destroy_svc.errors?
+      render json: destroy_svc.errors, status: :bad_request
+    else
+      render_ok
+    end
   end
 
 private
 
   def create_release_params
     params.permit(
-      :platform_id, :title, :title_en, :status, :voiced,
-      :animation_ero, :animation_story, :jan_num
+      :platform_id, :title, :title_en, :status, :voiced, :animation_ero,
+      :animation_story, :jan_num, :released, :age_rating
     )
   end
 
   def update_release_params
     params.permit(
-      :platform_id, :title, :title_en, :status, :voiced,
-      :animation_ero, :animation_story, :jan_num
+      :platform_id, :title, :title_en, :status, :voiced, :animation_ero,
+      :animation_story, :jan_num, :released, :age_rating
     )
   end
 end

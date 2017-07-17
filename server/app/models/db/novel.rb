@@ -12,7 +12,7 @@ class Db::Novel < ApplicationRecord
               message: 'Image must be one of following type: .jpg, .png or .jpeg' }
 
   attr_accessor :full_info
-  attr_accessor :characters_grouped, :producers, :staffs_grouped
+  attr_accessor :characters_grouped, :staffs_grouped
 
   enum length: [:very_short, :short, :medium, :long, :very_long]
 
@@ -43,8 +43,8 @@ class Db::Novel < ApplicationRecord
     self.releases.select { |release| release.status == :complete }.first
   end
 
-  def default_values
-    self.image_nsfw ||= false
+  def producers
+    releases.map(&:producers).flatten.uniq(&:id)
   end
 
 private
@@ -56,5 +56,9 @@ private
       self[key].strip!
       self[key].gsub!(/ +/, ' ')
     end
+  end
+
+  def default_values
+    self.image_nsfw ||= false
   end
 end

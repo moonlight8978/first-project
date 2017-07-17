@@ -1,13 +1,11 @@
 class Api::V1::Db::Novels::Characters::VoiceActressesController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
-
   def index
 
   end
 
   def create
-    create_svc = CharacterService::AddVoiceActress
-      .new(params[:id], params[:novel_id], params[:character_id], create_va_params)
+    create_svc = CharacterService::CreateVoiceActress
+      .new(params[:novel_id], params[:character_id], params[:id], create_va_params)
 
     create_svc.perform
 
@@ -35,14 +33,16 @@ class Api::V1::Db::Novels::Characters::VoiceActressesController < ApplicationCon
   end
 
   def destroy
+    @va = ::Db::Novel::Character::VoiceActress.find(params[:id])
 
+    begin
+      @va.destroy!
+    rescue ActiveRecord::RecordNotDestroyed => invalid
+      render json: ErrorMessage.new(invalid.record.errors), status: :bad_request
+    end
   end
 
 private
-  def not_found
-    error = ErrorMessage.new(message: 'Record which you want seem not be exists!')
-    render json: error, status: :not_found
-  end
 
   def create_va_params
     params.permit(:alias, :alias_en)

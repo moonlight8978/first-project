@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+
   ## Main authenticate helpers
 
   # Allow logged users access to resources
@@ -28,6 +30,8 @@ class ApplicationController < ActionController::API
     end
   end
 
+private
+
   # Get token from request header
   def token_from_request
     # return nil unless request.headers['HTTP_AUTHORIZATION'].present?
@@ -49,11 +53,9 @@ class ApplicationController < ActionController::API
   end
 
   def render_not_found
-    render json: { message: 'Not found!' }, status: :not_found
+    error = ErrorMessage.new(message: 'Record which you want seem not be exists!')
+    render json: error, status: :not_found
   end
-
-private
-  ## Supported
 
   # Check if user has been logged or not
   def authenticated?

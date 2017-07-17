@@ -1,6 +1,6 @@
 <h1>Character</h1>
 
-<form id="characterForm" ng-submit="vm.submit()">
+<!-- <form id="characterForm" ng-submit="vm.submit()">
   <select ng-model="vm.req.character.role" name="role">
     <option value="">Role</option>
     <option value="protagonist">Protagonist</option>
@@ -14,7 +14,7 @@
     <option value="male">Male</option>
     <option value="female">Female</option>
   </select>
-  <!-- <label>Birthday<input type="date" name="bday" ng-model="vm.req.character.birthday"></label> -->
+  <label>Birthday<input type="date" name="bday" ng-model="vm.req.character.birthday"></label>
   <label>Height<input type="number" name="height" ng-model="vm.req.character.height"></label>
   <label>Weight<input type="number" name="weight" ng-model="vm.req.character.weight"></label>
   <label>Bust<input type="number" name="bust" ng-model="vm.req.character.bust"></label>
@@ -30,30 +30,43 @@
   <label>Image<input type="text" name="image" ng-model="vm.req.character.image"></label>
   <img ng-src="{{ vm.req.character.image }}">
   <button>Submit</button>
+</form> -->
+
+<div class="jumbotron">
+  <span>{{ vm.novel.title }}</span><br>
+  <span>{{ vm.novel.titleEn }}</span><br>
+</div>
+
+<form class="jumbotron" ng-submit="vm.addC2N(vm.character_id)">
+  <label>
+    character_id:
+    <input type="number" name="character_id" ng-model="vm.character_id">
+  </label>
+  <button>Submit</button>
 </form>
 
-<div ng-repeat="(novel_i, novel) in vm.character.novels">
-  <span>{{ novel.title }}</span><br>
-  <span>{{ novel.titleEn }}</span><br>
-  <form ng-submit="vm.submitVA(vm.req.va[novel_i])">
-    <label>id<input type="number" ng-model="vm.req.va[novel_i].id"></label>
-    <label>alias<input type="text" ng-model="vm.req.va[novel_i].alias"></label><br>
-    <label>alias_en<input type="text" ng-model="vm.req.va[novel_i].aliasEn"></label><br>
+<div class="jumbotron" ng-repeat="(c_id, character) in vm.novel.characters.main">
+  <span>{{ character.name }}</span><br>
+  <span>{{ character.nameEn }}</span><br>
+  <button type="button" ng-click="vm.deleteC(vm.novel.id, character.id)">Delete</button>
+  <form ng-submit="vm.submitVA(vm.novel.id, character.id, vm.va[c_id].id)">
+    <label>va_id: <input type="number" ng-model="vm.va[c_id].id"></label>
     <button>Submit</button>
   </form>
-  <div ng-repeat="(va_i, va) in novel.voiceActresses">
-    <span>{{ va.name }}</span><br>
-    <span>{{ va.nameEn }}</span>
-    <form ng-submit="vm.updateVA(novel.id, vm.character.id, va.id, vm.va[novel_i][va_i])">
-      <label>alias<input type="text" ng-model="vm.va[novel_i][va_i].alias" placeholder="{{ va.name }}" ng-disabled="vm.va[novel_i][va_i].no_alias"></label><br>
-      <label>alias_en<input type="text" ng-model="vm.va[novel_i][va_i].aliasEn" placeholder="{{ va.nameEn }}" ng-disabled="vm.va[novel_i][va_i].no_alias"></label><br>
-      <label>No alias<input type="checkbox" ng-model="vm.va[novel_i][va_i].no_alias"></label>
-      <button>Submit</button>
-    </form>
+</div>
+
+<div class="jumbotron" ng-repeat="(c_id, character) in vm.novel.characters.side">
+  <span>{{ character.name }}</span><br>
+  <span>{{ character.nameEn }}</span><br>
+  <button type="button" ng-click="vm.deleteC(vm.novel.id, character.id)">Delete</button>
+  <form ng-submit="vm.submitVA(vm.novel.id, character.id, vm.va[c_id].id)">
+    <label>va_id: <input type="number" ng-model="vm.va[c_id].id"></label>
+    <button>Submit</button>
+  </form>
+  <div ng-repeat="(va_id, va) in character.voiceActresses">
+    <span>{{ va.name }}</span>
+    <button type="button" ng-click="vm.deleteVA(vm.novel.id, character.id, va.id)">
+      Delete
+    </button>
   </div>
 </div>
-<!-- <form ng-submit="vm.submitVA(vm.req.va)" ng-if="!vm.character.novels">
-  <input type="text" ng-model="vm.req.va[novel_i][va_i].name"><br>
-  <input type="text" ng-model="vm.req.va[novel_i][va_i].nameEn">
-</form> -->
-<!-- <div ng-repeat><label><input type="text"></label></div> -->

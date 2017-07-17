@@ -40,10 +40,6 @@ class Api::V1::Db::Novels::CharactersController < ApplicationController
     end
   end
 
-  # def destroy
-
-  # end
-
   def index_novel
     novel = ::Db::Novel.includes(characters: :people).find(params[:novel_id])
     @characters = GroupSerializeService
@@ -56,12 +52,31 @@ class Api::V1::Db::Novels::CharactersController < ApplicationController
 
   # Add existing character to novel
   def create_novel
+    add_char_to_novel_svc = CharacterService::AddCharacterToNovel
+      .new(params[:novel_id], params[:id])
 
+    add_char_to_novel_svc.perform
+    if add_char_to_novel_svc.errors?
+      render json: add_char_to_novel_svc.errors,
+        status: add_char_to_novel_svc.errors[:http_status]
+    else
+      render_ok
+    end
   end
 
-  # Remove a character from novel (if character was in another novel), else destroy
+  # If character exists in more than 1 novel, remove character
+  # Else destroy character
   def destroy_novel
+    destroy_svc = CharacterService::DestroyCharacter
+      .new(params[:novel_id], params[:id])
 
+    destroy_svc.perform
+    if destroy_svc.errors?
+      render json: destroy_svc.errors,
+        status: destroy_svc.errors[:http_status]
+    else
+      render_ok
+    end
   end
 
 private

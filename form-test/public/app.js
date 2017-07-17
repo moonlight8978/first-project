@@ -26,5 +26,20 @@
         $locationProvider.hashPrefix('');
         $urlRouterProvider.otherwise('/form');
     }
+
+    angular
+        .module('app')
+        .run(runConfig);
+
+    runConfig.$inject = ['$rootScope', '$state']
+
+    function runConfig($rootScope, $state) {
+        $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {
+            if (error) {
+                event.preventDefault()
+                $state.go(`errors.${error.status}`)
+            }
+        });
+    }
 })();
 

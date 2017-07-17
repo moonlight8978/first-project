@@ -37,6 +37,10 @@ Rails.application.routes.draw do
           resources :novel_staffs, except: [:show, :index], controller: 'staffs'
           resources :novel_tags, except: :delete, controller: 'tags'
           resources :characters, except: :delete
+
+          scope module: :releases do
+            resources :novel_platforms, controller: 'platforms'
+          end
           # resources :voice_actresses, only: :update do
           #   # Add more seiyuu to character
           #   post   'people/:id', to: 'characters/voice_actresses#create'
