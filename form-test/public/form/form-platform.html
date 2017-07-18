@@ -1,0 +1,23 @@
+<h1>Platform</h1>
+
+<form class="jumbotron" ng-submit="vm.submit(vm.req.platform)">
+  <div>
+    platform:
+    <input type="text" name="platform" ng-model="vm.req.platform.platform">
+  </div>
+  <button>Submit</button>
+</form>
+
+<div class="jumbotron" ng-repeat="(pId, platform) in vm.platforms">
+  <form ng-submit="vm.update(platform.id, vm.req.platforms[pId])">
+    <div>
+      id: {{ platform.id }}
+    </div>
+    <div>
+      platform: {{ platform.platform }}<br>
+      <input type="text" name="platform" ng-model="vm.req.platforms[pId].platform">
+    </div>
+    <button>Submit</button>
+    <button type="button" ng-click="vm.del(platform.id)">Destroy</button>
+  </form>
+</div>

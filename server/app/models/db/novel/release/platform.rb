@@ -1,3 +1,3 @@
 class Db::Novel::Release::Platform < ApplicationRecord
-  has_many :releases
+  has_many :releases, dependent: :nullify
 end

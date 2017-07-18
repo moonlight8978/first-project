@@ -1,18 +1,20 @@
 (function () {
-    'use strict'
+    'use strict';
 
     angular
         .module('app')
-        .controller('FormController', FormController)
+        .controller('FormController', FormController);
 
-    FormController.$inject = ['$resource', '$state', 'novel']
+    FormController.$inject = ['$resource', '$state', 'novel'];
 
     function FormController($resource, $state, novel) {
         // let url = 'http://localhost:3000/api/db/novel_releases/:id'
         // let url_2 = 'http://localhost:3000/api/db/novels/:novel_id/releases/:id'
         // let url_3 = 'http://localhost:3000/api/db/novel_platforms/:id'
         //
-        this.novel = novel
+        this.novel = novel;
+
+
         //
         // this.req = {
         //     'release': {},
@@ -92,88 +94,88 @@
         //     return [year, month, day].join('-')
         // }
 
-        this.character = {}
+        this.character = {};
 
         this.req = {
           'character': {},
           'va': []
-        }
+        };
 
-        this.va = []
+        this.va = [];
 
-        this.update = update
-        this.submit = submit
-        this.submitVA = submitVA
-        this.updateVA = updateVA
-        this.deleteVA = deleteVA
-        this.addC2N = addC2N
-        this.deleteC = deleteC
+        this.update = update;
+        this.submit = submit;
+        this.submitVA = submitVA;
+        this.updateVA = updateVA;
+        this.deleteVA = deleteVA;
+        this.addC2N = addC2N;
+        this.deleteC = deleteC;
 
-        let url = 'http://localhost:3000/api/db/characters/:id'
-        let url_2 = 'http://localhost:3000/api/db/novels/:novel_id/characters/:id'
-        let url_3 = 'http://localhost:3000/api/db/novels/:novel_id/characters/:character_id/voice_actresses/:id'
+        let url = 'http://localhost:3000/api/db/characters/:id';
+        let url_2 = 'http://localhost:3000/api/db/novels/:novel_id/characters/:id';
+        let url_3 = 'http://localhost:3000/api/db/novels/:novel_id/characters/:character_id/voice_actresses/:id';
 
         function addC2N(c_id) {
             $resource('http://localhost:3000/api/db/novels/:novel_id/characters/:id')
                 .save({ novel_id: this.novel.id, id: c_id }, {},
                     (message) => {
-                        console.log(message)
+                        console.log(message);
                     }, (message) => {
-                        console.log(message)
-                    })
+                        console.log(message);
+                    });
         }
 
         function update() {
             $resource(url, {}, { 'update': { method: 'PUT' } }).update({ id: 1 }, this.req.character, (message) => {
-                console.log(message)
+                console.log(message);
             }, (message) => {
-                console.log(message)
-            })
+                console.log(message);
+            });
         }
 
         function submit() {
             $resource(url_2).save({ novel_id: 2 }, this.req.character, (message) => {
-                console.log(message)
+                console.log(message);
             }, (message) => {
-                console.log(message)
-            })
+                console.log(message);
+            });
         }
 
         function submitVA(n_id, c_id, p_id) {
             $resource(url_3)
-                .save({ novel_id: n_id, character_id: c_id, id: p_id }, {}, 
+                .save({ novel_id: n_id, character_id: c_id, id: p_id }, {},
                     (message) => {
-                        console.log(message)
+                        console.log(message);
                     }, (message) => {
-                        console.log(message)
-                    })
+                        console.log(message);
+                    });
         }
 
         function updateVA(n_id, c_id, va_id, va) {
             $resource(url_3, {}, { 'update': { method: 'PUT' } }).update({ novel_id: n_id, character_id: c_id, id: va_id }, va, (message) => {
-                console.log(message)
+                console.log(message);
             }, (message) => {
-                console.log(message)
-            })
+                console.log(message);
+            });
         }
 
         function deleteVA(n_id, c_id, va_id) {
             $resource(url_3).delete({ novel_id: n_id, character_id: c_id, id: va_id }, (message) => {
-                console.log(message)
+                console.log(message);
             }, (message) => {
-                console.log(message)
-            })
+                console.log(message);
+            });
         }
 
         function deleteC(n_id, c_id) {
             $resource('http://localhost:3000/api/db/novels/:novel_id/characters/:id')
                 .delete({ novel_id: n_id, id: c_id }, {},
                     (message) => {
-                        console.log(message)
+                        console.log(message);
                     }, (message) => {
-                        console.log(message)
-                    })
+                        console.log(message);
+                    });
         }
 
     }
-})()
+})();

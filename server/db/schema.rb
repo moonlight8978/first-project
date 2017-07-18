@@ -345,7 +345,7 @@ ActiveRecord::Schema.define(version: 20170713115930) do
     t.string "twitter"
     t.string "gmail"
     t.boolean "activated", default: false, null: false
-    t.datetime "password_updated_at", default: "2017-07-17 13:29:58"
+    t.datetime "password_updated_at", default: "2017-07-18 14:38:46"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_security_users_on_country_id"

@@ -3,7 +3,7 @@ class CreateDbNovelScreenshots < ActiveRecord::Migration[5.1]
     create_table :db_novel_screenshots do |t|
       t.belongs_to :novel,                   index: true
       t.string     :image,      null: false
-      t.boolean    :image_nsfw, null: false
+      t.boolean    :image_nsfw, null: false, default: false
 
       t.timestamps
     end

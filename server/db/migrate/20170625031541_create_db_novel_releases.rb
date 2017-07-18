@@ -1,7 +1,7 @@
 class CreateDbNovelReleases < ActiveRecord::Migration[5.1]
   def change
     create_table :db_novel_releases do |t|
-      t.belongs_to :platform,        null: false, index: true
+      t.belongs_to :platform,        null: true,  index: true, default: nil
       t.string     :title,           null: false
       t.string     :title_en
       t.integer    :status,          null: false, index: true

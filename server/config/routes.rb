@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     scope module: :v1 do
       namespace :db do
         resources :novels do
-          resources :screenshots, controller: 'novels/screenshots'
+          resources :screenshots,  shallow: true, controller: 'novels/screenshots'
+          resources :staffs,       only: :create, controller: 'novels/staffs'
           resources :characters, only: [] do
             # Add more seiyuu to character
             post   'voice_actresses/:id', to: 'novels/characters/voice_actresses#create'
@@ -33,13 +34,12 @@ Rails.application.routes.draw do
         end
 
         scope module: :novels do
-          resources :novel_releases, only: [:update, :show], controller: 'releases'
-          resources :novel_staffs, except: [:show, :index], controller: 'staffs'
-          resources :novel_tags, except: :delete, controller: 'tags'
-          resources :characters, except: :delete
-
+          resources :novel_releases, only: [:update, :show],    controller: 'releases'
+          resources :novel_tags,     except: :destroy,          controller: 'tags'
+          resources :novel_staffs,   only: [:update, :destroy], controller: 'staffs'
+          resources :characters, except: :destroy
           scope module: :releases do
-            resources :novel_platforms, controller: 'platforms'
+            resources :novel_platforms, except: :show, controller: 'platforms'
           end
           # resources :voice_actresses, only: :update do
           #   # Add more seiyuu to character

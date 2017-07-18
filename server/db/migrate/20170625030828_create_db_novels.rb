@@ -8,7 +8,7 @@ class CreateDbNovels < ActiveRecord::Migration[5.1]
       t.text       :description_en
       t.string     :image,              null: false
       t.string     :image_description
-      t.boolean    :image_nsfw,         null: false
+      t.boolean    :image_nsfw,         null: false, default: false
 
       t.timestamps
     end
