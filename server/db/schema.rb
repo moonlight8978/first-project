@@ -110,9 +110,9 @@ ActiveRecord::Schema.define(version: 20170713115930) do
   end
 
   create_table "db_companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "country_id"
     t.string "name", null: false
     t.string "name_en"
-    t.bigint "country_id", null: false
     t.string "link", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -172,7 +172,7 @@ ActiveRecord::Schema.define(version: 20170713115930) do
   end
 
   create_table "db_novel_releases", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "platform_id", null: false
+    t.bigint "platform_id"
     t.string "title", null: false
     t.string "title_en"
     t.integer "status", null: false
@@ -192,7 +192,7 @@ ActiveRecord::Schema.define(version: 20170713115930) do
   create_table "db_novel_screenshots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "novel_id"
     t.string "image", null: false
-    t.boolean "image_nsfw", null: false
+    t.boolean "image_nsfw", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["novel_id"], name: "index_db_novel_screenshots_on_novel_id"
@@ -201,7 +201,7 @@ ActiveRecord::Schema.define(version: 20170713115930) do
   create_table "db_novel_staffs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "person_id", null: false
     t.bigint "novel_id", null: false
-    t.string "position", default: "Staff", null: false
+    t.string "position", default: "staff", null: false
     t.string "note"
     t.string "alias"
     t.string "alias_en"
@@ -230,7 +230,7 @@ ActiveRecord::Schema.define(version: 20170713115930) do
     t.text "description_en"
     t.string "image", null: false
     t.string "image_description"
-    t.boolean "image_nsfw", null: false
+    t.boolean "image_nsfw", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -345,7 +345,7 @@ ActiveRecord::Schema.define(version: 20170713115930) do
     t.string "twitter"
     t.string "gmail"
     t.boolean "activated", default: false, null: false
-    t.datetime "password_updated_at", default: "2017-07-18 14:38:46"
+    t.datetime "password_updated_at", default: "2017-07-19 16:59:15"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_security_users_on_country_id"

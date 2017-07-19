@@ -1,14 +1,13 @@
 class ErrorMessage
+  attr_accessor :status
+  attr_accessor :errors; alias_method :detail, :errors
+
   def initialize(errors = {})
     @errors = errors
   end
 
   def any?
     @errors.present?
-  end
-
-  def detail
-    @errors
   end
 
   def add!(override = false, **errors)
@@ -27,5 +26,10 @@ class ErrorMessage
 
   def set_status(http_status)
     @errors[:http_status] = http_status
+    @status = http_status
+  end
+
+  def full_message
+    @errors.values.flatten
   end
 end

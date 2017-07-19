@@ -49,9 +49,7 @@ Rails.application.routes.draw do
           # end
         end
 
-        resources :producers do
-
-        end
+        resources :producers, controller: 'companies'
 
         resources :people do
 
@@ -64,6 +62,8 @@ Rails.application.routes.draw do
         get 'releases',   to: 'releases#index'
         get 'tags',       to: 'tags#index'
       end
+
+      resources :countries, except: :show
     end
   end
 

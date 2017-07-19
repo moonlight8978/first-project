@@ -32,6 +32,7 @@ module NyoroNyoro
     config.active_record.default_timezone = :local
 
     config.autoload_paths << Rails.root.join('lib')
+    config.autoload_paths << Rails.root.join('app/services/concerns')
 
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = true

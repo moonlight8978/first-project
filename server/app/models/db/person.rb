@@ -32,13 +32,16 @@ class Db::Person < ApplicationRecord
 
   belongs_to :country, class_name: 'Country', optional: true
 
-  has_many :voice_actresses, class_name: 'Db::Novel::Character::VoiceActress'
-  has_many :staffs,          class_name: 'Db::Novel::Staff'
+  has_many :voice_actresses, dependent: :destroy,
+    class_name: 'Db::Novel::Character::VoiceActress'
+  has_many :staffs,          dependent: :destroy,
+    class_name: 'Db::Novel::Staff'
 
   has_many :character_novels, class_name: 'Db::Novel::CharacterNovel', through: :voice_actresses
   has_many :novels,                                                    through: :staffs
 
 private
+
   def birthday_cannot_be_in_the_future
     birthday = Date.new(self.birthday_year, self.birthday_month, self.birthday_day)
     # Date.today ~ Time.zone.today
