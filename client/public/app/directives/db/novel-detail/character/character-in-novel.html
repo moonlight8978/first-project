@@ -1,0 +1,47 @@
+<div ng-if="vm.characters" ng-switch="vm.type">
+  <h6 ng-switch-when="protagonist">主人公</h6>
+  <h6 ng-switch-when="main">メインキャラクター</h6>
+  <h6 ng-switch-when="side">サポート</h6>
+
+  <div class="row" ng-repeat="character in vm.characters">
+    <div class="col-3">
+      <div class="character-image-wrap image-placeholder ratio-3_4">
+        <div class="image-thumb"
+          ng-style="{ 'background-image': 'url({{ character.image }})' }"></div>
+      </div>
+    </div>
+    <div class="character-info col-9">
+      <div class="head">
+        <a ui-sref="index">{{ character.name }}</a>
+        <span ng-if"character.gender">{{ character.gender }}</span>
+        <span ng-if"character.bloodType">{{ character.bloodType }}</span>
+      </div>
+      <div class="character-data">
+        <div ng-if="character.birthdayDay || character.birthdayMonth">
+          <span>誕生日: </span>
+          <span>{{ vm.birthday(character) }}</span>
+        </div>
+        <div>
+          <span ng-if="character.height">身長: </span>
+          <span ng-if="character.height">{{ character.height }}cm</span>
+          <span ng-if="character.weight">重量: </span>
+          <span ng-if="character.weight">{{ character.weight }}kg</span>
+        </div>
+        <div ng-if="character.bust || character.waist || character.hips">
+          <span>B/W/H: </span>
+          <span>{{ vm.threeSizes(character) }}</span>
+        </div>
+        <p ng-if="character.description">
+          <p></p>
+          {{ character.description }}
+        </p>
+        <div ng-if="character.voiceActresses">
+          <span>CV: </span>
+          <span ng-repeat="va in character.voiceActresses">
+            {{ va.name }}<br>
+          </span>
+        </div>
+      </div>
+    </div>
+   </div>
+</div>

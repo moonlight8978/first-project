@@ -12,6 +12,9 @@
 	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
   <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css">
+  <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css">
+  <!-- <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css"> -->
+  <link rel="stylesheet" href="bower_components/zoom.js/css/zoom.css">
 
 	<!-- fonts -->
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
@@ -23,13 +26,13 @@
 	<link rel="stylesheet" href="/build/css/application.css">
 </head>
 <body>
-	<div ui-view="navbar">
+	<div ui-view="navbar" ng-cloak>
 
 	</div>
-	<div class="view-content" ui-view="content">
+	<div class="view-content" ui-view="content" ng-cloak>
 
 	</div>
-	<div ui-view="footer">
+	<div ui-view="footer" ng-cloak>
 
 	</div>
 	<!-- libraries -->
@@ -51,6 +54,8 @@
   <script src="bower_components/jquery_lazyload/jquery.lazyload.js"></script>
   <script src="bower_components/lazysizes/lazysizes.min.js"></script>
   <script src="bower_components/flux-slider/js/flux.min.js"></script>
+  <script src="bower_components/slick-carousel/slick/slick.min.js"></script>
+  <script src="bower_components/zoom.js/dist/zoom.min.js"></script>
 
 	<!-- inject:js -->
   <script src="app/app.module.js"></script>
@@ -68,6 +73,9 @@
   <script src="app/index/index.controller.js"></script>
   <script src="app/home/home.state.js"></script>
   <script src="app/home/home.controller.js"></script>
+  <script src="app/errors/errors.state.js"></script>
+  <script src="app/errors/404-not-found/404.state.js"></script>
+  <script src="app/directives/toggle-overflow.directive.js"></script>
   <script src="app/directives/sidebar-toggler.directive.js"></script>
   <script src="app/directives/sidebar.directive.js"></script>
   <script src="app/directives/search-form.directive.js"></script>
@@ -80,6 +88,9 @@
   <script src="app/directives/image-thumb.directive.js"></script>
   <script src="app/directives/image-preload.directive.js"></script>
   <script src="app/directives/delay-show.directive.js"></script>
+  <script src="app/directives/db/novel-detail/staff/staff-in-novel.directive.js"></script>
+  <script src="app/directives/db/novel-detail/screenshot/screenshot-in-novel.directive.js"></script>
+  <script src="app/directives/db/novel-detail/character/character-in-novel.directive.js"></script>
   <script src="app/db/novel/novel/novel.state.js"></script>
   <script src="app/db/novel/novel/list/novel-list.state.js"></script>
   <script src="app/db/novel/novel/list/novel-list.controller.js"></script>

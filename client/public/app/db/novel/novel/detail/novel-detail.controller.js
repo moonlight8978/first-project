@@ -5,32 +5,28 @@
         .module('app')
         .controller('NovelDetailController', NovelDetailController);
 
-    NovelDetailController.$inject = ['NovelResource', '$stateParams', 'LENGTH'];
+    NovelDetailController.$inject = ['$http', '$stateParams', 'novel', 'reviews', 'votes', 'LENGTH'];
 
-    function NovelDetailController(NovelResource, $stateParams, length) {
-        this.id = $stateParams.id;
+    function NovelDetailController($http, $stateParams, novel, reviews, votes, length) {
+        let self = this;
+
+        this.novel = novel;
+        this.novel.reviews = reviews.data;
+        // this.novel.votes = votes.data;
+
+        this.threeSizes = threeSizes;
+        this.birthday = birthday;
+
         this.hideNsfw = true;
-        this.length = length.full
-        this.req = {
-            'character': {},
-            'release': {},
-            'staff': {}
+        this.length = length.full;
+
+        function threeSizes(character) {
+            return `${character.bust || '?'}-${character.waist || '?'}-${character.hips || '?'}`;
         }
 
-        this.submit = submit;
-
-        // AJAX request to get informations about novel
-        NovelResource.novel.get({ id: this.id, fullInfo: 1 }, (novel) => {
-            this.novel = novel;
-        });
-
-        function submit() {
-            this.req.character.birthdayDay = this.req.character.birthday.getDate();
-            this.req.character.birthdayMonth = this.req.character.birthday.getMonth() + 1;
-            console.log(this.req.character)
-            NovelResource.character.save({ novelId: this.id }, this.req.character, (message) => {
-                console.log(message);
-            });
+        function birthday(character) {
+            return `${character.birthdayMonth || '?'}月` +
+                   `${character.birthdayDay || '?'}日`;
         }
     }
 })();

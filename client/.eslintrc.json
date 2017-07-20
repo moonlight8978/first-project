@@ -1,0 +1,25 @@
+{
+    "extends": "eslint-config-google",
+    "parserOptions": {
+        "ecmaVersion": 8
+    },
+    "rules": {
+        "space-before-function-paren": ["error", {
+            "anonymous": "always",
+            "named": "never",
+            "asyncArrow": "always"
+        }],
+        "comma-dangle": ["error", "never"],
+        "require-jsdoc": ["error", {
+            "require": {
+                "FunctionDeclaration": false,
+                "MethodDefinition": false,
+                "ClassDeclaration": false,
+                "ArrowFunctionExpression": false
+            }
+        }],
+        "object-curly-spacing": ["error", "always"],
+        "switch-colon-spacing": 0,
+        "max-len": 0
+    }
+}

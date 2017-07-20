@@ -16,6 +16,19 @@
                     controller: 'NovelDetailController',
                     controllerAs: 'vm'
                 }
+            },
+            resolve: {
+                novel: function ($stateParams, NovelResource) {
+                    return NovelResource.novel
+                        .get({ id: $stateParams.id, fullInfo: 1 })
+                        .$promise;
+                },
+                reviews: function ($http) {
+                    return $http.get('reviews.json');
+                },
+                votes: function ($http) {
+                    return $http.get('votes.json');
+                }
             }
         });
     }

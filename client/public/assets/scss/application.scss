@@ -5,6 +5,7 @@
 @import 'components/button';
 @import 'mixins';
 @import 'footer';
+@import 'db-novel';
 
 @font-face {
   font-family: 'Noto Sans CJK JP';
@@ -26,6 +27,10 @@
 //   background-image: url('/assets/img/placeholder.jpg');
 //   transition: background-image 0.5s ease;
 // }-
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
 
 html, body {
   height: 100%;

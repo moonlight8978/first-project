@@ -1,0 +1,12 @@
+<div ng-if="vm.staffs">
+  <div ng-repeat="(staffId, staff) in vm.staffs">
+    <a ui-sref="index">{{ staff.alias || staff.name }}</a>
+    <button ng-if="staff.note" type="button" aria-expanded="false"
+      data-target="#{{vm.type}}Note{{staffId}}" data-toggle="collapse">
+      &#x0002B;
+    </button>
+    <div ng-if="staff.note" class="collapse" id="{{vm.type}}Note{{staffId}}">
+      <span>{{ staff.note }}</span>
+    </div>
+  </div>
+</div>

@@ -40,7 +40,7 @@ class Db::Novel < ApplicationRecord
   end
 
   def first_release
-    self.releases.select { |release| release.status == :complete }.first
+    self.releases.select { |release| release.status == 'complete' }.first
   end
 
   def producers

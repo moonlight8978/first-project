@@ -166,10 +166,9 @@
       padding-bottom: 7px;
     }
   }
-}
-
-.image-wrap {
-  margin: 20px 0;
+  .image-wrap {
+    margin: 20px 0;
+  }
 }
 
 .image-placeholder {
@@ -198,6 +197,10 @@
 
 .ratio-3_4::before {
   padding-bottom: 4 / 3 * 100%;
+}
+
+.ratio-5_3::before {
+  padding-bottom: 3 / 5 * 100%;
 }
 
 // pagination

@@ -1,0 +1,92 @@
+@import 'variables';
+@import 'mixins';
+
+.no-banner {
+  padding-top: 80px;
+}
+
+.page-head {
+  padding: 15px 0;
+  background-color: $page-head__background;
+
+  h6 {
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}
+
+.db-novel-detail {
+  > .body {
+    padding: 20px 0;
+
+    > .content {
+      padding: 0;
+    }
+  }
+
+  .image-and-info-wrap {
+    padding-bottom: 20px;
+    border-bottom: 1px dashed $section-border;
+
+    > div {
+      padding: 15px 10px;
+    }
+
+    > .info {
+
+      th {
+        padding-left: 10px;
+        min-width: 140px;
+        font-weight: 600;
+      }
+
+      tr:not(:last-child) td {
+        padding: 3px 10px;
+        display: block;
+        @include responsive(md) { display: table-cell; }
+      }
+
+      .info-entry:nth-child(odd) {
+        background-color: $content__background;
+      }
+
+      .description-wrap {
+        padding: 1px 10px;
+        border: 1px solid #eaeaea;
+        margin: 5px 0;
+      }
+
+      .novel-descr {
+        max-height: 4.5em;
+        white-space: pre-line;
+        @include responsive(lg) { max-height: 6em; }
+        @include responsive(xl) { max-height: 9em; }
+      }
+    }
+  }
+
+  .overflow-toggleable {
+    // display: -webkit-box;
+    // -webkit-line-clamp: 6;
+    // -webkit-box-orient: vertical;
+    // text-overflow: -o-ellipsis-lastline;
+    overflow-y: hidden;
+    @include transition-std(max-height);
+    &.active {
+      max-height: 999px !important;
+    }
+  }
+
+  .see-more {
+    display: none;
+    &:hover {
+      color: $link__color-hover;
+    }
+  }
+
+  .review {
+    max-height: 3em;
+    white-space: pre-line;
+  }
+}

@@ -13,7 +13,7 @@
             abstract: true,
             views: {
                 'navbar@': {
-                    templateUrl: 'app/layouts/navbar/navbar.html',
+                    templateUrl: 'app/layouts/navbar/navbar-fixed.html',
                     controller: 'NavbarController',
                     controllerAs: 'vm'
                 },

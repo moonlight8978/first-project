@@ -337,18 +337,6 @@ nav .-user {
     font-weight: 500;
   }
 
-  .avatar {
-    width: 60px;
-    height: 60px;
-
-    .avatar-thumb {
-      background-image: url('/assets/img/unknown-user.png');
-      border: solid 1px #fff;
-      border-radius: 50% !important;
-      box-shadow: 0px 0px 2px 1px rgba(170, 170, 170, 0.7);
-    }
-  }
-
   .utility-container {
     margin-left: 2rem;
     flex: 1 1 auto !important;
@@ -368,8 +356,24 @@ nav .-user {
   }
 }
 
+.avatar {
+  width: 60px;
+  height: 60px;
+
+  .avatar-thumb {
+    background-image: url('/assets/img/unknown-user.png');
+    border: solid 1px #fff;
+    border-radius: 50% !important;
+    box-shadow: 0px 0px 2px 1px rgba(170, 170, 170, 0.7);
+  }
+}
+
 .ratio-1_1::before {
   padding-bottom: 1 / 1 * 100%;
+}
+
+.ratio-5_6::before {
+  padding-bottom: 6 / 5 * 100%;
 }
 
 body {
