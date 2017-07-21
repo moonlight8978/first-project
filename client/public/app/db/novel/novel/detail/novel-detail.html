@@ -73,7 +73,7 @@
                       class="overflow-toggleable novel-descr">{{ vm.novel.description }}</p>
                   </div>
                   <span class="see-more" toggle-overflow target="#novelDescription"
-                    lines="6" font-size="1">
+                    lines="6" font-size="1" role="button">
                     ▼もっと見る
                   </span>
                 </td>
@@ -86,19 +86,22 @@
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" data-target="#character" role="tab">
+              <div class="nav-link active" data-toggle="tab" data-target="#character"
+                role="button">
                 キャラクター
-              </a>
+              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" data-target="#staff" role="tab">
+              <div class="nav-link" data-toggle="tab" data-target="#staff"
+                role="button">
                 スタフ
-              </a>
+              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" data-target="#release" role="tab">
+              <div class="nav-link" data-toggle="tab" data-target="#release"
+                role="button">
                 発売
-              </a>
+              </div>
             </li>
           </ul>
 
@@ -106,45 +109,52 @@
           <div class="tab-content">
             <div class="tab-pane fade show active" id="character" role="tabpanel"
               ng-if="vm.novel.characters">
-              <div class="character-list row">
-                <character-in-novel characters="vm.novel.characters.protagonist" type="'protagonist'"
-                  class="col-12"></character-in-novel>
-                <character-in-novel characters="vm.novel.characters.main" type="'main'"
-                  class="col-12"></character-in-novel>
-                <character-in-novel characters="vm.novel.characters.side" type="'side'"
-                  class="col-12"></character-in-novel>
+              <div class="character-list">
+                <character-in-novel characters="vm.novel.characters.protagonist"
+                  type="'protagonist'" ng-if="vm.novel.characters.protagonist">
+                </character-in-novel>
+                <character-in-novel characters="vm.novel.characters.main"
+                  type="'main'" ng-if="vm.novel.characters.main">
+                </character-in-novel>
+                <character-in-novel characters="vm.novel.characters.side"
+                  type="'side'" ng-if="vm.novel.characters.side">
+                </character-in-novel>
               </div>
             </div>
 
             <div class="tab-pane fade" id="staff" role="tabpanel"
               ng-if="vm.novel.staffs">
-              <table>
-                <tr>
-                  <td>Artist</td>
+              <table class="staff-container">
+                <tr class="staff-group artist">
+                  <th>Artist</th>
                   <td>
                     <staff-in-novel staffs="vm.novel.staffs.artist" type="artist"></staff-in-novel>
                   </td>
                 </tr>
-                <tr>
-                  <td>Scenario</td>
+                <tr class="spacer"></tr>
+                <tr class="staff-group scenario">
+                  <th>Scenario</th>
                   <td>
                     <staff-in-novel staffs="vm.novel.staffs.scenario" type="scenario"></staff-in-novel>
                   </td>
                 </tr>
-                <tr>
-                  <td>Composer</td>
+                <tr class="spacer"></tr>
+                <tr class="staff-group composer">
+                  <th>Composer</th>
                   <td>
                     <staff-in-novel staffs="vm.novel.staffs.composer" type="composer"></staff-in-novel>
                   </td>
                 </tr>
-                <tr>
-                  <td>Vocals</td>
+                <tr class="spacer"></tr>
+                <tr class="staff-group vocals">
+                  <th>Vocals</th>
                   <td>
                     <staff-in-novel staffs="vm.novel.staffs.vocals" type="vocals"></staff-in-novel>
                   </td>
                 </tr>
-                <tr>
-                  <td>Staffs</td>
+                <tr class="spacer"></tr>
+                <tr class="staff-group staff">
+                  <th>Staffs</th>
                   <td>
                     <staff-in-novel staffs="vm.novel.staffs.staff" type="staff"></staff-in-novel>
                   </td>
@@ -153,40 +163,46 @@
             </div>
 
             <div class="tab-pane fade" id="release" role="tabpanel" ng-if="vm.novel.releases">
-              <div class="row" ng-repeat="(releaseId, release) in vm.novel.releases">
-                <div class="col-xl-2">
-                  <span>{{ release.released || '?-?-?' }}</span>
-                </div>
-                <div class="col-xl-1">
-                  <span ng-if="release.ageRating == 0">All ages</span>
-                  <span ng-if="release.ageRating != 0">{{ release.ageRating }}+</span>
-                </div>
-                <div class="col-xl-1">
-                  <span>{{ release.status }}</span>
-                </div>
-                <div class="col-xl-7">
-                  <span ng-if="release.ageRating != 0">{{ release.title }}+</span>
-                </div>
-                <button type="button" aria-expanded="false"
-                  data-target="#release{{releaseId}}" data-toggle="collapse">
-                  &#x0002B;
-                </button>
-                <div class="collapse" id="release{{releaseId}}">
-                  <div>
-                    <span>ヴォイス: </span>
-                    <span>{{ release.voiced }}</span>
-                  </div>
-                  <div>
-                    <span>アニメション: </span>
-                    <span>{{ release.animationStory }}</span>
-                  </div>
-                  <div>
-                    <span>アニメション(18+): </span>
-                    <span>{{ release.animationEro }}</span>
-                  </div>
-                  <div>
-                    <span>プラットフォーム: </span>
-                    <span>{{ release.platform }}</span>
+              <div ng-repeat="(releaseId, release) in vm.novel.releases">
+                <h6>
+                  {{ release.released || '?-?-?' }}
+                  <span ng-switch="release.status">
+                    <i ng-switch-when="trial" class="fa fa-spinner" title="Trial"></i>
+                    <i ng-switch-when="complete" class="fa fa-check" title="Complete"></i>
+                  </span>
+                </h6>
+                <div>
+                  <div class="title expand-toggler" role="button" data-toggle="collapse"
+                    aria-expanded="false" data-target="#release{{releaseId}}">
+                    {{ release.title }}</div>
+                  <div id="release{{releaseId}}" class="collapse release-detail">
+                    <table>
+                      <tbody>
+                        <tr>
+                          <th>年齢制限</th>
+                          <td>
+                            <span ng-if="release.ageRating == 0">全部</span>
+                            <span ng-if="release.ageRating != 0">{{ release.ageRating }}+</span>
+                          </td>
+                          <td class="spacer"></td>
+                          <th>ヴォイス</th>
+                          <td>{{ release.voiced }}</td>
+                        </tr>
+                        <tr class="spacer"></tr>
+                        <tr>
+                          <th>アニメション(ストリ)</th>
+                          <td>{{ release.animationStory }}</td>
+                          <td class="spacer"></td>
+                          <th>アニメション(18+)</th>
+                          <td>{{ release.animationEro }}</td>
+                        </tr>
+                        <tr class="spacer"></tr>
+                        <tr>
+                          <th>プラットフォーム</th>
+                          <td>{{ release.platform }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -194,42 +210,59 @@
           </div>
         </div>
 
-        <screenshot-in-novel ng-if="vm.novel.screenshots"
+        <h6 class="hidden-md-down screenshots-nsfw-toggler-bottom">
+          Hコンテンツを隠す
+          <label class="switch-button" style="vertical-align: bottom;">
+            <input type="checkbox" ng-model="vm.hideNsfw">
+            <div class="slider"></div>
+          </label>
+        </h6>
+        <screenshot-in-novel ng-if="vm.novel.screenshots" hide-nsfw="vm.hideNsfw"
           screenshots="vm.novel.screenshots"></screenshot-in-novel>
       </div>
 
-      <div class="sidebar col-lg-3">
-        <div class="ratings-container">
+      <div class="col-lg-3">
+        <aside class="db-detail">
+          <h6>
+            Hコンテンツを隠す
+            <label class="switch-button" style="vertical-align: bottom;">
+              <input type="checkbox" ng-model="vm.hideNsfw">
+              <div class="slider"></div>
+            </label>
+          </h6>
           <h6>スコア</h6>
-          <div ng-if="!vm.novel.ratings">
-            このノベルには誰も評価しませんでした。
-          </div>
-          <div ng-if="vm.novel.ratings">
+          <div class="ratings-container">
+            <div ng-if="!vm.novel.ratings">
+              このノベルには誰も評価しませんでした。
+            </div>
+            <div ng-if="vm.novel.ratings">
 
+            </div>
           </div>
-        </div>
-        <div class="reviews-container">
+
           <h6>レビュー</h6>
-          <div>
-            レビューが何もありません。
-          </div>
-          <div ng-if="vm.novel.reviews" class="reviews">
-            <div ng-repeat="(reviewId, review) in vm.novel.reviews">
-              <h6>{{ review.title }}</h6>
-              <p id="review{{reviewId}}" class="review overflow-toggleable">{{ review.body }}</p>
-              <span toggle-overflow class="see-more" target="#review{{reviewId}}"
-                lines="3" font-size="1">▼もっと見る</span>
-              <div>
-                <div class="image-placeholder ratio_1-1 avatar">
-                  <div class="avatar-thumb image-thumb" ng-style="review.user.profileImage ? { 'background-image': 'url(/assets/img/vanilla.png)' } : {}"></div>
+          <div class="review-container">
+            <div class="review" ng-if="!vm.novel.reviews">
+              レビューが何もありません。
+            </div>
+            <div ng-if="vm.novel.reviews">
+              <div class="review" ng-repeat="(reviewId, review) in vm.novel.reviews">
+                <h6>{{ review.title }}</h6>
+                <p id="review{{reviewId}}" class="review-body overflow-toggleable">{{ review.body }}</p>
+                <span toggle-overflow class="see-more" target="#review{{reviewId}}"
+                  lines="3" font-size="1">▼もっと見る</span>
+                <div>
+                  <div class="image-placeholder ratio_1-1 avatar">
+                    <div class="avatar-thumb image-thumb" ng-style="review.user.profileImage ? { 'background-image': 'url({{ review.user.profileImage }})' } : {}"></div>
+                  </div>
+                  <a ui-sref="index" class="username">
+                    {{ review.user.userName }}さん
+                  </a>
                 </div>
-                <span>
-                  {{ review.user.userName }}
-                </span>
               </div>
             </div>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   </div>

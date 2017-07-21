@@ -24,6 +24,14 @@
                         ele.css({ 'display': 'inline-block' });
                     }
 
+                    $(window).on('resize.showMore', () => {
+                        if (text[0].scrollHeight > maxH) {
+                            ele.css({ 'display': 'inline-block' });
+                        } else {
+                            ele.css({ 'display': 'none' });
+                        }
+                    });
+
                     ele.on('click.showMore', () => {
                         text.toggleClass('active');
                         if (text.hasClass('active')) {

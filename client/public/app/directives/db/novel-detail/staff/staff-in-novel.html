@@ -1,12 +1,15 @@
-<div ng-if="vm.staffs">
-  <div ng-repeat="(staffId, staff) in vm.staffs">
-    <a ui-sref="index">{{ staff.alias || staff.name }}</a>
-    <button ng-if="staff.note" type="button" aria-expanded="false"
-      data-target="#{{vm.type}}Note{{staffId}}" data-toggle="collapse">
-      &#x0002B;
-    </button>
-    <div ng-if="staff.note" class="collapse" id="{{vm.type}}Note{{staffId}}">
-      <span>{{ staff.note }}</span>
-    </div>
-  </div>
-</div>
+<table ng-if="vm.staffs" class="table">
+  <tr ng-repeat="(staffId, staff) in vm.staffs">
+    <td>
+      <div>
+        <div class="expand-toggler" ng-if="staff.note" role="button" aria-expanded="false"
+          data-target="#{{vm.type}}Note{{staffId}}" data-toggle="collapse">
+        </div>
+        <a ui-sref="index">{{ staff.alias || staff.name }}</a>
+      </div>
+      <div ng-if="staff.note" class="collapse" id="{{vm.type}}Note{{staffId}}">
+        <span>{{ staff.note }}</span>
+      </div>
+    </td>
+  </tr>
+</table>

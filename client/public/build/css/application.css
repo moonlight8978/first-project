@@ -1031,37 +1031,40 @@ footer {
 
 .page-head {
   padding: 15px 0;
-  background-color: #f0f0f0; }
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 4px #ddd; }
   .page-head h6 {
     font-size: 0.9em;
     font-weight: 600;
     text-transform: uppercase; }
 
 .db-novel-detail > .body {
-  padding: 20px 0; }
+  padding: 20px 10px; }
   .db-novel-detail > .body > .content {
     padding: 0; }
 
 .db-novel-detail .image-and-info-wrap {
   padding-bottom: 20px;
-  border-bottom: 1px dashed #aaa; }
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 4px -4px #0d0d0e; }
   .db-novel-detail .image-and-info-wrap > div {
-    padding: 15px 10px; }
+    padding: 15px 0; }
+    .db-novel-detail .image-and-info-wrap > div.image {
+      padding-right: 10px; }
+    .db-novel-detail .image-and-info-wrap > div.info {
+      padding-left: 10px; }
   .db-novel-detail .image-and-info-wrap > .info th {
     padding-left: 10px;
     min-width: 140px;
     font-weight: 600; }
   .db-novel-detail .image-and-info-wrap > .info tr:not(:last-child) td {
-    padding: 3px 10px;
-    display: block; }
-    @media (min-width: 768px) {
-      .db-novel-detail .image-and-info-wrap > .info tr:not(:last-child) td {
-        display: table-cell; } }
+    padding: 3px 10px; }
   .db-novel-detail .image-and-info-wrap > .info .info-entry:nth-child(odd) {
     background-color: #f8f8f8; }
   .db-novel-detail .image-and-info-wrap > .info .description-wrap {
     padding: 1px 10px;
-    border: 1px solid #eaeaea;
+    border: 1px solid #ddd;
     margin: 5px 0; }
   .db-novel-detail .image-and-info-wrap > .info .novel-descr {
     max-height: 4.5em;
@@ -1082,13 +1085,241 @@ footer {
     max-height: 999px !important; }
 
 .db-novel-detail .see-more {
-  display: none; }
+  display: none;
+  transition-property: color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease; }
   .db-novel-detail .see-more:hover {
     color: #009aab; }
 
-.db-novel-detail .review {
-  max-height: 3em;
-  white-space: pre-line; }
+.db-novel-detail .more-info-tabs .nav-tabs {
+  border-bottom: 0; }
+  .db-novel-detail .more-info-tabs .nav-tabs .nav-item {
+    margin-bottom: 0; }
+  .db-novel-detail .more-info-tabs .nav-tabs .nav-link {
+    position: relative;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease; }
+    .db-novel-detail .more-info-tabs .nav-tabs .nav-link:hover {
+      color: #009aab; }
+    .db-novel-detail .more-info-tabs .nav-tabs .nav-link.active {
+      color: #009aab;
+      border-color: #009aab; }
+
+.db-novel-detail .more-info-tabs .tab-content {
+  border: 1px solid #ddd;
+  background-color: #f8f8f8;
+  box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.3); }
+  .db-novel-detail .more-info-tabs .tab-content .tab-pane {
+    padding: 20px 15px; }
+    @media (min-width: 768px) {
+      .db-novel-detail .more-info-tabs .tab-content .tab-pane {
+        padding: 20px 25px; } }
+    @media (min-width: 992px) {
+      .db-novel-detail .more-info-tabs .tab-content .tab-pane {
+        padding: 30px 30px; } }
+
+.db-novel-detail character-in-novel:first-child .character-group h6 {
+  margin-top: 0; }
+
+.db-novel-detail .character-group h6 {
+  font-weight: 600;
+  padding-left: 15px;
+  margin-top: 20px; }
+
+.db-novel-detail .character-group > div {
+  background-color: #fff;
+  margin-bottom: 15px;
+  padding: 10px; }
+  .db-novel-detail .character-group > div:last-child {
+    margin-bottom: 0; }
+
+.db-novel-detail .character-group .character-image, .db-novel-detail .character-group .character-info {
+  padding: 0; }
+
+.db-novel-detail .character-group > div:nth-child(3n) .name {
+  text-shadow: 0px 0px 5px #9c27b0, 0px 0px 5px #9c27b0, 0px 0px 5px #9c27b0; }
+
+.db-novel-detail .character-group > div:nth-child(3n+1) .name {
+  text-shadow: 0px 0px 5px #ff9800, 0px 0px 5px #ff9800, 0px 0px 5px #ff9800; }
+
+.db-novel-detail .character-group > div:nth-child(3n+2) .name {
+  text-shadow: 0px 0px 5px #e51c23, 0px 0px 5px #e51c23, 0px 0px 5px #e51c23; }
+
+.db-novel-detail .character-group .character-info {
+  padding-left: 20px; }
+  .db-novel-detail .character-group .character-info .head {
+    padding-bottom: 3px;
+    margin-bottom: 3px;
+    border-bottom: 1px solid #ddd; }
+    .db-novel-detail .character-group .character-info .head .name {
+      color: #fff;
+      font-size: 1.15em;
+      margin-right: 5px; }
+  .db-novel-detail .character-group .character-info p {
+    margin-bottom: 5px; }
+
+.db-novel-detail .staff-container {
+  width: 100%; }
+  .db-novel-detail .staff-container .spacer {
+    height: 15px; }
+  .db-novel-detail .staff-container .staff-group > th {
+    background-color: #009688;
+    width: 120px;
+    text-align: center;
+    color: #fff; }
+  .db-novel-detail .staff-container .staff-group.artist th {
+    background-color: #03a9f4; }
+  .db-novel-detail .staff-container .staff-group.scenario th {
+    background-color: #9c27b0; }
+  .db-novel-detail .staff-container .staff-group.composer th {
+    background-color: #ff5722; }
+  .db-novel-detail .staff-container .staff-group.staff th {
+    background-color: #e91e63; }
+  .db-novel-detail .staff-container .staff-group table {
+    margin: 0; }
+    .db-novel-detail .staff-container .staff-group table tr:nth-child(odd) {
+      background-color: #fff; }
+    .db-novel-detail .staff-container .staff-group table td {
+      border: 0;
+      position: relative;
+      padding-left: 30px; }
+
+.db-novel-detail .expand-toggler[aria-expanded='true']:before {
+  content: '\02212'; }
+
+.db-novel-detail .expand-toggler[aria-expanded='false']:before {
+  content: '\0002B'; }
+
+.db-novel-detail .expand-toggler:before {
+  font-weight: 900;
+  position: absolute;
+  padding: 5px 0;
+  left: 0;
+  width: 34px;
+  text-align: center;
+  top: 7px; }
+
+.db-novel-detail #release > div {
+  margin-top: 15px; }
+  .db-novel-detail #release > div:first-child {
+    margin-top: 0; }
+  .db-novel-detail #release > div > h6 {
+    padding-left: 10px;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 0.9rem; }
+  .db-novel-detail #release > div > div {
+    background-color: #fff;
+    padding: 10px 0;
+    position: relative; }
+    .db-novel-detail #release > div > div .title {
+      padding: 0 10px 0 30px; }
+    .db-novel-detail #release > div > div .release-detail table {
+      margin: 10px auto;
+      width: 90%;
+      font-size: 0.9rem; }
+      .db-novel-detail #release > div > div .release-detail table tr.spacer {
+        height: 10px;
+        font-size: 0.9em; }
+      .db-novel-detail #release > div > div .release-detail table tr:not(.spacer):nth-child(3n) th {
+        background-color: #9c27b0; }
+      .db-novel-detail #release > div > div .release-detail table tr:not(.spacer):nth-child(3n+1) th {
+        background-color: #009aab; }
+      .db-novel-detail #release > div > div .release-detail table tr:not(.spacer):nth-child(3n+2) th {
+        background-color: #e91e63; }
+      .db-novel-detail #release > div > div .release-detail table th {
+        width: 35%;
+        color: #fff;
+        text-align: center; }
+      .db-novel-detail #release > div > div .release-detail table td:not(.spacer) {
+        width: 12%;
+        text-align: center;
+        background: linear-gradient(to right, #f8f8f8, #fff); }
+      .db-novel-detail #release > div > div .release-detail table td.spacer {
+        width: 3%; }
+
+.db-novel-detail .screenshots-nsfw-toggler-bottom {
+  margin-top: 15px;
+  font-weight: bold;
+  text-align: right;
+  padding-right: 10px; }
+
+.db-novel-detail .novel-screenshots .slide-image {
+  z-index: -1; }
+
+.db-novel-detail .novel-screenshots .slick-slide {
+  width: 200px; }
+
+.db-novel-detail .novel-screenshots .slick-list {
+  overflow-y: visible; }
+
+.db-novel-detail .novel-screenshots .slick-track {
+  padding: 50px 0; }
+
+.db-novel-detail .novel-screenshots .slick-center {
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  transition-duration: 0.5s;
+  transition-timing-function: ease; }
+  .db-novel-detail .novel-screenshots .slick-center .slide-image {
+    z-index: 1; }
+
+.db-novel-detail .novel-screenshots-nav {
+  width: 300px;
+  margin: auto; }
+  @media (min-width: 992px) {
+    .db-novel-detail .novel-screenshots-nav {
+      width: 400px; } }
+  .db-novel-detail .novel-screenshots-nav .slick-slide {
+    width: 50px;
+    margin-left: 20px; }
+    @media (min-width: 992px) {
+      .db-novel-detail .novel-screenshots-nav .slick-slide {
+        width: 75px; } }
+
+aside.db-detail {
+  margin: 50px -15px 0 -15px; }
+  @media (min-width: 992px) {
+    aside.db-detail {
+      padding: 15px 0;
+      margin: 0 -15px 0 5px; } }
+  aside.db-detail > h6 {
+    padding: 3px 10px;
+    font-weight: bold;
+    margin-top: 15px; }
+    aside.db-detail > h6:first-child {
+      margin-top: 0; }
+  aside.db-detail .ratings-container, aside.db-detail .review {
+    box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.3);
+    border: 1px solid #ddd;
+    padding: 10px 15px; }
+  aside.db-detail .review {
+    margin-bottom: 15px; }
+    aside.db-detail .review h6 {
+      font-weight: bold;
+      font-size: 1.05em;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #ddd; }
+    aside.db-detail .review .avatar {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      vertical-align: bottom;
+      margin: 5px 5px 0 0; }
+    aside.db-detail .review .username {
+      line-height: 40px;
+      height: 40px;
+      display: inline-block; }
+    aside.db-detail .review .review-body {
+      max-height: 3em;
+      white-space: pre-line; }
 
 @font-face {
   font-family: 'Noto Sans CJK JP';
@@ -1104,6 +1335,9 @@ footer {
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important; }
+
+table tr, table td, table th {
+  padding: 0; }
 
 html, body {
   height: 100%; }

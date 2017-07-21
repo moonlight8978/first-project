@@ -1,19 +1,22 @@
-<div ng-if="vm.characters" ng-switch="vm.type">
+<div class="character-group" ng-switch="vm.type">
   <h6 ng-switch-when="protagonist">主人公</h6>
   <h6 ng-switch-when="main">メインキャラクター</h6>
   <h6 ng-switch-when="side">サポート</h6>
 
   <div class="row" ng-repeat="character in vm.characters">
-    <div class="col-3">
-      <div class="character-image-wrap image-placeholder ratio-3_4">
+    <div class="col-3 character-image">
+      <div class="image-placeholder ratio-3_4">
         <div class="image-thumb"
           ng-style="{ 'background-image': 'url({{ character.image }})' }"></div>
       </div>
     </div>
     <div class="character-info col-9">
       <div class="head">
-        <a ui-sref="index">{{ character.name }}</a>
-        <span ng-if"character.gender">{{ character.gender }}</span>
+        <a ui-sref="index" class="name">{{ character.name }}</a>
+        <span ng-if"character.gender" ng-switch="character.gender">
+          <i ng-switch-when="male" class="fa fa-mars"></i>
+          <i ng-switch-when="female" class="fa fa-venus"></i>
+        </span>
         <span ng-if"character.bloodType">{{ character.bloodType }}</span>
       </div>
       <div class="character-data">
@@ -29,16 +32,18 @@
         </div>
         <div ng-if="character.bust || character.waist || character.hips">
           <span>B/W/H: </span>
-          <span>{{ vm.threeSizes(character) }}</span>
+          <span>{{ vm.threeSizes(character) }}cm</span>
         </div>
-        <p ng-if="character.description">
+        <div class="character-description" ng-if="character.description">
           <p></p>
-          {{ character.description }}
-        </p>
+          <p>
+            {{ character.description }}
+          </p>
+        </div>
         <div ng-if="character.voiceActresses">
           <span>CV: </span>
           <span ng-repeat="va in character.voiceActresses">
-            {{ va.name }}<br>
+            <a class="va-name" ui-sref="index">{{ va.name }}</a><br>
           </span>
         </div>
       </div>

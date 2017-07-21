@@ -11,6 +11,7 @@
         let self = this;
 
         this.novel = novel;
+        this.hideNsfw = true;
         this.novel.reviews = reviews.data;
         // this.novel.votes = votes.data;
 

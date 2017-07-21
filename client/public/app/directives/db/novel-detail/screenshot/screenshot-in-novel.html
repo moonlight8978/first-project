@@ -1,7 +1,24 @@
-<div class="your-class">
-  <div class="image-wrap" ng-repeat="ss in vm.screenshots" ng-if="!ss.imageNsfw">
+<div class="novel-screenshots">
+  <div class="image-wrap" ng-repeat="ss in vm.screenshots"
+    ng-class="{ 'nsfw-screenshot': ss.imageNsfw }">
     <div class="image-placeholder ratio-5_3">
-      <div class="image-thumb" ng-style="{ 'background-image': 'url({{ ss.image }})' }"></div>
+      <div class="image-thumb slide-image" ng-style="{ 'background-image': 'url({{ ss.image }})' }"></div>
     </div>
   </div>
 </div>
+
+<div class="novel-screenshots-nav">
+  <div class="image-wrap" ng-repeat="ss in vm.screenshots"
+    ng-class="{ 'nsfw-screenshot': ss.imageNsfw }">
+    <div class="image-placeholder ratio-5_3">
+      <div class="image-thumb slide-image" ng-style="{ 'background-image': 'url({{ ss.image }})' }"></div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="novel-screenshots">
+  <div ng-repeat="ss in vm.screenshots" ng-if="!ss.imageNsfw">
+    <img class="img-fluid" src="{{ ss.image }}">
+  </div>
+</div>
+ -->
