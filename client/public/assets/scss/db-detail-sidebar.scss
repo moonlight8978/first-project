@@ -14,7 +14,12 @@ aside.db-detail {
     font-weight: bold;
     margin-top: 15px;
 
-    &:first-child { margin-top: 0; }
+    // nsfw toggler
+    &:first-child {
+      margin-top: 0;
+      text-align: right;
+      @include responsive(lg) { text-align: left; }
+    }
   }
 
   > div {
@@ -54,6 +59,17 @@ aside.db-detail {
     .review-body {
       max-height: 3em;
       white-space: pre-line;
+    }
+  }
+
+  .review {
+    &.ng-enter {
+      transition: 1s;
+      opacity: 0;
+    }
+
+    &.ng-enter-active {
+      opacity: 1;
     }
   }
 }

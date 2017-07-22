@@ -38,6 +38,8 @@
 
     &.image {
       padding-right: 10px;
+
+      .screenshots-nsfw-toggler { margin-top: 0.5rem; }
     }
 
     &.info {
@@ -319,11 +321,42 @@ character-in-novel:first-child .character-group h6 { margin-top: 0; }
   }
 }
 
-.screenshots-nsfw-toggler-bottom {
-  margin-top: 15px;
-  font-weight: bold;
-  text-align: right;
-  padding-right: 10px;
+section.db-detail {
+  margin-top: 40px;
+
+  > .head {
+    border-bottom: 1px solid $border-color;
+
+    h6 {
+      font-weight: bold;
+      padding-left: 15px;
+    }
+  }
+
+  &.screenshot {
+    margin-bottom: 60px;
+
+    > .head {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    > .review-editor {
+      padding-top: 15px;
+    }
+  }
+
+  &.review {
+
+    > .head { margin-bottom: 15px; }
+
+    .submit-review {
+      margin: 20px 0;
+      text-align: right;
+
+      button { font-size: 0.9rem; }
+    }
+  }
 }
 
 .novel-screenshots {
@@ -359,3 +392,12 @@ character-in-novel:first-child .character-group h6 { margin-top: 0; }
 }
 
 }
+
+.screenshots-nsfw-toggler {
+  font-weight: bold;
+  padding-right: 10px;
+
+  &.toggler-right { text-align: right; }
+  &.toggler-left  { text-align: left; }
+}
+

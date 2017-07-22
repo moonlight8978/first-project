@@ -8,7 +8,8 @@
             'angular-loading-bar',
             'ngStorage',
             'ngResource',
-            'ui.bootstrap'
+            'ui.bootstrap',
+            'ngAnimate'
         ]);
 })();
 

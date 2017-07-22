@@ -66,8 +66,8 @@
             <button type="submit" id="searchSubmit">
               <i class="fa fa-search"></i>
             </button>
-            <div class="live-search-results animated fadeIn" ng-show="vm.search.results">
-              <a ui-sref="novel.detail({ id: novel.id })" class="animated fadeIn"
+            <div class="live-search-results">
+              <a ui-sref="novel.detail({ id: novel.id })"
                 ng-repeat="novel in vm.search.results">
                 <div class="result">
                   <div class="result-image-wrap image-placeholder ratio-3_4">

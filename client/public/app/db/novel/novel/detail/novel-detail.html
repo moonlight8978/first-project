@@ -36,6 +36,13 @@
                 </div>
               </div>
             </div>
+            <h6 class="hidden-lg-up screenshots-nsfw-toggler toggler-left">
+              Hコンテンツ
+              <label class="switch-button" style="vertical-align: bottom;">
+                <input type="checkbox" ng-model="vm.hideNsfw">
+                <div class="slider"></div>
+              </label>
+            </h6>
           </div>
 
           <div class="info col-lg-8 col-md-8 col-sm-8">
@@ -210,20 +217,32 @@
           </div>
         </div>
 
-        <h6 class="hidden-md-down screenshots-nsfw-toggler-bottom">
-          Hコンテンツを隠す
-          <label class="switch-button" style="vertical-align: bottom;">
-            <input type="checkbox" ng-model="vm.hideNsfw">
-            <div class="slider"></div>
-          </label>
-        </h6>
-        <screenshot-in-novel ng-if="vm.novel.screenshots" hide-nsfw="vm.hideNsfw"
-          screenshots="vm.novel.screenshots"></screenshot-in-novel>
+        <section class="db-detail screenshot">
+          <div class="head">
+            <h6>スクリーンショット</h6>
+            <h6 class="screenshots-nsfw-toggler toggler-right">
+              Hコンテンツ
+              <label class="switch-button" style="vertical-align: bottom;">
+                <input type="checkbox" ng-model="vm.hideNsfw">
+                <div class="slider"></div>
+              </label>
+            </h6>
+          </div>
+          <screenshot-in-novel ng-if="vm.novel.screenshots" hide-nsfw="vm.hideNsfw"
+            screenshots="vm.novel.screenshots"></screenshot-in-novel>
+          </section>
+
+        <section class="db-detail review">
+          <div class="head">
+            <h6>レビューを書く</h6>
+          </div>
+          <review class="review-editor"></review>
+        </section>
       </div>
 
       <div class="col-lg-3">
         <aside class="db-detail">
-          <h6>
+          <h6 class="hidden-md-down">
             Hコンテンツを隠す
             <label class="switch-button" style="vertical-align: bottom;">
               <input type="checkbox" ng-model="vm.hideNsfw">
@@ -233,7 +252,8 @@
           <h6>スコア</h6>
           <div class="ratings-container">
             <div ng-if="!vm.novel.ratings">
-              このノベルには誰も評価しませんでした。
+              <!-- このノベルには誰も評価しませんでした。 -->
+              <rating></rating>
             </div>
             <div ng-if="vm.novel.ratings">
 
@@ -241,12 +261,19 @@
           </div>
 
           <h6>レビュー</h6>
+          <ul uib-pagination total-items="vm.reviewTotalPage" ng-if="vm.novel.reviews"
+            ng-model="vm.reviewPage" max-size="1" items-per-page="5"
+            ng-change="vm.reviewPageChange()" boundary-links="true"
+            first-text="最初" last-text="最後" next-text="»" previous-text="«"
+            class="pull-right top">
+          </ul>
+          <div class="clearfix"></div>
           <div class="review-container">
             <div class="review" ng-if="!vm.novel.reviews">
               レビューが何もありません。
             </div>
             <div ng-if="vm.novel.reviews">
-              <div class="review" ng-repeat="(reviewId, review) in vm.novel.reviews">
+              <div class="review" ng-repeat="(reviewId, review) in vm.renderReviews">
                 <h6>{{ review.title }}</h6>
                 <p id="review{{reviewId}}" class="review-body overflow-toggleable">{{ review.body }}</p>
                 <span toggle-overflow class="see-more" target="#review{{reviewId}}"
