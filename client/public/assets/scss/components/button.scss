@@ -192,3 +192,44 @@ $white: #fff;
   outline-color: #282c2f;
   border-color: #282c2f;
 }
+
+.add-more {
+  width: 50px;
+  height: 50px;
+  background-image: url('/assets/img/add.png');
+  border: 0;
+  opacity: 1;
+  background-size: cover;
+  background-color: transparent;
+  @include transition-std(transform);
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.crud-btn-group.big {
+  top: 0;
+  position: absolute;
+  right: 0;
+  display: flex;
+
+  .crud-btn {
+    border: 0;
+    background-color: transparent;
+    padding: 3px 13px;
+    color: $black;
+
+    @include transition-std(all);
+
+    &:hover { color: $white; }
+
+    &.btn-delete:hover {
+      background-color: $red;
+    }
+
+    &.btn-edit:hover {
+      background-color: $blue;
+    }
+  }
+}

@@ -9,7 +9,8 @@ class NovelService::GetInfo
         .includes(
           :tags, :screenshots, { people: :country },
           { character_novels: [{ people: :country }, :character] },
-          { releases: [{ developers: :country }, { publishers: :country }] }
+          { releases: [{ developers: :country }, { publishers: :country }, :platform] },
+          { ratings: :user }
         )
         .find(@novel_id)
       @novel.full_info = true
@@ -18,7 +19,7 @@ class NovelService::GetInfo
       group_staffs
     else
       @novel = Db::Novel
-        .includes(releases: [{ developers: :country }, { publishers: :country }])
+        .includes(releases: [{ developers: :country }, { publishers: :country }], ratings: :user)
         .find(@novel_id)
     end
 

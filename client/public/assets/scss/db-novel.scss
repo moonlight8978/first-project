@@ -24,6 +24,21 @@
 
   > .content {
     padding: 0;
+    @include responsive(lg) {
+      max-width: 70%;
+    }
+    @include responsive(xl) {
+      max-width: 75%;
+    }
+  }
+
+  > aside {
+    @include responsive(lg) {
+      max-width: 30%;
+    }
+    @include responsive(xl) {
+      max-width: 25%;
+    }
   }
 }
 
@@ -174,6 +189,8 @@ character-in-novel:first-child .character-group h6 { margin-top: 0; }
     &:last-child { margin-bottom: 0; }
   }
 
+  .character.in-novel { position: relative; }
+
   .character-image, .character-info {
     padding: 0;
   }
@@ -261,7 +278,8 @@ character-in-novel:first-child .character-group h6 { margin-top: 0; }
 }
 
 #release {
-  > div {
+  > .release.in-novel {
+    position: relative;
     margin-top: 15px;
 
     &:first-child {
@@ -269,13 +287,14 @@ character-in-novel:first-child .character-group h6 { margin-top: 0; }
     }
 
     > h6 {
+      padding-top: 10px;
       padding-left: 10px;
       font-weight: bold;
       font-style: italic;
       font-size: 0.9rem;
     }
 
-    > div {
+    > div:not(.crud-btn-group) {
       background-color: $white;
       padding: 10px 0;
       position: relative;
@@ -359,14 +378,45 @@ section.db-detail {
   }
 }
 
+section.db-detail.screenshot .add-more-screenshots {
+  padding: 10px 15px 0 15px;
+  text-align: right;
+
+  button {
+    background-color: $green;
+    color: $white;
+    padding: 3px 10px;
+    border: 0;
+  }
+}
+
 .novel-screenshots {
+  .image-wrap {
+    position: relative;
+    .crud-btn-group {
+      z-index: 1;
+      right: 50%;
+      top: -22px;
+      transform: translate(50%, 0) scale(.6);
+    }
+  }
+
+  .image-wrap.slick-center:hover {
+    .crud-btn-group {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+  }
+
   .slide-image { z-index: -1; }
 
   .slick-slide { width: 200px; }
 
   .slick-list { overflow-y: visible; }
 
-  .slick-track { padding: 50px 0; }
+  .slick-track {
+    padding: 75px 0 60px 0;
+  }
 
   .slick-center {
     transform: scale(1.5);
@@ -401,3 +451,43 @@ section.db-detail {
   &.toggler-left  { text-align: left; }
 }
 
+.add-group {
+  margin-top: 30px;
+  display: block;
+
+  > div {
+    position: relative;
+    padding-left: 25px;
+    height: 50px;
+    width: 200px;
+    display: inline-block;
+
+    &:not(:first-child) {
+      margin-left: 25px;
+    }
+  }
+
+  button {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    &:hover + span {
+      color: $white;
+      background-color: $teal;
+    }
+  }
+
+  span {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 50px;
+    width: 100%;
+    padding-left: 35px;
+    padding-right: 10px;
+    background-color: $white;
+    @include transition-std(all);
+  }
+}

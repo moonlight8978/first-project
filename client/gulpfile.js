@@ -12,7 +12,7 @@ gulp.task('css:build', sass.compile);
 gulp.task('js:build', webpack.compile);
 
 gulp.task('css:watch', () => {
-    gulp.watch(config.assets_path + 'scss/*.scss', ['css:build']);
+    gulp.watch(config.assets_path + 'scss/**/*.scss', ['css:build']);
 });
 
 gulp.task('js:watch', () => {

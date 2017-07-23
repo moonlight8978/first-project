@@ -1,6 +1,14 @@
 @import 'variables';
 @import 'mixins';
 
+.rating-score {
+  i {
+    color: orange;
+  }
+
+  font-weight: 400;
+}
+
 aside.db-detail {
   margin: 50px -15px 0 -15px;
 
@@ -30,6 +38,10 @@ aside.db-detail {
     box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.3);
     border: 1px solid $border-color;
     padding: 10px 15px;
+  }
+
+  .ratings-wrap.true {
+    min-height: 250px;
   }
 
   .review {

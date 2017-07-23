@@ -3,7 +3,7 @@
   <h6 ng-switch-when="main">メインキャラクター</h6>
   <h6 ng-switch-when="side">サポート</h6>
 
-  <div class="row" ng-repeat="character in vm.characters">
+  <div class="row character in-novel" ng-repeat="character in vm.characters">
     <div class="col-3 character-image">
       <div class="image-placeholder ratio-3_4">
         <div class="image-thumb"
@@ -47,6 +47,15 @@
           </span>
         </div>
       </div>
+    </div>
+
+    <div class="crud-btn-group big">
+      <button class="crud-btn btn-edit">
+        <i class="fa fa-pencil"></i>
+      </button>
+      <button class="crud-btn btn-delete">
+        <i class="fa fa-times"></i>
+      </button>
     </div>
    </div>
 </div>

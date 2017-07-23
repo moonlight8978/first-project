@@ -1,4 +1,6 @@
 class Db::Novel < ApplicationRecord
+  include Rateable
+
   after_initialize :default_values
   before_save :standardized
 
@@ -25,7 +27,6 @@ class Db::Novel < ApplicationRecord
   has_many :people,     class_name: 'Db::Person', through: :staffs
 
   has_many :comments, class_name: 'Feature::Comment', as: :commentable
-  has_many :ratings,  class_name: 'Feature::Rating',  as: :rateable
 
   has_and_belongs_to_many :releases, -> { released_asc },
     join_table: :db_novels_novel_releases

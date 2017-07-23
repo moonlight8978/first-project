@@ -1007,6 +1007,45 @@ body {
   outline-color: #282c2f;
   border-color: #282c2f; }
 
+.add-more {
+  width: 50px;
+  height: 50px;
+  background-image: url("/assets/img/add.png");
+  border: 0;
+  opacity: 1;
+  background-size: cover;
+  background-color: transparent;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  transition-duration: 0.3s;
+  transition-timing-function: ease; }
+  .add-more:hover {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1); }
+
+.crud-btn-group.big {
+  top: 0;
+  position: absolute;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+  .crud-btn-group.big .crud-btn {
+    border: 0;
+    background-color: transparent;
+    padding: 3px 13px;
+    color: #0d0d0e;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease; }
+    .crud-btn-group.big .crud-btn:hover {
+      color: #fff; }
+    .crud-btn-group.big .crud-btn.btn-delete:hover {
+      background-color: #E1332D; }
+    .crud-btn-group.big .crud-btn.btn-edit:hover {
+      background-color: #009aab; }
+
 footer {
   padding: 40px 10%;
   background-color: rgba(10, 10, 10, 0.85);
@@ -1061,6 +1100,18 @@ footer {
   padding: 20px 10px; }
   .db-novel-detail > .body > .content {
     padding: 0; }
+    @media (min-width: 992px) {
+      .db-novel-detail > .body > .content {
+        max-width: 70%; } }
+    @media (min-width: 1200px) {
+      .db-novel-detail > .body > .content {
+        max-width: 75%; } }
+  @media (min-width: 992px) {
+    .db-novel-detail > .body > aside {
+      max-width: 30%; } }
+  @media (min-width: 1200px) {
+    .db-novel-detail > .body > aside {
+      max-width: 25%; } }
 
 .db-novel-detail .image-and-info-wrap {
   padding-bottom: 20px;
@@ -1158,6 +1209,9 @@ footer {
   .db-novel-detail .character-group > div:last-child {
     margin-bottom: 0; }
 
+.db-novel-detail .character-group .character.in-novel {
+  position: relative; }
+
 .db-novel-detail .character-group .character-image, .db-novel-detail .character-group .character-info {
   padding: 0; }
 
@@ -1224,43 +1278,45 @@ footer {
   text-align: center;
   top: 7px; }
 
-.db-novel-detail #release > div {
+.db-novel-detail #release > .release.in-novel {
+  position: relative;
   margin-top: 15px; }
-  .db-novel-detail #release > div:first-child {
+  .db-novel-detail #release > .release.in-novel:first-child {
     margin-top: 0; }
-  .db-novel-detail #release > div > h6 {
+  .db-novel-detail #release > .release.in-novel > h6 {
+    padding-top: 10px;
     padding-left: 10px;
     font-weight: bold;
     font-style: italic;
     font-size: 0.9rem; }
-  .db-novel-detail #release > div > div {
+  .db-novel-detail #release > .release.in-novel > div:not(.crud-btn-group) {
     background-color: #fff;
     padding: 10px 0;
     position: relative; }
-    .db-novel-detail #release > div > div .title {
+    .db-novel-detail #release > .release.in-novel > div:not(.crud-btn-group) .title {
       padding: 0 10px 0 30px; }
-    .db-novel-detail #release > div > div .release-detail table {
+    .db-novel-detail #release > .release.in-novel > div:not(.crud-btn-group) .release-detail table {
       margin: 10px auto;
       width: 90%;
       font-size: 0.9rem; }
-      .db-novel-detail #release > div > div .release-detail table tr.spacer {
+      .db-novel-detail #release > .release.in-novel > div:not(.crud-btn-group) .release-detail table tr.spacer {
         height: 10px;
         font-size: 0.9em; }
-      .db-novel-detail #release > div > div .release-detail table tr:not(.spacer):nth-child(3n) th {
+      .db-novel-detail #release > .release.in-novel > div:not(.crud-btn-group) .release-detail table tr:not(.spacer):nth-child(3n) th {
         background-color: #9c27b0; }
-      .db-novel-detail #release > div > div .release-detail table tr:not(.spacer):nth-child(3n+1) th {
+      .db-novel-detail #release > .release.in-novel > div:not(.crud-btn-group) .release-detail table tr:not(.spacer):nth-child(3n+1) th {
         background-color: #009aab; }
-      .db-novel-detail #release > div > div .release-detail table tr:not(.spacer):nth-child(3n+2) th {
+      .db-novel-detail #release > .release.in-novel > div:not(.crud-btn-group) .release-detail table tr:not(.spacer):nth-child(3n+2) th {
         background-color: #e91e63; }
-      .db-novel-detail #release > div > div .release-detail table th {
+      .db-novel-detail #release > .release.in-novel > div:not(.crud-btn-group) .release-detail table th {
         width: 35%;
         color: #fff;
         text-align: center; }
-      .db-novel-detail #release > div > div .release-detail table td:not(.spacer) {
+      .db-novel-detail #release > .release.in-novel > div:not(.crud-btn-group) .release-detail table td:not(.spacer) {
         width: 12%;
         text-align: center;
         background: linear-gradient(to right, #f8f8f8, #fff); }
-      .db-novel-detail #release > div > div .release-detail table td.spacer {
+      .db-novel-detail #release > .release.in-novel > div:not(.crud-btn-group) .release-detail table td.spacer {
         width: 3%; }
 
 .db-novel-detail section.db-detail {
@@ -1289,6 +1345,28 @@ footer {
     .db-novel-detail section.db-detail.review .submit-review button {
       font-size: 0.9rem; }
 
+.db-novel-detail section.db-detail.screenshot .add-more-screenshots {
+  padding: 10px 15px 0 15px;
+  text-align: right; }
+  .db-novel-detail section.db-detail.screenshot .add-more-screenshots button {
+    background-color: #259b24;
+    color: #fff;
+    padding: 3px 10px;
+    border: 0; }
+
+.db-novel-detail .novel-screenshots .image-wrap {
+  position: relative; }
+  .db-novel-detail .novel-screenshots .image-wrap .crud-btn-group {
+    z-index: 1;
+    right: 50%;
+    top: -22px;
+    -webkit-transform: translate(50%, 0) scale(0.6);
+            transform: translate(50%, 0) scale(0.6); }
+
+.db-novel-detail .novel-screenshots .image-wrap.slick-center:hover .crud-btn-group {
+  opacity: 1 !important;
+  visibility: visible !important; }
+
 .db-novel-detail .novel-screenshots .slide-image {
   z-index: -1; }
 
@@ -1299,7 +1377,7 @@ footer {
   overflow-y: visible; }
 
 .db-novel-detail .novel-screenshots .slick-track {
-  padding: 50px 0; }
+  padding: 75px 0 60px 0; }
 
 .db-novel-detail .novel-screenshots .slick-center {
   -webkit-transform: scale(1.5);
@@ -1333,6 +1411,50 @@ footer {
   .screenshots-nsfw-toggler.toggler-left {
     text-align: left; }
 
+.add-group {
+  margin-top: 30px;
+  display: block; }
+  .add-group > div {
+    position: relative;
+    padding-left: 25px;
+    height: 50px;
+    width: 200px;
+    display: inline-block; }
+    .add-group > div:not(:first-child) {
+      margin-left: 25px; }
+  .add-group button {
+    position: absolute;
+    left: 0;
+    top: 0; }
+    .add-group button:hover + span {
+      color: #fff;
+      background-color: #009688; }
+  .add-group span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    text-align: center;
+    height: 50px;
+    width: 100%;
+    padding-left: 35px;
+    padding-right: 10px;
+    background-color: #fff;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease; }
+
+.rating-score {
+  font-weight: 400; }
+  .rating-score i {
+    color: orange; }
+
 aside.db-detail {
   margin: 50px -15px 0 -15px; }
   @media (min-width: 992px) {
@@ -1353,6 +1475,8 @@ aside.db-detail {
     box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.3);
     border: 1px solid #ddd;
     padding: 10px 15px; }
+  aside.db-detail .ratings-wrap.true {
+    min-height: 250px; }
   aside.db-detail .review {
     margin-bottom: 15px; }
     aside.db-detail .review h6 {
@@ -1378,6 +1502,40 @@ aside.db-detail {
     opacity: 0; }
   aside.db-detail .review.ng-enter-active {
     opacity: 1; }
+
+.chart {
+  display: block;
+  margin: auto; }
+  .chart:hover text {
+    opacity: 1 !important; }
+
+.chart rect {
+  fill: steelblue; }
+
+.chart text {
+  opacity: 0;
+  fill: #000;
+  font: 10px sans-serif;
+  text-anchor: middle;
+  transition-property: opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease; }
+
+.user-rating {
+  font-size: 0.8rem; }
+  @media (min-width: 992px) {
+    .user-rating {
+      font-size: 0.9rem; } }
+  .user-rating select {
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid #0d0d0e; }
+  .user-rating button {
+    padding: 1px 10px;
+    margin-top: 1rem; }
+    @media (min-width: 768px) {
+      .user-rating button {
+        margin-left: 3px; } }
 
 @font-face {
   font-family: 'Noto Sans CJK JP';

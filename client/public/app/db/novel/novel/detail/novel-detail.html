@@ -25,7 +25,7 @@
 
   <div class="container db-novel-detail">
     <div class="body row">
-      <div class="content col-lg-9">
+      <div class="content col-xl-9">
         <div class="row image-and-info-wrap">
           <div class="image col-lg-4 col-md-4 col-sm-4">
             <div class="image-wrap">
@@ -36,6 +36,7 @@
                 </div>
               </div>
             </div>
+            <div your-rating class="user-rating" novel="vm.novel.id"></div>
             <h6 class="hidden-lg-up screenshots-nsfw-toggler toggler-left">
               Hコンテンツ
               <label class="switch-button" style="vertical-align: bottom;">
@@ -126,6 +127,16 @@
                 <character-in-novel characters="vm.novel.characters.side"
                   type="'side'" ng-if="vm.novel.characters.side">
                 </character-in-novel>
+                <div class="add-group">
+                  <div>
+                    <button class="add-more" type="button"></button>
+                    <span>新しいキャラクターを追加する</span>
+                  </div>
+                  <div>
+                    <button class="add-more" type="button"></button>
+                    <span>既存のキャラクターを追加する</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -167,10 +178,17 @@
                   </td>
                 </tr>
               </table>
+
+              <div class="add-group">
+                <div>
+                  <button class="add-more" type="button"></button>
+                  <span>スタフを追加する</span>
+                </div>
+              </div>
             </div>
 
             <div class="tab-pane fade" id="release" role="tabpanel" ng-if="vm.novel.releases">
-              <div ng-repeat="(releaseId, release) in vm.novel.releases">
+              <div class="release in-novel" ng-repeat="(releaseId, release) in vm.novel.releases">
                 <h6>
                   {{ release.released || '?-?-?' }}
                   <span ng-switch="release.status">
@@ -212,7 +230,21 @@
                     </table>
                   </div>
                 </div>
+                <div class="crud-btn-group big">
+                  <button class="crud-btn btn-edit">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                  <button class="crud-btn btn-delete">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
               </div>
+              <span class="add-group">
+                <div>
+                  <button class="add-more" type="button"></button>
+                  <span>リリースを追加する</span>
+                </div>
+              </span>
             </div>
           </div>
         </div>
@@ -228,6 +260,12 @@
               </label>
             </h6>
           </div>
+          <div class="add-more-screenshots">
+            <button>
+              <i class="fa fa-plus"></i>
+              <span>追加する</span>
+            </button>
+          </div>
           <screenshot-in-novel ng-if="vm.novel.screenshots" hide-nsfw="vm.hideNsfw"
             screenshots="vm.novel.screenshots"></screenshot-in-novel>
           </section>
@@ -240,7 +278,7 @@
         </section>
       </div>
 
-      <div class="col-lg-3">
+      <aside class="col-xl-3">
         <aside class="db-detail">
           <h6 class="hidden-md-down">
             Hコンテンツを隠す
@@ -249,14 +287,21 @@
               <div class="slider"></div>
             </label>
           </h6>
-          <h6>スコア</h6>
-          <div class="ratings-container">
-            <div ng-if="!vm.novel.ratings">
-              <!-- このノベルには誰も評価しませんでした。 -->
-              <rating></rating>
-            </div>
-            <div ng-if="vm.novel.ratings">
+          <h6>
+            スコア
+            <span ng-if="vm.novel.rating" class="rating-score pull-right">
+              <i class="fa fa-star"></i>
+              <strong>{{ vm.novel.rating }}</strong>
+              ({{ vm.novel.ratingsDetail.length }}人)
+            </span>
+          </h6>
 
+          <div class="ratings-container">
+            <div ng-if="!vm.novel.rating">
+              このノベルには誰も評価しませんでした。
+            </div>
+            <div ng-if="vm.novel.rating" class="ratings-wrap true">
+              <rating data="vm.novel.ratingsStatistics"></rating>
             </div>
           </div>
 
@@ -290,7 +335,7 @@
             </div>
           </div>
         </aside>
-      </div>
+      </aside>
     </div>
   </div>
 </div>
