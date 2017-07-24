@@ -1,0 +1,63 @@
+<div class="no-banner"></div>
+<div class="container">
+  <div class="login-form-wrap">
+    <form class="login-form">
+      <div class="logo">
+        <span><i class="fa fa-user"></i></span>
+      </div>
+      <div class="head">
+        <h4>ログイン</h4>
+      </div>
+      <div class="form-group">
+        <i class="fa fa-user"></i>
+        <input type="text" class="form-control" id="" placeholder="Username or Email">
+      </div>
+      <div class="form-group">
+        <i class="fa fa-lock"></i>
+        <input ng-attr-type="{{ vm.showPassword ? 'text' : 'password' }}"
+          class="form-control" id="" placeholder="Password">
+        <small id="fileHelp" class="form-text text-muted text-right">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" ng-model="vm.showPassword">
+              パスワードを表示する
+            </label>
+          </div>
+        </small>
+      </div>
+      <div class="form-submit">
+        <button class="btn-c btn-c-5 btn-c-5-dark">
+          ログイン
+        </button>
+      </div>
+      <div class="form-check remember-me text-muted">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input">
+          次回から自動でログインする
+        </label>
+      </div>
+      <div class="form-link">
+        <a ui-sref="login">パスワードを忘れた方</a>
+      </div>
+
+      <div class="social-login">
+        <div>
+          <a ui-sref="login" class="google">
+            <span>Googleアカウントでログイン</span>
+          </a>
+        </div>
+        <div>
+          <a ui-sref="login" class="twitter">
+            <span>Twitterアカウントでログイン</span>
+          </a>
+        </div>
+        <div>
+          <a ui-sref="login" class="facebook">
+            <span>Facebookアカウントでログイン</span>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="margin-footer"></div>

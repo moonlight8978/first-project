@@ -121,13 +121,22 @@
               {{ (vm.user.name && vm.user.name + '様') || 'ゲストさん' }}
             </a>
             <div class="utilities">
-              <span>
+              <span ng-if="vm.user">
                 <i class="fa fa-envelope"></i>
               </span>
-              <span>
+              <span ng-if="vm.user">
                 <i class="fa fa-shopping-cart"></i>
                 0
               </span>
+              <a ui-sref="login" ng-if="!vm.user">
+                <span>
+                  <i class="fa fa-sign-in"></i>
+                  ログイン
+                </span>
+              </a>
+              <a ui-sref="logout" ng-if="vm.user">
+                <span><i class="fa fa-sign-out"></i></span>
+              </a>
             </div>
           </div>
         </li>

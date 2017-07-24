@@ -1,14 +1,16 @@
+@import 'mixins';
+@import 'variables';
+
 @import 'novel-list';
 @import 'navbar';
 @import 'index';
-@import 'variables';
 @import 'components/button';
-@import 'mixins';
 @import 'footer';
 @import 'db-novel';
 @import 'db-detail-sidebar';
 @import 'components/graph';
 @import 'components/user-rating';
+@import 'login';
 
 @font-face {
   font-family: 'Noto Sans CJK JP';

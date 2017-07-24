@@ -6,6 +6,10 @@ $footer-gray: #8e8e8e;
 $footer-light-gray: #c1c1c1;
 $footer-bg-color: rgba(10, 10, 10, 0.85);
 
+.margin-footer {
+  margin-top: 45px;
+}
+
 footer {
   padding: 40px 10%;
   background-color: $footer-bg-color;
@@ -16,18 +20,24 @@ footer {
   }
 
   .about-us {
+    margin-bottom: 30px;
+    @include responsive(lg) { margin-bottom: 0; }
+
     h4 {
       font-family: 'Montserrat';
     }
 
-    p, span {
+    p,
+    span {
       font-weight: 500;
     }
 
     p {
       color: $footer-gray;
       font-size: 0.8em;
-      width: 70%;
+      width: 90%;
+
+      @include responsive(lg) { width: 70%; }
     }
 
     span {
