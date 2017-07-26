@@ -10,6 +10,9 @@
     function stateConfig($stateProvider) {
         $stateProvider.state('index', {
             url: '/index',
+            data: {
+                pageTitle: 'インデックス'
+            },
             views: {
                 'navbar@': {
                     templateUrl: 'app/layouts/navbar/navbar-fixed.html',

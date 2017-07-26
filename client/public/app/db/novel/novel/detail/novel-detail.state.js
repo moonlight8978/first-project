@@ -17,6 +17,9 @@
                     controllerAs: 'vm'
                 }
             },
+            data: {
+                roles: []
+            },
             resolve: {
                 novel: function ($stateParams, NovelResource) {
                     return NovelResource.novel

@@ -18,6 +18,11 @@
 .fixed-top {
   position: fixed !important;
   background-color: $background-color__nav-fixed;
+  @include transition-slow(background-color);
+
+  &.active {
+    background-color: $nav-fixed--active__background-color;
+  }
 }
 
 .invisible {

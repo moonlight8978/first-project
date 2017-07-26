@@ -5,9 +5,9 @@
         .module('app')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$scope', '$state', 'NovelResource'];
+    NavbarController.$inject = ['$scope', '$state', 'NovelResource', 'Principal', 'Auth'];
 
-    function NavbarController($scope, $state, NovelResource) {
+    function NavbarController($scope, $state, NovelResource, Principal, Auth) {
         let self = this;
 
         this.search = {
@@ -16,14 +16,25 @@
             'results': []
         };
 
-        // this.user = {
-        //     'name': '鈴木ひろし',
-        //     'profileImage': '/assets/img/vanilla.png'
-        // };
+        self.isAuthenticated = Principal.isAuthenticated();
+        self.user = Principal.getUser();
 
         this.goSearch = goSearch;
         this.search = search;
         this.clearInput = clearInput;
+        self.logout = Auth.logout;
+
+        $scope.$watch(() => {
+            return Principal.isAuthenticated();
+        }, (value) => {
+            if (value) {
+                self.isAuthenticated = Principal.isAuthenticated();
+                self.user = Principal.getUser();
+            } else {
+                self.isAuthenticated = false;
+                self.user = null;
+            }
+        });
 
         function goSearch() {
             if (self.search.category == 'novel') {

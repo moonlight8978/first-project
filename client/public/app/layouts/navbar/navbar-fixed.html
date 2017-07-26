@@ -1,4 +1,4 @@
-<nav delay-show time="1000" search-form class="navbar fixed-top navbar-inverse navbar-toggleable-sm animated fadeInDown hide" id="navFixed">
+<nav nav-fixed search-form delay-show time="1000" class="navbar fixed-top navbar-inverse navbar-toggleable-sm animated fadeInDown hide" id="navFixed">
   <button class="navbar-toggler navbar-toggler-left" type="button"
     id="toggler" sidebar-toggler target="#sidebarLeftWrap"
     aria-expanded="false" aria-label="Toggle navigation">
@@ -89,9 +89,14 @@
       <!-- main section -->
       <div class="-user">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link">
+          <li class="nav-item no-ng-animate" ng-if="!vm.isAuthenticated">
+            <a class="nav-link" ui-sref="login">
               ログイン
+            </a>
+          </li>
+          <li class="nav-item no-ng-animate" ng-if="vm.isAuthenticated">
+            <a class="nav-link" ng-click="vm.logout()">
+              ログアウト
             </a>
           </li>
           <li class="nav-item">

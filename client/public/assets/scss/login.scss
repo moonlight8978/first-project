@@ -2,7 +2,7 @@
   padding-top: 55px;
 }
 
-.login-form {
+.form-auth {
   width: 75%;
   margin: auto;
   position: relative;
@@ -10,6 +10,14 @@
   padding: 2rem 2.5rem;
   box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.3);
   background-color: $content__background;
+  @include responsive(md) {
+    width: 70%;
+    padding: 2rem 3.5rem;
+  }
+  @include responsive(lg) {
+    width: 75%;
+    padding: 2rem 2.5rem;
+  }
 
   .logo {
     position: absolute;
@@ -44,28 +52,88 @@
     position: relative;
     margin-bottom: 1.5rem;
 
-    input {
-      padding: .75rem 1rem .75rem 3.5rem;
+    input, select {
+      padding: .75rem 1rem .75rem 4rem;
       font-size: .9rem;
     }
 
-    i {
+    select {
+      height: 43px;
+    }
+
+    input[type='date'] {
+      padding-top: 9.7px;
+      padding-bottom: 9.7px;
+    }
+
+    .icon-wrap {
       position: absolute;
-      left: 1.2rem;
+      left: .75rem;
       top: .65rem;
-      font-size: 1.4rem;
-      padding-right: 0.75rem;
+      padding-right: 0.35rem;
       border-right: 1px solid #aaa;
-      color: #000;
+
+      i {
+        font-size: 1.4rem;
+        color: #000;
+      }
     }
   }
 
-  .form-submit button {
-    width: 100%;
-    padding: .5rem;
-    background-color: $sakura;
-    outline-color: $sakura;
-    border-color: $sakura;
+  .form-control {
+    &.ng-dirty.ng-invalid,
+    &.ng-touched.ng-invalid {
+      border-color: $red;
+    }
+  }
+
+  .input-inline-group .input-inline {
+    @include responsive(lg) {
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+
+    &:first-child {
+      @include responsive(lg) {
+        padding-right: 10px;
+        padding-left: 0;
+      }
+    }
+
+    &:last-child {
+      @include responsive(lg) {
+        padding-right: 0;
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .form-submit {
+    text-align: center;
+
+    button {
+      width: 100%;
+      padding: .5rem;
+      background-color: $sakura;
+      outline-color: $sakura;
+      border-color: $sakura;
+    }
+  }
+
+  .form-error {
+    color: red;
+    font-size: 0.9rem;
+  }
+}
+
+.login-form {
+  .form-group {
+    @include responsive(lg) { padding-right: 5px; }
+  }
+
+  .form-error {
+    margin-top: -.5rem;
+    margin-bottom: 1rem;
   }
 
   .remember-me {
@@ -88,6 +156,12 @@
     border-top: 1px solid $border-color;
     margin-top: .75rem;
     padding-top: 1rem;
+    @include responsive(lg) {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+      border-left: 1px solid #ddd;
+    }
 
     a {
       font-size: 0.9rem;
@@ -143,4 +217,69 @@
       }
     }
   }
+}
+
+.form-signup {
+  margin-top: 75px;
+
+  .form-title-group {
+    display: flex;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+    list-style-type: none;
+  }
+
+  .form-title {
+    flex: none;
+    cursor: pointer;
+
+    a {
+      font-size: 0.9rem;
+      font-weight: normal;
+      border-bottom: 2px solid transparent;
+      @include transition-std(all);
+
+      &.active {
+        font-weight: bold;
+        border-color: $teal;
+      }
+    }
+  }
+
+  .form-submit button {
+    @include responsive(lg) { width: 40%; }
+  }
+
+  .form-error {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .tos {
+    font-size: 0.9rem;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.ng-if-fade-in.ng-enter {
+  transition: 0.8s linear all;
+  opacity: 0;
+}
+
+.ng-if-fade-in-init .fade-element-in.ng-enter {
+  opacity: 1;
+}
+
+.ng-if-fade-in.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+.ng-if-fade-in.ng-leave {
+  transition: 0.3s linear all;
+  opacity: 1;
+}
+.ng-if-fade-in.ng-leave.ng-leave-active {
+  opacity: 0;
 }

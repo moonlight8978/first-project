@@ -4,11 +4,12 @@
     angular
         .module('app')
         .constant('SERVER', {
-          api:    'http://localhost:3000/api',
+          name: 'にょろにょろ',
+          api: 'http://localhost:3000/api',
           search: 'http://localhost:3000/api/search',
           domain: 'http://localhost:3000',
-          login:  'http://localhost:3000/login',
-          logout: 'http://localhost:3000/logout'
+          login: 'http://localhost:3000/api/login',
+          logout: 'http://localhost:3000/api/logout'
         })
         .constant('LENGTH', {
             'very_short': '短い＋',

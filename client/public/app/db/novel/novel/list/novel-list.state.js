@@ -15,6 +15,9 @@
                 sort: null,
                 page: '1'
             },
+            data: {
+                pageTitle: 'ビジュアルノベル・リスト'
+            },
             views: {
                 'content@': {
                     templateUrl: 'app/db/novel/novel/list/novel-list.html',
@@ -24,14 +27,14 @@
             },
             resolve: {
                 data: ['$q', '$stateParams', 'NovelResource', function ($q, $stateParams, NovelResource) {
-                    var deferred = $q.defer();
+                    let deferred = $q.defer();
 
                     NovelResource.novel.query({
-                        perPage: 4,
-                        page: $stateParams.page,
+                        'perPage': 4,
+                        'page': $stateParams.page,
                         'length[]': $stateParams.length
                     }, (novels, headers) => {
-                        var data = {
+                        let data = {
                             'novels': novels,
                             'headers': headers()
                         };

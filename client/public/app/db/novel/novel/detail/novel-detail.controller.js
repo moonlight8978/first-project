@@ -5,13 +5,14 @@
         .module('app')
         .controller('NovelDetailController', NovelDetailController);
 
-    NovelDetailController.$inject = ['$http', '$stateParams', 'novel', 'reviews', 'votes', 'LENGTH'];
+    NovelDetailController.$inject = ['$http', '$stateParams', 'novel', 'reviews', 'votes', 'LENGTH', 'Principal', 'Token', 'PageTitle'];
 
-    function NovelDetailController($http, $stateParams, novel, reviews, votes, length) {
+    function NovelDetailController($http, $stateParams, novel, reviews, votes, length, Principal, Token, PageTitle) {
+        // common
         let self = this;
+        PageTitle.set(novel.title);
 
         // \/ for novel
-
         this.novel = novel;
         this.hideNsfw = true;
         // this.novel.votes = votes.data;

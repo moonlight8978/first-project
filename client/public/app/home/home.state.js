@@ -11,6 +11,9 @@
         $stateProvider.state('home', {
             parent: 'app',
             url: '/',
+            data: {
+                pageTitle: 'ホームページ'
+            },
             views: {
                 'content@': {
                     templateUrl: 'app/home/home.html',

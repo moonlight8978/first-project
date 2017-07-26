@@ -64,6 +64,12 @@ Rails.application.routes.draw do
       end
 
       resources :countries, except: :show
+
+      scope module: :security do
+        scope module: :auth do
+          post 'login'
+        end
+      end
     end
   end
 

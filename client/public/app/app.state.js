@@ -20,6 +20,11 @@
                 'footer@': {
                     templateUrl: 'app/layouts/footer/footer.html'
                 }
+            },
+            resolve: {
+                authorize: function (Auth) {
+                    return Auth.authorize();
+                }
             }
         });
 

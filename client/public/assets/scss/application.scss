@@ -33,6 +33,14 @@
 //   transition: background-image 0.5s ease;
 // }-
 
+.no-padding {
+  padding: 0;
+}
+
+.no-ng-animate {
+  transition: none !important;
+}
+
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi" ng-app="app" ng-cloak>
 <head>
-	<title>にょろにょろショップ</title>
+	<title ng-bind="$root.title"></title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- <base href="/"></base> -->
@@ -63,6 +63,10 @@
 
 	<!-- inject:js -->
   <script src="app/app.module.js"></script>
+  <script src="app/services/page-title.service.js"></script>
+  <script src="app/services/auth/token.service.js"></script>
+  <script src="app/services/auth/principal.service.js"></script>
+  <script src="app/services/auth/auth.service.js"></script>
   <script src="app/search/search.state.js"></script>
   <script src="app/search/novel/novel-search.state.js"></script>
   <script src="app/search/novel/novel-search.controller.js"></script>
@@ -79,6 +83,8 @@
   <script src="app/home/home.controller.js"></script>
   <script src="app/errors/errors.state.js"></script>
   <script src="app/errors/404-not-found/404.state.js"></script>
+  <script src="app/errors/403-forbidden/403.state.js"></script>
+  <script src="app/errors/401-unauthorized/401.state.js"></script>
   <script src="app/directives/toggle-overflow.directive.js"></script>
   <script src="app/directives/sidebar-toggler.directive.js"></script>
   <script src="app/directives/sidebar.directive.js"></script>
@@ -87,6 +93,7 @@
   <script src="app/directives/novel/staffs-data/staff.directive.js"></script>
   <script src="app/directives/novel/characters-data/character-info.directive.js"></script>
   <script src="app/directives/novel/characters-data/character.directive.js"></script>
+  <script src="app/directives/nav-fixed.directive.js"></script>
   <script src="app/directives/nav-bar.directive.js"></script>
   <script src="app/directives/lazy.directive.js"></script>
   <script src="app/directives/image-thumb.directive.js"></script>
@@ -112,7 +119,9 @@
   <script src="app/db/db.state.js"></script>
   <script src="app/config/wow.config.js"></script>
   <script src="app/config/scroll-top.config.js"></script>
+  <script src="app/config/http.config.js"></script>
   <script src="app/config/header.config.js"></script>
+  <script src="app/config/authorization.config.js"></script>
   <script src="app/components/review/review.directive.js"></script>
   <script src="app/components/rating/your-rating.directive.js"></script>
   <script src="app/components/login/login.state.js"></script>

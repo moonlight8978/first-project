@@ -8,14 +8,14 @@
     stateConfig.$inject = ['$stateProvider'];
 
     function stateConfig($stateProvider) {
-        $stateProvider.state('errors.404', {
-            url: '/404',
+        $stateProvider.state('errors.403', {
+            url: '/403',
             data: {
-                pageTitle: 'Not found'
+                pageTitle: 'Access denined'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/errors/404-not-found/404.html'
+                    templateUrl: 'app/errors/403-forbidden/403.html'
                 }
             }
         });

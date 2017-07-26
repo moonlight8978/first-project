@@ -14,4 +14,8 @@ class Security::User < ApplicationRecord
   def token
     JsonWebToken.encode({ id: self.id })
   end
+
+  def all_roles
+    self.roles.map(&:role)
+  end
 end
