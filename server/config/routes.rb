@@ -68,6 +68,7 @@ Rails.application.routes.draw do
       scope module: :security do
         scope module: :auth do
           post 'login'
+          post 'logout'
         end
       end
     end

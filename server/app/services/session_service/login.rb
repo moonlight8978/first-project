@@ -3,9 +3,9 @@ class SessionService::Login < ApplicationService
 
   def initialize(params)
     @params = params
-    @user = Security::User.find_by(
-      "user_name = :login or email = :login", { login: @params[:login] }
-    )
+    @user = Security::User
+      .includes(:roles, :country)
+      .find_by("user_name = :login or email = :login", { login: @params[:login] })
     super()
   end
 

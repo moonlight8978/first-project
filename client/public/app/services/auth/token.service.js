@@ -17,15 +17,11 @@
         return service;
 
         function getToken() {
-            return $localStorage.authToken;
+            return $localStorage.authToken || $sessionStorage.authToken;
         }
 
         function deleteToken() {
             delete $localStorage.authToken;
-        }
-
-        function storeToken(token) {
-            $localStorage.authToken = token;
         }
     }
 })();

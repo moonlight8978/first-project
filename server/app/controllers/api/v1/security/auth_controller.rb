@@ -1,6 +1,4 @@
 class Api::V1::Security::AuthController < ApplicationController
-  before_action :authenticate, only: :logout
-
   def login
     login_svc = SessionService::Login.new(login_params)
       .perform
@@ -28,9 +26,10 @@ class Api::V1::Security::AuthController < ApplicationController
   end
 
   def logout
-    @logout_svc = SessionService::Logout.new(token_from_request)
-    @logout_svc.perform && (head :ok and return)
-    render_unauthorized
+    p request.headers['HTTP_AUTHORIZATION']
+    @logout_svc = SessionService::Logout.new(token_from_request).perform
+
+    render_ok
   end
 
 private

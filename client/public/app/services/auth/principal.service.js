@@ -5,23 +5,26 @@
         .module('app')
         .factory('Principal', Principal);
 
-    Principal.$inject = ['$http', '$localStorage', 'SERVER'];
+    Principal.$inject = ['$localStorage', '$sessionStorage', 'SERVER'];
 
-    function Principal($http, $localStorage, server) {
-        let authenticated = false;
-        let user = null;
+    function Principal($localStorage, $sessionStorage, server) {
+        let authenticated;
+        let user;
+        let token;
+        let exp;
 
         const service = {
             isAuthenticated: isAuthenticated,
             authenticate: authenticate,
             getUser: getUser,
+            getToken: getToken,
+            getExp: getExp,
             hasAnyRole: hasAnyRole
         };
 
         return service;
 
         function isAuthenticated() {
-            authenticate();
             return authenticated;
         }
 
@@ -31,7 +34,6 @@
             }
 
             let valid = false;
-
             roles.forEach((role) => {
                 if (user.roles.indexOf(role) != -1) {
                     valid = true;
@@ -43,12 +45,22 @@
         }
 
         function getUser() {
-            return $localStorage.user;
+            return user;
+        }
+
+        function getToken() {
+            return token;
+        }
+
+        function getExp() {
+            return exp;
         }
 
         function authenticate() {
-            user = $localStorage.user;
-            authenticated = !!user;
+            exp = $localStorage.exp || $sessionStorage.exp;
+            token = $localStorage.authToken || $sessionStorage.authToken;
+            user = $localStorage.user || $sessionStorage.user;
+            authenticated = !!user && !!token;
         }
     }
 })();

@@ -5,13 +5,13 @@
         .module('app')
         .factory('AuthInterceptor', AuthInterceptor);
 
-    AuthInterceptor.$inject = ['Token'];
+    AuthInterceptor.$inject = ['Principal'];
 
-    function AuthInterceptor(Token) {
+    function AuthInterceptor(Principal) {
         let interceptor = {
             request: function (config) {
                 config.headers = config.headers || {};
-                let token = Token.get();
+                let token = Principal.getToken();
 
                 if (token) {
                     config.headers['Authorization'] = 'Bearer ' + token;

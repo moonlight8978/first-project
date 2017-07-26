@@ -5,9 +5,9 @@
         .module('app')
         .controller('NovelDetailController', NovelDetailController);
 
-    NovelDetailController.$inject = ['$http', '$stateParams', 'novel', 'reviews', 'votes', 'LENGTH', 'Principal', 'Token', 'PageTitle'];
+    NovelDetailController.$inject = ['$http', '$stateParams', 'novel', 'reviews', 'votes', 'LENGTH', 'Principal', 'PageTitle'];
 
-    function NovelDetailController($http, $stateParams, novel, reviews, votes, length, Principal, Token, PageTitle) {
+    function NovelDetailController($http, $stateParams, novel, reviews, votes, length, Principal, PageTitle) {
         // common
         let self = this;
         PageTitle.set(novel.title);

@@ -22,8 +22,11 @@
                 }
             },
             resolve: {
-                authorize: function (Auth) {
-                    return Auth.authorize();
+                authorize: function (Auth, Principal) {
+                    Principal.authenticate();
+                    Auth.checkExpiration();
+                    Auth.authorize();
+                    return 1;
                 }
             }
         });

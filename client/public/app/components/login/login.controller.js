@@ -5,9 +5,9 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', 'Auth', 'Principal', 'Token'];
+    LoginController.$inject = ['$rootScope', '$state', 'Auth'];
 
-    function LoginController($rootScope, $state, Auth, Principal, Token) {
+    function LoginController($rootScope, $state, Auth) {
         let self = this;
 
         self.signup = {};
@@ -20,9 +20,9 @@
             { id: 1, name: 'ベトナム', name_en: 'Vietnam' }
         ];
 
-        async function submitLogin(user) {
+        async function submitLogin(user, remember) {
             try {
-                await Auth.login(user);
+                await Auth.login(user, remember);
 
                 if ($rootScope.fromState.name) {
                     $state.go($rootScope.fromState, $rootScope.fromStateParams);

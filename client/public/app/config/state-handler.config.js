@@ -5,9 +5,9 @@
         .module('app')
         .run(stateHandler);
 
-    stateHandler.$inject = ['$rootScope', 'Auth', 'PageTitle'];
+    stateHandler.$inject = ['$rootScope', 'Auth', 'Principal', 'PageTitle'];
 
-    function stateHandler($rootScope, Auth, PageTitle) {
+    function stateHandler($rootScope, Auth, Principal, PageTitle) {
         $rootScope.$on('$stateChangeStart', (event, toState, toStateParams, fromState, fromStateParams) => {
             $rootScope.event = event;
             $rootScope.toState = toState;
@@ -15,6 +15,8 @@
             $rootScope.fromState = fromState;
             $rootScope.fromStateParams = fromStateParams;
 
+            Principal.authenticate();
+            Auth.checkExpiration();
             Auth.authorize();
         });
 

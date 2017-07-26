@@ -1,7 +1,8 @@
 <div class="no-banner"></div>
 <div class="container animated fadeIn auth-container">
   <div class="login-form-wrap">
-    <form class="form-auth login-form" ng-submit="vm.submitLogin(vm.login.user)">
+    <form class="form-auth login-form"
+      ng-submit="vm.submitLogin(vm.login.user, vm.login.user.rememberMe)">
       <div class="logo">
         <span><i class="fa fa-user"></i></span>
       </div>
@@ -43,7 +44,8 @@
           </div>
           <div class="form-check remember-me text-muted">
             <label class="form-check-label">
-              <input type="checkbox" class="form-check-input">
+              <input type="checkbox" class="form-check-input"
+                ng-model="vm.login.user.rememberMe">
               次回から自動でログインする
             </label>
           </div>
