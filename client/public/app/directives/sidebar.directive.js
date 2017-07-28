@@ -12,11 +12,19 @@
                 angular.element(document).ready(function () {
                     let sidebar = $(element);
 
-                    $(window).on('click.disableSidebar', (event) => {
+                    $(window).on('click.disableSidebar', disableSideBar);
+
+                    function disableSideBar(event) {
                         if (event.target == sidebar[0]) {
                             sidebar.removeClass('active');
                         }
-                    });
+                    }
+
+                    scope.$on('$destroy', unbind);
+
+                    function unbind() {
+                        $(window).off('click.disableSidebar', disableSideBar);
+                    }
                 });
             }
         };

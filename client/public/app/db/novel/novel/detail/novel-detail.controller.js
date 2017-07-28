@@ -5,9 +5,9 @@
         .module('app')
         .controller('NovelDetailController', NovelDetailController);
 
-    NovelDetailController.$inject = ['$http', '$stateParams', 'novel', 'reviews', 'votes', 'LENGTH', 'Principal', 'PageTitle'];
+    NovelDetailController.$inject = ['$scope', '$state', '$http', '$stateParams', 'novel', 'reviews', 'votes', 'LENGTH', 'Principal', 'PageTitle', 'NovelResource'];
 
-    function NovelDetailController($http, $stateParams, novel, reviews, votes, length, Principal, PageTitle) {
+    function NovelDetailController($scope, $state, $http, $stateParams, novel, reviews, votes, length, Principal, PageTitle, NovelResource) {
         // common
         let self = this;
         PageTitle.set(novel.title);
@@ -30,6 +30,23 @@
         this.renderReviews = paginateReviews(this.reviewPage);
 
         this.reviewPageChange = reviewPageChange;
+
+        // \/ event handlers
+        $scope.$on('updateRating', async (event, data) => {
+            // $state.reload();
+            try {
+                let newNovel = await NovelResource.novel
+                    .get({ id: self.novel.id, fullInfo: 1 })
+                    .$promise;
+                self.novel.rating = newNovel.rating;
+                self.novel.ratingsDetail = newNovel.ratingsDetail;
+                self.novel.ratingsStatistics = newNovel.ratingsStatistics;
+                $scope.$broadcast('updateGraph', self.novel.ratingsStatistics);
+                console.log(newNovel);
+            } catch (e) {
+                console.log(e);
+            }
+        });
 
         // \/ functions
 

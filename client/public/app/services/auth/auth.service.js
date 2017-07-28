@@ -5,9 +5,9 @@
         .module('app')
         .factory('Auth', Auth);
 
-    Auth.$inject = ['$rootScope', '$http', '$state', '$q', '$localStorage', '$sessionStorage', 'Principal', 'JwtService', 'SERVER'];
+    Auth.$inject = ['$rootScope', '$location', '$http', '$state', '$q', '$localStorage', '$sessionStorage', 'Principal', 'JwtService', 'SERVER'];
 
-    function Auth($rootScope, $http, $state, $q, $localStorage, $sessionStorage, Principal, JwtService, server) {
+    function Auth($rootScope, $location, $http, $state, $q, $localStorage, $sessionStorage, Principal, JwtService, server) {
         const loginUrl = server.login;
         const logoutUrl = server.logout;
 
@@ -63,13 +63,22 @@
         }
 
         function authorize() {
+            let notAllowMember =
+                $rootScope.toState.data
+                && $rootScope.toState.data.notAllowMember;
             let secureState =
                 $rootScope.toState.data
                 && $rootScope.toState.data.roles
                 && $rootScope.toState.data.roles.length > 0;
             let isAuthenticated = Principal.isAuthenticated();
 
-            if (secureState) {
+            if (notAllowMember) {
+                // Not allow member route > All
+                if (isAuthenticated) {
+                    $rootScope.event.preventDefault();
+                    $state.go('errors.not-allow-member');
+                }
+            } else if (secureState) {
                 let isAuthorized = Principal.hasAnyRole($rootScope.toState.data.roles);
                 if (!isAuthenticated) {
                     // Not logged in
@@ -85,6 +94,16 @@
                 }
             }
         }
+
+        // function unauthorize() {
+        //     let isAuthenticated = Principal.isAuthenticated();
+
+        //     if (isAuthenticated) {
+        //         $rootScope.event.preventDefault();
+        //         $location.path('/errors/not_allow_member')
+        //         $state.go('errors.not-allow-member');
+        //     }
+        // }
 
         async function logout(force = false) {
             if (!force) {

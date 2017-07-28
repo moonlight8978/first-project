@@ -3,7 +3,10 @@ class Api::V1::Db::NovelsController < ApplicationController
   # before_action :require_admin, only: [:create, :destroy]
 
   def index
-    @novels = ::Db::Novel.all.page(params[:page]).per(params[:per_page])
+    @novels = ::Db::Novel
+      .includes(:releases, :ratings)
+      .all
+      .page(params[:page]).per(params[:per_page])
 
     if params[:length].present?
       @novels = @novels.where(length: params[:length])

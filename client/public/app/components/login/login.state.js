@@ -9,7 +9,12 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('login', {
+            parent: 'app',
             url: '/login',
+            data: {
+                pageTitle: 'ログイン・サインアップ',
+                notAllowMember: true
+            },
             views: {
                 'navbar@': {
                     templateUrl: 'app/layouts/navbar/navbar-fixed.html',

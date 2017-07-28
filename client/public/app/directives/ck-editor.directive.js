@@ -15,15 +15,27 @@
                 angular.element(document).ready(() => {
                     let ck = CKEDITOR.replace(elm[0]);
 
-                    ck.on('pasteState', function () {
-                        scope.$apply(function () {
-                            ngModel.$setViewValue(ck.getData());
-                        });
-                    });
+                    ck.on('pasteState', pasteStateFunc);
 
                     ngModel.$render = function (value) {
                         ck.setData(ngModel.$viewValue);
                     };
+
+                    scope.$on('$destroy', () => {
+                        unbind();
+                    });
+
+                    function pasteStateFunc() {
+                        scope.$apply(function () {
+                            ngModel.$setViewValue(ck.getData());
+                        });
+                    }
+
+                    function unbind() {
+                        ck.on( 'currentInstance', function (ev) {
+                            ev.removeListener();
+                        });
+                    }
                 });
             }
         };

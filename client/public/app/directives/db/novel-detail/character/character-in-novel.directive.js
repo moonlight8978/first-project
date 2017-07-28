@@ -10,12 +10,14 @@
             restrict: 'E',
             scope: {
               characters: '=',
-              type: '='
+              type: '@',
+              novel: '='
             },
             templateUrl: 'app/directives/db/novel-detail/character/character-in-novel.html',
             controller: function ($scope) {
                 this.characters = $scope.characters;
                 this.type = $scope.type;
+                this.novelId = $scope.novel;
 
                 this.threeSizes = threeSizes;
                 this.birthday = birthday;

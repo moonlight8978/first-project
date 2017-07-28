@@ -15,13 +15,22 @@
                 angular.element(document).ready(function () {
                     let sidebar = $(scope.target);
 
-                    $(element).click(() => {
+                    $(element).on('click', clickFunc);
+
+                    function clickFunc() {
                         // $('body').toggleClass('active');
                         // $('.sidebar-left-wrap').toggleClass('active');
                         // $(scope.target).toggleClass('active');
                         sidebar.toggleClass('active');
-                    });
+                    }
+
+                    scope.$on('$destroy', unbind)
+
+                    function unbind() {
+                        $(element).off('click', clickFunc);
+                    }
                 });
+
             }
         };
     }

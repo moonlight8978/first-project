@@ -15,13 +15,21 @@
 
         function linkFunc(scope, element, attrs) {
             angular.element(document).ready(() => {
-                $(window).on('scroll.fixedNav', function () {
+                $(window).on('scroll.navFixed', function () {
                     if ($(this).scrollTop() == 0) {
                         $(element).removeClass('active');
                     } else {
                         $(element).addClass('active');
                     }
                 });
+
+                scope.$on('$destroy', () => {
+                    unbind();
+                });
+
+                function unbind() {
+                    $(window).off('scroll.navFixed');
+                }
             });
         }
     }

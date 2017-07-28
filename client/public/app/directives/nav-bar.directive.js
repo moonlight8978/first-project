@@ -11,7 +11,7 @@
                 $(function() {
                     let nav = $('nav');
                     let navHeight = nav.outerHeight();
-                    $(window).scroll(function () {
+                    $(window).on('scroll.navBar', () => {
                         if ($(this).scrollTop() >= 400) {
                             nav.addClass('fixed-top').show();
                         } else if ($(this).scrollTop() > navHeight && $(this).scrollTop() < 400) {
@@ -20,6 +20,14 @@
                             nav.show().removeClass('fixed-top');
                         }
                     });
+
+                    scope.$on('$destroy', () => {
+                        unbind();
+                    });
+
+                    function unbind() {
+                        $(window).off('scroll.navBar');
+                    }
                 });
             }
         };

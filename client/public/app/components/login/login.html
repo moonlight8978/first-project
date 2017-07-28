@@ -34,7 +34,7 @@
               </div>
             </small>
           </div>
-          <div class="form-error animated fadeIn" ng-if="vm.login.error">
+          <div class="form-error animated fadeIn no-ng-animate" ng-if="vm.login.error">
             <span ng-repeat="(key, value) in vm.login.error">{{ value }}<br></span>
           </div>
           <div class="form-submit">
@@ -181,8 +181,6 @@
                   ng-model="vm.signup.user.firstName">
               </div>
 
-
-
               <div class="row input-inline-group">
                 <div class="col-lg-7 col-xl-8 no-padding input-inline">
                   <div class="form-group">
@@ -238,8 +236,11 @@
               Accept TOS
             </label>
           </div>
-          <div class="form-error animated fadeIn" ng-if="vm.signup.error">
+          <div class="form-error animated fadeIn no-ng-animate" ng-if="vm.signup.error">
             <span ng-repeat="(key, value) in vm.signup.error">{{ value }}<br></span>
+          </div>
+          <div class="form-success animated fadeIn no-ng-animate" ng-if="vm.signup.message">
+            <span>{{ vm.signup.message }}</span>
           </div>
           <div class="form-submit">
             <button class="btn-c btn-c-5 btn-c-5-dark">

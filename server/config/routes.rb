@@ -14,6 +14,11 @@ Rails.application.routes.draw do
             # Remove seiyuu from character
             delete 'voice_actresses/:id', to: 'novels/characters/voice_actresses#destroy'
           end
+          scope module: :novels do
+            get  'ratings/:user_id', to: 'ratings#show'
+            post 'ratings', to: 'ratings#create'
+            get  'ratings', to: 'ratings#index'
+          end
 
           post   'characters',     to: 'novels/characters#create'
           # Add existing character to novel
@@ -69,6 +74,8 @@ Rails.application.routes.draw do
         scope module: :auth do
           post 'login'
           post 'logout'
+          post 'register'
+          post 'register/confirm', action: 'register_confirm'
         end
       end
     end

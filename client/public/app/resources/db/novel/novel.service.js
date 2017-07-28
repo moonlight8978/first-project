@@ -15,6 +15,7 @@
         let tagUrl        = server.api + '/db/novels/:novelId/tags/:id';
         let producerUrl   = server.api + '/db/novels/:novelId/publications';
         let screenshotUrl = server.api + '/db/novels/:novelId/screenshots';
+        let ratingUrl     = server.api + '/db/novels/:novelId/ratings/:userId'
         let searchUrl     = server.search + '/novels'
 
         let service = {
@@ -25,7 +26,8 @@
             tag: tagRsrc(),
             producer: producerRsrc(),
             screenshot: screenshotRsrc(),
-            search: searchRsrc()
+            search: searchRsrc(),
+            rating: ratingRsrc()
         };
 
         return service;
@@ -53,31 +55,38 @@
 
         function releaseRsrc() {
             return $resource(releaseUrl, {
-                'query':  { method: 'GET', isArray: true }
+                'query': { method: 'GET', isArray: true }
             });
         }
 
         function tagRsrc() {
             return $resource(tagUrl, {
-                'query':  { method: 'GET', isArray: true }
+                'query': { method: 'GET', isArray: true }
             });
         }
 
         function producerRsrc() {
             return $resource(producerUrl, {
-                'query':  { method: 'GET', isArray: true }
+                'query': { method: 'GET', isArray: true }
             });
         }
 
         function screenshotRsrc() {
             return $resource(screenshotUrl, {
-                'query':  { method: 'GET', isArray: true }
+                'query': { method: 'GET', isArray: true }
             });
         }
 
         function searchRsrc() {
             return $resource(searchUrl, {
-                'query':  { method: 'GET', isArray: true }
+                'query': { method: 'GET', isArray: true }
+            });
+        }
+
+        function ratingRsrc() {
+            return $resource(ratingUrl, {
+                'get': { method: 'GET' },
+                'save': { method: 'POST' }
             });
         }
     }

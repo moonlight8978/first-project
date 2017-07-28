@@ -36,7 +36,7 @@
                 </div>
               </div>
             </div>
-            <div your-rating class="user-rating" novel="vm.novel.id"></div>
+            <div user-rating class="user-rating" novel="vm.novel.id" type="novel"></div>
             <h6 class="hidden-lg-up screenshots-nsfw-toggler toggler-left">
               Hコンテンツ
               <label class="switch-button" style="vertical-align: bottom;">
@@ -88,6 +88,8 @@
               </tr>
             </table>
           </div>
+
+          <tag-in-novel tags="vm.novel.tags"></tag-in-novel>
         </div>
 
         <div class="more-info-tabs">
@@ -119,13 +121,13 @@
               ng-if="vm.novel.characters">
               <div class="character-list">
                 <character-in-novel characters="vm.novel.characters.protagonist"
-                  type="'protagonist'" ng-if="vm.novel.characters.protagonist">
+                  type="protagonist" novel="vm.novel.id" ng-if="vm.novel.characters.protagonist">
                 </character-in-novel>
                 <character-in-novel characters="vm.novel.characters.main"
-                  type="'main'" ng-if="vm.novel.characters.main">
+                  type="main" novel="vm.novel.id" ng-if="vm.novel.characters.main">
                 </character-in-novel>
                 <character-in-novel characters="vm.novel.characters.side"
-                  type="'side'" ng-if="vm.novel.characters.side">
+                  type="side" novel="vm.novel.id" ng-if="vm.novel.characters.side">
                 </character-in-novel>
                 <div class="add-group">
                   <div>

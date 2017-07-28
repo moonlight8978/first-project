@@ -40,6 +40,13 @@
                             ele.html('▼もっと見る');
                         }
                     });
+
+                    scope.$on('$destroy', unbind);
+
+                    function unbind() {
+                        $(window).off('resize.showMore');
+                        ele.off('click.showMore');
+                    }
                 });
             }
         };

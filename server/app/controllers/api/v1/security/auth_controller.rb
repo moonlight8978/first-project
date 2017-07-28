@@ -32,9 +32,41 @@ class Api::V1::Security::AuthController < ApplicationController
     render_ok
   end
 
+  def register
+    @register_svc = RegisterService::Register.new(register_params).perform
+    p @register_svc.errors?
+
+    if @register_svc.errors?
+      render json: @register_svc.errors.detail, status: @register_svc.errors.status
+    else
+      RegisterMailer.complete_register(@register_svc.user, @register_svc.token)
+        .deliver_later
+      head :ok
+    end
+  end
+
+  def register_confirm
+    @confirm_svc = RegisterService::Confirm
+      .new(params[:email], params[:token])
+      .perform
+
+    if @confirm_svc.errors?
+      render json: @confirm_svc.errors.detail, status: @confirm_svc.errors.status
+    else
+      head :ok
+    end
+  end
+
 private
 
   def login_params
     params.permit(:login, :password)
+  end
+
+  def register_params
+    params.permit(
+      :user_name, :email, :password, :password_confirmation, :first_name, :middle_name,
+      :last_name
+    )
   end
 end

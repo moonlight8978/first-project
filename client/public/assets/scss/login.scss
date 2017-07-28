@@ -124,6 +124,11 @@
     color: red;
     font-size: 0.9rem;
   }
+
+  .form-success {
+    color: $green;
+    font-size: 0.9rem;
+  }
 }
 
 .login-form {
@@ -251,7 +256,7 @@
     @include responsive(lg) { width: 40%; }
   }
 
-  .form-error {
+  .form-error, .form-success {
     margin-bottom: 1rem;
     text-align: center;
   }

@@ -1,4 +1,4 @@
-<nav nav-fixed search-form delay-show time="1000" class="navbar fixed-top navbar-inverse navbar-toggleable-sm animated fadeInDown hide" id="navFixed">
+<nav nav-fixed search-form class="navbar fixed-top navbar-inverse navbar-toggleable-sm animated fadeInDown" id="navFixed">
   <button class="navbar-toggler navbar-toggler-left" type="button"
     id="toggler" sidebar-toggler target="#sidebarLeftWrap"
     aria-expanded="false" aria-label="Toggle navigation">
@@ -122,30 +122,30 @@
             <div class="avatar-thumb image-thumb" ng-style="vm.user.profileImage ? { 'background-image': 'url({{ vm.user.profileImage }})' } : {}"></div>
           </div>
           <div class="utility-container">
-            <a ui-sref="index" class="text-can-be-overflow user-name">
-              {{ (vm.user.name && vm.user.name + '様') || 'ゲストさん' }}
+            <a ui-sref="index" class="text-can-be-overflow user-name no-ng-animate">
+              {{ (vm.user && ((vm.user.firstName || '無名') + '様')) || 'ゲストさん' }}
             </a>
             <div class="utilities">
-              <span ng-if="vm.user">
+              <span ng-if="vm.user" class="no-ng-animate">
                 <i class="fa fa-envelope"></i>
               </span>
-              <span ng-if="vm.user">
+              <span ng-if="vm.user" class="no-ng-animate">
                 <i class="fa fa-shopping-cart"></i>
                 0
               </span>
-              <a ui-sref="login" ng-if="!vm.user">
+              <a ui-sref="login" ng-if="!vm.isAuthenticated" class="no-ng-animate">
                 <span>
                   <i class="fa fa-sign-in"></i>
                   ログイン
                 </span>
               </a>
-              <a ui-sref="logout" ng-if="vm.user">
+              <a ng-if="vm.isAuthenticated" class="no-ng-animate" ng-click="vm.logout()">
                 <span><i class="fa fa-sign-out"></i></span>
               </a>
             </div>
           </div>
         </li>
-        <a ui-sref="index" class="list-item-wrap link">
+        <a ui-sref="home" class="list-item-wrap link">
           <li class="list-group-item">
             <i class="fa fa-pagelines"></i>
             ホムページ
@@ -181,7 +181,7 @@
         </a>
         <div class="collapse" id="databaseList">
           <ul class="list-group sub-menu">
-            <a ui-sref="index" class="list-item-wrap link">
+            <a ui-sref="novel.list" class="list-item-wrap link">
               <li class="list-group-item">
                 ビジュアルノベル
               </li>
@@ -194,7 +194,7 @@
             <a ui-sref="index" class="list-item-wrap link">
               <li class="list-group-item">
                 <span class="text-can-be-overflow">
-                  ビジュアルノベルのリリースasdladoasdjasoijdasiojdasdasdasjdaso
+                  ビジュアルノベルのリリース
                 </span>
               </li>
             </a>

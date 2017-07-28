@@ -1,4 +1,11 @@
 class Security::User < ApplicationRecord
+  validates :user_name,
+    uniqueness: { message: 'ユーザー名がありました。' }
+  validates :email,
+    uniqueness: { message: 'マイルアドレスがありました。' }
+  validates :country,
+    if: -> { self.country_id || self.country },
+    presence: true
   belongs_to :country, class_name: 'Country', optional: true
 
   has_and_belongs_to_many :roles,

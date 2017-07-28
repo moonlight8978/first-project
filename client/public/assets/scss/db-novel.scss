@@ -491,3 +491,44 @@ section.db-detail.screenshot .add-more-screenshots {
     @include transition-std(all);
   }
 }
+
+tag-in-novel {
+  display: block;
+  width: 100%
+}
+
+.novel-tag-container {
+  .line {
+    height: 1px;
+    background-color: $border-color;
+    width: 60%;
+    margin: 10px auto 20px;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+
+    .tag {
+      font-size: 0.9rem;
+      padding: 5px 15px;
+      // flex shrink: 0 - flex item can resize smaller than default
+      flex: 1 0 auto;
+      background-color: $content__background;
+      margin: 3px;
+      text-align: center;
+      color: $black;
+      @include transition-std(background-color);
+
+      &:hover {
+        background-color: gainsboro;
+      }
+    }
+  }
+
+  .no-tag {
+    padding: 1px;
+  }
+}

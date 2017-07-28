@@ -12,15 +12,30 @@
               ngSrc: '@'
             },
             link: function (scope, element, attrs) {
-                element.on('load', function() {
-                    element.addClass('show');
-                }).on('error', function() {
-                  //
-                });
+                element
+                    .on('load', loadFunc)
+                    .on('error', errorFunc);
 
                 scope.$watch('ngSrc', function(newVal) {
                     element.removeClass('show');
                 });
+
+                scope.$on('$destroy', () => {
+                    unbind();
+                });
+
+                function loadFunc() {
+                   element.addClass('show');
+                }
+
+                function errorFunc() {
+                    // body...
+                }
+
+                function unbind() {
+                    element.off('load', loadFunc);
+                    element.off('error', errorFunc)
+                }
             }
         };
     }

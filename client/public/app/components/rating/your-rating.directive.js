@@ -3,15 +3,16 @@
 
     angular
         .module('app')
-        .directive('yourRating', yourRating);
+        .directive('userRating', userRating);
 
-    yourRating.$inject = [];
+    userRating.$inject = ['Principal', 'NovelResource'];
 
-    function yourRating() {
+    function userRating(Principal, NovelResource) {
         return {
             restrict: 'A',
             scope: {
-                'novel': '='
+                'novel': '=',
+                'type': '@'
             },
             templateUrl: 'app/components/rating/your-rating.html',
             link: function (scope, elm, attr) {
@@ -28,12 +29,66 @@
                     { star: 10, label: 'Masterpiece' }
                 ];
 
-                setTimeout(() => {
-                    scope.userSelection = {
-                        'id': 1,
-                        'star': 10
-                    };
+                scope.userSelection = {};
+
+                scope.updateScore = updateScore;
+
+                scope.$watch(() => {
+                    return Principal.isAuthenticated();
+                }, async (value) => {
+                    if (value) {
+                        console.log('getScore');
+                        await getScore();
+                    } else {
+                        console.log('setDefault');
+                        setDefault();
+                    }
                 });
+
+                async function getScore() {
+                    try {
+                        let rating = await NovelResource.rating
+                            .get({ novelId: scope.novel, userId: Principal.getUser().id })
+                            .$promise;
+                        console.log(rating);
+                        scope.userSelection.star = rating.star;
+                        console.log(scope.userSelection.star);
+                        console.log('Done');
+                    } catch (e) {
+                        console.log(e);
+                        scope.errors = e;
+                    }
+                }
+
+                function setDefault() {
+                    scope.userSelection.star = '';
+                }
+
+                async function updateScore(star) {
+                    console.log('update');
+                    if (Principal.isAuthenticated()) {
+                        console.log('update');
+                        try {
+                            console.log('Try');
+                            let rating = await NovelResource.rating
+                                .save(
+                                    { novelId: scope.novel },
+                                    { 'star': star }
+                                )
+                                .$promise;
+                            console.log(rating);
+                            scope.userSelection.star = rating.star;
+                            scope.$emit('updateRating');
+                        } catch (e) {
+                            console.log(e);
+                            scope.errors = e.data;
+                        }
+                    } else {
+                        scope.errors = {
+                            message: 'You need to log in!'
+                        };
+                    }
+                }
             }
         };
     }

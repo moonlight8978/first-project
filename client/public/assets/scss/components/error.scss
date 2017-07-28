@@ -1,0 +1,49 @@
+.error-container {
+  padding: 30px 0;
+  text-align: center;
+  color: $text--semi-dark;
+
+  .code {
+    display: flex;
+    justify-content: center;
+
+    > div {
+      padding: 10px 20px;
+      border: 1px solid $border-color;
+      text-shadow: 0 1px 1px $black;
+      font-size: 3em;
+      margin: 0 7px;
+      @include box-shadow;
+      @include responsive(lg) {
+        padding: 20px 30px;
+        font-size: 3.5em;
+      }
+    }
+  }
+
+  .title {
+    text-transform: uppercase;
+    margin: 20px 0;
+    @include responsive(lg) {
+      margin: 40px 0 20px;
+    }
+
+    > div:first-child {
+      font-size: 2.5em;
+    }
+
+    > div:last-child {
+      font-size: 1.5em;
+      margin-top: -.25em;
+    }
+  }
+
+  .link {
+
+    a { margin: 0 3px; }
+
+    > div:first-child { text-align: right; }
+
+    > div:last-child { text-align: left; }
+  }
+}
