@@ -1,0 +1,128 @@
+<div class="animated fadeIn">
+  <div class="no-banner"></div>
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a ui-sref="home">メインページ</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0);">データベース</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a ui-sref="novelTag.list" ui-sref-opts="{ reload: true }">タグ</a>
+      </li>
+      <li class="breadcrumb-item active">
+        {{ vm.tag.tag }}
+      </li>
+    </ol>
+  </div>
+
+  <div class="page-head">
+    <div class="container">
+      <h3>{{ vm.tag.tag }}</h3>
+      <h6>{{ vm.tag.tagEn }}</h6>
+    </div>
+  </div>
+
+  <div class="container page-body">
+    <div class="body row">
+      <div class="content col-lg-9">
+        <div class="tag-detail-container item-container">
+          <div class="item-group">
+            <h6>ディスクリプション</h6>
+            <div class="tag item-bg item-box item item-container">
+              <div class="item-group" ng-if="vm.tag.description">
+                <h6>日本語</h6>
+                <div class="item text-description">{{ vm.tag.description }}</div>
+              </div>
+
+              <div class="item-group" ng-if="vm.tag.descriptionEn">
+                <h6>英語</h6>
+                <div class="item text-description">{{ vm.tag.descriptionEn }}</div>
+              </div>
+            </div>
+            <!-- <div class="tag item-bg item" ng-if="vm.tag.descriptionEn">
+
+            </div> -->
+          </div>
+
+          <!-- <div class="line-shadow bottom"></div> -->
+
+          <div class="item-group">
+            <h6>このタグには関係があるノベル</h6>
+            <div class="line full-width"></div>
+            <div class="related-container item-container">
+              <div class="row" ng-if="vm.novels.novels.length">
+                <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 novel-wrap has-ng-repeat-animate"
+                  ng-repeat="novel in vm.novels.novels">
+                  <div class="novel" role="link" ui-sref="novel.detail({ id: novel.id })">
+                    <div class="image-wrap">
+                      <div class="image-placeholder ratio-3_4">
+                        <div image-thumb class="image-thumb"
+                          condition="vm.hideNsfw && novel.imageNsfw"
+                          nsfw="/assets/img/image-nsfw.jpg" image="{{ novel.image }}">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="info">
+                      <h6 class="text-center" title="{{ novel.title }}" role="button">
+                        {{ novel.title }}
+                      </h6>
+                      <div class="rating-score text-center">
+                        <i class="fa fa-star"></i>
+                        <strong>{{ novel.rating || '?' }}</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="load-more text-right" ng-if="vm.novels.novels.length">
+                <button class="btn-c-5 btn-c btn-c-5-sakura" ng-click="vm.loadMore()">もっと</button>
+              </div>
+              <div ng-if="!vm.novels.novels.length">
+                関係があるノベルがありません。
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- container wrap -->
+      </div>
+      <!-- END content -->
+      <aside class="col-lg-3 item-container">
+        <div class="item-group">
+          <h6>Quick tool</h6>
+          <div class="item item-box quick-tool-group">
+            <div class="nsfw">
+              <span>
+                <label class="switch-button">
+                  <input type="checkbox" ng-model="vm.hideNsfw">
+                  <div class="slider"></div>
+                </label>
+              </span>
+              <span>Hコンテンツを消す</span>
+            </div>
+            <div class="btn-group">
+              <button class="crud-btn btn-edit" ui-sref="novelTag.detail.edit"
+                ui-sref-opts="{ reload: true }">
+                <i class="fa fa-fw fa-pencil"></i>
+              </button>
+              <span>Edit article</span>
+            </div>
+            <div class="btn-group">
+              <button class="crud-btn btn-delete">
+                <i class="fa fa-fw fa-times"></i>
+              </button>
+              <span>Delete article</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-group">
+          <h6>コメント</h6>
+          <div class="item item-box">
+            凄い
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

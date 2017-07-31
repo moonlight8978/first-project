@@ -14,6 +14,23 @@ class Api::V1::Db::Novels::TagsController < ApplicationController
       serializer: Api::V1::Db::Novel::Tag::TagDetailSerializer
   end
 
+  def novels
+    query_results = ::Db::Novel.search(include: [:ratings, :releases]) do
+      with(:tag_ids, params[:novel_tag_id])
+      order_by(:title_sort, :asc)
+      paginate(page: params[:page] || 1, per_page: 6)
+    end
+
+    p query_results
+
+    render json: query_results.results, key_transform: :camel_lower, status: :ok,
+      each_serializer: Api::V1::Db::Novel::NovelListSerializer
+
+    response.headers['x-per-page'] = 6
+    response.headers['x-page'] = params[:page] || 1
+    response.headers['x-total'] = query_results.total
+  end
+
   def create
     # Find tag, check if exists
     @tag = ::Db::Novel::Tag.create(create_tag_params)
@@ -69,13 +86,15 @@ class Api::V1::Db::Novels::TagsController < ApplicationController
   def create_novel
     @novel = ::Db::Novel.find(params[:novel_id])
     @tag = ::Db::Novel::Tag.find(params[:id])
+    @errors = ErrorMessage.new
 
     unless @novel.tags.exists?(@tag.id)
       @novel.tags << @tag
       render_ok
     else
-      render json: ErrorMessage.new(message_from_server: 'Tag is already exists in collection'),
-        status: :conflict
+      @errors.add!(message_from_server: 'Tag is already exists in collection')
+      @errors.set_status(:conflict)
+      render json: @errors.detail, status: @errors.status
     end
   end
 

@@ -38,6 +38,10 @@ class Db::Novel < ApplicationRecord
       NetworkKanjiFilter.to_hiragana(title)
     end
     text :title_en
+    string :title_sort do
+      NetworkKanjiFilter.to_hiragana(title.downcase.gsub(/[^\d\w\s]/, ''))
+    end
+    integer :tag_ids, references: Db::Novel::Tag, multiple: true
   end
 
   def first_release

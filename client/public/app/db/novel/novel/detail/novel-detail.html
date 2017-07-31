@@ -1,4 +1,4 @@
-<div class="no-banner">
+<div class="no-banner animated fadeIn">
   <div class="container">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="container db-novel-detail">
+  <div class="container page-body db-novel-detail">
     <div class="body row">
       <div class="content col-xl-9">
         <div class="row image-and-info-wrap">
@@ -89,7 +89,12 @@
             </table>
           </div>
 
-          <tag-in-novel tags="vm.novel.tags"></tag-in-novel>
+          <tag-in-novel class="col-12" tags="vm.novel.tags" novel="vm.novel"
+            type="novel"></tag-in-novel>
+
+          <div class="col-12">
+            <div class="line-shadow full-width bottom"></div>
+          </div>
         </div>
 
         <div class="more-info-tabs">

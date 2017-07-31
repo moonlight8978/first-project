@@ -6,6 +6,12 @@
 @import 'components/graph';
 @import 'components/user-rating';
 @import 'components/error';
+@import 'components/crud-modal';
+@import 'components/form';
+@import 'components/collapse';
+@import 'components/ng-animate';
+@import 'components/quick-tool';
+@import 'components/lines';
 
 @import 'novel-list';
 @import 'navbar';
@@ -15,6 +21,11 @@
 @import 'db-detail-sidebar';
 @import 'login';
 @import 'register-confirm';
+@import 'ng1bs4';
+@import 'main-layout';
+@import 'age-confirm';
+@import 'tag-list';
+@import 'tag-detail';
 
 @font-face {
   font-family: 'Noto Sans CJK JP';
@@ -36,6 +47,19 @@
 //   background-image: url('/assets/img/placeholder.jpg');
 //   transition: background-image 0.5s ease;
 // }-
+
+.line {
+  height: 1px;
+  background-color: $border-color;
+  width: 60%;
+  margin: 10px auto 20px;
+}
+
+.text-description { white-space: pre-line; }
+
+.full-width {
+  width: 100% !important;
+}
 
 .no-padding {
   padding: 0;
@@ -108,8 +132,8 @@ button:active, button:focus {
   padding-right: 0;
 }
 
-.row {
-  margin-left: 0;
-  margin-right: 0;
-}
+// .row {
+//   margin-left: 0;
+//   margin-right: 0;
+// }
 

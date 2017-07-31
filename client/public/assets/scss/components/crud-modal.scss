@@ -1,0 +1,26 @@
+.modal {
+  top: 50px;
+}
+
+.crud-modal {
+  .search-to-add-form {
+    button {
+      padding: .25rem 1rem;
+      margin-right: 10px;
+    }
+  }
+
+  .error, .message, .search-results {
+    margin-top: 20px;
+  }
+
+  .error h6 {
+    color: $red;
+    font-size: 0.9rem;
+  }
+
+  .message {
+    color: $green;
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,81 @@
+<div class="animated fadeIn">
+  <div class="no-banner"></div>
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a ui-sref="home">メインページ</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="javascript:;">データベース</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="javascript:;">タグ</a>
+      </li>
+      <li class="breadcrumb-item active">
+        新しいタグを作る
+      </li>
+    </ol>
+  </div>
+
+  <div class="page-head">
+    <div class="container">
+      <h3>新しいタグを作る</h3>
+      <h6>Create new tag</h6>
+    </div>
+  </div>
+
+  <div class="container page-body">
+    <div class="body row">
+      <div class="content col-xl-9">
+        <form id="tagForm" ng-submit="vm.submit(vm.tag)">
+          <div class="row">
+            <div class="col-lg-6 input-inline">
+              <div class="form-group">
+                <label>タグ</label>
+                <input type="text" class="form-control" name="tag" ng-model="vm.tag.tag">
+                <small id="tagHelp" class="form-text text-muted">日本語でお願いします。</small>
+              </div>
+            </div>
+
+            <div class="col-lg-6 input-inline">
+              <div class="form-group">
+                <label>タグ(英語)</label>
+                <input type="text" class="form-control" name="tagEn" ng-model="vm.tag.tagEn">
+                <small id="tagEnHelp" class="form-text text-muted">英語でお願いします。</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>ディスクリプション</label>
+            <textarea type="text" class="form-control" rows="6"
+              name="description" ng-model="vm.tag.description"></textarea>
+            <!-- <small id="descriptionHelp" class="form-text text-muted">英語でお願いします。</small> -->
+          </div>
+
+          <div class="form-group form-success animated fadeIn"
+            ng-show="vm.message">
+            <h6 ng-repeat="(key, value) in vm.message">{{ value }}</h6>
+          </div>
+
+          <div class="form-group form-error animated fadeIn"
+            ng-show="vm.error">
+            <h6 ng-repeat="(key, value) in vm.error">{{ value }}</h6>
+          </div>
+
+          <button class="btn-c btn-c-5 btn-c-5-sakura pull-right">提出する</button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+
+      <aside class="col-xl-3">
+        <div>
+          <h6></h6>
+          <div></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<div class="margin-footer"></div>

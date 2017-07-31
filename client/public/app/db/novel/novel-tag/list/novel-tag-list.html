@@ -1,0 +1,84 @@
+<div class="animated fadeIn">
+  <div class="no-banner"></div>
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a ui-sref="home">メインページ</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="javascript:;">データベース</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="javascript:;">タグ</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <a ui-sref="novelTag.list">全てのタグ</a>
+      </li>
+      <li class="breadcrumb-item active">
+        ページ {{ vm.currentPage }}/{{ vm.totalPages }}
+      </li>
+    </ol>
+  </div>
+
+  <div class="page-head">
+    <div class="container">
+      <h3>全てのタグ</h3>
+      <h6>All tags</h6>
+    </div>
+  </div>
+
+  <div class="container page-body">
+    <div class="body row">
+      <div class="content col-lg-9">
+        <div class="tag-container item-container row">
+          <div class="tag-wrap col-sm-6 col-xl-4" ng-repeat="(tagId, tag) in vm.tags">
+            <div class="tag">
+              <!-- <div class="header collapse-toggler toggler-left"
+                data-toggle="collapse" aria-expanded="false"
+                aria-controls="tagBody{{tagId}}" data-target="#tagBody{{tagId}}">
+                <span>{{ tag.tag }}</span>
+              </div> -->
+              <div class="header row">
+                <div class="collapse-toggler-button"
+                  data-toggle="collapse" aria-expanded="false"
+                  aria-controls="tagBody{{tagId}}" data-target="#tagBody{{tagId}}">
+                </div>
+                <div ui-sref="novelTag.detail({ id: tag.id })" role="link" class="tag-link">
+                  <span class="text-can-be-overflow" role="button">{{ tag.tag }}</span>
+                </div>
+              </div>
+              <!-- END header -->
+
+              <div class="body">
+                <div class="collapse" id="tagBody{{tagId}}">
+                  <p ng-if="!tag.description">ディスクリプションがありません</p>
+                  <p ng-if="tag.description">{{ tag.description }}</p>
+                </div>
+              </div>
+              <!-- END body -->
+            </div>
+          </div>
+          <!-- END 1 item -->
+        </div>
+        <!-- END container -->
+
+        <ul uib-pagination total-items="vm.totalTags" ng-model="vm.currentPage" max-size="8"
+          items-per-page="vm.perPage" ng-change="vm.pageChange()" boundary-links="true"
+          rotate="true" force-ellipses="true" boundary-link-numbers="true"
+          first-text="最初" last-text="最後" next-text="»" previous-text="«"
+          class="pull-right">
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+
+      <aside class="col-lg-3">
+        <div>
+          <h6></h6>
+          <div></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<div class="margin-footer"></div>

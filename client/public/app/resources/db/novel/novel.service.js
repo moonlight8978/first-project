@@ -61,7 +61,9 @@
 
         function tagRsrc() {
             return $resource(tagUrl, {
-                'query': { method: 'GET', isArray: true }
+                'query': { method: 'GET', isArray: true },
+                'save': { method: 'POST' },
+                'delete': { method: 'DELETE' }
             });
         }
 

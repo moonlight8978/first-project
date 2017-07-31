@@ -2,13 +2,19 @@
   <div class="line"></div>
 
   <div class="tag-list" ng-if="tags.length">
-    <a href="" class="tag" ng-repeat="tag in tags">
+    <a ui-sref="novelTag.detail({ id: tag.id })" class="tag" ng-repeat="tag in tags">
       {{ tag.tag }}
     </a>
   </div>
 
   <div class="no-tag" ng-if="!tags.length">
     タグはありません。
+  </div>
+
+  <div class="tag-list">
+    <a class="tag" href="javascript:void(0);" ng-click="open()" has-role authority="ROLE_USER">
+      + Add tag
+    </a>
   </div>
 </div>
 

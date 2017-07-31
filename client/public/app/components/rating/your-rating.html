@@ -3,8 +3,8 @@
     <option value="">-</option>
   </select>
   <button class="btn-c btn-c-5 btn-c-5-dark">提出</button>
-  <div class="form-error">
-    <span ng-repeat="(key, value) in vm.errors">{{ value }}<br></span>
+  <div class="form-error" ng-if="errors">
+    <h6 ng-repeat="(key, value) in errors">{{ value }}</h6>
   </div>
 </form>
 

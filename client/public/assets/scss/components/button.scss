@@ -193,6 +193,13 @@ $white: #fff;
   border-color: #282c2f;
 }
 
+.btn-c-5-sakura {
+  color: #fff;
+  background-color: $sakura;
+  outline-color: $sakura;
+  border-color: $sakura;
+}
+
 .add-more {
   width: 50px;
   height: 50px;
@@ -213,6 +220,7 @@ $white: #fff;
   position: absolute;
   right: 0;
   display: flex;
+  z-index: 100;
 
   .crud-btn {
     border: 0;
@@ -230,6 +238,10 @@ $white: #fff;
 
     &.btn-edit:hover {
       background-color: $blue;
+    }
+
+    &.btn-view:hover {
+      background-color: $green;
     }
   }
 }

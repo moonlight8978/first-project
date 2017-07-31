@@ -32,6 +32,6 @@
         });
 
         $locationProvider.hashPrefix('');
-        $urlRouterProvider.otherwise('/index');
+        $urlRouterProvider.otherwise('/warning');
     }
 })();

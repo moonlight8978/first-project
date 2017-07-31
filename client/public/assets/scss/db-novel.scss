@@ -1,29 +1,11 @@
 @import 'variables';
 @import 'mixins';
 
-.no-banner {
-  margin-top: 80px;
-}
-
-.page-head {
-  padding: 15px 0;
-  background-color: $page-head__background;
-  box-shadow: 0 2px 4px $box-shadow__color;
-
-  h6 {
-    font-size: 0.9em;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-}
-
 .db-novel-detail {
 
 > .body {
-  padding: 20px 10px;
 
   > .content {
-    padding: 0;
     @include responsive(lg) {
       max-width: 70%;
     }
@@ -43,26 +25,16 @@
 }
 
 .image-and-info-wrap {
-  padding-bottom: 20px;
-  border-bottom: 1px solid $border-color;
   margin-bottom: 20px;
-  box-shadow: 0 3px 4px -4px $black;
 
-  > div {
-    padding: 15px 0;
+  > .image {
+    padding-right: 10px;
 
-    &.image {
-      padding-right: 10px;
-
-      .screenshots-nsfw-toggler { margin-top: 0.5rem; }
-    }
-
-    &.info {
-      padding-left: 10px;
-    }
+    .screenshots-nsfw-toggler { margin-top: 0.5rem; }
   }
 
   > .info {
+    padding-left: 10px;
 
     th {
       padding-left: 10px;
@@ -498,13 +470,6 @@ tag-in-novel {
 }
 
 .novel-tag-container {
-  .line {
-    height: 1px;
-    background-color: $border-color;
-    width: 60%;
-    margin: 10px auto 20px;
-  }
-
   .tag-list {
     display: flex;
     flex-wrap: wrap;
@@ -529,6 +494,8 @@ tag-in-novel {
   }
 
   .no-tag {
-    padding: 1px;
+    text-align: center;
   }
 }
+
+

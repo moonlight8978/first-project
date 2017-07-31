@@ -87,27 +87,6 @@
     }
   }
 
-  .input-inline-group .input-inline {
-    @include responsive(lg) {
-      padding-right: 5px;
-      padding-left: 5px;
-    }
-
-    &:first-child {
-      @include responsive(lg) {
-        padding-right: 10px;
-        padding-left: 0;
-      }
-    }
-
-    &:last-child {
-      @include responsive(lg) {
-        padding-right: 0;
-        padding-left: 10px;
-      }
-    }
-  }
-
   .form-submit {
     text-align: center;
 
@@ -128,6 +107,27 @@
   .form-success {
     color: $green;
     font-size: 0.9rem;
+  }
+}
+
+.input-inline-group .input-inline {
+  @include responsive(lg) {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+
+  &:first-child {
+    @include responsive(lg) {
+      padding-right: 10px;
+      padding-left: 0;
+    }
+  }
+
+  &:last-child {
+    @include responsive(lg) {
+      padding-right: 0;
+      padding-left: 10px;
+    }
   }
 }
 

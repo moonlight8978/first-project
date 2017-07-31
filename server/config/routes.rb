@@ -40,9 +40,12 @@ Rails.application.routes.draw do
 
         scope module: :novels do
           resources :novel_releases, only: [:update, :show],    controller: 'releases'
-          resources :novel_tags,     except: :destroy,          controller: 'tags'
           resources :novel_staffs,   only: [:update, :destroy], controller: 'staffs'
-          resources :characters, except: :destroy
+          resources :characters,     except: :destroy
+          resources :novel_tags,     except: :destroy,          controller: 'tags' do
+            # Get all novels belongs to a specific tag
+            get 'novels'
+          end
           scope module: :releases do
             resources :novel_platforms, except: :show, controller: 'platforms'
           end
@@ -65,7 +68,7 @@ Rails.application.routes.draw do
         get 'novels',     to: 'novels#index'
         get 'characters', to: 'characters#index'
         get 'releases',   to: 'releases#index'
-        get 'tags',       to: 'tags#index'
+        get 'novel_tags',       to: 'tags#index'
       end
 
       resources :countries, except: :show

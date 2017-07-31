@@ -5,9 +5,9 @@
         .module('app')
         .controller('NovelDetailController', NovelDetailController);
 
-    NovelDetailController.$inject = ['$scope', '$state', '$http', '$stateParams', 'novel', 'reviews', 'votes', 'LENGTH', 'Principal', 'PageTitle', 'NovelResource'];
+    NovelDetailController.$inject = ['$rootScope', '$scope', '$state', '$http', '$stateParams', 'novel', 'reviews', 'votes', 'LENGTH', 'Principal', 'PageTitle', 'NovelResource'];
 
-    function NovelDetailController($scope, $state, $http, $stateParams, novel, reviews, votes, length, Principal, PageTitle, NovelResource) {
+    function NovelDetailController($rootScope, $scope, $state, $http, $stateParams, novel, reviews, votes, length, Principal, PageTitle, NovelResource) {
         // common
         let self = this;
         PageTitle.set(novel.title);
@@ -46,6 +46,12 @@
             } catch (e) {
                 console.log(e);
             }
+        });
+
+        $rootScope.$on('tagAdded', (event, tag) => {
+            console.log(tag);
+            self.novel.tags.push(tag);
+            console.log(self.novel.tags);
         });
 
         // \/ functions

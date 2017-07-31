@@ -4,6 +4,7 @@
 	<title ng-bind="$root.title"></title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon-2.ico">
 	<!-- <base href="/"></base> -->
 
 	<!-- libraries stylesheets -->
@@ -63,6 +64,7 @@
 
 	<!-- inject:js -->
   <script src="app/app.module.js"></script>
+  <script src="app/services/remove-empty-field.service.js"></script>
   <script src="app/services/page-title.service.js"></script>
   <script src="app/services/auth/token.service.js"></script>
   <script src="app/services/auth/principal.service.js"></script>
@@ -108,6 +110,15 @@
   <script src="app/directives/db/novel-detail/rating/rating.directive.js"></script>
   <script src="app/directives/db/novel-detail/character/character-in-novel.directive.js"></script>
   <script src="app/directives/ck-editor.directive.js"></script>
+  <script src="app/db/novel/novel-tag/novel-tag.state.js"></script>
+  <script src="app/db/novel/novel-tag/new/novel-tag-new.state.js"></script>
+  <script src="app/db/novel/novel-tag/new/novel-tag-new.controller.js"></script>
+  <script src="app/db/novel/novel-tag/list/novel-tag-list.state.js"></script>
+  <script src="app/db/novel/novel-tag/list/novel-tag-list.controller.js"></script>
+  <script src="app/db/novel/novel-tag/detail/novel-tag-detail.state.js"></script>
+  <script src="app/db/novel/novel-tag/detail/novel-tag-detail.controller.js"></script>
+  <script src="app/db/novel/novel-tag/detail/edit/novel-tag-detail-edit.state.js"></script>
+  <script src="app/db/novel/novel-tag/detail/edit/novel-tag-detail-edit.controller.js"></script>
   <script src="app/db/novel/novel/novel.state.js"></script>
   <script src="app/db/novel/novel/list/novel-list.state.js"></script>
   <script src="app/db/novel/novel/list/novel-list.controller.js"></script>
@@ -128,6 +139,8 @@
   <script src="app/config/scroll-top.config.js"></script>
   <script src="app/config/http.config.js"></script>
   <script src="app/config/header.config.js"></script>
+  <script src="app/components/tag/add-tag.service.js"></script>
+  <script src="app/components/tag/add-tag.controller.js"></script>
   <script src="app/components/review/review.directive.js"></script>
   <script src="app/components/register-confirm/register-confirm.state.js"></script>
   <script src="app/components/register-confirm/register-confirm.controller.js"></script>
@@ -137,6 +150,7 @@
   <script src="app/components/jwt.js"></script>
   <script src="app/app.state.js"></script>
   <script src="app/app.constants.js"></script>
+  <script src="app/adult-warning/warning.state.js"></script>
   <!-- endinject -->
 
 	<!-- app's javascripts -->

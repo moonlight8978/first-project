@@ -1,0 +1,11 @@
+.has-ng-repeat-animate {
+  opacity: 1;
+}
+.has-ng-repeat-animate.ng-enter {
+  -webkit-transition: 1s;
+  transition: 1s;
+  opacity: 0;
+}
+.has-ng-repeat-animate.ng-enter-active {
+  opacity: 1;
+}

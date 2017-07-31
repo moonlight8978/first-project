@@ -1,0 +1,40 @@
+.no-banner { margin-top: 80px; }
+
+.page-head {
+  padding: 15px 0;
+  background-color: $page-head__background;
+  box-shadow: 0 2px 4px $box-shadow__color;
+
+  h6 {
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}
+
+.page-body {
+  > .body { padding: 40px 0; }
+}
+
+.item-container {
+  .item-group {
+    > h3, > h4, > h5,
+    > h6 {
+      padding-left: 1rem;
+      font-weight: bold;
+    }
+  }
+
+  .item-box {
+    @include box-shadow;
+  }
+
+  .item {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .item-bg {
+    background-color: $content__background;
+  }
+}
