@@ -36,9 +36,11 @@
   > .info {
     padding-left: 10px;
 
+    table { width: 100%; }
+
     th {
       padding-left: 10px;
-      min-width: 140px;
+      width: 140px;
       font-weight: 600;
     }
 

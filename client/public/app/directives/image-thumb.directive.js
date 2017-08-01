@@ -5,26 +5,56 @@
         .module('app')
         .directive('imageThumb', imageThumb);
 
-    function imageThumb() {
+    imageThumb.$inject = ['IsImage'];
+
+    function imageThumb(IsImage) {
         return {
             restrict: 'AE',
             scope: {
                 'condition': '=',
                 'image': '@',
-                'nsfw': '@'
+                'nsfw': '@',
+                'imageChange': '=?'
             },
             link: function (scope, element) {
-                let urlNsfw = `url('${scope.nsfw}')`;
-                let urlImg = `url('${scope.image}')`;
+                scope.$watch(() => scope.condition,
+                    (value) => {
+                        if (value) {
+                            setBackgroundImage(true);
+                        } else {
+                            setBackgroundImage();
+                        }
+                    }
+                );
 
-                scope.$watch(() => {
-                    return scope.condition;
-                }, (value) => {
-                    element.css(
-                        'background-image',
-                        (value ? urlNsfw : urlImg)
+                if (scope.imageChange) {
+                    scope.$watch(() => scope.image,
+                        () => setBackgroundImage()
                     );
-                });
+                }
+
+                async function setBackgroundImage(nsfw = false) {
+                    let image = await img(nsfw);
+                    element.css('background-image', image);
+                }
+
+                async function img(nsfw) {
+                    if (scope.valid == null || scope.imageChange) {
+                        scope.valid = await IsImage.perform(scope.image);
+                    }
+
+                    if (scope.image && scope.valid) {
+                        if (nsfw) {
+                            console.log('nsfw');
+                            return `url('${scope.nsfw}')`;
+                        } else {
+                            console.log('normal');
+                            return `url('${scope.image}')`;
+                        }
+                    } else {
+                        return `url('/assets/img/no_img.png')`;
+                    }
+                }
             }
         };
     }

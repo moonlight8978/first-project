@@ -9,3 +9,12 @@
 .has-ng-repeat-animate.ng-enter-active {
   opacity: 1;
 }
+
+.ng-show-hide-animate.ng-hide {
+  opacity: 0;
+}
+
+.ng-show-hide-animate.ng-hide-add,
+.ng-show-hide-animate.ng-hide-remove {
+  transition: all linear 0.5s;
+}

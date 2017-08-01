@@ -29,9 +29,11 @@ class Db::Novel < ApplicationRecord
   has_many :comments, class_name: 'Feature::Comment', as: :commentable
 
   has_and_belongs_to_many :releases, -> { released_asc },
-    join_table: :db_novels_novel_releases
+    join_table: :db_novels_novel_releases,
+    after_add: :reindex
   has_and_belongs_to_many :tags,
-    join_table: :db_novels_novel_tags
+    join_table: :db_novels_novel_tags,
+    after_add: :reindex
 
   searchable do
     text :title do
@@ -41,7 +43,8 @@ class Db::Novel < ApplicationRecord
     string :title_sort do
       NetworkKanjiFilter.to_hiragana(title.downcase.gsub(/[^\d\w\s]/, ''))
     end
-    integer :tag_ids, references: Db::Novel::Tag, multiple: true
+    integer :tag_ids,     references: Db::Novel::Tag,     multiple: true
+    integer :release_ids, references: Db::Novel::Release, multiple: true
   end
 
   def first_release
@@ -65,5 +68,9 @@ private
 
   def default_values
     self.image_nsfw ||= false
+  end
+
+  def reindex(object)
+    Sunspot.index!(self)
   end
 end

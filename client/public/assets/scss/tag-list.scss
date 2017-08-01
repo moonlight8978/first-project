@@ -1,27 +1,27 @@
 .tag-container {
   .tag-wrap {
-    padding: 0;
+    // padding: 0;
 
-    @include responsive(sm) {
-      &:nth-child(2n + 1) { padding-right: .75rem; }
-      &:nth-child(2n) { padding-left: .75rem; }
-    }
+    // @include responsive(sm) {
+    //   &:nth-child(2n + 1) { padding-right: .75rem; }
+    //   &:nth-child(2n) { padding-left: .75rem; }
+    // }
 
-    @include responsive(xl) {
-      &:nth-child(2n + 1) { padding: 0; }
-      &:nth-child(2n) { padding: 0; }
+    // @include responsive(xl) {
+    //   &:nth-child(2n + 1) { padding: 0; }
+    //   &:nth-child(2n) { padding: 0; }
 
-      &:nth-child(3n + 1) { padding-right: 0.75rem; }
-      &:nth-child(3n + 2) { padding: 0 (0.75rem / 2); }
-      &:nth-child(3n) { padding-left: 0.75rem; }
-    }
+    //   &:nth-child(3n + 1) { padding-right: 0.75rem; }
+    //   &:nth-child(3n + 2) { padding: 0 (0.75rem / 2); }
+    //   &:nth-child(3n) { padding-left: 0.75rem; }
+    // }
   }
 
   .tag {
     position: relative;
     padding: 1rem 1rem 0;
     margin-bottom: 1.5rem;
-    background-color: $content__background;
+    // background-color: $white;
 
     .header {
       // padding: 1rem 1rem 1rem 2.5rem;

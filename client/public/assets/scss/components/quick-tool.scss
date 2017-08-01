@@ -23,6 +23,10 @@
       &.btn-edit:hover { background-color: $blue; }
 
       &.btn-delete:hover { background-color: $red; }
+
+      &.btn-view:hover { background-color: $cyan; }
+
+      &.btn-create:hover { background-color: $green; }
     }
 
     span {

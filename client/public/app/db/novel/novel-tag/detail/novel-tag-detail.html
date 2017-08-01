@@ -30,15 +30,23 @@
         <div class="tag-detail-container item-container">
           <div class="item-group">
             <h6>ディスクリプション</h6>
-            <div class="tag item-bg item-box item item-container">
-              <div class="item-group" ng-if="vm.tag.description">
+            <div class="tag item-box item item-container">
+              <div class="item-group">
                 <h6>日本語</h6>
-                <div class="item text-description">{{ vm.tag.description }}</div>
+                <div class="line full-width no-margin"></div>
+                <div class="item text-description" ng-if="vm.tag.description">{{ vm.tag.description }}</div>
+                <div class="item" ng-if="!vm.tag.description">
+                  ディスクリプションがありません。
+                </div>
               </div>
 
-              <div class="item-group" ng-if="vm.tag.descriptionEn">
+              <div class="item-group">
                 <h6>英語</h6>
-                <div class="item text-description">{{ vm.tag.descriptionEn }}</div>
+                <div class="line full-width no-margin"></div>
+                <div class="item text-description" ng-if="vm.tag.descriptionEn">{{ vm.tag.descriptionEn }}</div>
+                <div class="item" ng-if="!vm.tag.descriptionEn">
+                  No description.
+                </div>
               </div>
             </div>
             <!-- <div class="tag item-bg item" ng-if="vm.tag.descriptionEn">
@@ -79,7 +87,7 @@
               <div class="load-more text-right" ng-if="vm.novels.novels.length">
                 <button class="btn-c-5 btn-c btn-c-5-sakura" ng-click="vm.loadMore()">もっと</button>
               </div>
-              <div ng-if="!vm.novels.novels.length">
+              <div class="item no-margin" ng-if="!vm.novels.novels.length">
                 関係があるノベルがありません。
               </div>
             </div>
@@ -113,6 +121,12 @@
                 <i class="fa fa-fw fa-times"></i>
               </button>
               <span>Delete article</span>
+            </div>
+            <div class="btn-group">
+              <button class="crud-btn btn-create" ui-sref="novelTag.new">
+                <i class="fa fa-fw fa-plus"></i>
+              </button>
+              <span>New article</span>
             </div>
           </div>
         </div>

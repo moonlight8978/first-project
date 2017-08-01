@@ -30,12 +30,13 @@ class Api::V1::Db::NovelsController < ApplicationController
   end
 
   def create
-    novel = ::Db::Novel.create(create_novel_params)
+    @novel = ::Db::Novel.create(create_novel_params)
 
-    if novel.errors.any?
-      render json: novel.errors, status: :ok, key_transform: :camel_lower
+    if @novel.errors.any?
+      render json: @novel.errors, status: :ok, key_transform: :camel_lower
     else
-      render_ok
+      render json: @novel, key_transform: :camel_lower, status: :ok,
+        serializer: Api::V1::Db::Novel::NovelListSerializer
     end
   end
 

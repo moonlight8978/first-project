@@ -33,10 +33,11 @@
         return service;
 
         function novelRsrc() {
-            return $resource(novelUrl, {
+            return $resource(novelUrl, {}, {
                 'query':  { method: 'GET', isArray: true },
                 'update': { method: 'PUT' },
-                'get':    { method: 'GET' }
+                'get':    { method: 'GET' },
+                'save':   { method: 'POST'}
             });
         }
 

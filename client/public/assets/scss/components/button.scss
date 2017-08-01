@@ -241,6 +241,10 @@ $white: #fff;
     }
 
     &.btn-view:hover {
+      background-color: $cyan;
+    }
+
+    &.btn-create:hover {
       background-color: $green;
     }
   }

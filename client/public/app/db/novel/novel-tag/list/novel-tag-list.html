@@ -29,7 +29,8 @@
 
   <div class="container page-body">
     <div class="body row">
-      <div class="content col-lg-9">
+      <div class="content col-lg-9 item-container">
+        <div class="item-box item">
         <div class="tag-container item-container row">
           <div class="tag-wrap col-sm-6 col-xl-4" ng-repeat="(tagId, tag) in vm.tags">
             <div class="tag">
@@ -60,6 +61,7 @@
           </div>
           <!-- END 1 item -->
         </div>
+        </div>
         <!-- END container -->
 
         <ul uib-pagination total-items="vm.totalTags" ng-model="vm.currentPage" max-size="8"
@@ -71,10 +73,23 @@
         <div class="clearfix"></div>
       </div>
 
-      <aside class="col-lg-3">
-        <div>
-          <h6></h6>
-          <div></div>
+      <aside class="col-lg-3 item-container">
+        <div class="item-group">
+          <h6>Quick tool</h6>
+          <div class="item item-box quick-tool-group">
+            <div class="btn-group">
+              <button class="crud-btn btn-create" ui-sref="novelTag.new">
+                <i class="fa fa-fw fa-plus"></i>
+              </button>
+              <span>New article</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-group">
+          <h6>コメント</h6>
+          <div class="item item-box">
+            凄い
+          </div>
         </div>
       </aside>
     </div>

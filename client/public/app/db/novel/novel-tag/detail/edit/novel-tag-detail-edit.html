@@ -29,7 +29,10 @@
 
   <div class="container page-body">
     <div class="body row">
-      <div class="content col-xl-9">
+      <div class="content col-xl-9 item-container">
+       <!--  <div class="item-group">
+        <h6>フォーム</h6>
+        <div class="item item-box"> -->
         <form id="tagForm" ng-submit="vm.submit(vm.tag)">
           <div class="row">
             <div class="col-lg-6 input-inline">
@@ -77,14 +80,15 @@
             <h6 ng-repeat="(key, value) in vm.error">{{ value }}</h6>
           </div>
 
+          <a class="pull-left" ui-sref="novelTag.detail" ui-sref-opts="{ reload: true }">
+            <span>&#x2039;</span>
+            戻る
+          </a>
           <button class="btn-c btn-c-5 btn-c-5-sakura pull-right">提出する</button>
           <div class="clearfix"></div>
         </form>
-
-        <a class="pull-left" ui-sref="novelTag.detail" ui-sref-opts="{ reload: true }">
-          <span>&#x2039;</span>
-          戻る
-        </a>
+     <!--  </div>
+      </div> -->
       </div>
 
       <aside class="col-xl-3 item-container">
