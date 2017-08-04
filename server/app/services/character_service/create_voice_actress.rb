@@ -1,7 +1,7 @@
 class CharacterService::CreateVoiceActress
-  def initialize(novel_id, character_id, person_id, params = {})
+  def initialize(character_novel_id, person_id, params = {})
     @character_novel = Db::Novel::CharacterNovel
-      .find_by(character_id: character_id, novel_id: novel_id)
+      .find(character_novel_id)
     @params = params
     @errors = ErrorMessage.new
     @person = ::Db::Person.find(person_id)

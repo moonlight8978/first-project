@@ -8,10 +8,11 @@
     CharacterResource.$inject = ['$resource', 'SERVER'];
 
     function CharacterResource($resource, server) {
-        let characterUrl      = server.api + '/db/characters/:id';
-
+        let characterUrl = server.api + '/db/characters/:id';
+        let vaUrl        = server.api + '/db/character_novels/:characterNovelId/voice_actresses/:id'
         let service = {
-            character: characterRsrc()
+            character: characterRsrc(),
+            va: vaRsrc()
         };
 
         return service;
@@ -21,6 +22,14 @@
                 'query':  { method: 'GET', isArray: true },
                 'update': { method: 'PUT' },
                 'get':    { method: 'GET' }
+            });
+        }
+
+        function vaRsrc() {
+            return $resource(vaUrl, {}, {
+                'update': { method: 'PUT' },
+                'get':    { method: 'GET' },
+                'save':   { method: 'POST' }
             });
         }
     }

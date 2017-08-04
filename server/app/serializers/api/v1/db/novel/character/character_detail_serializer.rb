@@ -5,5 +5,6 @@ class Api::V1::Db::Novel::Character::CharacterDetailSerializer < ActiveModel::Se
     :birthday_month, :bust, :waist, :hips, :image, :gender, :role,
     :description, :description_en
 
-  has_many :character_novels, key: :novels
+  has_many :character_novels, key: :novels,
+    serializer: Api::V1::Db::Novel::Character::CharacterNovelSerializer
 end

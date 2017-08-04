@@ -1,0 +1,260 @@
+<div class="animated fadeIn">
+  <div class="no-banner"></div>
+  <div class="container">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a ui-sref="home">メインページ</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0);">データベース</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a ui-sref="novel.list({ page: 1, length: null })">全てのノベル</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a ui-sref="novel.detail">{{ vm.novel.title }}</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0);">キャラクター</a>
+        </li>
+        <li class="breadcrumb-item active">
+          新しいキャラクターを作る
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="page-head">
+    <div class="container">
+      <h3>新しいキャラクターを作る</h3>
+      <h6>create new character</h6>
+    </div>
+  </div>
+
+  <div class="container page-body">
+    <div class="body row">
+      <div class="content col-xl-9">
+        <form novalidate name="form" ng-submit="vm.submitCreate(vm.character)">
+          <div class="row">
+            <div class="col-lg-9 col-7 col-md-8">
+              <div class="form-group"
+                ng-class="{ 'has-danger': (form.$submitted || form.name.$touched) && form.name.$invalid }">
+                <label for="_name" class="form-control-label">*名前</label>
+                <input type="text" class="form-control" name="name" id="_name"
+                  ng-model="vm.character.name" autocomplete="off" required>
+                <small id="nameHelp" class="form-text text-muted">日本語でお願いします。</small>
+                <div class="form-control-feedback"
+                  ng-show="form.$submitted || form.name.$touched">
+                  <span ng-show="form.name.$error.required" class="ng-show-hide-animate">
+                    Title can't be empty.
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group"
+                ng-class="{ 'has-danger': (form.$submitted || form.nameEn.$touched) && form.nameEn.$invalid }">
+                <label for="_nameEn" class="form-control-label">*名前(英語)</label>
+                <input type="text" class="form-control" name="nameEn" id="_nameEn"
+                  ng-model="vm.character.nameEn" autocomplete="off" required>
+                <small id="titleEnHelp" class="form-text text-muted">
+                  英語/ローマ字でお願いします。
+                </small>
+                <div class="form-control-feedback"
+                  ng-show="form.$submitted || form.nameEn.$touched">
+                  <span ng-show="form.nameEn.$error.required" class="ng-show-hide-animate">
+                    Name can't be empty.
+                  </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-8">
+                  <div class="form-group"
+                    ng-class="{ 'has-danger': (form.$submitted || form.role.$touched) && form.role.$invalid }">
+                    <label for="_role" class="form-control-label">*役割</label>
+                    <select id="_role" name="role" class="form-control"
+                      ng-options="r.value as r.label for r in vm.role"
+                      ng-model="vm.character.role" required>
+                    </select>
+                    <div class="form-control-feedback"
+                      ng-show="form.$submitted || form.role.$touched">
+                      <span ng-show="form.role.$error.required" class="ng-show-hide-animate">
+                        Role can't be empty.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="form-group"
+                    ng-class="{ 'has-danger': (form.$submitted || form.gender.$touched) && form.gender.$invalid }">
+                    <label for="_gender" class="form-control-label">*性別</label>
+                    <select id="_gender" name="gender" class="form-control"
+                      ng-options="g.value as g.label for g in vm.gender"
+                      ng-model="vm.character.gender" required>
+                    </select>
+                    <div class="form-control-feedback"
+                      ng-show="form.$submitted || form.gender.$touched">
+                      <span ng-show="form.gender.$error.required" class="ng-show-hide-animate">
+                        Gender can't be empty.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-5 col-md-4">
+              <div class="image-placeholder ratio-3_4">
+                <div image-thumb class="image-thumb"
+                  condition="false" image-change="true"
+                  nsfw="/assets/img/image-nsfw.jpg" image="{{ vm.character.image }}">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group"
+            ng-class="{ 'has-danger': (form.$submitted || form.image.$touched) && form.image.$invalid }">
+            <label for="_image" class="form-control-label">写真</label>
+            <input type="text" class="form-control" name="image" id="_image"
+              ng-model="vm.character.image" autocomplete="off"
+              link-validator ext="jpg,png,jpeg"
+              ng-model-options="{ updateOn: 'mousedown blur' }">
+            <small id="imageHelp" class="form-text text-muted">
+              Image URL looks like: http(s):// blah..blah .[jpg|png|jpeg]<br>
+              i.e. https://s.vndb.org/cv/31/31631.jpg
+            </small>
+
+            <div class="form-control-feedback" ng-show="form.$submitted || form.image.$touched && form.image.$invalid">
+              <span ng-show="form.image.$error.link" class="ng-show-hide-animate">
+                Image URL invalid.
+              </span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-4">
+              <div class="form-group">
+                <label for="_height">身長</label>
+                <input type="number" id="_height" name="height" class="form-control"
+                  ng-model="vm.character.height">
+                <small id="heightHelp" class="form-text text-muted">
+                  センチメートル
+                </small>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="form-group">
+                <label for="_weight">重量</label>
+                <input type="number" id="_weight" name="weight" class="form-control"
+                  ng-model="vm.character.weight">
+                <small id="weightHelp" class="form-text text-muted">
+                  キログラム
+                </small>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="form-group">
+                <label for="_threeSizes">B/W/H</label>
+                <input type="text" id="_threeSizes" name="threeSize" class="form-control"
+                  ng-model="vm.character.threeSize">
+                <small id="threeSizesHelp" class="form-text text-muted">
+                  センチメートル<br>
+                  例: B:80 W: 50 H: 75 => 80-50-75
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-8">
+              <div class="form-group">
+                <label for="_birthday">誕生日</label>
+                <input type="text" id="_birthday" name="birthday" class="form-control"
+                  ng-model="vm.character.birthday" has-date-picker
+                  format="mm-dd">
+                <small id="birthdayHelp" class="form-text text-muted">
+                  月-日
+                </small>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="form-group">
+                <label for="_bloodType">血液型</label>
+                <select id="_bloodType" name="bloodType" class="form-control"
+                  ng-options="b.value as b.label for b in vm.bloodType"
+                  ng-model="vm.character.bloodType">
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>ディスクリプション</label>
+            <textarea type="text" class="form-control" rows="6"
+              name="description" ng-model="vm.character.description">
+            </textarea>
+            <small id="descriptionHelp" class="form-text text-muted">
+              日本語でお願いします。
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label>ディスクリプション(英語)</label>
+            <textarea type="text" class="form-control" rows="6"
+              name="descriptionEn" ng-model="vm.character.descriptionEn">
+            </textarea>
+            <small id="descriptionEnHelp" class="form-text text-muted">英語でお願いします。</small>
+          </div>
+
+          <div class="form-group form-success animated fadeIn"
+            ng-show="vm.message">
+            <h6 ng-repeat="(key, value) in vm.message">{{ value }}</h6>
+          </div>
+
+          <div class="form-group form-error animated fadeIn"
+            ng-show="vm.error">
+            <h6 ng-repeat="(key, value) in vm.error">{{ value }}</h6>
+          </div>
+
+          <a class="pull-left" ui-sref="novel.detail" ui-sref-opts="{ reload: true }">
+            <span>&#x2039;</span>
+            戻る
+          </a>
+          <button class="btn-c btn-c-5 btn-c-5-sakura pull-right">
+            提出する
+          </button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+
+      <aside class="col-lg-3 item-container">
+        <div class="item-group">
+          <h6>Quick tool</h6>
+          <div class="item item-box quick-tool-group">
+            <div class="nsfw">
+              <span>
+                <label class="switch-button">
+                  <input type="checkbox" ng-model="vm.hideNsfw">
+                  <div class="slider"></div>
+                </label>
+              </span>
+              <span>Hコンテンツを消す</span>
+            </div>
+            <div class="btn-group">
+              <button class="crud-btn btn-reset" ng-click="vm.resetAll()">
+                <i class="fa fa-fw fa-repeat"></i>
+              </button>
+              <span>フォルムをリセット</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

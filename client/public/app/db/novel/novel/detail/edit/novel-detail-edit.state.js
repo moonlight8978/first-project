@@ -19,11 +19,6 @@
                     controller: 'NovelDetailEditController',
                     controllerAs: 'vm'
                 }
-            },
-            data: {
-                roles: []
-            },
-            resolve: {
             }
         });
     }

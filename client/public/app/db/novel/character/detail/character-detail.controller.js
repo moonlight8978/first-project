@@ -5,15 +5,15 @@
         .module('app')
         .controller('CharacterDetailController', CharacterDetailController);
 
-    CharacterDetailController.$inject = ['CharacterResource', '$stateParams'];
+    CharacterDetailController.$inject = ['character', 'PageTitle'];
 
-    function CharacterDetailController(CharacterResource, $stateParams) {
-        this.id = $stateParams.id;
-        this.hideNsfw = true;
+    function CharacterDetailController(character, PageTitle) {
+        const vm = this;
 
-        // AJAX request to get informations about character
-        CharacterResource.character.get({ id: this.id }, (character) => {
-            this.character = character;
-        });
+        PageTitle.set(`${character.name} / キャラクター`);
+        console.log(character);
+
+        vm.character = character;
+        vm.hideNsfw = true;
     }
 })();

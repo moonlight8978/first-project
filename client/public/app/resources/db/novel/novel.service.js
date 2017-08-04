@@ -10,7 +10,7 @@
     function NovelResource($resource, server) {
         let novelUrl      = server.api + '/db/novels/:id';
         let staffUrl      = server.api + '/db/novels/:novelId/staffs';
-        let characterUrl  = server.api + '/db/novels/:novelId/characters';
+        let characterUrl  = server.api + '/db/novels/:novelId/characters/:id';
         let releaseUrl    = server.api + '/db/novels/:novelId/releases/:id';
         let tagUrl        = server.api + '/db/novels/:novelId/tags/:id';
         let producerUrl   = server.api + '/db/novels/:novelId/publications';
@@ -42,26 +42,26 @@
         }
 
         function staffRsrc() {
-            return $resource(staffUrl, {
+            return $resource(staffUrl, {}, {
                 'query': { method: 'GET', isArray: true },
                 'get':   { method: 'GET' }
             });
         }
 
         function characterRsrc() {
-            return $resource(characterUrl, {
+            return $resource(characterUrl, {}, {
                 'query': { method: 'GET', isArray: true }
             });
         }
 
         function releaseRsrc() {
-            return $resource(releaseUrl, {
+            return $resource(releaseUrl, {}, {
                 'query': { method: 'GET', isArray: true }
             });
         }
 
         function tagRsrc() {
-            return $resource(tagUrl, {
+            return $resource(tagUrl, {}, {
                 'query': { method: 'GET', isArray: true },
                 'save': { method: 'POST' },
                 'delete': { method: 'DELETE' }
@@ -69,25 +69,25 @@
         }
 
         function producerRsrc() {
-            return $resource(producerUrl, {
+            return $resource(producerUrl, {}, {
                 'query': { method: 'GET', isArray: true }
             });
         }
 
         function screenshotRsrc() {
-            return $resource(screenshotUrl, {
+            return $resource(screenshotUrl, {}, {
                 'query': { method: 'GET', isArray: true }
             });
         }
 
         function searchRsrc() {
-            return $resource(searchUrl, {
+            return $resource(searchUrl, {}, {
                 'query': { method: 'GET', isArray: true }
             });
         }
 
         function ratingRsrc() {
-            return $resource(ratingUrl, {
+            return $resource(ratingUrl, {}, {
                 'get': { method: 'GET' },
                 'save': { method: 'POST' }
             });

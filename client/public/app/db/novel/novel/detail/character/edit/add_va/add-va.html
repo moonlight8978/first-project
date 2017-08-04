@@ -1,0 +1,102 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ vm.modalTitle }}</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+    ng-click="vm.closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body crud-modal">
+  <form id="searchForm" name="searchForm" class="search-to-add-form" ng-submit="vm.search(vm.query)">
+    <div class="form-group">
+      <label>キーワード</label>
+      <input class="form-control" type="text" name="query" ng-model="vm.query"
+        placeholder="入力。。。">
+    </div>
+
+    <button class="btn-c btn-c-5 btn-c-5-sakura">検索する</button>
+    <a href="javascript:;" ng-click="vm.goNew()">{{ vm.goNewLink }}</a>
+  </form>
+
+  <div class="line"></div>
+
+  <form name="form" ng-submit="vm.submitCreate(vm.va)">
+    <div class="form-group" ng-class="{ 'has-danger': form.$submitted && !vm.va.personId }">
+      <h6 class="ng-show-hide-animate" ng-show="vm.va.person">
+        <a href="javascript:void(0)">{{ vm.va.person.name }}</a>が選択されていました。
+        <a href="javascript:void(0)" ng-click="vm.resetVa()">リセット</a>
+      </h6>
+      <h6 class="ng-show-hide-animate form-control-feedback" ng-hide="vm.va.person">
+        誰も選択されています。
+      </h6>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="_alias" class="form-control-label">アリアス</label>
+          <input id="_alias" class="form-control" type="text" name="alias"
+            ng-model="vm.va.alias" ng-disabled="vm.va.noAlias">
+          <small id="titleHelp" class="form-text text-muted">日本語でお願いします。</small>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="_aliasEn" class="form-control-label">アリアス(英語)</label>
+          <input id="_aliasEn" class="form-control" type="text" name="aliasEn"
+            ng-model="vm.va.aliasEn" ng-disabled="vm.va.noAlias">
+          <small id="titleHelp" class="form-text text-muted">英語/ローマ字でお願いします。</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-check">
+      <label class="form-check-label" for="_noAlias">
+        <input id="_noAlias" type="checkbox" class="form-check-input"
+          ng-model="vm.va.noAlias">
+          アリアス使いません
+      </label>
+    </div>
+
+    <div class="message" ng-if="vm.message">
+      <h6 ng-repeat="(key, value) in vm.message">{{ value }}</h6>
+    </div>
+    <div class="error" ng-if="vm.error">
+      <h6 ng-repeat="(key, value) in vm.error">{{ value }}</h6>
+    </div>
+
+    <button class="btn-c btn-c-5 btn-c-5-sakura pull-right">提出</button>
+    <div class="clearfix"></div>
+  </form>
+
+  <div class="novel-tag-container search-results">
+    <div class="title">
+      検索結果
+      <span class="animated fadeIn" ng-show="vm.done">
+        ({{ vm.total }}結果)
+      </span>
+      <ul uib-pagination total-items="vm.total"
+        ng-model="vm.currentPage" max-size="1" items-per-page="vm.perPage"
+        ng-change="vm.pageChange()" boundary-links="true"
+        first-text="最初" last-text="最後" next-text="»" previous-text="«"
+        class="pull-right top">
+      </ul>
+    </div>
+    <div class="line full-width"></div>
+    <div class="tag-list full-width" ng-if="vm.results.length && vm.done">
+      <a role="button" class="tag animated fadeIn" ng-repeat="result in vm.results"
+        ng-click="vm.choose(result)">
+        {{ result[vm.resultProperty] }}
+        <span>&plus;</span>
+      </a>
+    </div>
+<!--
+    <div ng-if="!vm.results.length && vm.done">
+      There is no results for <i>{{ vm.query }}</i>
+    </div> -->
+  </div>
+</div>
+<!-- <div class="modal-footer">
+  <button type="button" class="btn btn-primary">Save changes</button>
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div> -->
+

@@ -5,9 +5,9 @@
         .module('app')
         .controller('NovelTagDetailEditController', NovelTagDetailEditController);
 
-    NovelTagDetailEditController.$inject = ['tag', 'PageTitle', 'RemoveEmptyField', 'TagResource'];
+    NovelTagDetailEditController.$inject = ['$scope', 'tag', 'PageTitle', 'RemoveEmptyField', 'TagResource'];
 
-    function NovelTagDetailEditController(tag, PageTitle, RemoveEmptyField, TagResource) {
+    function NovelTagDetailEditController($scope, tag, PageTitle, RemoveEmptyField, TagResource) {
         PageTitle.set(`Edit ${tag.tag}`);
 
         let vm = this;
@@ -18,6 +18,9 @@
         vm.submit = submit;
 
         async function submit(_tag) {
+            if ($scope.form.$pristine || $scope.form.$invalid)
+                return false;
+
             console.log(_tag);
             reset();
             RemoveEmptyField.perform(_tag);

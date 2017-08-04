@@ -5,9 +5,9 @@
         .module('app')
         .controller('NovelDetailController', NovelDetailController);
 
-    NovelDetailController.$inject = ['$rootScope', '$scope', '$state', '$http', '$stateParams', 'novel', 'reviews', 'votes', 'LENGTH', 'Principal', 'PageTitle', 'NovelResource'];
+    NovelDetailController.$inject = ['$rootScope', '$scope', '$state', '$http', '$stateParams', 'novel', 'reviews', 'votes', 'LENGTH', 'Principal', 'PageTitle', 'NovelResource', 'DeleteConfirm'];
 
-    function NovelDetailController($rootScope, $scope, $state, $http, $stateParams, novel, reviews, votes, length, Principal, PageTitle, NovelResource) {
+    function NovelDetailController($rootScope, $scope, $state, $http, $stateParams, novel, reviews, votes, length, Principal, PageTitle, NovelResource, DeleteConfirm) {
         // common
         let self = this;
         PageTitle.set(novel.title);
@@ -19,6 +19,13 @@
 
         this.threeSizes = threeSizes;
         this.birthday = birthday;
+        this.delete = () => {
+            DeleteConfirm.open(
+                'NovelDetailDeleteController',
+                'app/db/novel/novel/detail/delete/novel-detail-delete.html',
+                this.novel
+            );
+        }
 
         this.hideNsfw = true;
         this.length = length.full;

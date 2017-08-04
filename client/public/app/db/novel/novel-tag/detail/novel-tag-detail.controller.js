@@ -5,9 +5,9 @@
         .module('app')
         .controller('NovelTagDetailController', NovelTagDetailController);
 
-    NovelTagDetailController.$inject = ['$state', 'tag', 'novels', 'PageTitle', 'TagResource'];
+    NovelTagDetailController.$inject = ['$state', 'tag', 'novels', 'PageTitle', 'TagResource', 'DeleteConfirm'];
 
-    function NovelTagDetailController($state, tag, novels, PageTitle, TagResource) {
+    function NovelTagDetailController($state, tag, novels, PageTitle, TagResource, DeleteConfirm) {
         let vm = this;
         const noMore = { 'message': 'There is no more...' };
         PageTitle.set(tag.tag);
@@ -17,6 +17,13 @@
         vm.hideNsfw = true;
 
         vm.loadMore = loadMore;
+        vm.delete = () => {
+            DeleteConfirm.open(
+                'NovelTagDetailDeleteController',
+                'app/db/novel/novel-tag/detail/delete/novel-tag-detail-delete.html',
+                this.tag
+            );
+        }
 
         function loadMore() {
             if (vm.novels.page < vm.novels.totalPage) {

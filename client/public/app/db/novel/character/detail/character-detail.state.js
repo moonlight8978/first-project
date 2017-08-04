@@ -16,6 +16,13 @@
                     controller: 'CharacterDetailController',
                     controllerAs: 'vm'
                 }
+            },
+            resolve: {
+                'character': async ($stateParams, CharacterResource) => {
+                    return await CharacterResource.character
+                        .get({ id: $stateParams.id })
+                        .$promise;
+                }
             }
         });
     }

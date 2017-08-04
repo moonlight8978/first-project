@@ -22,6 +22,7 @@
 
         $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {
             if (error && error.status) {
+                console.log(error);
                 event.preventDefault();
                 $state.go(`errors.${error.status}`)
             }

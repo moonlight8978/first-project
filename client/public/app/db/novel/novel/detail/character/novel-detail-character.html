@@ -1,0 +1,202 @@
+<!-- Contains three groups,
+    contents are the same,
+    different is only in first 3 lines
+    (ng-if, ng-repeat, h6 tag) -->
+<div class="character-group" ng-if="vm.characters.protagonist">
+  <h6>主人公</h6>
+
+  <div class="character-wrap" ng-repeat="character in vm.characters.protagonist">
+    <div class="row">
+      <div class="col-3 character-image">
+        <div class="image-placeholder ratio-3_4">
+          <div class="image-thumb" image-thumb image="{{ character.image }}"
+            nsfw="" condition="false"></div>
+        </div>
+      </div>
+      <div class="character-info col-9">
+        <div class="head">
+          <a ui-sref="index" class="name">{{ character.name }}</a>
+          <span ng-if"character.gender" ng-switch="character.gender">
+            <i ng-switch-when="male" class="fa fa-mars"></i>
+            <i ng-switch-when="female" class="fa fa-venus"></i>
+          </span>
+          <span ng-if"character.bloodType">{{ character.bloodType }}</span>
+        </div>
+        <div class="character-data">
+          <div ng-if="character.birthdayDay || character.birthdayMonth">
+            <span>誕生日: </span>
+            <span>{{ vm.birthday(character) }}</span>
+          </div>
+          <div>
+            <span ng-if="character.height">身長: </span>
+            <span ng-if="character.height">{{ character.height }}cm</span>
+            <span ng-if="character.weight">重量: </span>
+            <span ng-if="character.weight">{{ character.weight }}kg</span>
+          </div>
+          <div ng-if="character.bust || character.waist || character.hips">
+            <span>B/W/H: </span>
+            <span>{{ vm.threeSizes(character) }}cm</span>
+          </div>
+          <div class="character-description" ng-if="character.description">
+            <p></p>
+            <p>
+              {{ character.description }}
+            </p>
+          </div>
+          <div ng-if="character.voiceActresses">
+            <span>CV: </span>
+            <span ng-repeat="va in character.voiceActresses">
+              <a class="va-name" ui-sref="index">{{ va.name }}</a><br>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="crud-btn-group big" has-role authority="ROLE_USER">
+        <button class="crud-btn btn-edit" type="button" ui-sref="novel.detail.editCharacter({ id: vm.novelId, characterId: character.id, character: character })">
+          <i class="fa fa-pencil"></i>
+        </button>
+        <button class="crud-btn btn-delete" ng-click="vm.delete(character)">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+     </div>
+   </div>
+</div>
+
+<div class="character-group" ng-if="vm.characters.main">
+  <h6>メインキャラクター</h6>
+
+  <div class="character-wrap" ng-repeat="character in vm.characters.main">
+    <div class="row">
+      <div class="col-3 character-image">
+        <div class="image-placeholder ratio-3_4">
+          <div class="image-thumb" image-thumb image="{{ character.image }}"
+            nsfw="" condition="false"></div>
+        </div>
+      </div>
+      <div class="character-info col-9">
+        <div class="head">
+          <a ui-sref="character.detail({ id: character.id })" class="name">
+            {{ character.name }}
+          </a>
+          <span ng-if"character.gender" ng-switch="character.gender">
+            <i ng-switch-when="male" class="fa fa-mars"></i>
+            <i ng-switch-when="female" class="fa fa-venus"></i>
+          </span>
+          <span ng-if"character.bloodType">{{ character.bloodType }}</span>
+        </div>
+        <div class="character-data">
+          <div ng-if="character.birthdayDay || character.birthdayMonth">
+            <span>誕生日: </span>
+            <span>{{ vm.birthday(character) }}</span>
+          </div>
+          <div>
+            <span ng-if="character.height">身長: </span>
+            <span ng-if="character.height">{{ character.height }}cm</span>
+            <span ng-if="character.weight">重量: </span>
+            <span ng-if="character.weight">{{ character.weight }}kg</span>
+          </div>
+          <div ng-if="character.bust || character.waist || character.hips">
+            <span>B/W/H: </span>
+            <span>{{ vm.threeSizes(character) }}cm</span>
+          </div>
+          <div class="character-description" ng-if="character.description">
+            <p></p>
+            <p>
+              {{ character.description }}
+            </p>
+          </div>
+          <div ng-if="character.voiceActresses">
+            <span>CV: </span>
+            <span ng-repeat="va in character.voiceActresses">
+              <a class="va-name" ui-sref="index">{{ va.name }}</a><br>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="crud-btn-group big" has-role authority="ROLE_USER">
+        <button class="crud-btn btn-edit" type="button" ui-sref="novel.detail.editCharacter({ id: vm.novelId, characterId: character.id, character: character })">
+          <i class="fa fa-pencil"></i>
+        </button>
+        <button class="crud-btn btn-delete" ng-click="vm.delete(character)">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+     </div>
+   </div>
+</div>
+
+<div class="character-group" ng-if="vm.characters.side">
+  <h6>サポート</h6>
+
+  <div class="character-wrap" ng-repeat="character in vm.characters.side">
+    <div class="row">
+      <div class="col-3 character-image">
+        <div class="image-placeholder ratio-3_4">
+          <div class="image-thumb" image-thumb image="{{ character.image }}"
+            nsfw="" condition="false"></div>
+        </div>
+      </div>
+      <div class="character-info col-9">
+        <div class="head">
+          <a ui-sref="index" class="name">{{ character.name }}</a>
+          <span ng-if"character.gender" ng-switch="character.gender">
+            <i ng-switch-when="male" class="fa fa-mars"></i>
+            <i ng-switch-when="female" class="fa fa-venus"></i>
+          </span>
+          <span ng-if"character.bloodType">{{ character.bloodType }}</span>
+        </div>
+        <div class="character-data">
+          <div ng-if="character.birthdayDay || character.birthdayMonth">
+            <span>誕生日: </span>
+            <span>{{ vm.birthday(character) }}</span>
+          </div>
+          <div>
+            <span ng-if="character.height">身長: </span>
+            <span ng-if="character.height">{{ character.height }}cm</span>
+            <span ng-if="character.weight">重量: </span>
+            <span ng-if="character.weight">{{ character.weight }}kg</span>
+          </div>
+          <div ng-if="character.bust || character.waist || character.hips">
+            <span>B/W/H: </span>
+            <span>{{ vm.threeSizes(character) }}cm</span>
+          </div>
+          <div class="character-description" ng-if="character.description">
+            <p></p>
+            <p>
+              {{ character.description }}
+            </p>
+          </div>
+          <div ng-if="character.voiceActresses">
+            <span>CV: </span>
+            <span ng-repeat="va in character.voiceActresses">
+              <a class="va-name" ui-sref="index">{{ va.name }}</a><br>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="crud-btn-group big" has-role authority="ROLE_USER">
+        <button class="crud-btn btn-edit" type="button" ui-sref="novel.detail.editCharacter({ id: vm.novelId, characterId: character.id, character: character })">
+          <i class="fa fa-pencil"></i>
+        </button>
+        <button class="crud-btn btn-delete" ng-click="vm.delete(character)">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+     </div>
+   </div>
+</div>
+
+<div class="add-group">
+  <div>
+    <button class="add-more" type="button" ui-sref="novel.detail.newCharacter"></button>
+    <span>新しいキャラクターを追加する</span>
+  </div>
+  <div>
+    <button class="add-more" type="button"></button>
+    <span>既存のキャラクターを追加する</span>
+  </div>
+</div>

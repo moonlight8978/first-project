@@ -122,29 +122,10 @@
 
           <!-- Tab panes -->
           <div class="tab-content">
-            <div class="tab-pane fade show active" id="character" role="tabpanel"
-              ng-if="vm.novel.characters">
-              <div class="character-list">
-                <character-in-novel characters="vm.novel.characters.protagonist"
-                  type="protagonist" novel="vm.novel.id" ng-if="vm.novel.characters.protagonist">
-                </character-in-novel>
-                <character-in-novel characters="vm.novel.characters.main"
-                  type="main" novel="vm.novel.id" ng-if="vm.novel.characters.main">
-                </character-in-novel>
-                <character-in-novel characters="vm.novel.characters.side"
-                  type="side" novel="vm.novel.id" ng-if="vm.novel.characters.side">
-                </character-in-novel>
-                <div class="add-group">
-                  <div>
-                    <button class="add-more" type="button"></button>
-                    <span>新しいキャラクターを追加する</span>
-                  </div>
-                  <div>
-                    <button class="add-more" type="button"></button>
-                    <span>既存のキャラクターを追加する</span>
-                  </div>
-                </div>
-              </div>
+            <div class="tab-pane fade show active" id="character" role="tabpanel">
+              <novel-detail-character class="character-list"
+                characters="vm.novel.characters" novel="vm.novel">
+              </novel-detail-character>
             </div>
 
             <div class="tab-pane fade" id="staff" role="tabpanel"
@@ -306,7 +287,7 @@
               <span>Edit article</span>
             </div>
             <div class="btn-group">
-              <button class="crud-btn btn-delete">
+              <button class="crud-btn btn-delete" ng-click="vm.delete()">
                 <i class="fa fa-fw fa-times"></i>
               </button>
               <span>Delete article</span>

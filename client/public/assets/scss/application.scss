@@ -108,8 +108,8 @@ a {
   }
 }
 
-button:active, button:focus {
-  outline: 0;
+*:active, *:focus {
+  outline: none;
 }
 
 * {

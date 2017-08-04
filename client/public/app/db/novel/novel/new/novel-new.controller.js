@@ -5,9 +5,9 @@
         .module('app')
         .controller('NovelNewController', NovelNewController);
 
-    NovelNewController.$inject = ['NovelResource', 'RemoveEmptyField'];
+    NovelNewController.$inject = ['$scope', 'NovelResource', 'RemoveEmptyField'];
 
-    function NovelNewController(NovelResource, RemoveEmptyField) {
+    function NovelNewController($scope, NovelResource, RemoveEmptyField) {
         let vm = this;
         const success = { 'message': 'Everythingは大丈夫！' };
 
@@ -35,6 +35,7 @@
         ]
 
         vm.submit = submit;
+        vm.resetAll = resetAll;
         vm.log = log;
 
         /**
@@ -42,6 +43,9 @@
          * @param {Novel} novel - Novel need to be created
          */
         async function submit(_novel) {
+            if ($scope.form.$pristine || $scope.form.$invalid)
+                return false;
+
             reset();
             RemoveEmptyField.perform(_novel);
 
@@ -62,6 +66,13 @@
             delete vm.error;
             delete vm.message;
             delete vm.result;
+        }
+
+        function resetAll(form) {
+            reset();
+            delete vm.novel;
+            $scope.form.$setPristine();
+            $scope.form.$setUntouched();
         }
 
         function log() {

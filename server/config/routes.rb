@@ -6,13 +6,13 @@ Rails.application.routes.draw do
           resources :screenshots,  shallow: true, controller: 'novels/screenshots'
           resources :staffs,       only: :create, controller: 'novels/staffs'
           resources :characters, only: [] do
-            # Add more seiyuu to character
-            post   'voice_actresses/:id', to: 'novels/characters/voice_actresses#create'
-            # Update seiyuu alias
-            patch  'voice_actresses/:id', to: 'novels/characters/voice_actresses#update'
-            put    'voice_actresses/:id', to: 'novels/characters/voice_actresses#update'
-            # Remove seiyuu from character
-            delete 'voice_actresses/:id', to: 'novels/characters/voice_actresses#destroy'
+            # # Add more seiyuu to character
+            # post   'voice_actresses/:id', to: 'novels/characters/voice_actresses#create'
+            # # Update seiyuu alias
+            # patch  'voice_actresses/:id', to: 'novels/characters/voice_actresses#update'
+            # put    'voice_actresses/:id', to: 'novels/characters/voice_actresses#update'
+            # # Remove seiyuu from character
+            # delete 'voice_actresses/:id', to: 'novels/characters/voice_actresses#destroy'
           end
           scope module: :novels do
             get  'ratings/:user_id', to: 'ratings#show'
@@ -36,6 +36,16 @@ Rails.application.routes.draw do
           post   'releases/:id', to: 'novels/releases#create_novel'
           # Remove a release from novel
           delete 'releases/:id', to: 'novels/releases#destroy_novel'
+        end
+
+        resources :character_novels, only: [] do
+          # Add more seiyuu to character
+          post   'voice_actresses', to: 'character_novels/voice_actresses#create'
+          # Update seiyuu alias
+          patch  'voice_actresses/:id', to: 'character_novels/voice_actresses#update'
+          put    'voice_actresses/:id', to: 'character_novels/voice_actresses#update'
+          # Remove seiyuu from character
+          delete 'voice_actresses/:id', to: 'character_novels/voice_actresses#destroy'
         end
 
         scope module: :novels do
@@ -68,7 +78,8 @@ Rails.application.routes.draw do
         get 'novels',     to: 'novels#index'
         get 'characters', to: 'characters#index'
         get 'releases',   to: 'releases#index'
-        get 'novel_tags',       to: 'tags#index'
+        get 'novel_tags', to: 'tags#index'
+        get 'people',     to: 'people#index'
       end
 
       resources :countries, except: :show

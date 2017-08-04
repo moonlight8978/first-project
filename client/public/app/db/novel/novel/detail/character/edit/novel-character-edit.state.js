@@ -9,7 +9,7 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('novel.detail.editCharacter', {
-            url: '/character/:characterId/edit',
+            url: '/characters/{characterId:int}/edit',
             params: {
                 'character': null
             },
@@ -21,12 +21,10 @@
                 }
             },
             data: {
-                roles: ['ROLE_ADMIN']
+                roles: ['ROLE_USER']
             },
             resolve: {
-                character: function ($stateParams) {
-                    return $stateParams.character;
-                }
+                character: ($stateParams) => $stateParams.character
             }
         });
     }

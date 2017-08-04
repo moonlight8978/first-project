@@ -44,8 +44,8 @@
         </ul>
         <!-- END navbar left -->
         <form class="form-inline search-form" id="searchForm"
-          ng-submit="vm.goSearch()">
-          <select class="custom-select" id="searchCate" ng-model="vm.search.category" required>
+          ng-submit="vm.goSearch()" name="navSearchForm">
+          <!-- <select class="custom-select" id="searchCate" ng-model="vm.search.category" required>
             <option value="">カテゴリ</option>
             <option value="novel">ビジュアルノベル</option>
             <option value="novelRelease">ノベルの発売</option>
@@ -55,8 +55,21 @@
             <option value="albumProduct">アルバム(製品)</option>
             <option value="character">キュラクター</option>
             <option value="tag">タグ</option>
-          </select>
-          <div class="stylish-input-group" id="inputGroup">
+          </select> -->
+          <div class="input-group search-cate-wrap" ng-class="{ 'has-danger': navSearchForm.$submitted && navSearchForm.category.$invalid }">
+            <select class="form-control search-cate" name="category" id="searchCate" ng-model="vm.search.category" required>
+              <option value="">カテゴリ</option>
+              <option value="novel">ビジュアルノベル</option>
+              <option value="novelRelease">ノベルの発売</option>
+              <option value="album">アルバム</option>
+              <option value="albumRelease">アルバムの発売</option>
+              <option value="novelProduct">美少女ゲーム(製品)</option>
+              <option value="albumProduct">アルバム(製品)</option>
+              <option value="character">キュラクター</option>
+              <option value="tag">タグ</option>
+            </select>
+          </div>
+          <!-- <div class="stylish-input-group" id="inputGroup">
             <input class="form-control mr-sm-2" id="searchInput" type="text"
               placeholder="探しましょう" ng-model="vm.search.query"
               autocomplete="off" ng-change="vm.search()" ng-trim="false" required>
@@ -65,7 +78,23 @@
             </button>
             <button type="submit" id="searchSubmit">
               <i class="fa fa-search"></i>
-            </button>
+            </button> -->
+
+          <div class="input-group search-query-wrap" ng-class="{ 'has-danger': navSearchForm.$submitted && navSearchForm.query.$invalid }">
+            <input class="form-control search-query" id="searchInput"
+              name="query" type="text"
+              placeholder="探しましょう" ng-model="vm.search.query"
+              autocomplete="off" ng-change="vm.search()" ng-trim="false" required>
+            <div class="btn-group">
+              <button type="button" class="btn btn-clear" id="searchClear"
+                ng-click="vm.clearInput()">
+                <span>&#10006;</span>
+              </button>
+              <button id="searchSubmit" class="btn btn-submit">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+
             <div class="live-search-results">
               <a ui-sref="novel.detail({ id: novel.id })"
                 ng-repeat="novel in vm.search.results">

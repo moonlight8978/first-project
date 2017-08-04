@@ -16,7 +16,7 @@
 
         function perform(object) {
             Object.keys(object).forEach((key) => {
-                if (!object[key]) {
+                if (typeof object[key] != 'boolean' && !object[key]) {
                     delete object[key];
                 }
             });

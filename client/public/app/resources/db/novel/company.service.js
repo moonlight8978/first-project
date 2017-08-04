@@ -17,7 +17,7 @@
         return service;
 
         function companyRsrc() {
-            return $resource(companyUrl, {
+            return $resource(companyUrl, {}, {
                 'query':  { method: 'GET', isArray: true },
                 'update': { method: 'PUT' },
                 'get':    { method: 'GET' }

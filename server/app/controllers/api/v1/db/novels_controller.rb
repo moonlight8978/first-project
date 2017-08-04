@@ -1,6 +1,6 @@
 class Api::V1::Db::NovelsController < ApplicationController
-  # before_action :require_moderator, only: :update
-  # before_action :require_admin, only: [:create, :destroy]
+  before_action :require_moderator, only: :update
+  before_action :require_admin, only: [:create, :destroy]
 
   def index
     @novels = ::Db::Novel

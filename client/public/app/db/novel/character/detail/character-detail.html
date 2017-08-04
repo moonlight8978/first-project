@@ -1,20 +1,189 @@
-<a ui-sref="home">Home</a><br><br>
+<div class="no-banner animated fadeIn">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a ui-sref="home">メインページ</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a>データベース</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a ui-sref="character.list({ page: 1, length: null })">キャラクター</a>
+      </li>
+      <li class="breadcrumb-item active">
+        {{ vm.character.name }}
+      </li>
+    </ol>
+  </div>
 
-<img ng-src="{{ vm.character.image }}" ng-hide="vm.hideNsfw && vm.character.imageNsfw">
-<h2>{{ vm.character.name }}</h2>
-<table>
-  <tr>
-    <td>Birthday</td>
-    <td>{{ vm.character.birthday }}</td>
-  </tr>
-  <tr>
-    <td>Three-sizes</td>
-    <td>{{ vm.character.threeSizes }}cm</td>
-  </tr>
-  <tr>
-    <td rowspan="{{ vm.character.voiceActresses.size }}">Voiced by</td>
-    <td ng-repeat="seiyuu in vm.character.voiceActresses">
-      {{ seiyuu.alias || seiyuu.name }}
-    </td>
-  </tr>
-</table>
+  <div class="page-head">
+    <div class="container">
+      <h3>{{ vm.character.name }}</h3>
+      <h6>{{ vm.character.nameEn }}</h6>
+    </div>
+  </div>
+
+  <div class="container page-body db-novel-detail">
+    <div class="body row">
+      <div class="content col-xl-9">
+        <div class="row image-and-info-wrap">
+          <div class="image col-lg-4 col-md-4 col-sm-4">
+            <div class="image-wrap">
+              <div class="image-placeholder ratio-3_4">
+                <div image-thumb class="image-thumb"
+                  condition="vm.hideNsfw && vm.novel.imageNsfw"
+                  nsfw="/assets/img/image-nsfw.jpg" image="{{ vm.character.image }}">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info col-lg-8 col-md-8 col-sm-8">
+            <table>
+              <tr class="info-entry">
+                <th class="hidden-sm-down">名前</th>
+                <td>
+                  <span ng-switch="vm.character.gender">
+                    <i ng-switch-when="male" class="fa fa-mars"></i>
+                    <i ng-switch-when="female" class="fa fa-venus"></i>
+                  </span>
+                  <span>{{ vm.character.name }}</span>
+                </td>
+              </tr>
+              <tr class="info-entry">
+                <th class="hidden-sm-down">誕生日</th>
+                <td>{{ vm.birthday() }}</td>
+              </tr>
+              <tr class="info-entry">
+                <th class="hidden-sm-down">B/W/H</th>
+                <td>{{ vm.threeSizes() }}cm</td>
+              </tr>
+              <tr class="info-entry">
+                <th class="hidden-sm-down">身長</th>
+                <td>{{ vm.character.height || '?' }}cm</td>
+              </tr>
+              <tr class="info-entry">
+                <th class="hidden-sm-down">重量</th>
+                <td>{{ vm.character.weight || '?' }}kg</td>
+              </tr>
+              <tr class="info-entry">
+                <th class="hidden-sm-down">血液型</th>
+                <td>{{ vm.character.bloodType || '?' }}</td>
+              </tr>
+              <tr>
+                <th colspan="2">デスクリプション</th>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <div class="description-wrap">
+                    <p> </p>
+                    <p id="novelDescription" ng-if="!vm.character.description"
+                      class="overflow-toggleable novel-descr">ディスクリプションがありません。</p>
+                    <p id="novelDescription" ng-if="vm.character.description"
+                      class="overflow-toggleable novel-descr">{{ vm.character.description }}</p>
+                  </div>
+                  <span class="see-more" toggle-overflow target="#novelDescription"
+                    lines="6" font-size="1" role="button">
+                    ▼もっと見る
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="col-12">
+            <div class="line-shadow full-width bottom"></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="col-xl-3 item-container">
+        <div class="item-group">
+          <h6>Quick tool</h6>
+          <div class="item item-box quick-tool-group">
+            <div class="nsfw">
+              <span>
+                <label class="switch-button">
+                  <input type="checkbox" ng-model="vm.hideNsfw">
+                  <div class="slider"></div>
+                </label>
+              </span>
+              <span>Hコンテンツを消す</span>
+            </div>
+            <div class="btn-group">
+              <button class="crud-btn btn-edit" ui-sref="novel.detail.edit"
+                ui-sref-opts="{ reload: true }">
+                <i class="fa fa-fw fa-pencil"></i>
+              </button>
+              <span>Edit article</span>
+            </div>
+            <div class="btn-group">
+              <button class="crud-btn btn-delete" ng-click="vm.delete()">
+                <i class="fa fa-fw fa-times"></i>
+              </button>
+              <span>Delete article</span>
+            </div>
+            <div class="btn-group">
+              <button class="crud-btn btn-create" ui-sref="novel.new">
+                <i class="fa fa-fw fa-plus"></i>
+              </button>
+              <span>New article</span>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="item-group">
+          <h6>
+            スコア
+            <span ng-if="vm.novel.rating" class="rating-score pull-right">
+              <i class="fa fa-star"></i>
+              <strong>{{ vm.novel.rating }}</strong>
+              ({{ vm.novel.ratingsDetail.length }}人)
+            </span>
+          </h6>
+
+          <div class="item item-box ratings-container">
+            <div ng-if="!vm.novel.rating">
+              このノベルには誰も評価しませんでした。
+            </div>
+            <div ng-if="vm.novel.rating" class="ratings-wrap true">
+              <rating data="vm.novel.ratingsStatistics"></rating>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-group">
+          <h6>レビュー</h6>
+          <ul uib-pagination total-items="vm.reviewTotalPage" ng-if="vm.novel.reviews"
+            ng-model="vm.reviewPage" max-size="1" items-per-page="5"
+            ng-change="vm.reviewPageChange()" boundary-links="true"
+            first-text="最初" last-text="最後" next-text="»" previous-text="«"
+            class="pull-right top">
+          </ul>
+          <div class="clearfix"></div>
+          <div class="review-container">
+            <div class="review item item-box" ng-if="!vm.novel.reviews">
+              レビューが何もありません。
+            </div>
+            <div ng-if="vm.novel.reviews">
+              <div class="review" ng-repeat="(reviewId, review) in vm.renderReviews">
+                <h6>{{ review.title }}</h6>
+                <p id="review{{reviewId}}" class="review-body overflow-toggleable">{{ review.body }}</p>
+                <span toggle-overflow class="see-more" target="#review{{reviewId}}"
+                  lines="3" font-size="1">▼もっと見る</span>
+                <div>
+                  <div class="image-placeholder ratio_1-1 avatar">
+                    <div class="avatar-thumb image-thumb" ng-style="review.user.profileImage ? { 'background-image': 'url({{ review.user.profileImage }})' } : {}"></div>
+                  </div>
+                  <a ui-sref="index" class="username">
+                    {{ review.user.userName }}さん
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </aside>
+    </div>
+  </div>
+</div>
+

@@ -1,2 +1,168 @@
-<div class="no-banner"></div>
-<div>EDIT</div>
+<div class="animated fadeIn">
+  <div class="no-banner"></div>
+  <div class="container">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a ui-sref="home">メインページ</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a>データベース</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a ui-sref="novel.list({ page: 1, length: null })">全てのノベル</a>
+        </li>
+        <li class="breadcrumb-item active">
+          <a ui-sref="novel.detail({ id: vm.oldNovel.id })">{{ vm.oldNovel.title }}</a>
+        </li>
+        <li class="breadcrumb-item active">
+          Edit
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="page-head">
+    <div class="container">
+      <h3>Edit {{ vm.oldNovel.title }}</h3>
+      <h6>Edit {{ vm.oldNovel.titleEn }}</h6>
+    </div>
+  </div>
+
+  <div class="container page-body">
+    <div class="body row">
+      <div class="content col-xl-9">
+        <form novalidate name="form" ng-submit="vm.submit(vm.novel)">
+          <div class="row">
+            <div class="col-lg-9 col-7 col-md-8">
+              <div class="form-group">
+                <label for="_title" class="form-control-label">*タイトル</label>
+                <input type="text" class="form-control" name="title" id="_title"
+                  ng-model="vm.novel.title" autocomplete="off"
+                  placeholder="{{ vm.oldNovel.title }}">
+                <small id="titleHelp" class="form-text text-muted">日本語でお願いします。</small>
+              </div>
+
+              <div class="form-group">
+                <label for="_titleEn">タイトル(英語)</label>
+                <input type="text" class="form-control" name="titleEn" id="_titleEn"
+                  ng-model="vm.novel.titleEn" autocomplete="off"
+                  placeholder="{{ vm.oldNovel.titleEn }}">
+                <small id="titleEnHelp" class="form-text text-muted">
+                  英語でお願いします。
+                </small>
+              </div>
+
+              <div class="form-group">
+                <label for="_length" class="form-control-label">*長さ</label>
+                <select id="_length" name="length" class="form-control"
+                  ng-options="l.value as l.label for l in vm.length"
+                  ng-model="vm.novel.length" ng-init="vm.novel.length = vm.oldNovel.length"
+                  required>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-5 col-md-4">
+              <div class="image-placeholder ratio-3_4">
+                <div image-thumb class="image-thumb"
+                  condition="vm.hideNsfw && vm.novel.imageNsfw" image-change="true"
+                  nsfw="/assets/img/image-nsfw.jpg" image="{{ vm.novel.image }}">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-check pull-right">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input"
+                ng-model="vm.novel.imageNsfw"
+                ng-init="vm.novel.imageNsfw = vm.oldNovel.imageNsfw">
+              *NSFW写真
+            </label>
+          </div>
+
+          <div class="form-group"
+            ng-class="{ 'has-danger': (form.$submitted || form.image.$touched) && form.image.$invalid }">
+            <label for="_image" class="form-control-label">*写真</label>
+            <input type="text" class="form-control" name="image" id="_image"
+              ng-model="vm.novel.image" autocomplete="off"
+              link-validator ext="jpg,png,jpeg"
+              ng-model-options="{ updateOn: 'mousedown blur' }"
+              placeholder="{{ vm.oldNovel.image }}">
+            <small id="titleHelp" class="form-text text-muted">
+              Image URL looks like: http(s):// blah..blah .[jpg|png|jpeg]<br>
+              i.e. https://s.vndb.org/cv/31/31631.jpg
+            </small>
+
+            <div class="form-control-feedback" ng-show="form.$submitted || form.image.$touched && form.image.$invalid">
+              <span ng-show="form.image.$error.link" class="ng-show-hide-animate">
+                Image URL invalid.
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>ディスクリプション</label>
+            <textarea type="text" class="form-control" rows="6"
+              name="description" ng-model="vm.novel.description"
+              placeholder="{{ vm.oldNovel.description }}">
+            </textarea>
+            <small id="descriptionHelp" class="form-text text-muted">
+              日本語でお願いします。
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label>ディスクリプション(英語)</label>
+            <textarea type="text" class="form-control" rows="6"
+              name="descriptionEn" ng-model="vm.novel.descriptionEn"
+              placeholder="{{ vm.oldNovel.descriptionEn }}">
+            </textarea>
+            <small id="descriptionEnHelp" class="form-text text-muted">英語でお願いします。</small>
+          </div>
+
+          <div class="form-group form-success animated fadeIn"
+            ng-show="vm.message">
+            <h6 ng-repeat="(key, value) in vm.message">{{ value }}</h6>
+          </div>
+
+          <div class="form-group form-error animated fadeIn"
+            ng-show="vm.error">
+            <h6 ng-repeat="(key, value) in vm.error">{{ value }}</h6>
+          </div>
+
+          <a class="pull-left" ui-sref="novel.detail" ui-sref-opts="{ reload: true }">
+            <span>&#x2039;</span>
+            戻る
+          </a>
+          <button class="btn-c btn-c-5 btn-c-5-sakura pull-right">提出する</button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+
+      <aside class="col-lg-3 item-container">
+        <div class="item-group">
+          <h6>Quick tool</h6>
+          <div class="item item-box quick-tool-group">
+            <div class="nsfw">
+              <span>
+                <label class="switch-button">
+                  <input type="checkbox" ng-model="vm.hideNsfw">
+                  <div class="slider"></div>
+                </label>
+              </span>
+              <span>Hコンテンツを消す</span>
+            </div>
+            <div class="btn-group">
+              <button class="crud-btn btn-reset" ng-click="vm.resetAll()">
+                <i class="fa fa-fw fa-repeat"></i>
+              </button>
+              <span>フォルムをリセット</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

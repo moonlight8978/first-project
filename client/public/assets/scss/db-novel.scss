@@ -146,7 +146,7 @@
   }
 }
 
-character-in-novel:first-child .character-group h6 { margin-top: 0; }
+.character-list .character-group:first-child h6 { margin-top: 0; }
 
 .character-group {
   h6 {
@@ -155,18 +155,13 @@ character-in-novel:first-child .character-group h6 { margin-top: 0; }
     margin-top: 20px;
   }
 
-  > div {
+  .character-wrap {
+    position: relative;
     background-color: #fff;
-    margin-bottom: 15px;
     padding: 10px;
+    margin-bottom: 15px;
 
     &:last-child { margin-bottom: 0; }
-  }
-
-  .character.in-novel { position: relative; }
-
-  .character-image, .character-info {
-    padding: 0;
   }
 
   >div:nth-child(3n) .name {
