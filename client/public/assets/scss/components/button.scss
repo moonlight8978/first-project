@@ -249,3 +249,10 @@ $white: #fff;
     }
   }
 }
+
+.see-more {
+  display: none;
+  @include transition-std(color);
+
+  &:hover { color: $link__color-hover; }
+}

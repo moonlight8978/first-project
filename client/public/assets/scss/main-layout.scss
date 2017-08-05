@@ -1,4 +1,12 @@
-.no-banner { margin-top: 80px; }
+.no-banner { padding-top: 80px; }
+
+// .page-wrap {
+//   background-color: $page__background;
+
+//   .page-head {
+//     background-color: $white;
+//   }
+// }
 
 .page-head {
   padding: 15px 0;
@@ -13,10 +21,17 @@
 }
 
 .page-body {
-  > .body { padding: 40px 0; }
+  padding: 2.5rem 0 2.5rem;
 }
 
 .item-container {
+  .item-list {
+    padding: 0 !important;
+    .item {
+      margin: 0 !important;
+    }
+  }
+
   .item-group {
     > h3, > h4, > h5,
     > h6 {
@@ -31,10 +46,38 @@
 
   .item {
     padding: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .item-bg {
     background-color: $content__background;
   }
+}
+
+.test-container {
+&.page-detail > .row > .body {
+  .main-content-wrap > .row {
+
+    .image-wrap {
+      margin: 0;
+    }
+
+    table.detail-info {
+      width: 100%;
+
+      .info-entry {
+        th { width: 140px; }
+
+        &:nth-child(odd) { background-color: $content__background; }
+      }
+
+      .description-wrap {
+        border: 1px solid $border-color;
+        padding: 1px 10px;
+        margin: 5px 0;
+      }
+    }
+  }
+}
+
 }

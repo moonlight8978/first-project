@@ -53,10 +53,10 @@
       </div>
 
       <div class="crud-btn-group big" has-role authority="ROLE_USER">
-        <button class="crud-btn btn-edit" type="button" ui-sref="novel.detail.editCharacter({ id: vm.novelId, characterId: character.id, character: character })">
+        <button class="crud-btn btn-edit" type="button" ui-sref="novel.detail.editCharacter({ id: vm.novel.id, characterId: character.id, character: character })">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="crud-btn btn-delete" ng-click="vm.delete(character)">
+        <button class="crud-btn btn-delete" ng-click="vm.destroy(character)">
           <i class="fa fa-times"></i>
         </button>
       </div>
@@ -117,10 +117,10 @@
       </div>
 
       <div class="crud-btn-group big" has-role authority="ROLE_USER">
-        <button class="crud-btn btn-edit" type="button" ui-sref="novel.detail.editCharacter({ id: vm.novelId, characterId: character.id, character: character })">
+        <button class="crud-btn btn-edit" type="button" ui-sref="novel.detail.editCharacter({ id: vm.novel.id, characterId: character.id, character: character })">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="crud-btn btn-delete" ng-click="vm.delete(character)">
+        <button class="crud-btn btn-delete" ng-click="vm.destroy(character)">
           <i class="fa fa-times"></i>
         </button>
       </div>
@@ -179,10 +179,10 @@
       </div>
 
       <div class="crud-btn-group big" has-role authority="ROLE_USER">
-        <button class="crud-btn btn-edit" type="button" ui-sref="novel.detail.editCharacter({ id: vm.novelId, characterId: character.id, character: character })">
+        <button class="crud-btn btn-edit" type="button" ui-sref="novel.detail.editCharacter({ id: vm.novel.id, characterId: character.id, character: character })">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="crud-btn btn-delete" ng-click="vm.delete(character)">
+        <button class="crud-btn btn-delete" ng-click="vm.destroy(character)">
           <i class="fa fa-times"></i>
         </button>
       </div>

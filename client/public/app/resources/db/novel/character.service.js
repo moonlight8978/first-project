@@ -9,7 +9,8 @@
 
     function CharacterResource($resource, server) {
         let characterUrl = server.api + '/db/characters/:id';
-        let vaUrl        = server.api + '/db/character_novels/:characterNovelId/voice_actresses/:id'
+        let vaUrl        = server.api + '/db/character_novels/:characterNovelId/voice_actresses/:id';
+
         let service = {
             character: characterRsrc(),
             va: vaRsrc()

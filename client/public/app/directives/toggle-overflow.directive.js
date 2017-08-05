@@ -20,6 +20,8 @@
                     let maxH = scope.lines * scope.fontSize * 16 * 1.5;
                     let text = $(scope.target);
                     let ele = $(element);
+                    console.log(text[0].scrollHeight)
+                    console.log(maxH)
                     if (text[0].scrollHeight > maxH) {
                         ele.css({ 'display': 'inline-block' });
                     }

@@ -13,7 +13,7 @@
           <a ui-sref="novel.list({ page: 1, length: null })">全てのノベル</a>
         </li>
         <li class="breadcrumb-item">
-          <a ui-sref="novel.detail">{{ vm.novel.title }}</a>
+          <a ui-sref="novel.detail", ui-sref-opts="{ reload: true }">{{ vm.novel.title }}</a>
         </li>
         <li class="breadcrumb-item">
           <a href="javascript:void(0);">キャラクター</a>
@@ -35,186 +35,210 @@
     </div>
   </div>
 
-  <div class="container page-body">
+  <div class="container page-body page-edit-character">
     <div class="body row">
-      <div class="content col-xl-9">
-        <form novalidate name="form" ng-submit="vm.submitUpdate(vm.character)">
-          <div class="row">
-            <div class="col-lg-9 col-7 col-md-8">
-              <div class="form-group">
-                <label for="_name" class="form-control-label">*名前</label>
-                <input type="text" class="form-control" name="name" id="_name"
-                  ng-model="vm.character.name" autocomplete="off"
-                  placeholder="{{ vm.oldCharacter.name }}">
-                <small id="titleHelp" class="form-text text-muted">日本語でお願いします。</small>
+      <div class="content col-lg-9">
+        <ul class="no-padding tab-menu" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" data-target="#character" role="tab">
+              キャラクター
+            </a>
+          </li>
+          <li class="nav-item">
+            <span class="px-0 nav-link">/</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" data-target="#voiceActress" role="tab">
+              声優
+            </a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="character" role="tabpanel">
+            <form novalidate name="form" ng-submit="vm.submitUpdate(vm.character)">
+              <div class="row">
+                <div class="col-lg-9 col-7 col-md-8">
+                  <div class="form-group">
+                    <label for="_name" class="form-control-label">*名前</label>
+                    <input type="text" class="form-control" name="name" id="_name"
+                      ng-model="vm.character.name" autocomplete="off"
+                      placeholder="{{ vm.oldCharacter.name }}">
+                    <small id="titleHelp" class="form-text text-muted">日本語でお願いします。</small>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="_nameEn">*名前(英語)</label>
+                    <input type="text" class="form-control" name="nameEn" id="_nameEn"
+                      ng-model="vm.character.nameEn" autocomplete="off"
+                      placeholder="{{ vm.oldCharacter.nameEn }}">
+                    <small id="titleEnHelp" class="form-text text-muted">
+                      英語/ローマ字でお願いします。
+                    </small>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-8">
+                      <div class="form-group">
+                        <label for="_role">*役割</label>
+                        <select id="_role" name="role" class="form-control"
+                          ng-options="r.value as r.label for r in vm.role"
+                          ng-model="vm.character.role"
+                          ng-init="vm.character.role = vm.oldCharacter.role">
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="_gender">*性別</label>
+                        <select id="_gender" name="gender" class="form-control"
+                          ng-options="g.value as g.label for g in vm.gender"
+                          ng-model="vm.character.gender"
+                          ng-init="vm.character.gender = vm.oldCharacter.gender">
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-3 col-5 col-md-4">
+                  <div class="image-placeholder ratio-3_4">
+                    <div image-thumb class="image-thumb"
+                      condition="false" image-change="true"
+                      nsfw="/assets/img/image-nsfw.jpg" image="{{ vm.character.image }}">
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div class="form-group">
-                <label for="_nameEn">*名前(英語)</label>
-                <input type="text" class="form-control" name="nameEn" id="_nameEn"
-                  ng-model="vm.character.nameEn" autocomplete="off"
-                  placeholder="{{ vm.oldCharacter.nameEn }}">
-                <small id="titleEnHelp" class="form-text text-muted">
-                  英語/ローマ字でお願いします。
+              <div class="form-group"
+                ng-class="{ 'has-danger': (form.$submitted || form.image.$touched) && form.image.$invalid }">
+                <label for="_image" class="form-control-label">写真</label>
+                <input type="text" class="form-control" name="image" id="_image"
+                  ng-model="vm.character.image" autocomplete="off"
+                  link-validator ext="jpg,png,jpeg"
+                  ng-model-options="{ updateOn: 'mousedown blur' }"
+                  placeholder="{{ vm.oldCharacter.image }}">
+                <small id="imageHelp" class="form-text text-muted">
+                  Image URL looks like: http(s):// blah..blah .[jpg|png|jpeg]<br>
+                  i.e. https://s.vndb.org/cv/31/31631.jpg
                 </small>
+
+                <div class="form-control-feedback" ng-show="form.$submitted || form.image.$touched && form.image.$invalid">
+                  <span ng-show="form.image.$error.link" class="ng-show-hide-animate">
+                    Image URL invalid.
+                  </span>
+                </div>
               </div>
 
               <div class="row">
-                <div class="col-8">
+                <div class="col-4">
                   <div class="form-group">
-                    <label for="_role">*役割</label>
-                    <select id="_role" name="role" class="form-control"
-                      ng-options="r.value as r.label for r in vm.role"
-                      ng-model="vm.character.role"
-                      ng-init="vm.character.role = vm.oldCharacter.role">
-                    </select>
+                    <label for="_height">身長</label>
+                    <input type="number" id="_height" name="height" class="form-control"
+                      ng-model="vm.character.height"
+                      placeholder="{{ vm.oldCharacter.height }}">
+                    <small id="heightHelp" class="form-text text-muted">
+                      センチメートル
+                    </small>
                   </div>
                 </div>
 
                 <div class="col-4">
                   <div class="form-group">
-                    <label for="_gender">*性別</label>
-                    <select id="_gender" name="gender" class="form-control"
-                      ng-options="g.value as g.label for g in vm.gender"
-                      ng-model="vm.character.gender"
-                      ng-init="vm.character.gender = vm.oldCharacter.gender">
+                    <label for="_weight">重量</label>
+                    <input type="number" id="_weight" name="weight" class="form-control"
+                      ng-model="vm.character.weight"
+                      placeholder="{{ vm.oldCharacter.weight }}">
+                    <small id="weightHelp" class="form-text text-muted">
+                      キログラム
+                    </small>
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="form-group">
+                    <label for="_threeSizes">B/W/H</label>
+                    <input type="text" id="_threeSizes" name="threeSize" class="form-control"
+                      ng-model="vm.character.threeSize"
+                      placeholder="{{ vm.oldCharacter.bust+'-'+vm.oldCharacter.waist+'-'+vm.oldCharacter.hips }}">
+                    <small id="threeSizesHelp" class="form-text text-muted">
+                      センチメートル<br>
+                      例: B:80 W: 50 H: 75 => 80-50-75
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-8">
+                  <div class="form-group">
+                    <label for="_birthday">誕生日</label>
+                    <input type="text" id="_birthday" name="birthday" class="form-control"
+                      ng-model="vm.character.birthday" has-date-picker
+                      format="mm-dd">
+                    <small id="birthdayHelp" class="form-text text-muted">
+                      月-日
+                    </small>
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="form-group">
+                    <label for="_bloodType">血液型</label>
+                    <select id="_bloodType" name="role" class="form-control"
+                      ng-options="b.value as b.label for b in vm.bloodType"
+                      ng-model="vm.character.bloodType"
+                      ng-init="vm.character.bloodType = vm.oldCharacter.bloodType">
                     </select>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div class="col-lg-3 col-5 col-md-4">
-              <div class="image-placeholder ratio-3_4">
-                <div image-thumb class="image-thumb"
-                  condition="false" image-change="true"
-                  nsfw="/assets/img/image-nsfw.jpg" image="{{ vm.character.image }}">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group"
-            ng-class="{ 'has-danger': (form.$submitted || form.image.$touched) && form.image.$invalid }">
-            <label for="_image" class="form-control-label">写真</label>
-            <input type="text" class="form-control" name="image" id="_image"
-              ng-model="vm.character.image" autocomplete="off"
-              link-validator ext="jpg,png,jpeg"
-              ng-model-options="{ updateOn: 'mousedown blur' }"
-              placeholder="{{ vm.oldCharacter.image }}">
-            <small id="imageHelp" class="form-text text-muted">
-              Image URL looks like: http(s):// blah..blah .[jpg|png|jpeg]<br>
-              i.e. https://s.vndb.org/cv/31/31631.jpg
-            </small>
-
-            <div class="form-control-feedback" ng-show="form.$submitted || form.image.$touched && form.image.$invalid">
-              <span ng-show="form.image.$error.link" class="ng-show-hide-animate">
-                Image URL invalid.
-              </span>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-4">
               <div class="form-group">
-                <label for="_height">身長</label>
-                <input type="number" id="_height" name="height" class="form-control"
-                  ng-model="vm.character.height"
-                  placeholder="{{ vm.oldCharacter.height }}">
-                <small id="heightHelp" class="form-text text-muted">
-                  センチメートル
+                <label>ディスクリプション</label>
+                <textarea type="text" class="form-control" rows="6"
+                  name="description" ng-model="vm.character.description"
+                  placeholder="{{ vm.oldCharacter.description }}">
+                </textarea>
+                <small id="descriptionHelp" class="form-text text-muted">
+                  日本語でお願いします。
                 </small>
               </div>
-            </div>
 
-            <div class="col-4">
               <div class="form-group">
-                <label for="_weight">重量</label>
-                <input type="number" id="_weight" name="weight" class="form-control"
-                  ng-model="vm.character.weight"
-                  placeholder="{{ vm.oldCharacter.weight }}">
-                <small id="weightHelp" class="form-text text-muted">
-                  キログラム
-                </small>
+                <label>ディスクリプション(英語)</label>
+                <textarea type="text" class="form-control" rows="6"
+                  name="descriptionEn" ng-model="vm.character.descriptionEn"
+                  placeholder="{{ vm.oldCharacter.descriptionEn }}">
+                </textarea>
+                <small id="descriptionEnHelp" class="form-text text-muted">英語でお願いします。</small>
               </div>
-            </div>
 
-            <div class="col-4">
-              <div class="form-group">
-                <label for="_threeSizes">B/W/H</label>
-                <input type="text" id="_threeSizes" name="threeSize" class="form-control"
-                  ng-model="vm.character.threeSize"
-                  placeholder="{{ vm.oldCharacter.bust+'-'+vm.oldCharacter.waist+'-'+vm.oldCharacter.hips }}">
-                <small id="threeSizesHelp" class="form-text text-muted">
-                  センチメートル<br>
-                  例: B:80 W: 50 H: 75 => 80-50-75
-                </small>
+              <div class="form-group form-success animated fadeIn"
+                ng-show="vm.message">
+                <h6 ng-repeat="(key, value) in vm.message">{{ value }}</h6>
               </div>
-            </div>
-          </div>
 
-          <div class="row">
-            <div class="col-8">
-              <div class="form-group">
-                <label for="_birthday">誕生日</label>
-                <input type="text" id="_birthday" name="birthday" class="form-control"
-                  ng-model="vm.character.birthday" has-date-picker
-                  format="mm-dd">
-                <small id="birthdayHelp" class="form-text text-muted">
-                  月-日
-                </small>
+              <div class="form-group form-error animated fadeIn"
+                ng-show="vm.error">
+                <h6 ng-repeat="(key, value) in vm.error">{{ value }}</h6>
               </div>
-            </div>
 
-            <div class="col-4">
-              <div class="form-group">
-                <label for="_bloodType">血液型</label>
-                <select id="_bloodType" name="role" class="form-control"
-                  ng-options="b.value as b.label for b in vm.bloodType"
-                  ng-model="vm.character.bloodType"
-                  ng-init="vm.character.bloodType = vm.oldCharacter.bloodType">
-                </select>
-              </div>
-            </div>
+              <a class="pull-left" ui-sref="novel.detail" ui-sref-opts="{ reload: true }">
+                <span>&#x2039;</span>
+                戻る
+              </a>
+              <button class="btn-c btn-c-5 btn-c-5-sakura pull-right">提出する</button>
+              <div class="clearfix"></div>
+            </form>
           </div>
 
-          <div class="form-group">
-            <label>ディスクリプション</label>
-            <textarea type="text" class="form-control" rows="6"
-              name="description" ng-model="vm.character.description"
-              placeholder="{{ vm.oldCharacter.description }}">
-            </textarea>
-            <small id="descriptionHelp" class="form-text text-muted">
-              日本語でお願いします。
-            </small>
+          <div class="tab-pane fade show active" id="voiceActress" role="tabpanel">
+            <edit-va voice-actresses="vm.oldCharacter.voiceActresses"></edit-va>
           </div>
-
-          <div class="form-group">
-            <label>ディスクリプション(英語)</label>
-            <textarea type="text" class="form-control" rows="6"
-              name="descriptionEn" ng-model="vm.character.descriptionEn"
-              placeholder="{{ vm.oldCharacter.descriptionEn }}">
-            </textarea>
-            <small id="descriptionEnHelp" class="form-text text-muted">英語でお願いします。</small>
-          </div>
-
-          <div class="form-group form-success animated fadeIn"
-            ng-show="vm.message">
-            <h6 ng-repeat="(key, value) in vm.message">{{ value }}</h6>
-          </div>
-
-          <div class="form-group form-error animated fadeIn"
-            ng-show="vm.error">
-            <h6 ng-repeat="(key, value) in vm.error">{{ value }}</h6>
-          </div>
-
-          <a class="pull-left" ui-sref="novel.detail" ui-sref-opts="{ reload: true }">
-            <span>&#x2039;</span>
-            戻る
-          </a>
-          <button class="btn-c btn-c-5 btn-c-5-sakura pull-right">提出する</button>
-          <div class="clearfix"></div>
-        </form>
+        </div>
       </div>
 
       <aside class="col-lg-3 item-container">
@@ -240,7 +264,7 @@
               <button class="crud-btn btn-create" ng-click="vm.addVa()">
                 <i class="fa fa-fw fa-plus"></i>
               </button>
-              <span>声優</span>
+              <span>Add VA</span>
             </div>
           </div>
         </div>

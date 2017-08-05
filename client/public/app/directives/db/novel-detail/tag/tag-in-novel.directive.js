@@ -16,18 +16,9 @@
               novel: '='
             },
             templateUrl: 'app/directives/db/novel-detail/tag/tag-in-novel.html',
-            link: link
+            bindToController: true,
+            controller: 'TagInNovelController',
+            controllerAs: 'vm'
         };
-
-        function link(scope, element, attrs) {
-            if (scope.tags)
-                console.log(scope.tags)
-            else
-                console.log('loz')
-
-            scope.open = () => {
-                TagModal.open('lg', scope.novel);
-            }
-        }
     }
 })();

@@ -193,6 +193,14 @@
     .crud-btn-group.big .crud-btn.btn-create:hover {
       background-color: #259b24; }
 
+.see-more {
+  display: none;
+  transition-property: color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease; }
+  .see-more:hover {
+    color: #009aab; }
+
 .chart {
   display: block;
   margin: auto; }
@@ -334,6 +342,16 @@ form .form-error > h6 {
 .ng-show-hide-animate.ng-hide-add,
 .ng-show-hide-animate.ng-hide-remove {
   transition: all linear 0.5s; }
+
+.ng-repeat-animate {
+  opacity: 1; }
+
+.ng-repeat-animate.ng-enter {
+  transition: 1s;
+  opacity: 0; }
+
+.ng-repeat-animate.ng-enter-active {
+  opacity: 1; }
 
 .quick-tool-group > * {
   margin-bottom: 5px; }
@@ -2006,7 +2024,7 @@ aside .review.ng-enter-active {
   opacity: .5; }
 
 .no-banner {
-  margin-top: 80px; }
+  padding-top: 80px; }
 
 .page-head {
   padding: 15px 0;
@@ -2017,8 +2035,13 @@ aside .review.ng-enter-active {
     font-weight: 600;
     text-transform: uppercase; }
 
-.page-body > .body {
-  padding: 40px 0; }
+.page-body {
+  padding: 2.5rem 0 2.5rem; }
+
+.item-container .item-list {
+  padding: 0 !important; }
+  .item-container .item-list .item {
+    margin: 0 !important; }
 
 .item-container .item-group > h3, .item-container .item-group > h4, .item-container .item-group > h5,
 .item-container .item-group > h6 {
@@ -2030,10 +2053,24 @@ aside .review.ng-enter-active {
 
 .item-container .item {
   padding: 1rem;
-  margin-bottom: 1.5rem; }
+  margin-bottom: 1rem; }
 
 .item-container .item-bg {
   background-color: #f8f8f8; }
+
+.test-container.page-detail > .row > .body .main-content-wrap > .row .image-wrap {
+  margin: 0; }
+
+.test-container.page-detail > .row > .body .main-content-wrap > .row table.detail-info {
+  width: 100%; }
+  .test-container.page-detail > .row > .body .main-content-wrap > .row table.detail-info .info-entry th {
+    width: 140px; }
+  .test-container.page-detail > .row > .body .main-content-wrap > .row table.detail-info .info-entry:nth-child(odd) {
+    background-color: #f8f8f8; }
+  .test-container.page-detail > .row > .body .main-content-wrap > .row table.detail-info .description-wrap {
+    border: 1px solid #ddd;
+    padding: 1px 10px;
+    margin: 5px 0; }
 
 .age-confirm {
   padding-top: 30px;
@@ -2145,6 +2182,44 @@ aside .review.ng-enter-active {
       transition-property: color;
       transition-duration: 0.3s;
       transition-timing-function: ease; }
+
+.character-novel-relate .character-novel:not(:last-child) {
+  border-bottom: 1px solid #ddd; }
+
+.character-novel-relate .character-novel {
+  padding: 1rem; }
+  .character-novel-relate .character-novel .item-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+  .character-novel-relate .character-novel .image {
+    width: 50px; }
+  .character-novel-relate .character-novel .image-thumb {
+    background-position: center top; }
+  .character-novel-relate .character-novel .title {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 calc(100% - 50px);
+            flex: 1 1 calc(100% - 50px); }
+  .character-novel-relate .character-novel table {
+    width: 100%; }
+    .character-novel-relate .character-novel table tr {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex; }
+    .character-novel-relate .character-novel table td:last-child {
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1; }
+
+.page-edit-character .tab-menu {
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+  .page-edit-character .tab-menu .nav-link {
+    font-weight: normal; }
+  .page-edit-character .tab-menu .nav-link.active {
+    font-weight: bold; }
 
 @font-face {
   font-family: 'Noto Sans CJK JP';

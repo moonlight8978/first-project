@@ -67,11 +67,12 @@
                 return false;
 
             try {
-                let response = await CharacterResource.va
+                let newVa = await CharacterResource.va
                     .save({ characterNovelId: vm.owner.characterNovelId }, va)
                     .$promise;
                 vm.message = success;
-                console.log(response);
+                $rootScope.$broadcast('vaAdded', newVa);
+                console.log(newVa);
             } catch (e) {
                 vm.error = e.data;
                 console.log(e);

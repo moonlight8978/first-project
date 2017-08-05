@@ -29,8 +29,8 @@ class CharacterService::CreateVoiceActress
     self
   end
 
-  def results
-    @character
+  def result
+    @voice_actress
   end
 
   def errors?

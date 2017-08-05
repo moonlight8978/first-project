@@ -14,7 +14,8 @@ class Api::V1::Db::CharacterNovels::VoiceActressesController < ApplicationContro
     elsif create_svc.errors?
       render json: create_svc.errors, status: :bad_request
     else
-      render_ok
+      render json: create_svc.result, key_transform: :camel_lower, status: :ok,
+        serializer: Api::V1::Db::Novel::Character::VoiceActressSerializer
     end
   end
 
