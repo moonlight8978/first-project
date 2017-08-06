@@ -5,9 +5,9 @@
         .module('app')
         .controller('EditVaController', EditVaController);
 
-    EditVaController.$inject = ['$rootScope', 'CharacterResource'];
+    EditVaController.$inject = ['$rootScope', 'CharacterResource', 'DeleteConfirm'];
 
-    function EditVaController($rootScope, CharacterResource) {
+    function EditVaController($rootScope, CharacterResource, DeleteConfirm) {
         let vm = this;
         console.log(vm.voiceActresses);
 
@@ -16,26 +16,30 @@
 
         $rootScope.$on('vaAdded', handler);
 
-        async function destroy(i, va) {
-            reset();
+        function destroy(i, va) {
+            DeleteConfirm.open(
+                'DeleteVaController',
+                'app/db/novel/novel/detail/character/edit/delete-va/delete-va.html',
+                { i: i,
+                  va: va,
+                  voiceActresses: vm.voiceActresses }
+            );
+        }
 
-            console.log(va)
+        async function submitUpdate(i, oldVa, va) {
+            console.log(oldVa);
 
             try {
-                await CharacterResource.va
-                    .delete({ characterNovelId: 1, id: va.id }, {})
+                let resVa = await CharacterResource.va
+                    .update({ characterNovelId: 1, id: oldVa.id }, va)
                     .$promise;
+                edit(i, resVa);
+                vm.message = { x: '成功でした！' };
 
-                vm.message = { x: '成功でした。' }
-                vm.voiceActresses.splice(i, 1);
             } catch (e) {
                 vm.error = e.data;
                 console.log(e);
             }
-        }
-
-        function submitUpdate(i, va) {
-
         }
 
         function handler(event, va) {
@@ -43,9 +47,8 @@
             console.log(vm.voiceActresses)
         }
 
-        function reset() {
-            delete vm.message;
-            delete vm.error;
+        function edit(i, va) {
+            vm.voiceActresses[i] = va;
         }
     }
 })();

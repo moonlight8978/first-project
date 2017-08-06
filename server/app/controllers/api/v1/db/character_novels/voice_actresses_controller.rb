@@ -29,7 +29,8 @@ class Api::V1::Db::CharacterNovels::VoiceActressesController < ApplicationContro
     if update_svc.errors?
       render json: update_svc.errors, status: :bad_request
     else
-      render_ok
+      render json: update_svc.result, key_transform: :camel_lower, status: :ok,
+        serializer: Api::V1::Db::Novel::Character::VoiceActressSerializer
     end
   end
 

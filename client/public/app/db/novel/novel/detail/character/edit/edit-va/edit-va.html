@@ -31,7 +31,7 @@
     <div class="line full-width"></div>
 
     <form name="form{{vaId}}"" class="collapse" id="vaForm{{vaId}}"
-      ng-submit="submitUpdate(vm.va[vaId])">
+      ng-submit="vm.submitUpdate(vaId, va, vm.va[vaId])">
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">

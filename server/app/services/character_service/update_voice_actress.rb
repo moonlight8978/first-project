@@ -27,7 +27,7 @@ class CharacterService::UpdateVoiceActress
     self
   end
 
-  def results
+  def result
     @va
   end
 
