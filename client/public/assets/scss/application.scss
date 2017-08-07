@@ -13,6 +13,7 @@
 @import 'components/quick-tool';
 @import 'components/lines';
 @import 'components/space';
+@import 'components/overflow';
 
 @import 'novel-list';
 @import 'navbar';
@@ -28,6 +29,8 @@
 @import 'tag-list';
 @import 'tag-detail';
 @import 'character-detail';
+@import 'comment';
+@import 'sidebar';
 
 @font-face {
   font-family: 'Noto Sans CJK JP';
@@ -49,6 +52,9 @@
 //   background-image: url('/assets/img/placeholder.jpg');
 //   transition: background-image 0.5s ease;
 // }-
+.flex-overflow-fix {
+  min-width: 0;
+}
 
 .line {
   height: 1px;

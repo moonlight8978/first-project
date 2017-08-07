@@ -1,4 +1,6 @@
 class Db::Novel::Character < ApplicationRecord
+  include Commentable
+  
   before_save :standardized
 
   validates :name, :name_en,

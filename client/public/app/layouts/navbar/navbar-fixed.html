@@ -84,7 +84,9 @@
             <input class="form-control search-query" id="searchInput"
               name="query" type="text"
               placeholder="探しましょう" ng-model="vm.search.query"
-              autocomplete="off" ng-change="vm.search()" ng-trim="false" required>
+              autocomplete="off" ng-change="vm.search()" ng-trim="false" 
+              ng-model-options="{ debounce: 500 }"
+              required>
             <div class="btn-group">
               <button type="button" class="btn btn-clear" id="searchClear"
                 ng-click="vm.clearInput()">

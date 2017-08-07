@@ -20,8 +20,12 @@
                     let maxH = scope.lines * scope.fontSize * 16 * 1.5;
                     let text = $(scope.target);
                     let ele = $(element);
+                    const moreTxt = '▼もっと見る';
+                    const lessTxt = '▲閉じる';
                     console.log(text[0].scrollHeight)
                     console.log(maxH)
+                    ele.html(moreTxt);
+                    
                     if (text[0].scrollHeight > maxH) {
                         ele.css({ 'display': 'inline-block' });
                     }
@@ -37,9 +41,9 @@
                     ele.on('click.showMore', () => {
                         text.toggleClass('active');
                         if (text.hasClass('active')) {
-                            ele.html('▲閉じる');
+                            ele.html(lessTxt);
                         } else {
-                            ele.html('▼もっと見る');
+                            ele.html(moreTxt);
                         }
                     });
 

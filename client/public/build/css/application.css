@@ -353,6 +353,15 @@ form .form-error > h6 {
 .ng-repeat-animate.ng-enter-active {
   opacity: 1; }
 
+.ng-if-animate.ng-enter, .ng-if-animate.ng-leave {
+  transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s; }
+
+.ng-if-animate.ng-enter, .ng-if-animate.ng-leave.ng-leave-active {
+  opacity: 0; }
+
+.ng-if-animate.ng-leave, .ng-if-animate.ng-enter.ng-enter-active {
+  opacity: 1; }
+
 .quick-tool-group > * {
   margin-bottom: 5px; }
 
@@ -400,6 +409,11 @@ form .form-error > h6 {
 .margin-top-bottom.1_2 {
   margin-top: 10px;
   margin-bottom: 20px; }
+
+.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; }
 
 .list-banner {
   position: relative;
@@ -2221,6 +2235,35 @@ aside .review.ng-enter-active {
   .page-edit-character .tab-menu .nav-link.active {
     font-weight: bold; }
 
+.comment-container .comment-wrap:last-child .line {
+  display: none; }
+
+.comment-container .comment-user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+  .comment-container .comment-user .avatar {
+    -webkit-box-flex: 0;
+        -ms-flex: none;
+            flex: none; }
+  .comment-container .comment-user .user-name {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+
+.sidebar-will-load {
+  min-height: 56px; }
+
 @font-face {
   font-family: 'Noto Sans CJK JP';
   src: url("../fonts/NotoSansCJKjp-DemiLight.otf") format("opentype");
@@ -2232,6 +2275,9 @@ aside .review.ng-enter-active {
   src: url("../fonts/Roboto-Regular.ttf") format("truetype");
   font-style: normal;
   font-weight: 400; }
+
+.flex-overflow-fix {
+  min-width: 0; }
 
 .line {
   height: 1px;

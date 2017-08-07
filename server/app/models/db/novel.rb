@@ -1,5 +1,6 @@
 class Db::Novel < ApplicationRecord
   include Rateable
+  include Reviewable
 
   after_initialize :default_values
   before_save :standardized

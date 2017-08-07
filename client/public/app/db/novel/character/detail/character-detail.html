@@ -25,7 +25,7 @@
 
   <div class="container page-body page-detail test-container item-container">
     <div class="row">
-      <div class="col-xl-9 body">
+      <div class="col-lg-9 body">
         <div class="main-content-wrap item-box item">
           <div class="row">
             <div class="image-wrap col-lg-4 col-md-4 col-sm-4 pr-2">
@@ -100,7 +100,7 @@
         </character-novel-va>
       </div>
 
-      <aside class="col-xl-3 item-container">
+      <aside class="col-lg-3 item-container">
         <div class="item-group">
           <h6>Quick tool</h6>
           <div class="item item-box quick-tool-group">
@@ -134,57 +134,8 @@
             </div>
           </div>
         </div>
-        <!-- <div class="item-group">
-          <h6>
-            スコア
-            <span ng-if="vm.novel.rating" class="rating-score pull-right">
-              <i class="fa fa-star"></i>
-              <strong>{{ vm.novel.rating }}</strong>
-              ({{ vm.novel.ratingsDetail.length }}人)
-            </span>
-          </h6>
-
-          <div class="item item-box ratings-container">
-            <div ng-if="!vm.novel.rating">
-              このノベルには誰も評価しませんでした。
-            </div>
-            <div ng-if="vm.novel.rating" class="ratings-wrap true">
-              <rating data="vm.novel.ratingsStatistics"></rating>
-            </div>
-          </div>
-        </div>
-
-        <div class="item-group">
-          <h6>レビュー</h6>
-          <ul uib-pagination total-items="vm.reviewTotalPage" ng-if="vm.novel.reviews"
-            ng-model="vm.reviewPage" max-size="1" items-per-page="5"
-            ng-change="vm.reviewPageChange()" boundary-links="true"
-            first-text="最初" last-text="最後" next-text="»" previous-text="«"
-            class="pull-right top">
-          </ul>
-          <div class="clearfix"></div>
-          <div class="review-container">
-            <div class="review item item-box" ng-if="!vm.novel.reviews">
-              レビューが何もありません。
-            </div>
-            <div ng-if="vm.novel.reviews">
-              <div class="review" ng-repeat="(reviewId, review) in vm.renderReviews">
-                <h6>{{ review.title }}</h6>
-                <p id="review{{reviewId}}" class="review-body overflow-toggleable">{{ review.body }}</p>
-                <span toggle-overflow class="see-more" target="#review{{reviewId}}"
-                  lines="3" font-size="1">▼もっと見る</span>
-                <div>
-                  <div class="image-placeholder ratio_1-1 avatar">
-                    <div class="avatar-thumb image-thumb" ng-style="review.user.profileImage ? { 'background-image': 'url({{ review.user.profileImage }})' } : {}"></div>
-                  </div>
-                  <a ui-sref="index" class="username">
-                    {{ review.user.userName }}さん
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
+        <comment-container done="vm.comments.done" comments="vm.comments.data">
+        </comment-container>
       </aside>
     </div>
   </div>

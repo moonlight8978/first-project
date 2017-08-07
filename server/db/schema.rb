@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713115930) do
+ActiveRecord::Schema.define(version: 20170807142710) do
 
   create_table "countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
@@ -288,6 +288,18 @@ ActiveRecord::Schema.define(version: 20170713115930) do
     t.datetime "updated_at", null: false
     t.index ["rateable_type", "rateable_id"], name: "index_feature_ratings_on_rateable_type_and_rateable_id"
     t.index ["user_id"], name: "index_feature_ratings_on_user_id"
+  end
+
+  create_table "feature_reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "reviewable_type"
+    t.bigint "reviewable_id"
+    t.bigint "user_id"
+    t.string "title"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reviewable_type", "reviewable_id"], name: "index_feature_reviews_on_reviewable_type_and_reviewable_id"
+    t.index ["user_id"], name: "index_feature_reviews_on_user_id"
   end
 
   create_table "security_invalid_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
