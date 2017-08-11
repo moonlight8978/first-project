@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170807142710) do
+ActiveRecord::Schema.define(version: 20170809134714) do
 
   create_table "countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20170807142710) do
     t.string "link", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name_pronounce"
     t.index ["country_id"], name: "index_db_companies_on_country_id"
   end
 
@@ -130,6 +131,7 @@ ActiveRecord::Schema.define(version: 20170807142710) do
     t.bigint "novel_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role"
     t.index ["character_id"], name: "index_db_novel_character_novels_on_character_id"
     t.index ["novel_id"], name: "index_db_novel_character_novels_on_novel_id"
   end
@@ -163,6 +165,7 @@ ActiveRecord::Schema.define(version: 20170807142710) do
     t.text "description_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name_pronounce"
   end
 
   create_table "db_novel_release_platforms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -184,6 +187,7 @@ ActiveRecord::Schema.define(version: 20170807142710) do
     t.string "jan_num"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title_pronounce"
     t.index ["jan_num"], name: "index_db_novel_releases_on_jan_num"
     t.index ["platform_id"], name: "index_db_novel_releases_on_platform_id"
     t.index ["status"], name: "index_db_novel_releases_on_status"
@@ -233,6 +237,7 @@ ActiveRecord::Schema.define(version: 20170807142710) do
     t.boolean "image_nsfw", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title_pronounce"
   end
 
   create_table "db_novels_novel_releases", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -259,6 +264,7 @@ ActiveRecord::Schema.define(version: 20170807142710) do
     t.string "twitter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name_pronounce"
     t.index ["country_id"], name: "index_db_people_on_country_id"
   end
 
@@ -324,6 +330,18 @@ ActiveRecord::Schema.define(version: 20170807142710) do
     t.index ["user_id"], name: "index_security_user_activate_account_tokens_on_user_id"
   end
 
+  create_table "security_user_oauths", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.string "token"
+    t.string "provider"
+    t.string "uid"
+    t.string "expiration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider", "uid"], name: "index_security_user_oauths_on_provider_and_uid"
+    t.index ["user_id"], name: "index_security_user_oauths_on_user_id"
+  end
+
   create_table "security_user_reset_password_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id", null: false
     t.string "token", null: false
@@ -360,6 +378,7 @@ ActiveRecord::Schema.define(version: 20170807142710) do
     t.datetime "password_updated_at", default: "2017-07-19 16:59:15"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name_pronounce"
     t.index ["country_id"], name: "index_security_users_on_country_id"
     t.index ["email"], name: "index_security_users_on_email"
     t.index ["user_name"], name: "index_security_users_on_user_name"

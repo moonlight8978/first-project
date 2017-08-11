@@ -42,10 +42,16 @@ module NyoroNyoro
       :address        => 'smtp.gmail.com',
       :domain         => 'mail.google.com',
       :port           => 587,
-      :user_name      => 'moonlight8978@gmail.com',
-      :password       => '',
+      :user_name      => ENV['GMAIL_ACCOUNT'],
+      :password       => ENV['GMAIL_PASSWORD'],
       :authentication => :plain
       # :enable_starttls_auto => true
     }
+
+    # for omniauth
+    # config.session_store :disabled
+    config.session_store :cookie_store, key: '_interslice_session'
+    config.middleware.use ActionDispatch::Cookies # Required for all session management
+    config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
   end
 end

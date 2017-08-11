@@ -6,6 +6,9 @@ class Security::User < ApplicationRecord
   validates :country,
     if: -> { self.country_id || self.country },
     presence: true
+    
+  has_one :oauth
+  
   belongs_to :country, class_name: 'Country', optional: true
 
   has_and_belongs_to_many :roles,

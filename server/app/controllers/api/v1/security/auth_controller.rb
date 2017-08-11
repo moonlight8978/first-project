@@ -24,6 +24,30 @@ class Api::V1::Security::AuthController < ApplicationController
     #   render_unauthorized
     # end
   end
+  
+  # Auth then check user if user exists
+  # If not exist, create new user with social_login configs
+  def social_login
+    case params[:provider]
+    when 'google'
+      login_svc = SessionService::SocialLogin::Google.new(params[:code]).perform
+      
+    when 'facebook'
+      login_svc = SessionService::SocialLogin::Facebook.new(params).perform
+    when 'twitter'
+      # codes
+    else
+      render json: { message: 'Invalid provider' }, status: :unauthorized
+    end
+    
+    unless login_svc.errors?
+      render json: login_svc.result[:user], status: :ok, key_transform: :camel_lower,
+        serializer: Api::V1::Security::User::UserDetailSerializer
+      response.headers['x-token'] = login_svc.result[:token]
+    else
+      render json: login_svc.errors.detail, status: login_svc.errors.status
+    end
+  end
 
   def logout
     p request.headers['HTTP_AUTHORIZATION']

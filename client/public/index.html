@@ -26,6 +26,36 @@
 
 	<!-- app's stylesheets -->
 	<link rel="stylesheet" href="/build/css/application.css">
+  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+  </script>
+  <script>
+    function start() {
+      gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+          client_id: '1056040049417-37njggbv3mipl3d2faj03gr39h9gj3co.apps.googleusercontent.com'
+        });
+      });
+    }
+  </script>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '1916632268588574',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.8'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
 </head>
 <body>
 	<div ui-view="navbar" ng-cloak>
@@ -164,6 +194,7 @@
   <script src="app/components/register-confirm/register-confirm.state.js"></script>
   <script src="app/components/register-confirm/register-confirm.controller.js"></script>
   <script src="app/components/rating/your-rating.directive.js"></script>
+  <script src="app/components/login/social-login.service.js"></script>
   <script src="app/components/login/login.state.js"></script>
   <script src="app/components/login/login.controller.js"></script>
   <script src="app/components/jwt.js"></script>

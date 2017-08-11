@@ -15,7 +15,8 @@
             login: login,
             logout: logout,
             checkExpiration: checkExpiration,
-            authorize: authorize
+            authorize: authorize,
+            storeSession: storeSession,
         };
 
         return service;
@@ -25,14 +26,14 @@
 
             try {
                 // try to login
-                let response = await $http.post(loginUrl, user);
-
+                const response = await $http.post(loginUrl, user);
+                
                 // login successful
-                if (remember) {
-                    store(response.data, response.headers('x-token'));
-                } else {
-                    temp(response.data, response.headers('x-token'));
+                const session = {
+                    user: response.data,
+                    token: response.headers('x-token'),
                 }
+                storeSession(session, remember);
 
                 Principal.authenticate();
                 deferred.resolve(1);
@@ -43,17 +44,7 @@
 
             return deferred.promise;
 
-            function store(user, token) {
-                $localStorage.user = user;
-                $localStorage.authToken = token;
-                $localStorage.exp = JwtService.decode(token)['exp'];
-            }
-
-            function temp(user, token) {
-                $sessionStorage.user = user;
-                $sessionStorage.authToken = token;
-                $sessionStorage.exp = JwtService.decode(token)['exp'];
-            }
+            
         }
 
         function checkExpiration() {
@@ -105,18 +96,44 @@
         //     }
         // }
 
-        async function logout(force = false) {
-            if (!force) {
-                try {
-                    await $http.post(logoutUrl);
-                } catch (e) {
-                    console.log(e);
-                }
+        async function logout(tokenExpired = false) {
+            try {
+                auth2.isSignedIn.get() && (await auth2.signOut());
+            } catch (e) {
+                return;
+            }
+            
+            FB.getLoginStatus((response) => {
+                response.status === 'connected' && fbLogout();
+            });
+            
+            try {
+                tokenExpired || await $http.post(logoutUrl);
+            } catch (e) {
+                console.log(e);
             }
 
             $localStorage.$reset();
             $sessionStorage.$reset();
             Principal.authenticate();
+            
+            function fbLogout() {
+                FB.logout((response) => {
+                    console.log('FB Logged out');
+                });
+            }
+        }
+        
+        function storeSession({ user, token }, rememberMe = false) {
+            if (rememberMe) {
+                $localStorage.user = user;
+                $localStorage.authToken = token;
+                $localStorage.exp = JwtService.decode(token)['exp'];
+            } else {
+                $sessionStorage.user = user;
+                $sessionStorage.authToken = token;
+                $sessionStorage.exp = JwtService.decode(token)['exp'];
+            }
         }
     }
 })();

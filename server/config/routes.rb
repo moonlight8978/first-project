@@ -87,6 +87,7 @@ Rails.application.routes.draw do
       scope module: :security do
         scope module: :auth do
           post 'login'
+          post 'login/:provider', action: :social_login
           post 'logout'
           post 'register'
           post 'register/confirm', action: 'register_confirm'

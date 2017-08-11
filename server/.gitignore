@@ -18,3 +18,7 @@
 
 # Archived files
 # /archived
+
+# Ignore application configuration
+/config/application.yml
+client_secret.json
