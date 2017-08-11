@@ -1,0 +1,14 @@
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.margin-top-bottom {
+  &.1_2 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}

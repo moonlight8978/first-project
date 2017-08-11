@@ -1,0 +1,275 @@
+<nav nav-fixed search-form class="navbar fixed-top navbar-inverse navbar-toggleable-sm animated fadeInDown" id="navFixed">
+  <button class="navbar-toggler navbar-toggler-left" type="button"
+    id="toggler" sidebar-toggler target="#sidebarLeftWrap"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="container">
+    <a class="navbar-brand hidden-md-up" ui-sref="home">にょろにょろ</a>
+
+    <div class="collapse navbar-collapse">
+      <div class="-main">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownShop"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              ショップ
+            </a>
+            <div class="dropdown-menu animated fadeIn" aria-labelledby="navbarDropdownShop">
+              <a class="dropdown-item">ビジュアルノベル</a>
+              <a class="dropdown-item" href="#">アルバム</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownDatabase"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              データベース
+            </a>
+            <div class="dropdown-menu animated fadeIn" aria-labelledby="navbarDropdownDatabase">
+              <a class="dropdown-item" ui-sref="novel.list">ビジュアルノベル</a>
+              <a class="dropdown-item" href="#">アルバム</a>
+              <a class="dropdown-item" href="#">最近の活動</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              企業情報
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              接触
+            </a>
+          </li>
+        </ul>
+        <!-- END navbar left -->
+        <form class="form-inline search-form" id="searchForm"
+          ng-submit="vm.goSearch()" name="navSearchForm">
+          <!-- <select class="custom-select" id="searchCate" ng-model="vm.search.category" required>
+            <option value="">カテゴリ</option>
+            <option value="novel">ビジュアルノベル</option>
+            <option value="novelRelease">ノベルの発売</option>
+            <option value="album">アルバム</option>
+            <option value="albumRelease">アルバムの発売</option>
+            <option value="novelProduct">美少女ゲーム(製品)</option>
+            <option value="albumProduct">アルバム(製品)</option>
+            <option value="character">キュラクター</option>
+            <option value="tag">タグ</option>
+          </select> -->
+          <div class="input-group search-cate-wrap" ng-class="{ 'has-danger': navSearchForm.$submitted && navSearchForm.category.$invalid }">
+            <select class="form-control search-cate" name="category" id="searchCate" ng-model="vm.search.category" required>
+              <option value="">カテゴリ</option>
+              <option value="novel">ビジュアルノベル</option>
+              <option value="novelRelease">ノベルの発売</option>
+              <option value="album">アルバム</option>
+              <option value="albumRelease">アルバムの発売</option>
+              <option value="novelProduct">美少女ゲーム(製品)</option>
+              <option value="albumProduct">アルバム(製品)</option>
+              <option value="character">キュラクター</option>
+              <option value="tag">タグ</option>
+            </select>
+          </div>
+          <!-- <div class="stylish-input-group" id="inputGroup">
+            <input class="form-control mr-sm-2" id="searchInput" type="text"
+              placeholder="探しましょう" ng-model="vm.search.query"
+              autocomplete="off" ng-change="vm.search()" ng-trim="false" required>
+            <button type="button" class="clear-search-input" ng-click="vm.clearInput()">
+              &#10006;
+            </button>
+            <button type="submit" id="searchSubmit">
+              <i class="fa fa-search"></i>
+            </button> -->
+
+          <div class="input-group search-query-wrap" ng-class="{ 'has-danger': navSearchForm.$submitted && navSearchForm.query.$invalid }">
+            <input class="form-control search-query" id="searchInput"
+              name="query" type="text"
+              placeholder="探しましょう" ng-model="vm.search.query"
+              autocomplete="off" ng-change="vm.search()" ng-trim="false" 
+              ng-model-options="{ debounce: 500 }"
+              required>
+            <div class="btn-group">
+              <button type="button" class="btn btn-clear" id="searchClear"
+                ng-click="vm.clearInput()">
+                <span>&#10006;</span>
+              </button>
+              <button id="searchSubmit" class="btn btn-submit">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+
+            <div class="live-search-results">
+              <a ui-sref="novel.detail({ id: novel.id })"
+                ng-repeat="novel in vm.search.results">
+                <div class="result">
+                  <div class="result-image-wrap image-placeholder ratio-3_4">
+                    <div class="image-thumb"
+                      ng-style="{ 'background-image': 'url({{ novel.image }})' }"></div>
+                  </div>
+                  <div class="result-info">
+                    <div class="title">{{ novel.title }}</div>
+                    <div class="title-en">{{ novel.titleEn }}</div>
+                    <div class="length">{{ novel.length }}</div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+      <!-- main section -->
+      <div class="-user">
+        <ul class="navbar-nav">
+          <li class="nav-item no-ng-animate" ng-if="!vm.isAuthenticated">
+            <a class="nav-link" ui-sref="login">
+              ログイン
+            </a>
+          </li>
+          <li class="nav-item no-ng-animate" ng-if="vm.isAuthenticated">
+            <a class="nav-link" ng-click="vm.logout()">
+              ログアウト
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <i class="fa fa-shopping-cart"></i>
+              0
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- user section -->
+    </div>
+    <!-- END nav collapse -->
+  </div>
+  <!-- container -->
+  <div sidebar class="sidebar-left-wrap" id="sidebarLeftWrap">
+    <div class="sidebar-left" id="sidebarLeft">
+      <div class="sidebar-toggler" id="sidebarToggler"
+        sidebar-toggler target="#sidebarLeftWrap">&#10006;</div>
+      <ul class="list-group main-menu">
+        <li class="list-group-item">
+          <div class="avatar image-placeholder ratio-1_1">
+            <div class="avatar-thumb image-thumb" ng-style="vm.user.profileImage ? { 'background-image': 'url({{ vm.user.profileImage }})' } : {}"></div>
+          </div>
+          <div class="utility-container">
+            <a ui-sref="index" class="text-can-be-overflow user-name no-ng-animate">
+              {{ (vm.user && ((vm.user.firstName || '無名') + '様')) || 'ゲストさん' }}
+            </a>
+            <div class="utilities">
+              <span ng-if="vm.user" class="no-ng-animate">
+                <i class="fa fa-envelope"></i>
+              </span>
+              <span ng-if="vm.user" class="no-ng-animate">
+                <i class="fa fa-shopping-cart"></i>
+                0
+              </span>
+              <a ui-sref="login" ng-if="!vm.isAuthenticated" class="no-ng-animate">
+                <span>
+                  <i class="fa fa-sign-in"></i>
+                  ログイン
+                </span>
+              </a>
+              <a ng-if="vm.isAuthenticated" class="no-ng-animate" ng-click="vm.logout()">
+                <span><i class="fa fa-sign-out"></i></span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <a ui-sref="home" class="list-item-wrap link">
+          <li class="list-group-item">
+            <i class="fa fa-pagelines"></i>
+            ホムページ
+          </li>
+        </a>
+        <a ui-sref="index" data-toggle="collapse" data-target="#productList"
+          class="list-item-wrap link" aria-expanded="false">
+          <li class="list-group-item has-sub-menu">
+            <i class="fa fa-pagelines"></i>
+            製品
+          </li>
+        </a>
+        <div class="collapse" id="productList">
+          <ul class="list-group sub-menu">
+            <a ui-sref="index" class="list-item-wrap link">
+              <li class="list-group-item">
+                美少女ゲーム
+              </li>
+            </a>
+            <a ui-sref="index" class="list-item-wrap link">
+              <li class="list-group-item">
+                アルバム
+              </li>
+            </a>
+          </ul>
+        </div>
+        <a ui-sref="index" data-toggle="collapse" data-target="#databaseList"
+          class="list-item-wrap link" aria-expanded="false">
+          <li class="list-group-item has-sub-menu">
+            <i class="fa fa-pagelines"></i>
+            データベース
+          </li>
+        </a>
+        <div class="collapse" id="databaseList">
+          <ul class="list-group sub-menu">
+            <a ui-sref="novel.list" class="list-item-wrap link">
+              <li class="list-group-item">
+                ビジュアルノベル
+              </li>
+            </a>
+            <a ui-sref="index" class="list-item-wrap link">
+              <li class="list-group-item">
+                キャラクター
+              </li>
+            </a>
+            <a ui-sref="index" class="list-item-wrap link">
+              <li class="list-group-item">
+                <span class="text-can-be-overflow">
+                  ビジュアルノベルのリリース
+                </span>
+              </li>
+            </a>
+            <a ui-sref="index" class="list-item-wrap link">
+              <li class="list-group-item">
+                <span class="text-can-be-overflow">
+                  アルバム
+                </span>
+              </li>
+            </a>
+            <a ui-sref="index" class="list-item-wrap link">
+              <li class="list-group-item">
+                <span class="text-can-be-overflow">
+                  アルバムのリリース
+                </span>
+              </li>
+            </a>
+          </ul>
+        </div>
+        <a ui-sref="index" class="list-item-wrap link">
+          <li class="list-group-item">
+            <i class="fa fa-pagelines"></i>
+            <span class="text-can-be-overflow">ローレンイプサム</span>
+          </li>
+        </a>
+        <a ui-sref="index" class="list-item-wrap link">
+          <li class="list-group-item">
+            <i class="fa fa-pagelines"></i>
+            ローレンイプサム
+          </li>
+        </a>
+        <a ui-sref="index" class="list-item-wrap link">
+          <li class="list-group-item">
+            <i class="fa fa-pagelines"></i>
+            ローレンイプサム
+          </li>
+        </a>
+        <a ui-sref="index" class="list-item-wrap link">
+          <li class="list-group-item">
+            <i class="fa fa-pagelines"></i>
+            ローレンイプサム
+          </li>
+        </a>
+      </ul>
+    </div>
+  </div>
+</nav>

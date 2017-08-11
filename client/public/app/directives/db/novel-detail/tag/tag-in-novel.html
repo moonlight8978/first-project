@@ -1,0 +1,20 @@
+<div class="novel-tag-container">
+  <div class="line"></div>
+
+  <div class="tag-list" ng-if="vm.tags.length">
+    <a ui-sref="novelTag.detail({ id: tag.id })" class="tag" ng-repeat="tag in vm.tags">
+      {{ tag.tag }}
+    </a>
+  </div>
+
+  <div class="no-tag" ng-if="!vm.tags.length">
+    タグはありません。
+  </div>
+
+  <div class="tag-list">
+    <a class="tag" href="javascript:void(0);" ng-click="open()" has-role authority="ROLE_USER">
+      + Add tag
+    </a>
+  </div>
+</div>
+

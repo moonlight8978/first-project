@@ -1,0 +1,147 @@
+@import 'mixins';
+@import 'variables';
+
+@import 'components/visibility';
+@import 'components/button';
+@import 'components/graph';
+@import 'components/user-rating';
+@import 'components/error';
+@import 'components/crud-modal';
+@import 'components/form';
+@import 'components/collapse';
+@import 'components/ng-animate';
+@import 'components/quick-tool';
+@import 'components/lines';
+@import 'components/space';
+@import 'components/overflow';
+
+@import 'novel-list';
+@import 'navbar';
+@import 'index';
+@import 'footer';
+@import 'db-novel';
+@import 'db-detail-sidebar';
+@import 'login';
+@import 'register-confirm';
+@import 'ng1bs4';
+@import 'main-layout';
+@import 'age-confirm';
+@import 'tag-list';
+@import 'tag-detail';
+@import 'character-detail';
+@import 'comment';
+@import 'sidebar';
+
+@font-face {
+  font-family: 'Noto Sans CJK JP';
+  src: url('../fonts/NotoSansCJKjp-DemiLight.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+}
+
+// Global
+
+// .lazy {
+//   background-image: url('/assets/img/placeholder.jpg');
+//   transition: background-image 0.5s ease;
+// }-
+.flex-overflow-fix {
+  min-width: 0;
+}
+
+.line {
+  height: 1px;
+  background-color: $border-color;
+  width: 60%;
+  margin: 10px auto 20px;
+}
+
+.text-description { white-space: pre-line; }
+
+.full-width {
+  width: 100% !important;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.no-ng-animate {
+  transition: none !important;
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
+table {
+  tr, td, th {
+    padding: 0;
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.site-body {
+  padding-top: 40px;
+}
+
+html, body, input, input::placeholder, select {
+  font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+}
+
+// Bootstrap overiding
+a {
+  color: #007a87;
+  &.title {
+    color: #000;
+  }
+  &:focus, &:hover {
+    color: #009aab;
+    text-decoration: none;
+  }
+}
+
+*:active, *:focus {
+  outline: none;
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+.breadcrumb {
+  background-color: transparent;
+  padding: .75rem 0;
+  margin-bottom: 0;
+  a {
+    transition: color 0.3s ease;
+  }
+}
+.breadcrumb-item+.breadcrumb-item::before {
+  content: '»';
+}
+
+.container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// .row {
+//   margin-left: 0;
+//   margin-right: 0;
+// }
+

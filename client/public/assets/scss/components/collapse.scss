@@ -1,0 +1,34 @@
+.collapse-toggler {
+  position: relative;
+  &:before {
+    position: absolute;
+  }
+
+  &[aria-expanded='false']:before {
+    content: '\0002B';
+  }
+
+  &[aria-expanded='true']:before {
+    content: '\02212';
+  }
+}
+
+.toggler-left:before {
+  left: 1rem;
+}
+
+.collapse-toggler-button {
+  &:before {
+    width: 1.5em;
+    text-align: center;
+    display: block;
+  }
+
+  &[aria-expanded='false']:before {
+    content: '\0002B';
+  }
+
+  &[aria-expanded='true']:before {
+    content: '\02212';
+  }
+}

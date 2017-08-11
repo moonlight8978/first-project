@@ -1,0 +1,257 @@
+<div class="no-banner"></div>
+<div class="container animated fadeIn auth-container">
+  <div class="login-form-wrap">
+    <form class="form-auth login-form"
+      ng-submit="vm.submitLogin(vm.login.user, vm.login.user.rememberMe)">
+      <div class="logo">
+        <span><i class="fa fa-user"></i></span>
+      </div>
+      <div class="head">
+        <h4>ログイン</h4>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <span class="icon-wrap">
+              <i class="fa fa-fw fa-user"></i>
+            </span>
+            <input type="text" class="form-control" id="" placeholder="Username or Email"
+              ng-model="vm.login.user.login" required>
+          </div>
+          <div class="form-group">
+            <span class="icon-wrap">
+              <i class="fa fa-fw fa-lock"></i>
+            </span>
+            <input ng-attr-type="{{ vm.showPassword ? 'text' : 'password' }}"
+              class="form-control" id="" placeholder="Password"
+              ng-model="vm.login.user.password" required>
+            <small id="fileHelp" class="form-text text-muted text-right">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" ng-model="vm.showPassword">
+                  パスワードを表示する
+                </label>
+              </div>
+            </small>
+          </div>
+          <div class="form-error animated fadeIn no-ng-animate" ng-if="vm.login.error">
+            <span ng-repeat="(key, value) in vm.login.error">{{ value }}<br></span>
+          </div>
+          <div class="form-submit">
+            <button class="btn-c btn-c-5 btn-c-5-dark">
+              ログイン
+            </button>
+          </div>
+          <div class="form-check remember-me text-muted">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input"
+                ng-model="vm.login.user.rememberMe">
+              次回から自動でログインする
+            </label>
+          </div>
+          <div class="form-link">
+            <a ui-sref="login">パスワードを忘れた方</a>
+          </div>
+        </div>
+
+        <div class="social-login col-lg-6">
+          <div>
+            <a ui-sref="login" class="google" ng-click="vm.googleLogin()">
+              <span>Googleアカウントでログイン</span>
+            </a>
+          </div>
+          <div>
+            <a ui-sref="login" class="twitter" ng-click="vm.twitterLogin()">
+              <span>Twitterアカウントでログイン</span>
+            </a>
+          </div>
+          <div>
+            <a ui-sref="login" class="facebook" ng-click="vm.facebookLogin()">
+              <span>Facebookアカウントでログイン</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="no-account">
+        <div>アカウントが有りません？</div>
+        <div>&#8595;サインアップこちら</div>
+      </div> -->
+    </form>
+  </div>
+
+  <div class="sign-up-wrap">
+    <form class="form-auth form-signup" ng-submit="vm.submitSignup(vm.signup.user)">
+      <div class="logo">
+        <span><i class="fa fa-user-plus"></i></span>
+      </div>
+      <div class="head">
+        <h4>サインアップ</h4>
+      </div>
+
+      <ul class="form-title-group no-padding" role="tablist">
+        <li class="nav-item form-title">
+          <a class="nav-link active" data-toggle="tab" data-target="#importantInfo" role="tab">
+            強制情報
+          </a>
+        </li>
+        <li class="nav-item form-title">
+          <a class="nav-link" data-toggle="tab" data-target="#sideInfo" role="tab">
+            他の情報
+          </a>
+        </li>
+      </ul>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="tab-content">
+            <!-- important info -->
+            <div class="tab-pane fade show active" id="importantInfo" role="tabpanel">
+              <div class="form-group">
+                <span class="icon-wrap">
+                  <i class="fa fa-fw fa-user"></i>
+                </span>
+                <input type="text" class="form-control" id="" placeholder="Username"
+                  ng-model="vm.signup.user.userName" required>
+              </div>
+              <div class="form-group">
+                <span class="icon-wrap">
+                  <i class="fa fa-fw fa-envelope"></i>
+                </span>
+                <input type="email" class="form-control" id="" placeholder="Email"
+                  ng-model="vm.signup.user.email" required>
+              </div>
+              <div class="row input-inline-group">
+                <div class="col-lg-6 no-padding input-inline">
+                  <div class="form-group">
+                    <span class="icon-wrap">
+                      <i class="fa fa-fw fa-lock"></i>
+                    </span>
+                    <input ng-attr-type="{{ vm.showPassword ? 'text' : 'password' }}"
+                      class="form-control" id="" placeholder="Password"
+                      ng-model="vm.signup.user.password" required>
+                  </div>
+                </div>
+
+                <div class="col-lg-6 no-padding input-inline">
+                  <div class="form-group">
+                    <span class="icon-wrap">
+                      <i class="fa fa-fw fa-repeat"></i>
+                    </span>
+                    <input ng-attr-type="{{ vm.showPassword ? 'text' : 'password' }}"
+                      class="form-control" id="" placeholder="Password"
+                      ng-model="vm.signup.user.passwordConfirmation" required>
+                    <small id="fileHelp" class="form-text text-muted text-right">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="checkbox" class="form-check-input" ng-model="vm.showPassword">
+                          パスワードを表示する
+                        </label>
+                      </div>
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- END PANEL -->
+
+            <!-- other info -->
+            <div class="tab-pane fade" id="sideInfo" role="tabpanel">
+              <div class="form-group">
+                <span class="icon-wrap">
+                  <i class="fa fa-fw fa-id-card"></i>
+                </span>
+                <input type="text" class="form-control" id="" placeholder="Lastname"
+                  ng-model="vm.signup.user.lastName">
+              </div>
+
+              <div class="form-group">
+                <span class="icon-wrap">
+                  <i class="fa fa-fw fa-id-card"></i>
+                </span>
+                <input type="text" class="form-control" id="" placeholder="Middlename"
+                  ng-model="vm.signup.user.middleName">
+              </div>
+
+              <div class="form-group">
+                <span class="icon-wrap">
+                  <i class="fa fa-fw fa-id-card"></i>
+                </span>
+                <input type="text" class="form-control" id="" placeholder="Firstname"
+                  ng-model="vm.signup.user.firstName">
+              </div>
+
+              <div class="row input-inline-group">
+                <div class="col-lg-7 col-xl-8 no-padding input-inline">
+                  <div class="form-group">
+                    <span class="icon-wrap">
+                      <i class="fa fa-fw fa-phone"></i>
+                    </span>
+                    <input type="text" class="form-control" id="" placeholder="Phone number"
+                      ng-model="vm.signup.user.phoneNumber">
+                  </div>
+                </div>
+                <div class="col-lg-5 col-xl-4 no-padding input-inline">
+                  <div class="form-group">
+                    <span class="icon-wrap">
+                      <i class="fa fa-fw fa-birthday-cake"></i>
+                    </span>
+                    <input type="date" class="form-control" id=""
+                      ng-model="vm.signup.user.birthday">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row input-inline-group">
+                <div class="col-lg-7 col-xl-8 no-padding input-inline">
+                  <div class="form-group">
+                    <span class="icon-wrap">
+                      <i class="fa fa-fw fa-location-arrow"></i>
+                    </span>
+                    <input type="text" class="form-control" id="" placeholder="Address"
+                      ng-model="vm.signup.user.address">
+                  </div>
+                </div>
+                <div class="col-lg-5 col-xl-4 no-padding input-inline">
+                  <div class="form-group">
+                    <span class="icon-wrap">
+                      <i class="fa fa-fw fa-map-marker"></i>
+                    </span>
+                    <select size="1" class="form-control" id="exampleSelect1"
+                      ng-options="c.id as c.name for c in vm.countries"
+                      ng-model="vm.signup.user.countryId">
+                      <option value="">-</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- END PANEL -->
+          </div>
+          <!-- END tab-content -->
+          <div class="form-check tos">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input"
+                ng-model="vm.signup.user.acceptTOS" required>
+              Accept TOS
+            </label>
+          </div>
+          <div class="form-error animated fadeIn no-ng-animate" ng-if="vm.signup.error">
+            <span ng-repeat="(key, value) in vm.signup.error">{{ value }}<br></span>
+          </div>
+          <div class="form-success animated fadeIn no-ng-animate" ng-if="vm.signup.message">
+            <span>{{ vm.signup.message }}</span>
+          </div>
+          <div class="form-submit">
+            <button class="btn-c btn-c-5 btn-c-5-dark">
+              サインアップ
+            </button>
+          </div>
+        </div>
+        <!-- END wrapper -->
+      </div>
+      <!-- END form content -->
+    </form>
+  </div>
+</div>
+<div class="margin-footer"></div>

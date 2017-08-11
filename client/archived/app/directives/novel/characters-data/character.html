@@ -1,0 +1,7 @@
+<div ng-switch="type">
+  <span ng-switch-when="protagonist">Protagonists</span>
+  <span ng-switch-when="side">Side characters</span>
+  <span ng-switch-when="main">Main characters</span>
+</div>
+
+<character-info character="character" ng-repeat="character in characters"></character-info>

@@ -1,0 +1,24 @@
+@import '../mixins';
+@import '../variables';
+
+.chart {
+  display: block;
+  margin: auto;
+
+  &:hover text {
+    opacity: 1 !important;
+  }
+}
+
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  opacity: 0;
+  fill: #000;
+  font: 10px sans-serif;
+  text-anchor: middle;
+
+  @include transition-std(opacity);
+}

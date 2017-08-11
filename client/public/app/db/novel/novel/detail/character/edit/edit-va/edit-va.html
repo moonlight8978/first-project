@@ -1,0 +1,72 @@
+<div ng-if="vm.voiceActresses.length">
+  <div class="message" ng-if="vm.message">
+    <h6 ng-repeat="(key, value) in vm.message">{{ value }}</h6>
+  </div>
+  <div class="error" ng-if="vm.error">
+    <h6 ng-repeat="(key, value) in vm.error">{{ value }}</h6>
+  </div>
+
+  <div ng-repeat="(vaId, va) in vm.voiceActresses"
+    class="ng-repeat-animate">
+    <div class="row">
+      <div class="col-7 col-md-8">
+        <a ui-sref="person.detail({ id: va.personId })">{{ va.name }}さんは</a>
+        <span ng-if="va.alias">「{{ va.alias }}」を使っています。</span>
+        <span ng-if="!va.alias">アリアスを使っていません。</span>
+      </div>
+
+      <div class="col-5 col-md-4 text-right">
+        <a href="javascript:void(0)" role="button" ng-click="vm.destroy(vaId, va)">
+          ディリット
+        </a>
+        <span>|</span>
+        <a href="javascript:void(0)" role="button" data-toggle="collapse" aria-expanded="false"
+          data-target="#vaForm{{vaId}}">
+          エディット
+          <span>&#x25BE;</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="line full-width"></div>
+
+    <form name="form{{vaId}}"" class="collapse" id="vaForm{{vaId}}"
+      ng-submit="vm.submitUpdate(vaId, va, vm.va[vaId])">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="_alias{{vaId}}" class="form-control-label">アリアス</label>
+            <input id="_alias{{vaId}}" class="form-control" type="text" name="alias"
+              ng-model="vm.va[vaId].alias" ng-disabled="vm.va[vaId].noAlias">
+            <small class="form-text text-muted">日本語でお願いします。</small>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="_aliasEn{{vaId}}" class="form-control-label">アリアス(英語)</label>
+            <input id="_aliasEn{{vaId}}" class="form-control" type="text" name="aliasEn"
+              ng-model="vm.va[vaId].aliasEn" ng-disabled="vm.va[vaId].noAlias">
+            <small id="titleHelp" class="form-text text-muted">英語/ローマ字でお願いします。</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label" for="_noAlias{{vaId}}">
+          <input id="_noAlias{{vaId}}" type="checkbox" class="form-check-input"
+            ng-model="vm.va[vaId].noAlias">
+            アリアス使いません
+        </label>
+      </div>
+
+      <button class="btn-c btn-c-5 btn-c-5-sakura pull-right">提出</button>
+      <div class="clearfix mb-3"></div>
+    </form>
+  </div>
+  <div class="line-shadow full-width bottom hidden-lg-up mb-4"></div>
+</div>
+
+<div ng-if="!vm.voiceActresses.length">
+  VAがだれもいません。
+</div>

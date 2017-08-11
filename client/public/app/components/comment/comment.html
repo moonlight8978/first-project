@@ -1,0 +1,15 @@
+<div class="comment">
+  <p class="comment-body">{{ vm.comment.body }}</p>
+  
+  <div class="comment-user">
+    <div class="image-placeholder ratio_1-1 avatar">
+      <div class="avatar-thumb image-thumb" ng-style="vm.comment.user.profileImage ? { 'background-image': 'url({{ vm.comment.user.profileImage }})' } : {}"></div>
+    </div>
+    
+    <div class="user-name flex-overflow-fix pl-2">
+      <div class="ellipsis">
+        <a href="javascript:void(0);">{{ vm.comment.user.userName }}</a>
+      </div>
+    </div>
+  </div>
+</div>

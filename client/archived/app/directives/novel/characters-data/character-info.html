@@ -1,0 +1,22 @@
+<span>{{ character.id }}, </span>
+<span>{{ character.name }}, </span>
+<span>{{ character.threeSizes }}cm</span>
+<br>
+<form ng-submit="vm.update()">
+  <input ng-model="vm.reqChar.name" placeholder="{{ character.name }}">
+  <input ng-model="vm.reqChar.nameEn" placeholder="{{ character.nameEn }}">
+  <input ng-model="vm.reqChar.bust" placeholder="{{ character.threeSizes.split('-')[0] }}">
+  <input ng-model="vm.reqChar.hip" placeholder="{{ character.threeSizes.split('-')[1] }}">
+  <input ng-model="vm.reqChar.weist" placeholder="{{ character.threeSizes.split('-')[2] }}">
+  <input ng-model="vm.reqChar.birthdayDay">
+  <input ng-model="vm.reqChar.birthdayMonth">
+  <button type="submit">Update</button>
+</form>
+<span>Voiced by: <span>
+<div ng-repeat="va in character.voiceActresses">
+  <span>{{ va.name }}</span>
+  <form ng-submit="vm.updateVA(vm.reqVA[$index])">
+    <input ng-model="vm.reqVA[$index].name" placeholder="{{ va.name }}">
+    <button type="submit">Submit</button>
+  </form>
+</div>

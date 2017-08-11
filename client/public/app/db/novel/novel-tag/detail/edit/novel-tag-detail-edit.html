@@ -1,0 +1,117 @@
+<div class="animated fadeIn">
+  <div class="no-banner"></div>
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a ui-sref="home">メインページ</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="javascript:;">データベース</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a ui-sref="novelTag.list">タグ</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <a ui-sref="novelTag.detail">{{ vm.oldTag.tag }}</a>
+      </li>
+      <li class="breadcrumb-item active">
+        Edit
+      </li>
+    </ol>
+  </div>
+
+  <div class="page-head">
+    <div class="container">
+      <h3>Edit {{ vm.oldTag.tag }}</h3>
+      <h6 ng-if="vm.oldTag.tagEn">Edit {{ vm.oldTag.tagEn }}</h6>
+    </div>
+  </div>
+
+  <div class="container page-body">
+    <div class="body row">
+      <div class="content col-xl-9 item-container">
+       <!--  <div class="item-group">
+        <h6>フォーム</h6>
+        <div class="item item-box"> -->
+        <form name="form" ng-submit="vm.submit(vm.tag)">
+          <div class="row">
+            <div class="col-lg-6 input-inline">
+              <div class="form-group">
+                <label>タグ</label>
+                <input type="text" class="form-control" name="tag"
+                  ng-model="vm.tag.tag" placeholder="{{ vm.oldTag.tag || '入力する' }}">
+                <small id="tagHelp" class="form-text text-muted">日本語でお願いします。</small>
+              </div>
+            </div>
+
+            <div class="col-lg-6 input-inline">
+              <div class="form-group">
+                <label>タグ(英語)</label>
+                <input type="text" class="form-control" name="tagEn"
+                  ng-model="vm.tag.tagEn" placeholder="{{ vm.oldTag.tagEn || '入力する' }}">
+                <small id="tagEnHelp" class="form-text text-muted">英語でお願いします。</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>ディスクリプション</label>
+            <textarea type="text" class="form-control" rows="6"
+              name="description" ng-model="vm.tag.description"
+              placeholder="{{ vm.oldTag.description || '入力する' }}"></textarea>
+            <small id="descrHelp" class="form-text text-muted">日本語でお願いします。</small>
+          </div>
+
+          <div class="form-group">
+            <label>ディスクリプション(英語)</label>
+            <textarea type="text" class="form-control" rows="6"
+              name="descriptionEn" ng-model="vm.tag.descriptionEn"
+              placeholder="{{ vm.oldTag.descriptionEn || '入力する' }}"></textarea>
+            <small id="descrEnHelp" class="form-text text-muted">英語でお願いします。</small>
+          </div>
+
+          <div class="form-group form-success animated fadeIn"
+            ng-show="vm.message">
+            <h6 ng-repeat="(key, value) in vm.message">{{ value }}</h6>
+          </div>
+
+          <div class="form-group form-error animated fadeIn"
+            ng-show="vm.error">
+            <h6 ng-repeat="(key, value) in vm.error">{{ value }}</h6>
+          </div>
+
+          <a class="pull-left" ui-sref="novelTag.detail" ui-sref-opts="{ reload: true }">
+            <span>&#x2039;</span>
+            戻る
+          </a>
+          <button class="btn-c btn-c-5 btn-c-5-sakura pull-right">提出する</button>
+          <div class="clearfix"></div>
+        </form>
+     <!--  </div>
+      </div> -->
+      </div>
+
+      <aside class="col-xl-3 item-container">
+        <div class="item-group">
+          <h6>Remove fields</h6>
+          <form class="item item-box">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input"
+                  ng-model="vm.tag.removes.description">
+                  ディスクリプション
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input"
+                  ng-model="vm.tag.removes.descriptionEn">
+                  ディスクリプション(英語)
+              </label>
+            </div>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

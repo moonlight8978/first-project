@@ -1,0 +1,19 @@
+@import 'variables';
+@import 'mixins';
+
+.user-rating {
+  font-size: 0.8rem;
+  @include responsive(lg) { font-size: 0.9rem; }
+
+  select {
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid $black;
+  }
+
+  button {
+    padding: 1px 10px;
+    margin-top: 1rem;
+    @include responsive(md) { margin-left: 3px; }
+  }
+}

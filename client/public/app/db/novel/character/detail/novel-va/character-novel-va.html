@@ -1,0 +1,46 @@
+<h6>ノベル</h6>
+<div class="item item-box item-list">
+  <div class="character-novel" ng-repeat="(novelId, novel) in vm.novels">
+    <div class="item-header">
+      <div class="image pr-2">
+        <div class="image-placeholder ratio-3_4">
+          <div image-thumb class="image-thumb"
+            condition="false"
+            nsfw="/assets/img/image-nsfw.jpg" image="{{ novel.image }}">
+          </div>
+        </div>
+      </div>
+      <div class="title pl-2">
+        <a ui-sref="novel.detail({ id: novel.id })" role="button"
+          class="text-can-be-overflow">
+          {{ novel.title }}
+        </a>
+        <div>
+          役割: 主人公
+        </div>
+        <table>
+          <tr>
+            <td class="pr-2">CV:</td>
+            <td>
+              <div ng-if="novel.voiceActresses.length">
+                <div ng-repeat="(vaId, va) in novel.voiceActresses">
+                  <a ui-sref="person.detail({ id: va.id })">
+                    <div>
+                      <span class="text-can-be-overflow">
+                        {{ va.alias || va.name }}
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              <div ng-if="!novel.voiceActresses.length">
+                VAがいません。
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
