@@ -1,0 +1,36 @@
+.error-container {
+  padding: 30px 0;
+  text-align: center;
+  color: #505050; }
+  .error-container .code {
+    display: flex;
+    justify-content: center; }
+    .error-container .code > div {
+      padding: 10px 20px;
+      border: 1px solid #ddd;
+      text-shadow: 0 1px 1px #000;
+      font-size: 3em;
+      margin: 0 7px;
+      border: 0;
+      box-shadow: 0 1px 5px rgba(34, 25, 25, 0.3); }
+      @media (min-width: 992px) {
+        .error-container .code > div {
+          padding: 20px 30px;
+          font-size: 3.5em; } }
+  .error-container .title {
+    text-transform: uppercase;
+    margin: 20px 0; }
+    @media (min-width: 992px) {
+      .error-container .title {
+        margin: 40px 0 20px; } }
+    .error-container .title > div:first-child {
+      font-size: 2.5em; }
+    .error-container .title > div:last-child {
+      font-size: 1.5em;
+      margin-top: -.25em; }
+  .error-container .link a {
+    margin: 0 3px; }
+  .error-container .link > div:first-child {
+    text-align: right; }
+  .error-container .link > div:last-child {
+    text-align: left; }

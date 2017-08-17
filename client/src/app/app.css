@@ -1,0 +1,38 @@
+@charset "UTF-8";
+html {
+  font-size: 14px;
+  background-color: #eceff1; }
+
+html, body, input, input::placeholder, select {
+  font-family: 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif; }
+
+.page-wrap {
+  padding-top: 100px;
+  position: absolute;
+  left: 0;
+  right: 0; }
+
+.tab-pane.fade {
+  display: block !important;
+  height: 0;
+  overflow: hidden; }
+  .tab-pane.fade.active {
+    height: auto; }
+
+.fade.active {
+  opacity: 1; }
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1; }
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in; }
+
+.fade-exit {
+  opacity: 1; }
+
+.fade-exit.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 250ms ease-in; }

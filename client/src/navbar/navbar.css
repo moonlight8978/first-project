@@ -1,0 +1,23 @@
+nav.navbar {
+  font-size: 16px;
+  background-color: rgba(27, 31, 35, 0.7);
+  padding: 0.75rem 0;
+  text-align: center;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease; }
+  nav.navbar .nav-link {
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    color: #fafafa;
+    font-weight: 900;
+    text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer; }
+    nav.navbar .nav-link:hover {
+      color: #b8c6c6 !important; }
+
+nav.navbar.active {
+  background-color: rgba(27, 31, 35, 0.9); }
+  nav.navbar.active .nav-link {
+    color: #fff; }

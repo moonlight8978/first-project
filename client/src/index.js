@@ -2,16 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-import App from './components/App';
-import Header from './components/Header';
+import store from './stores/create-store';
+import App from './app';
+import config from './api';
+
+import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css';
+import 'animate.css';
+
+config();
+const root = document.getElementById('root');
 
 ReactDOM.render(
-  <BrowserRouter>
-    <div>
-      <Header />
+  <Provider store={store}>
+    <BrowserRouter>
       <App />
-    </div>
-  </BrowserRouter>,
-  document.getElementById('root'),
+    </BrowserRouter>
+  </Provider>,
+  root
 );

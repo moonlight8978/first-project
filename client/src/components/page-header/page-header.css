@@ -1,0 +1,8 @@
+.page-head {
+  padding: 15px 0;
+  background-color: #fafafa;
+  box-shadow: 0 5px 5px -5px rgba(34, 25, 25, 0.3); }
+  .page-head h6 {
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase; }
