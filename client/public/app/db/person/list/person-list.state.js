@@ -8,20 +8,19 @@
     stateConfig.$inject = ['$stateProvider'];
 
     function stateConfig($stateProvider) {
-        $stateProvider.state('character.list', {
-            url: '/characters?role&page&perPage',
+        $stateProvider.state('person.list', {
+            url: '?page&perPage',
             params: {
-                role: null,
                 page: '1',
                 perPage: '10',
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/db/novel/character/list/character-list.html',
-                    controller: 'CharacterListController',
+                    templateUrl: 'app/db/person/list/person-list.html',
+                    controller: 'PersonListController',
                     controllerAs: 'vm'
                 }
-            }
+            },
         });
     }
 })();

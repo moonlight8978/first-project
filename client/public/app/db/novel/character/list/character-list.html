@@ -1,16 +1,98 @@
-<a ui-sref="home">Home</a><br><br>
+<div class="no-banner page-wrap animated fadeIn">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a ui-sref="home">メインページ</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a>データベース</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a ui-sref="character.list({ page: 1, length: null })" 
+          ui-sref-opts="{ reload: true }">
+          キャラクター
+        </a>
+      </li>
+      <li class="breadcrumb-item active">
+        <span>ページ {{ vm.page }} / {{ vm.totalPages }}</span>
+      </li>
+    </ol>
+  </div>
 
-<table>
-  <tr>
-    <th>Id</th>
-    <th>Name</th>
-    <th>Three-sizes</th>
-    <th>Role</th>
-  </tr>
-  <tr ng-repeat="character in vm.characters">
-    <td>{{ character.id }}</td>
-    <td><a ui-sref="character.detail({ id: character.id })">{{ character.name }}</a></td>
-    <td>{{ character.threeSizes }}</td>
-    <td>{{ character.role }}</td>
-  </tr>
-</table>
+  <div class="page-head bb">
+    <div class="container">
+      <h3>キャラクター</h3>
+      <h6>All characters</h6>
+    </div>
+  </div>
+  
+  <div class="container page-body page-list character-list test-container item-container">
+    <div class="row">
+      <div class="col-lg-9 body">
+        <div class="has-loading">
+          <div class="loading item-box" ng-if="vm.loading"></div>
+          
+          <div ng-if="!vm.loading">
+            <div class="item-rows">
+              <div class="p-2 p-md-3 item-box item" ng-repeat="character in vm.characters">
+                <div class="row">
+                  <div class="col-3 image">
+                    <div class="image-placeholder ratio-3_4">
+                      <div image-thumb class="image-thumb" condition="false"
+                        nsfw="/assets/img/image-nsfw.jpg" image="{{ character.image }}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-9 info">
+                    <div class="name">
+                      <a ui-sref="character.detail({ id: character.id })">{{ character.name }}</a>
+                      <span ng-if"character.gender" ng-switch="character.gender">
+                        <i ng-switch-when="male" class="fa fa-mars"></i>
+                        <i ng-switch-when="female" class="fa fa-venus"></i>
+                      </span>
+                      <span ng-if"character.bloodType">{{ character.bloodType }}</span>
+                    </div>
+                    <div class="line full-width mt-1 mb-2"></div>
+                    <div class="novels-relate">
+                      <div>関係があるノベル:</div>
+                      <div ng-if="!character.novels.length">
+                        ありません。
+                      </div>
+                      <div ng-if="character.novels.length">
+                        <div class="pl-2 ellipsis" 
+                          title="{{ novel.title }}"
+                          ng-repeat="novel in character.novels" 
+                          ng-if="$index < 3">
+                          <a ui-sref="novel.detail({ id: novel.id })">{{ novel.title }}</a>
+                        </div>
+                        <div class="pl-2" ng-if="character.novels.length > 3">
+                          。。。
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <ul uib-pagination total-items="vm.total" ng-model="vm.page" max-size="8"
+              items-per-page="vm.perPage" ng-change="vm.pageChange()" boundary-links="true"
+              rotate="true" force-ellipses="true" boundary-link-numbers="true"
+              first-text="最初" last-text="最後" next-text="»" previous-text="«"
+              class="pull-right">
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+      
+      <aside class="col-lg-3 item-container">
+        <div class="item-group">
+          Thêm clg vào sidebar giờ ?!
+          <input type="checkbox" ng-model="vm.loading">
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+  

@@ -31,6 +31,7 @@
 @import 'character-detail';
 @import 'comment';
 @import 'sidebar';
+@import 'character-list';
 
 @font-face {
   font-family: 'Noto Sans CJK JP';
@@ -48,6 +49,7 @@
 
 // Global
 
+body { overflow-y:scroll; }
 // .lazy {
 //   background-image: url('/assets/img/placeholder.jpg');
 //   transition: background-image 0.5s ease;
@@ -89,6 +91,7 @@ table {
 
 html, body {
   height: 100%;
+  background-color: #fafafa;
 }
 
 body {

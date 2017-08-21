@@ -1,0 +1,69 @@
+<div class="no-banner page-wrap animated fadeIn">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a ui-sref="home">メインページ</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a>データベース</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a ui-sref="person.list({ page: 1, length: null })" 
+          ui-sref-opts="{ reload: true }">
+          スタフ
+        </a>
+      </li>
+      <li class="breadcrumb-item active">
+        <span>ページ {{ vm.page }} / {{ vm.totalPages }}</span>
+      </li>
+    </ol>
+  </div>
+
+  <div class="page-head">
+    <div class="container">
+      <h3>スタフ</h3>
+      <h6>All staffs</h6>
+    </div>
+  </div>
+  
+  <div class="container page-body page-list person-list item-container">
+    <div class="row">
+      <div class="col-lg-9 body">
+        <div class="has-loading">
+          <div class="loading item-box" ng-if="vm.loading"></div>
+          
+          <div ng-if="!vm.loading">
+            <div class="item-rows">
+              <div class="p-3 item-box item" ng-repeat="person in vm.people">
+                <div class="">
+                  <country country="person.country"></country>
+                  {{ person.name }}
+                </div>
+                
+                <div class="">
+                  {{ person.staffPositions }}
+                </div>
+              </div>
+            </div>
+            
+            <ul uib-pagination total-items="vm.total" ng-model="vm.page" max-size="8"
+              items-per-page="vm.perPage" ng-change="vm.pageChange()" boundary-links="true"
+              rotate="true" force-ellipses="true" boundary-link-numbers="true"
+              first-text="最初" last-text="最後" next-text="»" previous-text="«"
+              class="pull-right">
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+      
+      <aside class="col-lg-3 item-container">
+        <div class="item-group">
+          Thêm clg vào sidebar giờ ?!
+          <input type="checkbox" ng-model="vm.loading">
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+  
