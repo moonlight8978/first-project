@@ -1,15 +1,8 @@
 class Country < ApplicationRecord
   before_save :standardized
 
-  validates :name, :name_en,
+  validates :name, :name_en, :code,
     presence: true
-  validates :image,
-    presence: true,
-    format: { with: /\Ahttp\:\/\/|https\:\/\//,
-              message: 'Must be URL (http://... or https://...)' }
-  validates :image,
-    format: { with: /.jpg|.png|.jpeg\Z/,
-              message: 'Image must be one of following type: .jpg, .png or .jpeg' }
 
   has_many :people,    dependent: :nullify,
     class_name: 'Db::Person'
@@ -19,6 +12,6 @@ class Country < ApplicationRecord
 private
 
   def standardized
-    self.image.gsub(/\s+/, '')
+    self.code.gsub(/\s+/, '').downcase
   end
 end

@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170809134714) do
+ActiveRecord::Schema.define(version: 20170821152410) do
 
   create_table "countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.string "name_en", null: false
-    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "code"
   end
 
   create_table "db_album_classifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -359,9 +359,9 @@ ActiveRecord::Schema.define(version: 20170809134714) do
 
   create_table "security_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "country_id"
-    t.string "user_name", null: false
-    t.string "password_digest", null: false
-    t.string "email", null: false
+    t.string "user_name"
+    t.string "password_digest"
+    t.string "email"
     t.string "phone_number"
     t.string "address"
     t.string "first_name"

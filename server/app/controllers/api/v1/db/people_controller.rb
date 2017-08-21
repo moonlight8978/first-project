@@ -1,17 +1,19 @@
 class Api::V1::Db::PeopleController < ApplicationController
   def index
-    @people = ::Db::Person.all
-
+    @people = ::Db::Person
+      .includes(:staffs, :country, :voice_actresses)
+      .all
+  
     paginate json: @people, key_transform: :camel_lower, status: :ok,
       per_page: params[:per_page],
-      each_serializer: Api::V1::Database::Person::PersonSerializer
+      each_serializer: Api::V1::Db::Person::PersonListSerializer
   end
 
   def show
     @person = ::Db::Person.find(params[:id])
 
     render json: @person, key_transform: :camel_lower, status: :ok,
-      serializer: Api::V1::Database::Person::PersonSerializer
+      serializer: Api::V1::Db::Person::PersonListSerializer
   end
 
   def create

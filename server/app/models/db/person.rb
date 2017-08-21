@@ -32,7 +32,7 @@ class Db::Person < ApplicationRecord
 
   belongs_to :country, class_name: 'Country', optional: true
 
-  has_many :voice_actresses, dependent: :destroy,
+  has_many :voice_actresses, dependent: :destroy, counter_cache: true,
     class_name: 'Db::Novel::Character::VoiceActress'
   has_many :staffs,          dependent: :destroy,
     class_name: 'Db::Novel::Staff'
@@ -47,6 +47,15 @@ class Db::Person < ApplicationRecord
     end
     text :twitter do
       twitter ? gsub_twitter : ''
+    end
+  end
+  
+  def staff_positions
+    positions = staffs.map(&:position).uniq
+    if voice_actresses.length > 0
+      positions + ['voice_actor']
+    else
+      positions
     end
   end
 

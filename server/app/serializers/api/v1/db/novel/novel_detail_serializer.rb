@@ -13,6 +13,7 @@ class Api::V1::Db::Novel::NovelDetailSerializer < ActiveModel::Serializer
   has_many :tags,        if: -> { object.full_info }
   has_many :ratings,     if: -> { object.full_info }, key: :ratings_detail,
     serializer: Api::V1::Feature::Rating::RatingListSerializer
+  has_many :reviews,    if: -> { object.full_info }
 
   def rating
     object.ratings && object.ratings.avg
