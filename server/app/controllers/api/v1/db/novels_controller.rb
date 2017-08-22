@@ -17,7 +17,6 @@ class Api::V1::Db::NovelsController < ApplicationController
   end
 
   def show
-    p request.headers['HTTP_AUTHORIZATION']
     @get_novel_svc = NovelService::GetInfo.new(params[:id])
     if params[:full_info].present?
       @novel = @get_novel_svc.perform(full_info: true).result

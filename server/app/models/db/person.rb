@@ -27,7 +27,9 @@ class Db::Person < ApplicationRecord
     if: -> { self.twitter },
     format: { with: /[twitter.com|mobile.twitter.com|m.twitter.com]/,
               message: 'Must be Twitter page!' }
-
+  
+  attr_accessor :voice_actress_statistics, :staff_statistics
+  
   enum gender: [:female, :male]
 
   belongs_to :country, class_name: 'Country', optional: true

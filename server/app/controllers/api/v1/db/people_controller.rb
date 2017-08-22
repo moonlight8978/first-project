@@ -10,10 +10,23 @@ class Api::V1::Db::PeopleController < ApplicationController
   end
 
   def show
-    @person = ::Db::Person.find(params[:id])
-
+    @person = ::Db::Person
+      .includes(
+        { staffs: { novel: :releases } }, 
+        :country, 
+        { voice_actresses: { character_novel: [:novel, :character] } }
+      )
+      .find(params[:id])
+    
+    PersonService::Statistic.new(@person).perform
+    
     render json: @person, key_transform: :camel_lower, status: :ok,
-      serializer: Api::V1::Db::Person::PersonListSerializer
+      include: [
+        { voice_actresses: :character_novel }, 
+        :country,
+        :staffs
+      ],
+      serializer: Api::V1::Db::Person::PersonDetailSerializer
   end
 
   def create
