@@ -34,14 +34,27 @@
           
           <div ng-if="!vm.loading">
             <div class="item-rows">
-              <div class="p-3 item-box item" ng-repeat="person in vm.people">
-                <div class="">
-                  <country country="person.country"></country>
-                  {{ person.name }}
-                </div>
-                
-                <div class="">
-                  {{ person.staffPositions }}
+              <div class="row">
+                <div class="mb-3 col-md-6" ng-repeat="person in vm.people">
+                  <div class="m-0 p-3 h-100 item-box item">
+                    <a ui-sref="person.detail({ id: person.id })">
+                      <country country="person.country"></country>
+                      <span>{{ person.name }}</span>
+                    </a>
+                    
+                    <div class="staff-position-list d-flex">
+                      <div class="staff-position" 
+                        ng-repeat="position in person.staffPositions" 
+                        ng-switch="position">
+                        <div ng-switch-when="staff">スタフ</div>
+                        <div ng-switch-when="vocals">ボカルー</div>
+                        <div ng-switch-when="voice_actor">声優</div>
+                        <div ng-switch-when="composer">作曲家</div>
+                        <div ng-switch-when="artist">アルティスト</div>
+                        <div ng-switch-when="scenario">シーン</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

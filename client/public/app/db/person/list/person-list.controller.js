@@ -14,11 +14,14 @@
         vm.loading = true;
         vm.page = $stateParams.page;
         vm.perPage = $stateParams.perPage;
-        vm.country = {
-            code: 'JP',
-            name: '日本',
-            nameEn: 'Japan',
-        }
+        vm.positions = [
+            'staff',
+            'vocals',
+            'composer',
+            'voice_actor',
+            'scenario',
+            'artist',
+        ];
         
         // vm functions
         vm.pageChange = pageChange;

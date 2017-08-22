@@ -1,1 +1,48 @@
-Person Detail
+<div class="no-banner page-wrap animated fadeIn">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a ui-sref="home">メインページ</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a>データベース</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a ui-sref="person.list({ page: 1, length: null })">
+          スタフ
+        </a>
+      </li>
+      <li class="breadcrumb-item active">
+        <span>{{ vm.person.name }}</span>
+      </li>
+    </ol>
+  </div>
+
+  <div class="page-head">
+    <div class="container">
+      <h3>{{ vm.person.name }}</h3>
+      <h6>{{ vm.person.nameEn }}</h6>
+    </div>
+  </div>
+  
+  <div class="container page-body page-list person-detail item-container">
+    <div class="row">
+      <div class="col-lg-9 body">
+        <div class="has-loading">
+          <div class="loading item-box" ng-if="vm.loading"></div>
+          
+          <div ng-if="!vm.loading">
+            
+          </div>
+        </div>
+      </div>
+      
+      <aside class="col-lg-3 item-container">
+        <div class="item-group">
+          Thêm clg vào sidebar giờ ?!
+          <input type="checkbox" ng-model="vm.loading">
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

@@ -2280,6 +2280,36 @@ aside .review.ng-enter-active {
 .item-rows .item-row:not(:last-child) {
   border-bottom: 1px solid #ddd; }
 
+.person-list .staff-position-list {
+  margin: .25rem -.25rem 0;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start; }
+
+.person-list .staff-position-list .staff-position {
+  padding-left: .25rem;
+  padding-right: .25rem;
+  padding-top: .5rem; }
+  .person-list .staff-position-list .staff-position div {
+    padding: .1rem .5rem;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600; }
+  .person-list .staff-position-list .staff-position:nth-child(6) div {
+    background-color: #009aab; }
+  .person-list .staff-position-list .staff-position:nth-child(5) div {
+    background-color: #259b24; }
+  .person-list .staff-position-list .staff-position:nth-child(4) div {
+    background-color: #ffc107; }
+  .person-list .staff-position-list .staff-position:nth-child(3) div {
+    background-color: #ff9800; }
+  .person-list .staff-position-list .staff-position:nth-child(2) div {
+    background-color: #e51c23; }
+  .person-list .staff-position-list .staff-position:nth-child(1) div {
+    background-color: #9c27b0; }
+
 @font-face {
   font-family: 'Noto Sans CJK JP';
   src: url("../fonts/NotoSansCJKjp-DemiLight.otf") format("opentype");
@@ -2297,6 +2327,9 @@ body {
 
 .flex-overflow-fix {
   min-width: 0; }
+
+.flag-icon {
+  border: 1px solid #ddd; }
 
 .line {
   height: 1px;
