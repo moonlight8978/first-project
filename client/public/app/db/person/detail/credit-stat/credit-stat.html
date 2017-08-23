@@ -1,0 +1,15 @@
+<div class="loading" ng-if="drawing"></div>
+<div ng-show="!drawing && !noData">
+  <div class="d-flex line-note">
+    <div class="staff has-line-sample">
+      スタフ
+    </div>
+    <div class="voice-actor has-line-sample">
+      声優
+    </div>
+  </div>
+  <svg class="credit-stat-chart line-chart" id="creditStatChart"></svg>
+</div>
+<div ng-show="!drawing && noData">
+  データがありません。
+</div>

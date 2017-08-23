@@ -1,0 +1,49 @@
+<table class="w-100 main-info-table">
+  <tr>
+    <th>本名</th>
+    <td ng-switch="vm.person.gender">
+      {{ vm.person.name }}
+      <i ng-switch-when="male" class="fa fa-mars"></i>
+      <i ng-switch-when="female" class="fa fa-venus"></i>
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <th>国家</th>
+    <td>
+      <country country="vm.person.country"></country>
+      {{ vm.person.country.name }}
+    </td>
+  </tr>
+  <tr>
+    <th>誕生日</th>
+    <td>{{ vm.birthday() }}</td>
+  </tr>
+  <tr>
+    <th>リンク</th>
+    <td>
+      <a href="{{ vm.person.twitter }}" 
+        ng-if="vm.person.twitter"
+        title="{{ vm.person.name }}のツイッター"
+      >
+        ツイッター
+      </a><br>
+      <a href="{{ vm.person.link }}"
+        ng-if="vm.person.link"
+        title="{{ vm.person.name }}のホームページ"
+      >
+        ホームページ
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <th>Position</th>
+    <td>{{ vm.position() }}</td>
+  </tr>
+  <tr>
+    <th>アリアス</th>
+    <td>
+      {{ vm.alias() }}
+    </td>
+  </tr>
+</table>

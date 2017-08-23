@@ -25,22 +25,54 @@
     </div>
   </div>
   
-  <div class="container page-body page-list person-detail item-container">
+  <div class="container page-body page-detail person-detail item-container">
     <div class="row">
       <div class="col-lg-9 body">
         <div class="has-loading">
           <div class="loading item-box" ng-if="vm.loading"></div>
-          
-          <div ng-if="!vm.loading">
             
+          <div class="content" ng-if="!vm.loading">
+            <div class="item-group info">
+              <h6>主な情報</h6>
+              <div class="item item-box">
+                <div ng-include="'app/db/person/detail/main-info.html'"></div>
+              </div>
+            </div>
+            
+            <div class="item-group credits">
+              <h6>クレジット</h6>
+              <div class="item item-box">
+                <person-credits 
+                  class="w-100 d-block"
+                  voice-actresses="vm.person.voiceActresses"
+                  staffs="vm.person.staffs"
+                  name="vm.person.name"
+                >
+                </person-credits>
+              </div>
+            </div>
+            
+            <div class="item-group chart line-chart">
+              <h6>まとめの統計</h6>
+              <div class="item item-box">
+                <credit-stat class="w-100 d-block has-loading"
+                  va-data="vm.person.voiceActressStatistics"
+                  staff-data="vm.person.staffStatistics"
+                >
+                </credit-stat>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       
       <aside class="col-lg-3 item-container">
         <div class="item-group">
-          Thêm clg vào sidebar giờ ?!
-          <input type="checkbox" ng-model="vm.loading">
+          <h6>Thêm clg vào sidebar giờ ?!</h6>
+          <div class="item item-box">
+            <input type="checkbox" ng-model="vm.loading">
+          </div>
+          
         </div>
       </aside>
     </div>

@@ -1,0 +1,93 @@
+<ul class="nav nav-tabs tab-c" role="tablist">
+  <li class="nav-item tab-item-c">
+    <a class="nav-link active" data-toggle="tab" data-target="#voicedCharacters" role="tab">
+      キャラクター
+    </a>
+  </li>
+  <li class="nav-item tab-item-c">
+    <a class="nav-link" data-toggle="tab" data-target="#staffCredits" role="tab">
+      スタフ
+    </a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content tab-content-c">
+  <div class="tab-pane fade show active table-c" id="voicedCharacters" role="tabpanel">
+    <div class="table-head table-c-row">
+      <div class="row">
+        <div class="col-2">
+          キャラ名
+        </div>
+        <div class="col-6">
+          ノベル名
+        </div>
+        <div class="col-2 text-center">
+          発売日
+        </div>
+        <div class="col-2">
+          アリアス
+        </div>
+      </div>
+    </div>
+    
+    <div class="table-c-row" ng-repeat="va in vm.voiceActresses">
+      <div class="row">
+        <div class="col-2">
+          <a ui-sref="character.detail({ id: va.characterNovel.characterId })">
+            {{ va.characterNovel.characterName }}
+          </a>
+        </div>
+        <div class="col-6">
+          <a ui-sref="novel.detail({ id: va.characterNovel.novelId })">
+            {{ va.characterNovel.novelTitle }}
+          </a>
+        </div>
+        <div class="col-2 text-center">
+          {{ va.characterNovel.novelReleased }}
+        </div>
+        <div class="col-2">
+          {{ va.alias || vm.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="tab-pane fade table-c" id="staffCredits" role="tabpanel">
+    <div class="table-head table-c-row">
+      <div class="row">
+        <div class="col-2">
+          Position
+        </div>
+        <div class="col-6">
+          ノベル名
+        </div>
+        <div class="col-2 text-center">
+          発売日
+        </div>
+        <div class="col-2">
+          アリアス
+        </div>
+      </div>
+    </div>
+    
+    <div class="table-c-row" ng-repeat="staff in vm.staffs">
+      <div class="row">
+        <div class="col-2">
+          {{ staff.position }}
+        </div>
+        <div class="col-6">
+          <a ui-sref="novel.detail({ id: staff.novelId })">
+            {{ staff.novelTitle }}
+          </a>
+        </div>
+        <div class="col-2 text-center">
+          {{ staff.novelReleased }}
+        </div>
+        <div class="col-2">
+          {{ staff.alias || vm.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
