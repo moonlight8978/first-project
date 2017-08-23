@@ -28,7 +28,7 @@ class PersonService::VoiceActressStatistic < ApplicationService
     end.to_h
     
     initial_statistics.merge(statistics_hash).map do |year, total|
-      { year: year, total: total }
+      { year: year.to_s, total: total }
     end
   end
 end

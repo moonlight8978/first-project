@@ -10,7 +10,7 @@ class PersonService::StaffStatistic < ApplicationService
       staff.novel.first_release.nil?
     end
     
-    return nil if with_released.length == 0
+    return nil if with_released.size == 0
     
     # else
     statistics_hash = with_released.group_by_year do |staff|
@@ -24,11 +24,11 @@ class PersonService::StaffStatistic < ApplicationService
     end
     
     statistics_hash = statistics_hash.map do |first_day_of_year, staffs|
-      [first_day_of_year.year, staffs.length]
+      [first_day_of_year.year, staffs.size]
     end.to_h
     
     initial_statistics.merge(statistics_hash).map do |year, total|
-      { year: year, total: total }
+      { year: year.to_s, total: total }
     end
   end
 end
