@@ -3,14 +3,14 @@ class Api::V1::Db::CompaniesController < ApplicationController
     @companies = ::Db::Company.all
 
     paginate json: @companies, key_transform: :camel_lower, status: :ok,
-      each_serializer: Api::V1::Db::Company::CompanySerializer
+      each_serializer: Api::V1::Db::Company::CompanyListSerializer
   end
 
   def show
     @company = ::Db::Company.find(params[:id])
 
     render json: @company, key_transform: :camel_lower, status: :ok,
-      serializer: Api::V1::Db::Company::CompanySerializer
+      serializer: Api::V1::Db::Company::CompanyDetailSerializer
   end
 
   def create

@@ -35,9 +35,36 @@ class Db::Person < ApplicationRecord
   belongs_to :country, class_name: 'Country', optional: true
 
   has_many :voice_actresses, dependent: :destroy, counter_cache: true,
+    class_name: 'Db::Novel::Character::VoiceActress' do
+    # block  
+    def sort_date
+      self.select do |va|
+        va.character_novel.novel.first_release.nil?
+      end + self.reject do |va| 
+        va.character_novel.novel.first_release.nil? 
+      end.sort_by do |va| 
+        va.character_novel.novel.first_release.released 
+      end
+    end
+  end
+  has_many :voice_actress_aliases, -> { voice_actress_aliases },
     class_name: 'Db::Novel::Character::VoiceActress'
   has_many :staffs,          dependent: :destroy,
+    class_name: 'Db::Novel::Staff' do
+    # block
+    def sort_date
+      self.select do |staff|
+        staff.novel.first_release.released.nil?
+      end + self.reject do |staff|
+        staff.novel.first_release.released.nil?
+      end.sort_by do |staff| 
+        staff.novel.first_release.released 
+      end
+    end
+  end
+  has_many :staff_aliases, -> { staff_aliases },
     class_name: 'Db::Novel::Staff'
+  
 
   has_many :character_novels, class_name: 'Db::Novel::CharacterNovel', through: :voice_actresses
   has_many :novels,                                                    through: :staffs
@@ -59,6 +86,10 @@ class Db::Person < ApplicationRecord
     else
       positions
     end
+  end
+  
+  def aliases
+    (staff_aliases.map(&:alias) + voice_actress_aliases.map(&:alias)).uniq
   end
 
 private

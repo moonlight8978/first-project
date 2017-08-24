@@ -70,7 +70,11 @@ Rails.application.routes.draw do
         resources :producers, controller: 'companies'
 
         resources :people do
-
+          scope module: :people do
+            get 'staffs', to: 'staffs#index'
+            get 'voice_actresses', to: 'voice_actresses#index'
+          end
+          
         end
       end
 

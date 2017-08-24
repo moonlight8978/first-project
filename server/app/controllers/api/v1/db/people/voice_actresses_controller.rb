@@ -1,14 +1,23 @@
 class Api::V1::Db::People::VoiceActressesController < ApplicationController
-  def index_person
+  def index
     @person = ::Db::Person
-      .includes({ characters: { novels: :releases } }, :country)
+      .includes({ voice_actresses: { 
+                    character_novel: [
+                      :character, { novel: :releases }
+                    ] 
+                  } 
+                }, :country)
       .find(params[:person_id])
-    @voiceds = @person.voice_actresses.sort_by do |voice_actress|
-      voice_actress.novel.first_release.released
-    end
+    @voice_actresses = Kaminari
+      .paginate_array(@person.voice_actresses.sort_date)
+      .page(params[:page] || 1)
+      .per(params[:per_page] || 10)
 
-    paginate json: @voiceds, key_transform: :camel_lower, status: :ok,
-      per_page: params[:per_page],
-      each_serializer: Api::V1::Database::Person::VoicedSerializer
+    render json: @voice_actresses, key_transform: :camel_lower, status: :ok,
+      each_serializer: Api::V1::Db::Person::VoiceActressSerializer
+      
+    response.headers['x-per-page'] = params[:per_page] || 10
+    response.headers['x-page'] = params[:page] || 1
+    response.headers['x-total'] = @person.voice_actresses.size
   end
 end

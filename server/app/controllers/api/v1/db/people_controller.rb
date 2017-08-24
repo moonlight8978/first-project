@@ -3,9 +3,10 @@ class Api::V1::Db::PeopleController < ApplicationController
     @people = ::Db::Person
       .includes(:staffs, :country, :voice_actresses)
       .all
+      .page(params[:page] || 1)
+      .per(params[:per_page] || 10)
   
-    paginate json: @people, key_transform: :camel_lower, status: :ok,
-      per_page: params[:per_page],
+    render json: @people, key_transform: :camel_lower, status: :ok,
       each_serializer: Api::V1::Db::Person::PersonListSerializer
   end
 
@@ -13,8 +14,10 @@ class Api::V1::Db::PeopleController < ApplicationController
     @person = ::Db::Person
       .includes(
         { staffs: { novel: :releases } }, 
-        :country, 
-        { voice_actresses: { character_novel: [:novel, :character] } }
+        :country,
+        :staff_aliases, 
+        :voice_actress_aliases,
+        { voice_actresses: { character_novel: [{ novel: :releases }] } }
       )
       .find(params[:id])
     

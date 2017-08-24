@@ -1,13 +1,14 @@
 class Api::V1::Db::People::StaffsController < ApplicationController
-  def index_person
-    @person = ::Db::Person.includes({ novels: :releases }, :country)
+  def index
+    @person = ::Db::Person
+      .includes(staffs: { novel: :releases })
       .find(params[:person_id])
-    @credits = @person.staffs.sort_by do |staff|
-      staff.novel.first_release.released
-    end
+    @staffs = Kaminari
+      .paginate_array(@person.staffs.sort_date)
+      .page(params[:page] || 1)
+      .per(params[:per_page] || 10)
 
-    paginate json: @credits, key_transform: :camel_lower, status: :ok,
-      per_page: params[:per_page],
-      each_serializer: Api::V1::Database::Person::CreditSerializer
+    render json: @staffs, key_transform: :camel_lower, status: :ok,
+      each_serializer: Api::V1::Db::Person::StaffSerializer
   end
 end
