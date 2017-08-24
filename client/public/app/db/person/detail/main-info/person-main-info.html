@@ -37,13 +37,15 @@
     </td>
   </tr>
   <tr>
-    <th>Position</th>
-    <td>{{ vm.position() }}</td>
-  </tr>
-  <tr>
     <th>アリアス</th>
     <td>
       {{ vm.alias() }}
+    </td>
+  </tr>
+  <tr>
+    <th>Position</th>
+    <td>
+      <div staff-positions positions="vm.person.staffPositions"></div>
     </td>
   </tr>
 </table>

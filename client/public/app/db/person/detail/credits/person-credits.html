@@ -31,7 +31,7 @@
       </div>
     </div>
     
-    <div class="table-c-row" ng-repeat="va in vm.voiceActresses">
+    <div class="table-c-row" ng-repeat="va in vm.voiceActresses.data">
       <div class="row">
         <div class="col-2">
           <a ui-sref="character.detail({ id: va.characterNovel.characterId })">
@@ -51,6 +51,13 @@
         </div>
       </div>
     </div>
+    
+    <ul uib-pagination total-items="vm.total" ng-model="vm.page" max-size="8"
+      items-per-page="vm.perPage" ng-change="vm.pageChange()" boundary-links="true"
+      rotate="true" force-ellipses="true" boundary-link-numbers="true"
+      first-text="最初" last-text="最後" next-text="»" previous-text="«"
+      class="justify-content-center">
+    </ul>
   </div>
   
   <div class="tab-pane fade table-c" id="staffCredits" role="tabpanel">
@@ -71,7 +78,7 @@
       </div>
     </div>
     
-    <div class="table-c-row" ng-repeat="staff in vm.staffs">
+    <div class="table-c-row" ng-repeat="staff in vm.staffs.data">
       <div class="row">
         <div class="col-2">
           {{ staff.position }}
@@ -89,5 +96,12 @@
         </div>
       </div>
     </div>
+    
+    <ul uib-pagination total-items="vm.total" ng-model="vm.page" max-size="8"
+      items-per-page="vm.perPage" ng-change="vm.pageChange()" boundary-links="true"
+      rotate="true" force-ellipses="true" boundary-link-numbers="true"
+      first-text="最初" last-text="最後" next-text="»" previous-text="«"
+      class="justify-content-center">
+    </ul>
   </div>
 </div>

@@ -42,17 +42,7 @@
                       <span>{{ person.name }}</span>
                     </a>
                     
-                    <div class="staff-position-list d-flex">
-                      <div class="staff-position" 
-                        ng-repeat="position in person.staffPositions" 
-                        ng-switch="position">
-                        <div ng-switch-when="staff">スタフ</div>
-                        <div ng-switch-when="vocals">ボカルー</div>
-                        <div ng-switch-when="voice_actor">声優</div>
-                        <div ng-switch-when="composer">作曲家</div>
-                        <div ng-switch-when="artist">アルティスト</div>
-                        <div ng-switch-when="scenario">シーン</div>
-                      </div>
+                    <div staff-positions positions="person.staffPositions">
                     </div>
                   </div>
                 </div>

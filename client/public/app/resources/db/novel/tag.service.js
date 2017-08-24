@@ -11,11 +11,12 @@
         let tagUrl      = server.api + '/db/novel_tags/:id';
         let searchUrl   = server.api + '/search/novel_tags';
         let novelUrl    = server.api + '/db/novel_tags/:id/novels';
+        const vaUrl = `${server.api}/db/people/:id/voice_actresses`;
 
         let service = {
             tag: tagRsrc(),
             search: searchRsrc(),
-            novel: novelRsrc()
+            novel: novelRsrc(),
         };
 
         return service;

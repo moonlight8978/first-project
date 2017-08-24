@@ -46,7 +46,7 @@
           <div ng-if="character.voiceActresses">
             <span>CV: </span>
             <span ng-repeat="va in character.voiceActresses">
-              <a class="va-name" ui-sref="index">{{ va.name }}</a><br>
+              <a class="va-name" ui-sref="person.detail({ id: personId })">{{ va.name }}</a><br>
             </span>
           </div>
         </div>
@@ -110,7 +110,7 @@
           <div ng-if="character.voiceActresses">
             <span>CV: </span>
             <span ng-repeat="va in character.voiceActresses">
-              <a class="va-name" ui-sref="index">{{ va.name }}</a><br>
+              <a class="va-name" ui-sref="person.detail({ id: va.personId })">{{ va.name }}</a><br>
             </span>
           </div>
         </div>
@@ -172,7 +172,7 @@
           <div ng-if="character.voiceActresses">
             <span>CV: </span>
             <span ng-repeat="va in character.voiceActresses">
-              <a class="va-name" ui-sref="index">{{ va.name }}</a><br>
+              <a class="va-name" ui-sref="person.detail({ id: va.personId })">{{ va.name }}</a><br>
             </span>
           </div>
         </div>

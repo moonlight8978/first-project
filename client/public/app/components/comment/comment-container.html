@@ -1,31 +1,24 @@
-<div class="item-group comment-container">
-  <h6>コメント</h6>
+<div class="loading" ng-if="!vm.done">
+</div>
+
+<div class="animated fadeIn" ng-if="vm.done">
+  <div class="" ng-if="vm.comments.length" id="commentTop">
+    <div class="comment-wrap item pb-0 mb-0" ng-repeat="comment in vm.renderComment(vm.currentPage)">
+      <comment comment="comment"></comment>
+      <div class="row">
+        <div class="line full-width mb-0"></div>
+      </div>
+    </div>
+    <ul uib-pagination total-items="vm.comments.length"
+      ng-model="vm.currentPage" max-size="1" items-per-page="vm.perPage"
+      ng-change="vm.pageChange()" boundary-links="true"
+      first-text="最初" last-text="最後" next-text="»" previous-text="«"
+      class="mt-3 pull-right top">
+    </ul>
+    <div class="clearfix"></div>
+  </div>
   
-  <div class="item item-box sidebar-will-load">
-    <div class="" ng-if="!vm.done">
-      Loading...
-    </div>
-    
-    <div class="animated fadeIn" ng-if="vm.done">
-      <div class="" ng-if="vm.comments.length" id="commentTop">
-        <div class="comment-wrap" ng-repeat="comment in vm.renderComment(vm.currentPage)">
-          <comment comment="comment"></comment>
-          <div class="row">
-            <div class="line full-width"></div>
-          </div>
-        </div>
-        <ul uib-pagination total-items="vm.comments.length"
-          ng-model="vm.currentPage" max-size="1" items-per-page="vm.perPage"
-          ng-change="vm.pageChange()" boundary-links="true"
-          first-text="最初" last-text="最後" next-text="»" previous-text="«"
-          class="pull-right top">
-        </ul>
-        <div class="clearfix"></div>
-      </div>
-      
-      <div class="" ng-if="!vm.comments.length">
-        コメントがありません。
-      </div>
-    </div>
+  <div class="" ng-if="!vm.comments.length">
+    コメントがありません。
   </div>
 </div>

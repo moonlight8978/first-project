@@ -58,12 +58,12 @@
 
           <div class="item-group">
             <h6>このタグには関係があるノベル</h6>
-            <div class="line full-width"></div>
             <div class="related-container item-container">
               <div class="row" ng-if="vm.novels.novels.length">
                 <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 novel-wrap has-ng-repeat-animate"
                   ng-repeat="novel in vm.novels.novels">
-                  <div class="novel" role="link" ui-sref="novel.detail({ id: novel.id })">
+                  <div class="novel item" 
+                    role="link" ui-sref="novel.detail({ id: novel.id })">
                     <div class="image-wrap">
                       <div class="image-placeholder ratio-3_4">
                         <div image-thumb class="image-thumb"

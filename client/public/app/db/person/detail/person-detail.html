@@ -35,7 +35,7 @@
             <div class="item-group info">
               <h6>主な情報</h6>
               <div class="item item-box">
-                <div ng-include="'app/db/person/detail/main-info.html'"></div>
+                <div person-main-info person="vm.person"></div>
               </div>
             </div>
             
@@ -44,9 +44,8 @@
               <div class="item item-box">
                 <person-credits 
                   class="w-100 d-block"
-                  voice-actresses="vm.person.voiceActresses"
-                  staffs="vm.person.staffs"
                   name="vm.person.name"
+                  personId="vm.person.id"
                 >
                 </person-credits>
               </div>

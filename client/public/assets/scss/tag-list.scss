@@ -31,6 +31,7 @@
       > * {
         display: block;
         padding: 1rem;
+        background-color: $grey;
         min-width: 0;
         @include transition-std(all);
       }

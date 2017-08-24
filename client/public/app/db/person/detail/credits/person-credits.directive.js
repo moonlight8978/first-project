@@ -9,9 +9,8 @@
         return {
             restrict: 'E',
             scope: {
-                'voiceActresses': '=',
-                'staffs': '=',
-                'name': '='
+                personId: '=',
+                name: '=',
             },
             templateUrl: 'app/db/person/detail/credits/person-credits.html',
             bindToController: true,

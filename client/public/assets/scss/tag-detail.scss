@@ -2,17 +2,15 @@
   .tag { margin-bottom: 2.5rem; }
 
   .related-container {
-    margin-top: -1rem;
 
     .novel-wrap { padding: 0 1rem; }
 
     .novel {
       padding: 1rem .5rem;
-      @include transition-std(background-color);
-
+      @include box-with-hover;
+      @include transition-std(all);
+      
       &:hover {
-        background-color: $content__background;
-
         .info h6 { color: $link__color-hover; }
       }
     }

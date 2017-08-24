@@ -11,12 +11,6 @@
         const vm = this;
         
         vm.loading = true;
-        vm.aliases = ['青葉りんご', '青葉りんご', '青葉りんご', '青葉りんご', '青葉りんご', '青葉りんご'];
-        vm.positions = ['voice_actor', 'staff', 'vocals']
-        
-        vm.birthday = birthday;
-        vm.alias = alias;
-        vm.position = position;
         
         getData();
         
@@ -26,25 +20,13 @@
                     .get({ id: $stateParams.id })
                     .$promise;
                 console.log(vm.person);
+                PageTitle.set(`${vm.person.name}・スタフ`);
                 vm.loading = false;
             } catch (error) {
                 console.log(error);
+                vm.loading = false;
                 $state.go(`errors.${error.status}`);
             }
-        }
-        
-        function birthday() {
-            return `${vm.person.birthdayYear || '?'}年` +
-                   `${vm.person.birthdayMonth || '?'}月` +
-                   `${vm.person.birthdayDay || '?'}日`;
-        }
-        
-        function alias() {
-            return vm.aliases.join('、');
-        }
-        
-        function position() {
-            return vm.positions.join('、');
         }
     }
 })();

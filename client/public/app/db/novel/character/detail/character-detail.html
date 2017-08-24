@@ -134,8 +134,16 @@
             </div>
           </div>
         </div>
-        <comment-container done="vm.comments.done" comments="vm.comments.data">
-        </comment-container>
+        <div class="item-group comment-container">
+          <h6>コメント</h6>
+          
+          <div class="item item-box sidebar-will-load has-loading">
+            <comment-container 
+              done="vm.comments.done" 
+              comments="vm.comments.data"
+            >
+            </comment-container>
+          </div>
       </aside>
     </div>
   </div>
