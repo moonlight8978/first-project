@@ -13,95 +13,106 @@
 
 <!-- Tab panes -->
 <div class="tab-content tab-content-c">
-  <div class="tab-pane fade show active table-c" id="voicedCharacters" role="tabpanel">
-    <div class="table-head table-c-row">
-      <div class="row">
-        <div class="col-2">
-          キャラ名
-        </div>
-        <div class="col-6">
-          ノベル名
-        </div>
-        <div class="col-2 text-center">
-          発売日
-        </div>
-        <div class="col-2">
-          アリアス
+  <div class="tab-pane fade show active table-c has-loading" id="voicedCharacters" role="tabpanel">
+    <div class="loading" ng-if="vm.voiceActresses.loading">
+    </div>
+    <div class="" ng-if="!vm.voiceActresses.loading">
+      <div class="table-head table-c-row">
+        <div class="row">
+          <div class="col-2">
+            キャラ名
+          </div>
+          <div class="col-6">
+            ノベル名
+          </div>
+          <div class="col-2 text-center">
+            発売日
+          </div>
+          <div class="col-2">
+            アリアス
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="table-c-row" ng-repeat="va in vm.voiceActresses.data">
-      <div class="row">
-        <div class="col-2">
-          <a ui-sref="character.detail({ id: va.characterNovel.characterId })">
-            {{ va.characterNovel.characterName }}
-          </a>
-        </div>
-        <div class="col-6">
-          <a ui-sref="novel.detail({ id: va.characterNovel.novelId })">
-            {{ va.characterNovel.novelTitle }}
-          </a>
-        </div>
-        <div class="col-2 text-center">
-          {{ va.characterNovel.novelReleased }}
-        </div>
-        <div class="col-2">
-          {{ va.alias || vm.name }}
+      
+      <div class="table-c-row" ng-repeat="va in vm.voiceActresses.data">
+        <div class="row">
+          <div class="col-2">
+            <a ui-sref="character.detail({ id: va.characterNovel.characterId })">
+              {{ va.characterNovel.characterName }}
+            </a>
+          </div>
+          <div class="col-6">
+            <a ui-sref="novel.detail({ id: va.characterNovel.novelId })">
+              {{ va.characterNovel.novelTitle }}
+            </a>
+          </div>
+          <div class="col-2 text-center">
+            {{ va.characterNovel.novelReleased }}
+          </div>
+          <div class="col-2">
+            {{ va.alias || vm.name }}
+          </div>
         </div>
       </div>
+      
+      <ul uib-pagination total-items="vm.voiceActresses.total" 
+        ng-model="vm.voiceActresses.page" max-size="8"
+        items-per-page="vm.voiceActresses.perPage" 
+        ng-change="vm.voiceActresses.pageChange()" 
+        boundary-links="true" rotate="true" force-ellipses="true" 
+        boundary-link-numbers="true" first-text="最初" last-text="最後" 
+        next-text="»" previous-text="«" class="justify-content-center">
+      </ul>
     </div>
-    
-    <ul uib-pagination total-items="vm.total" ng-model="vm.page" max-size="8"
-      items-per-page="vm.perPage" ng-change="vm.pageChange()" boundary-links="true"
-      rotate="true" force-ellipses="true" boundary-link-numbers="true"
-      first-text="最初" last-text="最後" next-text="»" previous-text="«"
-      class="justify-content-center">
-    </ul>
   </div>
   
-  <div class="tab-pane fade table-c" id="staffCredits" role="tabpanel">
-    <div class="table-head table-c-row">
-      <div class="row">
-        <div class="col-2">
-          Position
-        </div>
-        <div class="col-6">
-          ノベル名
-        </div>
-        <div class="col-2 text-center">
-          発売日
-        </div>
-        <div class="col-2">
-          アリアス
-        </div>
-      </div>
-    </div>
-    
-    <div class="table-c-row" ng-repeat="staff in vm.staffs.data">
-      <div class="row">
-        <div class="col-2">
-          {{ staff.position }}
-        </div>
-        <div class="col-6">
-          <a ui-sref="novel.detail({ id: staff.novelId })">
-            {{ staff.novelTitle }}
-          </a>
-        </div>
-        <div class="col-2 text-center">
-          {{ staff.novelReleased }}
-        </div>
-        <div class="col-2">
-          {{ staff.alias || vm.name }}
+  <div class="tab-pane fade table-c has-loading" id="staffCredits" role="tabpanel">
+    <div class="loading" ng-if="vm.staffs.loading"></div>
+    <div class="" ng-if="!vm.staffs.loading">
+      <div class="table-head table-c-row">
+        <div class="row">
+          <div class="col-2">
+            Position
+          </div>
+          <div class="col-6">
+            ノベル名
+          </div>
+          <div class="col-2 text-center">
+            発売日
+          </div>
+          <div class="col-2">
+            アリアス
+          </div>
         </div>
       </div>
+      
+      <div class="table-c-row" ng-repeat="staff in vm.staffs.data">
+        <div class="row">
+          <div class="col-2">
+            {{ staff.position }}
+          </div>
+          <div class="col-6">
+            <a ui-sref="novel.detail({ id: staff.novelId })">
+              {{ staff.novelTitle }}
+            </a>
+          </div>
+          <div class="col-2 text-center">
+            {{ staff.novelReleased }}
+          </div>
+          <div class="col-2">
+            {{ staff.alias || vm.name }}
+          </div>
+        </div>
+      </div>
+      
+      <ul uib-pagination total-items="vm.staffs.total" 
+        ng-model="vm.staffs.page" max-size="8"
+        items-per-page="vm.staffs.perPage" 
+        ng-change="vm.staffs.pageChange()" 
+        boundary-links="true" rotate="true" force-ellipses="true" 
+        boundary-link-numbers="true" first-text="最初" last-text="最後" 
+        next-text="»" previous-text="«" class="justify-content-center">
+      </ul>
     </div>
-    
-    <ul uib-pagination total-items="vm.total" ng-model="vm.page" max-size="8"
-      items-per-page="vm.perPage" ng-change="vm.pageChange()" boundary-links="true"
-      rotate="true" force-ellipses="true" boundary-link-numbers="true"
-      first-text="最初" last-text="最後" next-text="»" previous-text="«"
-      class="justify-content-center">
-    </ul>
   </div>
 </div>

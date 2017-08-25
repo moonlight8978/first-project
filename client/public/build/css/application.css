@@ -284,7 +284,7 @@
       text-shadow: 0 1px 1px #0d0d0e;
       font-size: 3em;
       margin: 0 7px;
-      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.3); }
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
       @media (min-width: 992px) {
         .error-container .code > div {
           padding: 20px 30px;
@@ -510,7 +510,8 @@ form .form-error > h6 {
   display: inline-block;
   width: 40px;
   height: 1.3rem;
-  margin: 0; }
+  margin: 0;
+  vertical-align: top; }
   .switch-button .slider {
     position: absolute;
     cursor: pointer;
@@ -641,6 +642,66 @@ form .form-error > h6 {
       border-bottom: solid 4px #31773a; }
   .pagination.top {
     margin: 0 0 1rem 0; }
+
+.page-list.novel-list .novel-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  text-align: center; }
+
+.page-list.novel-list .novel-info-head {
+  padding-top: 1rem;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0; }
+  .page-list.novel-list .novel-info-head .novel-info-head-title {
+    font-size: 1.0rem;
+    max-height: 3.0rem;
+    word-wrap: break-word;
+    overflow: hidden; }
+  .page-list.novel-list .novel-info-head .novel-info-head-other {
+    font-size: 0.9rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding-top: .5rem; }
+    .page-list.novel-list .novel-info-head .novel-info-head-other .length,
+    .page-list.novel-list .novel-info-head .novel-info-head-other .rating {
+      -webkit-box-flex: 1;
+          -ms-flex: 1 0 50%;
+              flex: 1 0 50%;
+      padding: 0 5px; }
+    .page-list.novel-list .novel-info-head .novel-info-head-other .length {
+      text-align: right;
+      border-right: 1px solid #ddd; }
+    .page-list.novel-list .novel-info-head .novel-info-head-other .rating {
+      text-align: left; }
+
+.page-list.novel-list .novel-info-release {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; }
+  .page-list.novel-list .novel-info-release .label {
+    font-size: 0.9rem; }
+
+.page-list.novel-list .db-novel .imagewrap {
+  padding: 1rem;
+  padding-right: 0; }
 
 .navbar {
   position: absolute;
@@ -2096,7 +2157,15 @@ aside .review.ng-enter-active {
   font-weight: bold; }
 
 .item-container .item-box {
-  box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.3); }
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+
+.item-container .item-box-hover {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease; }
+  .item-container .item-box-hover:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25), 0 3px 10px rgba(0, 0, 0, 0.22); }
 
 .item-container .item {
   padding: 1rem;
@@ -2203,9 +2272,12 @@ aside .review.ng-enter-active {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition-property: all;
   transition-duration: 0.3s;
+  transition-timing-function: ease;
+  transition-property: all;
+  transition-duration: 0.3s;
   transition-timing-function: ease; }
   .tag-detail-container .related-container .novel:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25), 0 3px 10px rgba(0, 0, 0, 0.22); }
   .tag-detail-container .related-container .novel:hover .info h6 {
     color: #009aab; }
 
@@ -2408,6 +2480,39 @@ aside .review.ng-enter-active {
 .page-detail.person-detail .main-info-table tr:nth-child(odd) {
   background-color: #f8f8f8; }
 
+.page-detail.novel-detail .image-and-info-wrap .info {
+  padding-left: 0; }
+
+.page-utility-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #f3f4f5;
+  padding: 8px 0;
+  border: 1px solid #ddd;
+  margin-bottom: 15px; }
+  @media (min-width: 768px) {
+    .page-utility-container {
+      margin-bottom: 25px; } }
+  .page-utility-container .page-utility {
+    padding: 0 10px;
+    border-left: 1px solid #ccc; }
+    .page-utility-container .page-utility:first-child {
+      border-left: 0; }
+    .page-utility-container .page-utility .utility-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: #105c65;
+      font-weight: bold;
+      cursor: pointer;
+      transition-property: all;
+      transition-duration: 0.3s;
+      transition-timing-function: ease; }
+      .page-utility-container .page-utility .utility-label:hover {
+        color: #009aab; }
+    .page-utility-container .page-utility .dropdown-menu {
+      font-size: 0.85rem; }
+
 @font-face {
   font-family: 'Noto Sans CJK JP';
   src: url("../fonts/NotoSansCJKjp-DemiLight.otf") format("opentype");
@@ -2450,6 +2555,9 @@ body {
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important; }
 
+.rating i {
+  color: orange; }
+
 table tr, table td, table th {
   padding: 0; }
 
@@ -2479,6 +2587,11 @@ a {
   a:focus, a:hover {
     color: #009aab;
     text-decoration: none; }
+
+.dropdown-item.active, .dropdown-item:active {
+  color: #000;
+  text-decoration: none;
+  background-color: #f7f7f9; }
 
 *:active, *:focus {
   outline: none; }

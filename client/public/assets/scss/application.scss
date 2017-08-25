@@ -33,6 +33,7 @@
 @import 'sidebar';
 @import 'character-list';
 @import 'db';
+@import 'page-utils';
 
 @font-face {
   font-family: 'Noto Sans CJK JP';
@@ -88,6 +89,8 @@ body { overflow-y:scroll; }
   display: none !important;
 }
 
+.rating i { color: orange; }
+
 table {
   tr, td, th {
     padding: 0;
@@ -122,6 +125,14 @@ a {
     text-decoration: none;
   }
 }
+
+.dropdown-item.active, .dropdown-item:active {
+  color: #000;
+  text-decoration: none;
+  background-color: #f7f7f9;
+}
+
+// #001979;#2432ec; 
 
 *:active, *:focus {
   outline: none;

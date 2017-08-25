@@ -1,0 +1,86 @@
+<div class="page-utility dropdown">
+  <span class="utility-label" id="sortBy"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+  >
+    レーティング
+    <span>&#9660;</span>
+  </span>
+  <div class="dropdown-menu" aria-labelledby="sortBy" 
+    ng-click="vm.fixDropdown($event)"
+  >
+    <div>
+      <label for="sortCancel" class="d-block m-0">
+        <div class="dropdown-item">
+          <input type="radio" class="form-check-input ml-0" 
+            ng-model="vm.sort.by" value="" id="sortCancel"
+          >
+          キャンセル
+        </div>
+      </label>
+      <div class="dropdown-item">
+        <label for="sortName" class="d-block m-0">
+          <input type="radio" class="form-check-input ml-0" 
+            ng-model="vm.sort.by" value="name" id="sortName"
+          >
+          名
+        </label>
+      </div>
+      <div class="dropdown-item">
+        <label for="sortLength" class="d-block m-0">
+          <input type="radio" class="form-check-input ml-0" 
+            ng-model="vm.sort.by" value="length" id="sortLength"
+          >
+          長さ
+        </label>
+      </div>
+      <div class="dropdown-item">
+        <label for="sortReleased" class="d-block m-0">
+          <input type="radio" class="form-check-input ml-0" 
+            ng-model="vm.sort.by" value="released" id="sortReleased"
+          >
+          発売日
+        </label>
+      </div>
+      <div class="dropdown-item">
+        <label for="sortRating" class="d-block m-0">
+          <input type="radio" class="form-check-input ml-0" 
+            ng-model="vm.sort.by" value="rating" id="sortRating"
+          >
+          レーティング
+        </label>
+      </div>
+    </div>
+    
+    <label for="reverseSort" class="d-block m-0">
+      <div class="dropdown-item">
+        <input type="checkbox" class="form-check-input ml-0" 
+          ng-model="vm.sort.reverse" id="reverseSort"
+        >
+        Reverse sort
+      </div>
+    </label>
+  </div>
+</div>
+
+<div class="page-utility dropdown">
+  <span class="utility-label" id="hideNsfw"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+  >
+    nsfw
+    <span>&#9660;</span>
+  </span>
+  
+  <div class="dropdown-menu" aria-labelledby="hideNsfw" 
+    ng-click="vm.fixDropdown($event)"
+  >
+    <div class="dropdown-item">
+      <label class="switch-button">
+        <input type="checkbox" ng-model="vm.hideNsfw">
+        <div class="slider"></div>
+      </label>
+      <span class="">
+        18+コンテンツ {{ vm.hideNsfw ? 'OFF' : 'ON'}}。
+      </span>
+    </div>
+  </div>
+</div>

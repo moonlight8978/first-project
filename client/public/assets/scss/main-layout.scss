@@ -44,7 +44,11 @@
   .item-box {
     @include box-shadow;
   }
-
+  
+  .item-box-hover {
+    @include box-with-hover;
+  }
+  
   .item {
     padding: 1rem;
     margin-bottom: 1rem;

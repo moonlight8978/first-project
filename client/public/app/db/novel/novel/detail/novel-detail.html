@@ -23,10 +23,27 @@
     </div>
   </div>
 
-  <div class="container page-body db-novel-detail">
+  <div class="container page-body db-novel-detail page-detail novel-detail item-container">
     <div class="body row">
-      <div class="content col-xl-9">
-        <div class="row image-and-info-wrap">
+      <div class="content col-lg-9">
+        <div class="page-utility-container"
+          novel-detail-utility 
+          hide-nsfw="vm.hideNsfw" 
+        >
+        </div>
+        
+        <div class="item item-box">
+          <div class="has-loading" 
+            novel-detail-main-info 
+            novel="vm.novel"
+            hide-nsfw="vm.hideNsfw"
+          >
+          </div>
+          
+          <tag-in-novel class="col-12" tags="vm.novel.tags" novel="vm.novel"
+            type="novel"></tag-in-novel>
+        </div>
+        <!-- <div class="row image-and-info-wrap">
           <div class="image col-lg-4 col-md-4 col-sm-4">
             <div class="image-wrap">
               <div class="image-placeholder ratio-3_4">
@@ -95,7 +112,7 @@
           <div class="col-12">
             <div class="line-shadow full-width bottom"></div>
           </div>
-        </div>
+        </div> -->
 
         <div class="more-info-tabs">
           <!-- Nav tabs -->
@@ -266,7 +283,7 @@
         </section>
       </div>
 
-      <aside class="col-xl-3 item-container">
+      <aside class="col-lg-3 item-container">
         <div class="item-group">
           <h6>Quick tool</h6>
           <div class="item item-box quick-tool-group">

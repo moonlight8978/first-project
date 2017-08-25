@@ -1,0 +1,59 @@
+<div class="loading" ng-if="!vm.novel"></div>
+
+<div class="" ng-if="vm.novel">
+  <div class="row image-and-info-wrap">
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="image">
+        <div class="image-placeholder ratio-3_4">
+          <div image-thumb class="image-thumb"
+            condition="vm.hideNsfw && vm.novel.imageNsfw"
+            nsfw="/assets/img/image-nsfw.jpg" image="{{ vm.novel.image }}">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="info col-lg-8 col-md-8 col-sm-8">
+      <table>
+        <tr class="info-entry">
+          <th class="hidden-sm-down">タイトル</th>
+          <td>{{ vm.novel.title }}</td>
+        </tr>
+        <tr class="info-entry" ng-if="vm.novel.alias">
+          <th class="hidden-sm-down">アリアス</th>
+          <td>{{ vm.novel.alias }}</td>
+        </tr>
+        <tr class="info-entry" ng-if="vm.novel.length">
+          <th class="hidden-sm-down">長さ</th>
+          <td>10-30時間</td>
+        </tr>
+        <tr class="info-entry" ng-if="vm.novel.producers">
+          <th class="hidden-sm-down">プロヂューサー</th>
+          <td>
+            <div ng-repeat="producer in vm.novel.producers">
+              {{ producer.name }}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th colspan="2">デスクリプション</th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div class="description-wrap">
+              <p> </p>
+              <p id="novelDescription" ng-if="!vm.novel.description"
+                class="overflow-toggleable novel-descr">ディスクリプションがありません。</p>
+              <p id="novelDescription" ng-if="vm.novel.description"
+                class="overflow-toggleable novel-descr">{{ vm.novel.description }}</p>
+            </div>
+            <span class="see-more" toggle-overflow target="#novelDescription"
+              lines="6" font-size="1" role="button">
+              ▼もっと見る
+            </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

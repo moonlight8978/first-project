@@ -5,24 +5,30 @@
         .module('app')
         .controller('PersonCreditsController', PersonCreditsController);
 
-    PersonCreditsController.$inject = ['PersonResource'];
+    PersonCreditsController.$inject = ['$scope', '$timeout', 'PersonResource'];
     
-    function PersonCreditsController(PersonResource) {
+    function PersonCreditsController($scope, $timeout, PersonResource) {
         const vm = this;
         
         vm.voiceActresses = {
             page: 1,
             perPage: 10,
+            loading: true,
+            pageChange: voiceActressesPageChange
         };
         vm.staffs = {
             page: 1,
             perPage: 10,
+            loading: true,
+            pageChange: staffPageChange
         };
         
-        vm.pageChange = pageChange;
-        
-        getVaData();
-        getStaffData();
+        $scope.$watch(() => vm.personId, (value) => {
+            if (value) {
+                getVaData();
+                getStaffData();
+            }
+        });
         // Voice actress
         function getVaData() {
             PersonResource.voiceActress.query({ 
@@ -32,7 +38,9 @@
             }, (voiceActresses, headers) => {
                 vm.voiceActresses.data = voiceActresses;
                 vm.voiceActresses.total = headers('x-total');
+                vm.voiceActresses.loading = false;
             }, (error) => {
+                vm.voiceActresses.loading = false;
                 console.log(error);
             });
         }
@@ -46,13 +54,19 @@
             }, (staffs, headers) => {
                 vm.staffs.data = staffs;
                 vm.staffs.total = headers('x-total');
+                vm.staffs.loading = false;
             }, (error) => {
+                vm.staffs.loading = false;
                 console.log(error);
             });
         }
         
-        function pageChange() {
-            
+        function voiceActressesPageChange() {
+            getVaData();
+        }
+        
+        function staffPageChange() {
+            getStaffData();
         }
     }
 })();
