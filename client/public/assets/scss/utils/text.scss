@@ -1,0 +1,17 @@
+.ellipsis, .b-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.b-has-html {
+  white-space: pre-line;
+}
+
+.b-text-3-line {
+  @include text-limit-lines(3, 1.5, 0.9);
+}
+
+.b-font-90 { font-size: 0.9rem; }
+.b-font-80 { font-size: 0.8rem; }
+.b-font-75 { font-size: 0.75rem; }

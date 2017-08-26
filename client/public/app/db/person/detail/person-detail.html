@@ -66,12 +66,16 @@
       </div>
       
       <aside class="col-lg-3 item-container">
-        <div class="item-group">
-          <h6>Thêm clg vào sidebar giờ ?!</h6>
-          <div class="item item-box">
-            <input type="checkbox" ng-model="vm.loading">
-          </div>
+        <div class="item-group comment-container">
+          <h6>コメント</h6>
           
+          <div class="item item-box has-loading">
+            <div comment-container 
+              data-id="vm.person.id"
+              data-type="person"
+            >
+            </div>
+          </div>
         </div>
       </aside>
     </div>

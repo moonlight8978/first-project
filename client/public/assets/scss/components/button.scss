@@ -221,32 +221,32 @@ $white: #fff;
   right: 0;
   display: flex;
   z-index: 100;
+}
 
-  .crud-btn {
-    border: 0;
-    background-color: transparent;
-    padding: 3px 13px;
-    color: $black;
+.crud-btn, .b-btn-crud {
+  border: 0;
+  background-color: transparent;
+  padding: 3px 13px;
+  color: $black;
 
-    @include transition-std(all);
+  @include transition-std(all);
 
-    &:hover { color: $white; }
+  &:hover { color: $white; }
 
-    &.btn-delete:hover {
-      background-color: $red;
-    }
+  &.btn-delete:hover {
+    background-color: $red;
+  }
 
-    &.btn-edit:hover {
-      background-color: $blue;
-    }
+  &.btn-edit:hover {
+    background-color: $blue;
+  }
 
-    &.btn-view:hover {
-      background-color: $cyan;
-    }
+  &.btn-view:hover {
+    background-color: $cyan;
+  }
 
-    &.btn-create:hover {
-      background-color: $green;
-    }
+  &.btn-create:hover {
+    background-color: $green;
   }
 }
 

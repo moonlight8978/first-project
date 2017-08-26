@@ -11,10 +11,7 @@
         $stateProvider.state('db', {
             abstract: true,
             parent: 'app',
-            url: '/db',
-            views: {
-
-            }
+            url: '/db'
         });
     }
 })();

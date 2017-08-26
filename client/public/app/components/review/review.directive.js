@@ -8,14 +8,25 @@
     review.$inject = [];
 
     function review() {
-        return {
-            restrict: 'E',
+        const directive =  {
+            restrict: 'A',
             scope: {
+                'review': '='
             },
             templateUrl: 'app/components/review/review.html',
-            link: function (scope, elm, attr) {
-
-            }
+            controller: controller,
+            controllerAs: 'vm',
+            bindToController: true,
         };
+        
+        return directive;
+    }
+    
+    function link() {
+        
+    }
+    
+    function controller() {
+        const vm = this;
     }
 })();

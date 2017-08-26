@@ -1,4 +1,34 @@
-<textarea ck-edtior ng-model="review" id="reviewEditor" name="reviewEditor"></textarea>
-<div class="submit-review">
-  <button role="button" class="btn-c btn-c-5 btn-c-5-dark">提出する</button>
+<div class="item-row-line"></div>
+
+<h6 class="b-ellipsis" title="{{ vm.review.title }}">
+  <span>{{ vm.review.title }}</span>
+</h6>
+<p class="b-has-html b-text-3-line">{{ vm.review.body }}</p>
+<!-- <span toggle-overflow class="see-more" target="#review{{reviewId}}"
+  lines="3" font-size="1">▼もっと見る</span> -->
+<div class="b-user-group">
+  <div class="b-user-avatar">
+    <div class="image-placeholder ratio-1_1 image-placeholder-avatar">
+      <div class="avatar-thumb image-thumb" ng-style="vm.review.user.profileImage ? { 'background-image': 'url({{ vm.review.user.profileImage }})' } : {}"></div>
+    </div>
+  </div>
+  
+  <div class="b-user-info b-flex-column">
+    <div class="b-ellipsis">
+      <a ui-sref="user({ id: vm.review.user.id })" class="username">
+        {{ vm.review.user.userName }}さん
+      </a>
+    </div>
+      
+    <div class="b-user-time">
+      <div class="created-at" title="Created at {{ vm.review.createdAt }}">
+        <i class="fa fa-bullhorn"></i>
+        <span>{{ vm.review.createdAt }}</span>
+      </div>
+      <div class="updated-at" title="Updated at {{ vm.review.updatedAt }}">
+        <i class="fa fa-pencil"></i>
+        <span>{{ vm.review.updatedAt }}</span>
+      </div>
+    </div>
+  </div>
 </div>

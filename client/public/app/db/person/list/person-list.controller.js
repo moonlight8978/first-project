@@ -47,6 +47,7 @@
         
             // pageChange for uib-paginate
         function pageChange() {
+            console.log(vm.page);
             $state.go('person.list', { page: vm.page });
         }
         

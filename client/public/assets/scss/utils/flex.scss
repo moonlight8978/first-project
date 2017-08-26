@@ -1,0 +1,11 @@
+.b-flex-middle {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.b-flex-column {
+  display: flex;
+  flex-direction: column;
+}

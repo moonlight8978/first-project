@@ -1,11 +1,11 @@
 <div class="loading" ng-if="vm.loading"></div>
 
 <div class="" ng-if="!vm.loading">
-  <div class="" ng-if="!vm.comments.length">
-    コメントがありません。
+  <div class="" ng-if="!vm.reviews.length">
+    レビューがありません。
   </div>
   
-  <div class="item-rows" ng-if="vm.comments.length">
+  <div class="item-rows" ng-if="vm.reviews.length">
     <div class="item-row paginate-row">
       <ul class="m-0 justify-content-center" uib-pagination total-items="vm.total"
         ng-model="vm.page" max-size="1" items-per-page="vm.perPage"
@@ -15,9 +15,7 @@
       </ul>
     </div>
     
-    <div comment="comment" class="item-row item-row-hover" 
-      ng-repeat="comment in vm.comments"
-    >
+    <div review="review" class="review item-row item-row-hover" ng-repeat="review in vm.reviews">
     </div>
     
     <div class="item-row paginate-row">

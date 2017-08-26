@@ -174,39 +174,6 @@
   }
 }
 
-.image-placeholder {
-  position: relative;
-  &::before {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 0;
-    padding: 0;
-  }
-
-  .image-thumb {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-position: center center;
-    background-image: url('/assets/img/loading.gif');
-    // background-color: #f0f7f9;
-    height: 100%;
-    width: 100%;
-    transition: background-image .75s ease-in-out;
-  }
-}
-
-.ratio-3_4::before {
-  padding-bottom: 4 / 3 * 100%;
-}
-
-.ratio-5_3::before {
-  padding-bottom: 3 / 5 * 100%;
-}
-
 // pagination
 .pagination {
   margin: 1.5rem 0;

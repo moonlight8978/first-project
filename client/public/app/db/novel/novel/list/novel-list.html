@@ -34,7 +34,7 @@
         
         <div class="row">
           <div class="col-12 col-md-6 mb-3 mb-md-4" ng-repeat="novel in vm.novels">
-            <div class="item-box-hover db-novel">
+            <div class="item p-0 item-box-hover db-novel">
               <div class="row">
                 <div class="col-4 col-md-5 pr-0">
                   <div class="imagewrap">
@@ -50,7 +50,7 @@
                 </div>
                 
                 <div class="col-8 col-md-7 pl-0">
-                  <div class="px-4 novel-info">
+                  <div class="px-3 novel-info">
                     <div class="novel-info-head">
                       <div class="novel-info-head-title">
                         <a ui-sref="novel.detail({ id: novel.id })"
@@ -77,9 +77,7 @@
                         </div>
                       </div>
                       
-                      <div class="row">
-                        <div class="line full-width mb-0 mt-3"></div>
-                      </div>
+                      <div class="line full-width mb-0 mt-3"></div>
                     </div>
                     
                     <div class="novel-info-release">

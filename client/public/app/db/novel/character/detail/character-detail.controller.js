@@ -14,18 +14,6 @@
         console.log(character);
 
         vm.character = character;
-        vm.comments = {
-            data: [],
-            done: false
-        };
         vm.hideNsfw = true;
-        
-        $timeout(() => {
-            $http.get('/comments.json')
-                .then((response) => {
-                    vm.comments.data = response.data;
-                    vm.comments.done = true;
-                });
-        }, 3000);
     }
 })();

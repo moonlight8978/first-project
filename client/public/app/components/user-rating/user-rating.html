@@ -1,0 +1,34 @@
+<!-- <form ng-submit="updateScore(userSelection.star)">
+  <select ng-options="s.star as s.label for s in selections" ng-model="userSelection.star">
+    <option value="">-</option>
+  </select>
+  <button class="btn-c btn-c-5 btn-c-5-dark">提出</button>
+  
+</form> -->
+
+<form>
+  <div class="dropdown-item">
+    <div class="form-error" ng-if="vm.errors">
+      <h6 ng-repeat="(key, value) in vm.errors">{{ value }}</h6>
+    </div>
+  </div>
+  
+  <label for="star{{id}}" class="d-block m-0"
+    ng-repeat="(id, selection) in vm.selections"
+  >
+    <div class="dropdown-item">
+      <input type="radio" class="form-check-input ml-0" 
+        ng-model="vm.userSelection.star" ng-value="selection.star" id="star{{id}}"
+      >
+      {{ selection.label }}
+    </div>
+  </label>
+  
+  <div class="dropdown-item text-right">
+    <a href="javascript:void(0)" 
+      ng-click="vm.updateScore(vm.userSelection.star)"
+    >
+      提出
+    </a>
+  </div>
+</form>

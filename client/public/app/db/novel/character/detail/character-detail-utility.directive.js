@@ -3,24 +3,20 @@
 
     angular
         .module('app')
-        .directive('novelDetailUtility', novelDetailUtility);
+        .directive('characterDetailUtility', characterDetailUtility);
 
-    function novelDetailUtility() {
+    function characterDetailUtility() {
         return {
             restrict: 'A',
             scope: {
-                hideNsfw: '=',
-                novel: '='
+                character: '='
             },
-            templateUrl: 'app/db/novel/novel/detail/novel-detail-utility.html',
-            link: link, 
+            templateUrl: 'app/db/novel/character/detail/character-detail-utility.html',
             controller: controller,
             controllerAs: 'vm',
             bindToController: true,
         };
     }
-    
-    function link(scope, element, attrs) {}
     
     controller.$inject = ['DeleteConfirm'];
     
@@ -35,11 +31,6 @@
         }
         
         function destroy() {
-            DeleteConfirm.open(
-                'NovelDetailDeleteController',
-                'app/db/novel/novel/detail/delete/novel-detail-delete.html',
-                vm.novel,
-            );
         }
     }
 })();

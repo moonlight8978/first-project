@@ -3,27 +3,6 @@
 
 .db-novel-detail {
 
-> .body {
-
-  > .content {
-    @include responsive(lg) {
-      max-width: 70%;
-    }
-    @include responsive(xl) {
-      max-width: 75%;
-    }
-  }
-
-  > aside {
-    @include responsive(lg) {
-      max-width: 30%;
-    }
-    @include responsive(xl) {
-      max-width: 25%;
-    }
-  }
-}
-
 .image-and-info-wrap {
   margin-bottom: 20px;
 
@@ -48,18 +27,6 @@
 
     .info-entry:nth-child(odd) { background-color: $content__background; }
 
-    .description-wrap {
-      padding: 1px 10px;
-      border: 1px solid $border-color;
-      margin: 5px 0;
-    }
-
-    .novel-descr {
-      max-height: 4.5em;
-      white-space: pre-line;
-      @include responsive(lg) { max-height: 6em; }
-      @include responsive(xl) { max-height: 9em; }
-    }
   }
 }
 

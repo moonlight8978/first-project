@@ -1,0 +1,32 @@
+.table-c {
+  .table-c-row {
+    padding: .5rem 5px;
+    &:not(.table-head):hover {
+      background-color: $content__background;
+    }
+    
+    &.table-head {
+      padding: 1rem 5px;
+      font-weight: 600;
+      border-bottom: 1px solid #ccc;
+    }
+  }
+}
+
+.main-info-table {
+  width: 100%;
+  
+  td {
+    padding: 7px;
+  }
+  
+  th {
+    padding: 7px 7px 7px 15px;
+    width: 111px;
+    vertical-align: text-top;
+  }
+  
+  tr:nth-child(odd):not(.description) {
+    background-color: $content__background;
+  }
+}

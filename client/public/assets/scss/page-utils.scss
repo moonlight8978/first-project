@@ -1,5 +1,6 @@
 .page-utility-container {
   display: flex;
+  justify-content: space-between;
   background-color: #f3f4f5;
   padding: 8px 0;
   border: 1px solid $border-color;
@@ -7,6 +8,11 @@
   
   @include responsive(md) {
     margin-bottom: 25px;
+  }
+  
+  .page-utility-group {
+    display: flex;
+    flex-grow: 0;
   }
   
   .page-utility {
@@ -30,6 +36,14 @@
     
     .dropdown-menu {
       font-size: 0.85rem;
+      @include box(1);
+      border: 0;
+    }
+  }
+  
+  .crud {
+    .utility-label {
+      font-size: 1rem;
     }
   }
 }

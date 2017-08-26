@@ -1,0 +1,12 @@
+.description-wrap {
+  padding: 1px 10px;
+  border: 1px solid $border-color;
+  margin: 5px 0;
+}
+
+.description-text {
+  max-height: 4.5em;
+  white-space: pre-line;
+  @include responsive(lg) { max-height: 6em; }
+  @include responsive(xl) { max-height: 9em; }
+}

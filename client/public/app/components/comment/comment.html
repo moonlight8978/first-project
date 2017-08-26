@@ -1,14 +1,29 @@
-<div class="comment">
-  <p class="comment-body">{{ vm.comment.body }}</p>
-  
-  <div class="comment-user">
-    <div class="image-placeholder ratio_1-1 avatar">
+<div class="item-row-line"></div>
+<p class="b-has-html b-text-3-line">{{ vm.comment.body }}</p>
+<!-- <span toggle-overflow class="see-more" target="#comment{{commentId}}"
+  lines="3" font-size="1">▼もっと見る</span> -->
+<div class="b-user-group">
+  <div class="b-user-avatar">
+    <div class="image-placeholder ratio-1_1 image-placeholder-avatar">
       <div class="avatar-thumb image-thumb" ng-style="vm.comment.user.profileImage ? { 'background-image': 'url({{ vm.comment.user.profileImage }})' } : {}"></div>
     </div>
-    
-    <div class="user-name flex-overflow-fix pl-2">
-      <div class="ellipsis">
-        <a href="javascript:void(0);">{{ vm.comment.user.userName }}</a>
+  </div>
+  
+  <div class="b-user-info b-flex-column">
+    <div class="b-ellipsis">
+      <a ui-sref="user({ id: vm.comment.user.id })" class="username">
+        {{ vm.comment.user.userName }}さん
+      </a>
+    </div>
+      
+    <div class="b-user-time">
+      <div class="created-at" title="Created at {{ vm.comment.createdAt }}">
+        <i class="fa fa-bullhorn"></i>
+        <span>{{ vm.comment.createdAt }}</span>
+      </div>
+      <div class="updated-at" title="Updated at {{ vm.comment.updatedAt }}">
+        <i class="fa fa-pencil"></i>
+        <span>{{ vm.comment.updatedAt }}</span>
       </div>
     </div>
   </div>
