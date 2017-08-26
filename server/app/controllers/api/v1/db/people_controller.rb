@@ -3,10 +3,9 @@ class Api::V1::Db::PeopleController < ApplicationController
     @people = ::Db::Person
       .includes(:staffs, :country, :voice_actresses)
       .all
-      .page(params[:page] || 1)
-      .per(params[:per_page] || 10)
   
-    render json: @people, key_transform: :camel_lower, status: :ok,
+    paginate json: @people, key_transform: :camel_lower, status: :ok,
+      page: params[:page] || 1, per_page: params[:per_page] || 10,
       each_serializer: Api::V1::Db::Person::PersonListSerializer
   end
 

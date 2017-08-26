@@ -5,8 +5,8 @@ class Feature::Rating < ApplicationRecord
       scope: [:rateable_id, :rateable_type], 
       message: 'You have already voted'
     }
-  validates :body,
-    presence: { message: 'Body cannot be empty!' }
+  validates :star,
+    presence: { message: 'Star cannot be empty!' }
   
   belongs_to :user, class_name: 'Security::User'
   

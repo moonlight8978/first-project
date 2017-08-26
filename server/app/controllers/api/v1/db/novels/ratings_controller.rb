@@ -24,14 +24,15 @@ class Api::V1::Db::Novels::RatingsController < ApplicationController
     @novel = ::Db::Novel.find(params[:novel_id])
     @rating = @novel.ratings.includes(:rateable, :user).find_by(user_id: @user.id)
     @errors = ErrorMessage.new
-
+    
     if params[:star]
       if @rating
         @rating.assign_attributes(update_rating_params)
+        p @rating
         if @rating.changed?
           @rating.save || @errors.add!(@rating.errors)
         else
-          @errros.add!(nothing_changed: 'Nothing changed!')
+          @errors.add!(nothing_changed: 'Nothing changed!')
         end
       else
         @rating = @novel.ratings.build(create_rating_params)
