@@ -1,0 +1,29 @@
+<div class="loading" ng-if="vm.loading"></div>
+
+<div class="" ng-if="!vm.loading">
+  <form name="form" novalidate ng-submit="vm.submit()">
+    <div class="form-group form-error animated fadeIn"
+      ng-show="vm.error">
+      <h6 ng-repeat="(key, value) in vm.error">{{ value }}</h6>
+    </div>
+    <div class="form-group">
+      <textarea type="text" required
+        ng-class="{ 'active': vm.expanded }"
+        class="form-control b-comment-form-control"
+        ng-click="vm.expand()" 
+        rows="1"
+        ng-model="vm.comment.body"
+        placeholder="コメントの本文。。。"
+      >
+      </textarea>
+    </div>
+    <button 
+      class="b-font-90 px-4 mt-2 pull-right btn-c btn-c-5 btn-c-5-sakura"
+      ng-disabled="form.$invalid"
+    >
+      提出
+    </button>
+    <div class="clearfix"></div>
+  </form>
+  
+</div>

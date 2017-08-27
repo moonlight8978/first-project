@@ -21,39 +21,48 @@
         return directive;
     }
     
-    controller.$inject = ['$scope', '$timeout', '$http'];
+    controller.$inject = ['$scope', '$timeout', '$http', 'CommentApi'];
     
-    function controller($scope, $timeout, $http) {
+    function controller($scope, $timeout, $http, CommentApi) {
         const vm = this;
         
         // Variables
         vm.loading = true;
         vm.page = 1;
         vm.perPage = 6;
-        vm.total = 20;
         
         // Functions
         vm.pageChange = pageChange;
         
         // Init functions
-        $scope.$watch(() => vm.id, () => {
-            $timeout(getData, 3000);
-        })
+        $scope.$watch(() => vm.id, (value) => {
+            if (value) {
+                $timeout(getData, 3000);
+            }
+        });
+        $scope.$on('needToUpdateComment', (event, data) => {
+            getData();
+        });
         
         // Functions declare
         function pageChange() {
-            // vm.viewComments = renderComment(vm.currentPage);
-            // $('html, body').animate({
-            //     scrollTop: $('#commentTop').offset().top - 20
-            // }, 'slow');
+            getData();
         }
         
         function getData() {
-            $http.get('/comments.json')
-                .then((response) => {
-                    vm.comments = response.data;
+            CommentApi.type(vm.type)
+                .query({ 
+                    commentableId: vm.id, 
+                    page: vm.page, 
+                    perPage: vm.perPage,
+                }, (comments, headers) => {
+                    vm.comments = comments;
+                    vm.total = headers('x-total');
                     vm.loading = false;
-                });
+                }, (error) => {
+                    vm.loading = false;
+                    console.log(e);
+                });          
         }
     }
 })();

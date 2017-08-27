@@ -1,0 +1,8 @@
+.b-comment-form-control {
+  @include transition-std(all);
+  height: 38px;
+  
+  &.active {
+    height: 120px;
+  }
+}

@@ -5,13 +5,19 @@
         .module('app')
         .controller('PersonDetailController', PersonDetailController);
 
-    PersonDetailController.$inject = ['$scope', '$state', '$stateParams', 'PersonResource', 'PageTitle'];
+    PersonDetailController.$inject = ['$scope', '$state', '$stateParams', 'PersonResource', 'PageTitle', 'Principal'];
     
-    function PersonDetailController($scope, $state, $stateParams, PersonResource, PageTitle) {
+    function PersonDetailController($scope, $state, $stateParams, PersonResource, PageTitle, Principal) {
         const vm = this;
         
         vm.loading = true;
         
+        $scope.$watch(() => Principal.isAuthenticated(), (value) => {
+            vm.isAuthenticated = value;
+        });
+        $scope.$on('commentSubmitSuccess', (event, data) => {
+            $scope.$broadcast('needToUpdateComment');
+        });
         getData();
         
         async function getData() {

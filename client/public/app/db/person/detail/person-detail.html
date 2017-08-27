@@ -61,6 +61,24 @@
                 </credit-stat>
               </div>
             </div>
+            
+            <div class="item-group">
+              <h6>コメントを書く</h6>
+              <div class="item item-box has-loading">
+                <div class="item" ng-if="!vm.isAuthenticated">
+                  ログインのが必要です。
+                </div>
+                
+                <div class="item" ng-if="vm.isAuthenticated">
+                  <div write-comment
+                    type="person"
+                    data-id="vm.person.id"
+                    loading="vm.loading"
+                  >
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -102,6 +102,24 @@
 
         <character-novel-va class="item-group character-novel-relate" novels="vm.character.novels">
         </character-novel-va>
+        
+        <div class="item-group">
+          <h6>コメントを書く</h6>
+          <div class="item item-box has-loading">
+            <div class="item" ng-if="!vm.isAuthenticated">
+              ログインのが必要です。
+            </div>
+            
+            <div class="item" ng-if="vm.isAuthenticated">
+              <div write-comment
+                type="character"
+                data-id="vm.character.id"
+                loading="vm.loading"
+              >
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <aside class="col-lg-3 item-container">

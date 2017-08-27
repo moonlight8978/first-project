@@ -1,7 +1,7 @@
 <div class="loading" ng-if="vm.loading"></div>
 
 <div class="" ng-if="!vm.loading">
-  <div class="" ng-if="!vm.comments.length">
+  <div class="item" ng-if="!vm.comments.length">
     コメントがありません。
   </div>
   
@@ -15,10 +15,13 @@
       </ul>
     </div>
     
-    <div comment="comment" class="item-row item-row-hover" 
-      ng-repeat="comment in vm.comments"
+    <div class="no-ng-animate"
+      ng-repeat="comment in vm.comments track by comment.id"
     >
+      <div comment="comment" class="item-row item-row-hover">
+      </div>
     </div>
+    
     
     <div class="item-row paginate-row">
       <div class="item-row-line"></div>
