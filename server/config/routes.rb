@@ -1,19 +1,10 @@
 Rails.application.routes.draw do
   namespace :api do
-    scope module: :v1 do
+    scope module: :v1, constraints: ApiConstraint.new(1) do
       namespace :db do
         resources :novels do
           resources :screenshots,  shallow: true, controller: 'novels/screenshots'
           resources :staffs,       only: :create, controller: 'novels/staffs'
-          resources :characters, only: [] do
-            # # Add more seiyuu to character
-            # post   'voice_actresses/:id', to: 'novels/characters/voice_actresses#create'
-            # # Update seiyuu alias
-            # patch  'voice_actresses/:id', to: 'novels/characters/voice_actresses#update'
-            # put    'voice_actresses/:id', to: 'novels/characters/voice_actresses#update'
-            # # Remove seiyuu from character
-            # delete 'voice_actresses/:id', to: 'novels/characters/voice_actresses#destroy'
-          end
           scope module: :novels do
             get  'ratings/:user_id', to: 'ratings#show'
             post 'ratings', to: 'ratings#create'
@@ -59,22 +50,16 @@ Rails.application.routes.draw do
           scope module: :releases do
             resources :novel_platforms, except: :show, controller: 'platforms'
           end
-          # resources :voice_actresses, only: :update do
-          #   # Add more seiyuu to character
-          #   post   'people/:id', to: 'characters/voice_actresses#create'
-          #   # Remove seiyuu from character
-          #   delete 'people/:id', to: 'characters/voice_actresses#destroy'
-          # end
         end
 
         resources :producers, controller: 'companies'
 
         resources :people do
           scope module: :people do
-            get 'staffs', to: 'staffs#index'
-            get 'voice_actresses', to: 'voice_actresses#index'
+            resources :staffs, only: :index
+            resources :voice_actresses, only: :index
+            resources :comments, except: :show
           end
-          
         end
       end
 

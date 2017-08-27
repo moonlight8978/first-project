@@ -1,4 +1,6 @@
 class Db::Person < ApplicationRecord
+  include Commentable
+  
   validates :name, :name_en,
     presence: true
   validates :gender,
@@ -65,7 +67,6 @@ class Db::Person < ApplicationRecord
   has_many :staff_aliases, -> { staff_aliases },
     class_name: 'Db::Novel::Staff'
   
-
   has_many :character_novels, class_name: 'Db::Novel::CharacterNovel', through: :voice_actresses
   has_many :novels,                                                    through: :staffs
 
