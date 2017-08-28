@@ -1,0 +1,39 @@
+.tab-c {
+  border: 0;
+  // border-bottom: 1px solid #ddd;
+  
+  .tab-item-c {
+    flex: 1 1 50%;
+    margin: 0;
+    
+    .nav-link {
+      color: $black;
+      text-align: center;
+      border: 0;
+      border-bottom: 2px transparent solid;
+      @include transition-std(all);
+      
+      &.active {
+        border-color: $red;
+      }
+      
+      &:not(.active):hover {
+        border-color: $purple;
+      }
+    }
+    
+    &:first-child .nav-link {
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 5px;
+        bottom: 5px;
+        width: 1px;
+        background-color: #ccc;
+      }
+    }
+  }
+}

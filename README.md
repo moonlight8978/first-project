@@ -1,49 +1,24 @@
-# __< Project name >__
+# README
 
-(Ruby on Rails (Rails API), AngularJS (maybe React), Bootstrap 4, JWT Authentication....)
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-#### (This  is for studying. Everything is fiction.)
+Things you may want to cover:
 
----
+* Ruby version
 
-## Environment:
+* System dependencies
 
-NodeJS, RailsInstaller (Ruby 2.3, Rails 5), XAMPP
+* Configuration
 
-###### NodeJS global package:
-* `$ npm i -g gulp bower`
+* Database creation
 
-###### Server
-* `$ bundle install`
+* Database initialization
 
-* `$ rake db:create`
+* How to run the test suite
 
-* `$ rake db:migrate`
+* Services (job queues, cache servers, search engines, etc.)
 
-* run:
-**`$ rails s`
-**`$ redis-server`
-**`$ bundle exec sidekiq -C config/sidekiq.yml`
+* Deployment instructions
 
-###### Client
-* `$ bower install`
-
-* `$ npm install`
-
-* run: `$ http-server -c-1` or `$ npm run start`
-
-###### MySQL
-* user: `root`
-* password: none
-
-## Dev Support Tool
-###### Build sass, ES6
-* `$ gulp js:build`
-
-* `$ gulp css:build`
-
-###### Build on saving
-* `$ gulp js:watch`
-
-* `$ gulp css:watch`
-* `$ gulp watch` (not implemented yet)
+* ...

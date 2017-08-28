@@ -1,0 +1,21 @@
+.item-rows {
+  
+  .item-row {
+    padding: 1rem;
+  }
+  
+  .item-row .item-row-line {
+    margin-top: -1rem;
+    height: 1px;
+    background-color: $border-color;
+    margin-bottom: 1rem;
+  }
+  
+  .item-row.item-row-hover {
+    @include transition-std(all);
+    
+    &:hover {
+      background-color: $content__background;
+    }
+  }
+}
