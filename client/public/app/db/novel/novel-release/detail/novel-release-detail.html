@@ -1,0 +1,85 @@
+<div class="no-banner page-wrap animated fadeIn">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a ui-sref="home">メインページ</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a>データベース</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a ui-sref="novelRelease.list" ui-sref-opts="{ reload: true}">
+          リリース
+        </a>
+      </li>
+      <li class="breadcrumb-item active">
+        <span>{{ vm.release.title }}</span>
+      </li>
+    </ol>
+  </div>
+
+  <div class="page-head">
+    <div class="container">
+      <h3>{{ vm.release.title }}</h3>
+      <h6>{{ vm.release.titleEn }}</h6>
+    </div>
+  </div>
+  
+  <div class="container page-body page-detail release-detail item-container">
+    <div class="row">
+      <div class="col-lg-9 body">
+        <div class="has-loading">
+          <div class="loading item-box" ng-if="vm.loading"></div>
+            
+          <div class="content" ng-if="!vm.loading">
+            <div class="item-group info">
+              <h6>主な情報</h6>
+              <div class="item item-box">
+                <div novel-release-main-info release="vm.release"></div>
+              </div>
+            </div>
+            
+            <div class="item-group info">
+              <h6>他の情報</h6>
+              <div class="item item-box">
+                <div novel-release-more-info release="vm.release"></div>
+              </div>
+            </div>
+            
+            <div class="item-group">
+              <h6>コメントを書く</h6>
+              <div class="item item-box has-loading">
+                <div class="item" ng-if="!vm.isAuthenticated">
+                  ログインのが必要です。
+                </div>
+                
+                <div class="item" ng-if="vm.isAuthenticated">
+                  <div write-comment
+                    type="person"
+                    data-id="vm.person.id"
+                    loading="vm.loading"
+                  >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <aside class="col-lg-3 item-container">
+        <div class="item-group comment-container">
+          <h6>コメント</h6>
+          
+          <div class="item item-box has-loading">
+            <!-- <div comment-container 
+              data-id="vm.person.id"
+              data-type="person"
+            >
+            </div> -->
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

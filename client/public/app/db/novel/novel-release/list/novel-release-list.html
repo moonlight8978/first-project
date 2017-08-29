@@ -1,0 +1,99 @@
+<div class="no-banner page-wrap animated fadeIn">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a ui-sref="home">メインページ</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a>データベース</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a ui-sref="novelRelease.list({ page: 1, length: null })" 
+          ui-sref-opts="{ reload: true }">
+          ノベルリリース
+        </a>
+      </li>
+      <li class="breadcrumb-item active">
+        <span>ページ {{ vm.page }} / {{ vm.totalPages }}</span>
+      </li>
+    </ol>
+  </div>
+
+  <div class="page-head">
+    <div class="container">
+      <h3>リリース</h3>
+      <h6>All novel releases</h6>
+    </div>
+  </div>
+  
+  <div class="container page-body page-list release-list item-container">
+    <div class="row">
+      <div class="col-lg-9 body">
+        <div class="has-loading">
+          <div class="loading item-box" ng-if="vm.loading"></div>
+          
+          <div ng-if="!vm.loading">
+            <div class="mb-3" ng-repeat="release in vm.releases track by release.id">
+              <div class="item item-box">
+                <div class="b-ellipsis">
+                  <span ng-switch="release.platform">
+                    <i ng-switch-when="Windows" class="fa fa-windows"></i>
+                  </span>
+                  <a ui-sref="novelRelease.detail({ id: release.id })" 
+                    class="pl-1" 
+                    title="{{ release.title }}"
+                  >
+                    {{ release.title }}
+                  </a>
+                </div>
+                <div class="b-font-90">
+                  {{ release.released || '?' }} - {{ release.status }}
+                </div>
+                <div class="line mt-1 mb-2 w-100"></div>
+                <table class="b-table b-table-label b-table-hover b-font-90">
+                  <tr>
+                    <td>音声</td>
+                    <td>
+                      <span class="b-tag">{{ release.voiced }}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>ストーリーのアニメション</td>
+                    <td>
+                      <span class="b-tag">{{ release.animationStory }}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Hシーンのアニメション</td>
+                    <td>
+                      <span class="b-tag">{{ release.animationEro }}</span>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            
+            <ul uib-pagination total-items="vm.total" ng-model="vm.page" max-size="8"
+              items-per-page="vm.perPage" ng-change="vm.pageChange()" boundary-links="true"
+              rotate="true" force-ellipses="true" boundary-link-numbers="true"
+              first-text="最初" last-text="最後" next-text="»" previous-text="«"
+              class="pull-right">
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+      
+      <aside class="col-lg-3 item-container">
+        <div class="item-group">
+          <h6>clgt</h6>
+          <div class="item item-box has-loading">
+            <div class="loading">
+              
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

@@ -8,7 +8,7 @@
     ReleaseResource.$inject = ['$resource', 'SERVER'];
 
     function ReleaseResource($resource, server) {
-        let releaseUrl      = server.api + 'db/novels/releases/:id';
+        let releaseUrl      = server.api + '/db/novel_releases/:id';
 
         let service = {
             release: releaseRsrc()

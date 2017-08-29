@@ -1,0 +1,49 @@
+<table class="b-table b-table-odd">
+  <tr>
+    <th>タイトル</th>
+    <td>
+      <div>
+        <span ng-switch="vm.release.platform">
+          <i ng-switch-when="Windows" class="fa fa-windows"></i>
+        </span>
+        <span class="pl-1">{{ vm.release.title }}</span>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th>出版社</th>
+    <td>
+      <div ng-repeat="publisher in vm.release.publishers">
+        <a href="#">
+          <country country="publisher.country"></country>
+          {{ publisher.name }}
+        </a>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th>開発者</th>
+    <td>
+      <div ng-repeat="developer in vm.release.developers">
+        <a href="#">
+          <country country="developer.country"></country>
+          {{ developer.name }}
+        </a>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th>発売費</th>
+    <td>{{ vm.release.released }}</td>
+  </tr>
+  <tr>
+    <th>関係があるノベル</th>
+    <td>
+      <div class="ellipsis" ng-repeat="novel in vm.release.novels">
+        <a ui-sref="novel.detail({ id: novel.id })" title="{{ novel.title }}">
+          {{ novel.title }}
+        </a>
+      </div>
+    </td>
+  </tr>
+</table>

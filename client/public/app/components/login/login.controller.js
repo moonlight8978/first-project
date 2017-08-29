@@ -59,7 +59,13 @@
         async function googleLogin() {
             SocialLogin.google()
                 .then(
-                    (data) => console.log(data),
+                    (data) => {
+                        if ($rootScope.fromState.name) {
+                            $state.go($rootScope.fromState, $rootScope.fromStateParams);
+                        } else {
+                            $state.go('home');
+                        }
+                    },
                     (error) => {
                         console.log(error);
                         vm.login.error = error;
@@ -70,37 +76,18 @@
         async function facebookLogin() {
             SocialLogin.facebook()
                 .then(
-                    (data) => console.log(data),
+                    (data) => {
+                        if ($rootScope.fromState.name) {
+                            $state.go($rootScope.fromState, $rootScope.fromStateParams);
+                        } else {
+                            $state.go('home');
+                        }
+                    },
                     (error)  => {
                         console.log(error);
                         vm.login.error = error;
                     }
                 );
-        }
-        
-        async function loginToServer({ provider, auth_code }) {
-            let credentials;
-            switch (provider) {
-            case 'google':
-                credentials = await $http.post(LOGIN_GOOGLE, auth_code);
-                auth(credentials);
-                break;
-            case 'facebook':
-                credentials =  await $http.post(LOGIN_FACEBOOK, auth_code);
-                auth(credentials);
-                break;
-            default:
-                console.log('Provider is not match');
-            }
-            
-            function auth(response) {
-                const session = {
-                    user: response.data,
-                    token: response.headers('x-token'),
-                }
-                Auth.storeSession(session);
-                Principal.authenticate();
-            }
         }
 
         function twitterLogin() {
