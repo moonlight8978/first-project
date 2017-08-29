@@ -359,9 +359,9 @@ ActiveRecord::Schema.define(version: 20170821152410) do
 
   create_table "security_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "country_id"
-    t.string "user_name"
-    t.string "password_digest"
-    t.string "email"
+    t.string "user_name", null: false
+    t.string "password_digest", null: false
+    t.string "email", null: false
     t.string "phone_number"
     t.string "address"
     t.string "first_name"
@@ -375,7 +375,7 @@ ActiveRecord::Schema.define(version: 20170821152410) do
     t.string "twitter"
     t.string "gmail"
     t.boolean "activated", default: false, null: false
-    t.datetime "password_updated_at", default: "2017-07-19 16:59:15"
+    t.datetime "password_updated_at", default: "2017-08-27 21:58:58"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name_pronounce"

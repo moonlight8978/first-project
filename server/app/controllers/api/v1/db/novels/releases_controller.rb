@@ -1,16 +1,21 @@
 class Api::V1::Db::Novels::ReleasesController < ApplicationController
-  # def index
-  #   @releases = ::Db::Novel::Release.all
+  def index
+    @releases = ::Db::Novel::Release
+      .includes(:platform)
+      .all
 
-  #   paginate json: @releases, key_transform: :camel_lower, status: :ok,
-  #     per_page: params[:per_page],
-  #     each_serializer: Api::V1::Db::Novel::Release::ReleaseListSerializer
-  # end
+    paginate json: @releases, key_transform: :camel_lower, status: :ok,
+      per_page: params[:per_page] || 10, page: params[:page] || 1,
+      each_serializer: Api::V1::Db::Novel::Release::ReleaseListSerializer
+  end
 
   def show
-    @releases = ::Db::Novel::Release.find(params[:id])
+    @releases = ::Db::Novel::Release
+      .includes(:platform, { developers: :country }, { publishers: :country }, :novels)
+      .find(params[:id])
 
     render json: @releases, key_transform: :camel_lower, status: :ok,
+      include: [:platform, { developers: :country }, { publishers: :country }, :novels],
       serializer: Api::V1::Db::Novel::Release::ReleaseDetailSerializer
   end
 

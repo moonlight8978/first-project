@@ -35,7 +35,9 @@ class Db::Novel::Release < ApplicationRecord
     join_table: :db_publishers_novel_releases
 
   scope :released_asc, -> { order(released: :asc) }
-
+  
+  default_scope { order(released: :asc) }
+  
   def producers
     (developers + publishers).uniq(&:id)
   end

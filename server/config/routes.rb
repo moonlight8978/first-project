@@ -40,7 +40,7 @@ Rails.application.routes.draw do
         end
 
         scope module: :novels do
-          resources :novel_releases, only: [:update, :show],    controller: 'releases'
+          resources :novel_releases, only: [:update, :show, :index], controller: 'releases'
           resources :novel_staffs,   only: [:update, :destroy], controller: 'staffs'
           resources :characters,     except: :destroy
           resources :novel_tags,     except: :destroy,          controller: 'tags' do

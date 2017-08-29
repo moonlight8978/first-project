@@ -1,7 +1,5 @@
 class Api::V1::Db::Novel::ProducerSerializer < ActiveModel::Serializer
-  attributes :id, :name, :name_en, :country_name
+  attributes :id, :name, :name_en
 
-  def country_name
-    object.country && object.country.name
-  end
+  belongs_to :country, serializer: Api::V1::CountrySerializer
 end

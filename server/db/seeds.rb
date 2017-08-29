@@ -10,7 +10,8 @@ admin = Security::User.create(
   about: 'こんにちは！',
   signature: 'これは俺のシグネチャー。',
   first_name: 'ひろし',
-  last_name: '鈴木'
+  last_name: '鈴木',
+  name_pronounce: 'すずきひろし'
 )
 moderator = Security::User.create(
   user_name: 'moderator',
@@ -24,7 +25,8 @@ moderator = Security::User.create(
   about: 'こんにちは！',
   signature: 'これは俺のシグネチャー。',
   first_name: 'ひろし',
-  last_name: '鈴木'
+  last_name: '鈴木',
+  name_pronounce: 'すずきひろし'
 )
 user = Security::User.create(
   user_name: 'user',
@@ -38,7 +40,8 @@ user = Security::User.create(
   about: 'こんにちは！',
   signature: 'これは俺のシグネチャー。',
   first_name: 'ひろし',
-  last_name: '鈴木'
+  last_name: '鈴木',
+  name_pronounce: 'すずきひろし'
 )
 
 role_user = Security::User::Role.create(role: 'ROLE_USER')
@@ -60,6 +63,7 @@ novels = [
   Db::Novel.create(
     title_en: 'Koi Suru Doll to Omoi no Kiseki ~Poupee de Souhaits~',
     title: '恋する少女と想いのキセキ～Poupee de souhaits～',
+    title_pronounce: 'こいするドールとおもいのきせき～Poupee de souhaits～',
     length: 2,
     description:
       '主人公・深作友紀は幼い頃、自らを人形遣いと名乗る、「阿須葉」という女性の屋敷に出入りし、'\
@@ -75,6 +79,7 @@ novels = [
   Db::Novel.create(
     title_en: 'Hime-sama Love Life! -Motto! Ichaicha ☆ Paradise!-',
     title: '姫様LOVEライフ！ -もーっと！イチャイチャ☆ぱらだいす！-',
+    title_pronounce: 'ひめさまLOVEライフ！ -もーっと！イチャイチャ☆ぱらだいす！-',
     length: 2,
     image: 'https://s.vndb.org/cv/42/31642.jpg',
     image_nsfw: false
@@ -90,6 +95,7 @@ country = Country.create(
 company = Db::Company.new(
   name: 'Sugar Pot',
   name_en: 'Sugar Pot',
+  name_pronounce: 'Sugar Pot',
   link: 'http://www.sugarpot-hp.com/'
 )
 
@@ -186,7 +192,7 @@ novels[0].screenshots.create(image: 'https://s.vndb.org/sf/05/99705.jpg', image_
 
 tag = [
   Db::Novel::Tag.create(
-    tag: '同じ屋根',
+    tag: '同棲',
     tag_en: 'Same Roof',
     description_en:
       'The protagonist lives in the same building as one of the heroines/heroes '\
@@ -201,10 +207,12 @@ tag = [
   )
 ]
 
-novels[0].tags << tag[0] << tag[1]
+novels[0].tags << tag[0]
+novels[0].tags << tag[1]
 
 Db::Person.create(
   name_en: 'Aoba Ringo',
+  name_pronounce: 'あおばりんご',
   name: '青葉りんご',
   link: 'http://ameblo.jp/aobaringorongoronstundup/',
   twitter: 'https://twitter.com/aobaringo'
@@ -212,6 +220,7 @@ Db::Person.create(
 
 Db::Person.create(
   name_en: 'Ogura Yui',
+  name_pronounce: 'おぐらゆい',
   name: '小倉結衣',
   link: 'http://ameblo.jp/bisyouzyoge-mu-seiyuu/',
   twitter: 'https://twitter.com/ogurayui1017'
@@ -219,6 +228,7 @@ Db::Person.create(
 
 Db::Person.create(
   name_en: 'Miruno Jun',
+  name_pronounce: 'みるのじゅん',
   name: 'ミルノ純',
   link: 'http://synchronist.net/',
   twitter: 'https://twitter.com/mirumirumiruno'
@@ -226,19 +236,22 @@ Db::Person.create(
 
 Db::Person.create(
   name_en: 'Sakata Yuki',
+  name_pronounce: 'さかたゆき',
   name: '坂田有希',
   link: 'http://ameblo.jp/snow11snow22/'
 )
 
 Db::Person.create(
   name_en: 'Mizusawa Kei',
+  name_pronounce: 'みずさわけい',
   name: '瑞沢渓',
   link: 'http://y-tail.jp/profile/mizusawa.html'
 )
 
 Db::Person.create(
   name_en: 'Hayase Yayoi',
-  name: '早瀬ゃょぃ',
+  name_pronounce: 'はやせやよい',
+  name: '早瀬やよい',
   link: 'http://ameblo.jp/hayase-yayoi/',
   twitter: 'https://twitter.com/hayaseyayoi'
 )
@@ -246,6 +259,7 @@ Db::Person.create(
 characters = [
   Db::Novel::Character.create(
     name_en: 'Ena',
+    name_pronounce: 'えな',
     name: 'エナ',
     birthday_day: 1,
     birthday_month: 11,
@@ -258,6 +272,7 @@ characters = [
   ),
   Db::Novel::Character.create(
     name_en: 'Himekawa Mitomo',
+    name_pronounce: 'ひめかわみとも',
     name: '姫川美朋',
     birthday_day: 10,
     birthday_month: 3,
@@ -270,6 +285,7 @@ characters = [
   ),
   Db::Novel::Character.create(
     name_en: 'Komakuri Amane',
+    name_pronounce: 'こまくりあまね',
     name: '駒久利天音',
     birthday_day: 25,
     birthday_month: 8,
@@ -282,6 +298,7 @@ characters = [
   ),
   Db::Novel::Character.create(
     name_en: 'Shuri',
+    name_pronounce: 'しゅり',
     name: '珠璃',
     birthday_day: 22,
     birthday_month: 2,
@@ -294,6 +311,7 @@ characters = [
   ),
   Db::Novel::Character.create(
     name_en: 'Towa',
+    name_pronounce: 'とわ',
     name: 'トワ',
     birthday_day: 8,
     birthday_month: 10,
@@ -306,6 +324,7 @@ characters = [
   ),
   Db::Novel::Character.create(
     name_en: 'Yoshino Sara',
+    name_pronounce: 'よしのさら',
     name: '吉野紗良',
     birthday_day: 4,
     birthday_month: 6,
@@ -318,6 +337,7 @@ characters = [
   ),
   Db::Novel::Character.create(
     name_en: 'Ou Maika',
+    name_pronounce: 'おうまいか',
     name: '王舞華',
     birthday_day: 3,
     birthday_month: 8,
@@ -330,55 +350,62 @@ characters = [
   )
 ]
 
-Db::Novel::CharacterNovel.create(
+x_1 = Db::Novel::CharacterNovel.create(
   character: characters[0],
   novel_id: 1
-).voice_actresses.create(
+)
+x_1.voice_actresses.create(
   person_id: 1
 )
 
-Db::Novel::CharacterNovel.create(
+x_2 = Db::Novel::CharacterNovel.create(
   character: characters[1],
   novel_id: 1
-).voice_actresses.create(
+)
+x_2.voice_actresses.create(
   person_id: 2
 )
 
-Db::Novel::CharacterNovel.create(
+x_3 = Db::Novel::CharacterNovel.create(
   character: characters[2],
   novel_id: 1
-).voice_actresses.create(
+)
+x_3.voice_actresses.create(
   person_id: 3,
   alias_en: 'Moka Choko',
   alias: '萌花ちょこ'
 )
 
-Db::Novel::CharacterNovel.create(
+x_4 = Db::Novel::CharacterNovel.create(
   character: characters[3],
   novel_id: 1
-).voice_actresses.create(
+)
+x_4.voice_actresses.create(
   person_id: 4
 )
 
-Db::Novel::CharacterNovel.create(
+x_5 = Db::Novel::CharacterNovel.create(
   character: characters[4],
   novel_id: 1
-).voice_actresses.create(
+)
+x_5.voice_actresses.create(
   person_id: 5,
   alias_en: 'Kawashima Rino',
   alias: 'かわしまりの'
 )
 
-Db::Novel::CharacterNovel.create(
+x_6 = Db::Novel::CharacterNovel.create(
   character: characters[5],
   novel_id: 1
-).voice_actresses.create(
+)
+x_6.voice_actresses.create(
   person_id: 6
 )
 
 nao = Db::Person.create(
   name_en: 'nao',
   name: 'なお',
+  name_pronounce: 'なお',
   link: 'http://ameblo.jp/dg-naoblog/'
 )
 
@@ -402,6 +429,7 @@ Db::Novel::Staff.create(
 
 Db::Person.create(
   name_en: 'Arai Kenji',
+  name_pronounce: 'あらいけんじ',
   name: '新井健史',
   link: 'http://hemuri.com/',
   twitter: 'https://twitter.com/arakeso'
@@ -416,6 +444,7 @@ Db::Novel::Staff.create(
 
 Db::Person.create(
   name_en: 'Naruse Mamoru',
+  name_pronounce: 'なるせまもる',
   name: '成瀬守',
   link: 'http://theflyers.sakura.ne.jp/',
   twitter: 'https://twitter.com/mamo_su'
@@ -429,6 +458,7 @@ Db::Novel::Staff.create(
 
 Db::Person.create(
   name_en: 'Tsukishima Yuko',
+  name_pronounce: 'つきしまゆこ',
   name: '月嶋ゆうこ',
   link: 'http://roritora.k-server.org/',
   twitter: 'https://twitter.com/yuko_tsukishima'
@@ -442,6 +472,7 @@ Db::Novel::Staff.create(
 
 Db::Person.create(
   name_en: 'Oumiya Yuu',
+  name_pronounce: 'おうみやゆう',
   name: '近江谷宥',
   link: 'http://oumiyayuu.blog.fc2.com/'
 )
@@ -454,6 +485,7 @@ Db::Novel::Staff.create(
 
 Db::Person.create(
   name_en: 'Dosei',
+  name_pronounce: 'どせい',
   name: 'どせい',
   link: 'http://www111.sakura.ne.jp/~hotaru/',
   twitter: 'https://twitter.com/dosei_s'
@@ -468,6 +500,7 @@ Db::Novel::Staff.create(
 
 Db::Person.create(
   name_en: 'Minami Makoto',
+  name_pronounce: 'みなみまこと',
   name: '南誠',
   link: 'http://www.fsinet.or.jp/~makochin/',
   twitter: 'https://twitter.com/saburo_m'
@@ -482,6 +515,7 @@ Db::Novel::Staff.create(
 
 Db::Person.create(
   name_en: 'Oumiya Yuu',
+  name_pronounce: 'おうみやゆう',
   name: '江谷宥',
   link: 'http://oumiyayuu.blog.fc2.com/'
 )
@@ -502,6 +536,7 @@ Db::Novel::Staff.create(
 
 Db::Person.create(
   name_en: 'Yamashita Shinichirou',
+  name_pronounce: 'やましたしんいちろう',
   name: '山下慎一狼',
   link: 'http://ameblo.jp/phoenrill/',
   twitter: 'https://twitter.com/oh_sama'
@@ -514,10 +549,11 @@ Db::Novel::Staff.create(
   note: 'OP lyrics'
 )
 
-Db::Novel::CharacterNovel.create(
+x_6 = Db::Novel::CharacterNovel.create(
   character: characters[6],
   novel_id: 2
-).voice_actresses.create(
+)
+x_6.voice_actresses.create(
   person_id: 1
 )
 
