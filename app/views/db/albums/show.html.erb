@@ -1,0 +1,19 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <th>タイトル</th>
+      <td><%= @album.title %> (<%= @album.title_pronounce %>)</td>
+    </tr>
+    <tr>
+      <th>タイトル（英語）</th>
+      <td><%= @album.title_en %></td>
+    </tr>
+    <tr>
+      <th>写真</th>
+      <td><%= @album.image %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_db_album_path(@album) %>
+<%= link_to 'Album list', db_albums_path %>

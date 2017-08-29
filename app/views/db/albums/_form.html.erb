@@ -1,0 +1,25 @@
+<%= form_for(@album) do |f| %>
+  <% if @album.errors.any? %>
+    <div class="">
+      <div class="">
+        <%= pluralize(@album.errors.count, 'error') %>
+        <ul>
+          <% @album.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.label :title %><br>
+  <%= f.text_field :title %><br>
+  <%= f.label :title_en %><br>
+  <%= f.text_field :title_en %><br>  
+  <%= f.label :title_pronounce %><br>
+  <%= f.text_field :title_pronounce %><br>  
+  <%= f.label :image %><br>
+  <%= f.text_field :image %><br>  
+
+  <%= f.submit %>
+<% end %>
