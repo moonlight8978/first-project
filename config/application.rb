@@ -15,5 +15,8 @@ module Nyoro2
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.assets.paths << Rails.root.join('node_modules')
+    
+    # Devise
+    config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   end
 end

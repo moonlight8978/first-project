@@ -1,3 +1,15 @@
+<% content_for :breadcrumb do %>
+  <div class="">
+    breadcrumb
+  </div>
+<% end %>
+
+<% content_for :title do %>
+  <div class="">
+    Page title
+  </div>
+<% end %>
+
 <% @albums.each do |album| %>
 <div class="row">
   <div class="col-3" style="background-image: url('<%= album.image %>')">
@@ -17,3 +29,5 @@
 <% end %>
 
 <%= link_to 'New album', new_db_album_path, { class: 'loz-link' } %><br>
+
+<%= render 'sidebar' %>

@@ -18,6 +18,7 @@ class Db::AlbumsController < ApplicationController
   end
   
   def index
+    @title = 'アルバムリスト'
     @albums = Db::Album.all
   end
   

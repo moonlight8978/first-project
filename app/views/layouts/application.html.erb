@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Nyoro2</title>
+    <title><%= @title %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -15,6 +15,12 @@
   </head>
 
   <body>
+    <!-- <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %> -->
     <%= render 'layouts/navbar' unless @no_navbar  %>
     
     <div class="animated fadeIn">
@@ -24,6 +30,10 @@
         <div class="pt-5"></div>
         <div class="pt-4"></div>
         <div class="pt-3"></div>
+        
+        <%= yield :breadcrumb %>
+      
+        <%= yield :title %>
         
         <div class="row">
           <div class="col-lg-9">

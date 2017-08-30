@@ -11,24 +11,26 @@
 // about supported directives.
 //
 //= require jquery
-
+//= require tether/dist/js/tether.min
+//= require popper.js/dist/umd/popper.min
+//= require bootstrap/dist/js/bootstrap.min
 //= require jquery-lazyload/jquery.lazyload
 //= require wowjs
+
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
 
-const wow = new WOW({
-    offset: 100
-});
-$(document).on('click', '.loz-link', () => console.log('loz'));
-
-$(document).on('turbolinks:load', () => {
-	$(".lazy").lazyload({
-		effect : 'fadeIn'
-	});
-	wow.init();
-});
-
-
-
+(function () {
+    const wow = new WOW({
+        offset: 100
+    });
+    $(document).on('click', '.loz-link', () => console.log('loz'));
+    
+    $(document).on('turbolinks:load', () => {
+    	$(".lazy").lazyload({
+    		effect : 'fadeIn'
+    	});
+    	wow.init();
+    });
+})();
