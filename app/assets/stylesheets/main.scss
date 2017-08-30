@@ -1,6 +1,9 @@
+@import 'libs';
+
 @import 'base/variables';
 @import 'base/mixins';
-@import 'libs';
+@import 'base/global';
+
 @import 'components';
 @import 'styles';
 @import 'utils';

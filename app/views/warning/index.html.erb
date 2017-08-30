@@ -1,36 +1,33 @@
-<div class="mt-4"></div>
+<div class="pt-3"></div>
+<div class="container">
+  <div class="adult-warning">
+    <div class="adult-warning-header">
+      <h3>年齢認証</h3>
+    </div>
 
-<div class="animated fadeIn">
-  <div class="container">
-    <div class="age-confirm">
-      <div class="header">
-        <h3>年齢認証</h3>
+    <div class="b-line w-75 mb-2"></div>
+
+    <div class="adult-warning-body">
+      <p class="adult-warning-message">
+        ここから先は、アダルト商品を取り扱うアダルトサイトとなります。<br>
+        18歳未満の方のアクセスは固くお断りいたします。
+      </p>
+
+      <div class="adult-warning-confirm">
+        <h6 class="adult-warning-confirm-message">あなたは18歳以上ですか？</h6>
+        <%= link_to(home_path) do %>
+          <button class="btn-c btn-c-5 btn-c-5-sakura adult-warning-confirm-button">
+            <strong>はい</strong>
+            (アダルトへ)
+          </button>
+        <% end %>
       </div>
+    </div>
 
-      <div class="line w-60"></div>
+    <div class="b-line w-100"></div>
 
-      <div class="body">
-        <h6>ここから先は、アダルト商品を取り扱うアダルトサイトとなります。</h6>
-        <h6>18歳未満の方のアクセスは固くお断りいたします。</h6>
-
-        <div class="confirm">
-          <h6>あなたは18歳以上ですか？</h6>
-          <%= link_to home_url do %>
-            <button class="btn-c btn-c-5 btn-c-5-sakura">
-              <strong>はい</strong>
-              (アダルトへ)
-            </button>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="line w-100"></div>
-
-      <div class="footer">
-        <span>
-          &#169; 2017 にょろにょろ Ltd.
-        </span>
-      </div>
+    <div class="adult-warning-footer">
+      <span>&#169; 2017 にょろにょろ Ltd.</span>
     </div>
   </div>
 </div>

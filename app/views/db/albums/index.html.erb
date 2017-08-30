@@ -5,7 +5,7 @@
   </div>
   <div class="col-9">
     <div class="" title="<%= album.title_pronounce %>">
-      <%= link_to db_album_path(album) do %>
+      <%= link_to db_album_path(album), { class: 'loz-link' } do %>
         <%= album.title %>
       <% end %>
     </div>

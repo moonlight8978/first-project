@@ -10,6 +10,25 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
+
+//= require jquery-lazyload/jquery.lazyload
+//= require wowjs
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+const wow = new WOW({
+    offset: 100
+});
+$(document).on('click', '.loz-link', () => console.log('loz'));
+
+$(document).on('turbolinks:load', () => {
+	$(".lazy").lazyload({
+		effect : 'fadeIn'
+	});
+	wow.init();
+});
+
+
+

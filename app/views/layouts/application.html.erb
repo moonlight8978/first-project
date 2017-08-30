@@ -6,12 +6,36 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="turbolinks-cache-control" content="no-cache">
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/earlyaccess/mplus1p.css" rel="stylesheet">
   </head>
 
   <body>
-    <nav>
-      asdasdsadsaadsasad
-    </nav>
-    <%= yield %>
+    <%= render 'layouts/navbar' unless @no_navbar  %>
+    
+    <div class="animated fadeIn">
+      <% if @full_page %>
+        <%= yield %>
+      <% else %>
+        <div class="pt-5"></div>
+        <div class="pt-4"></div>
+        <div class="pt-3"></div>
+        
+        <div class="row">
+          <div class="col-lg-9">
+            <%= yield %>
+          </div>
+          <div class="col-lg-3">
+            <%= yield :sidebar %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+    <%= render 'layouts/footer' unless @no_footer %>
   </body>
 </html>

@@ -1,27 +1,23 @@
-.age-confirm {
-  padding-top: 30px;
+.adult-warning {
   text-align: center;
 
-  .header {
+  .adult-warning-header {
     color: $red;
     padding-bottom: 10px;
-
-    > h1, > h2, > h3, > h4,
-    > h5 { font-weight: bold; }
+    font-weight: bold;
   }
 
-  .body {
+  .adult-warning-body {
     padding-top: 10px;
 
-    > span,
-    > h6 { color: $red; }
+    .adult-warning-message { color: $red; }
 
-    .confirm {
+    .adult-warning-confirm {
       padding: 30px 0 45px;
 
-      h6 { font-weight: bold; }
+      .adult-warning-confirm-message { font-weight: bold; }
 
-      button {
+      .adult-warning-confirm-button {
         margin-top: 30px;
 
         strong { font-size: 1.5rem; }
@@ -29,11 +25,7 @@
     }
   }
 
-  .footer {
-    margin-top: -15px;
-
-    > span, > h6 {
-      font-size: 0.9rem;
-    }
+  .adult-warning-footer {
+    font-size: 0.9rem;
   }
 }
