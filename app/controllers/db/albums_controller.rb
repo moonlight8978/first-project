@@ -4,7 +4,7 @@ class Db::AlbumsController < ApplicationController
   end
   
   def create
-    @album = Db::Album.create(create_album_params)
+    @album = Db::Album.create(album_params)
     
     unless @album.errors.any? 
       redirect_to @album
@@ -20,6 +20,13 @@ class Db::AlbumsController < ApplicationController
   def index
     @title = 'アルバムリスト'
     @albums = Db::Album.all
+      .page(params[:page] || 1)
+      .per(params[:per_page] || 2)
+      
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
   
   def edit
@@ -28,7 +35,7 @@ class Db::AlbumsController < ApplicationController
   
   def update
     @album = Db::Album.find(params[:id])
-    @album.assign_attributes(update_album_params)
+    @album.assign_attributes(album_params)
     
     (render plain: '何も変わらなかった。' and return) unless @album.changed?
     
@@ -40,14 +47,8 @@ class Db::AlbumsController < ApplicationController
   end
 
 private
-  
-  def create_album_params
-    params.require(:album).permit(
-      :title, :title_en, :title_pronounce, :image
-    )
-  end
-  
-  def update_album_params
+
+  def album_params
     params.require(:db_album).permit(
       :title, :title_en, :title_pronounce, :image
     )

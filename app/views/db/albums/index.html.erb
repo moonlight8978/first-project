@@ -10,23 +10,9 @@
   </div>
 <% end %>
 
-<% @albums.each do |album| %>
-<div class="row">
-  <div class="col-3" style="background-image: url('<%= album.image %>')">
-    
-  </div>
-  <div class="col-9">
-    <div class="" title="<%= album.title_pronounce %>">
-      <%= link_to db_album_path(album), { class: 'loz-link' } do %>
-        <%= album.title %>
-      <% end %>
-    </div>
-    <div class="">
-      <%= album.title_en %>
-    </div>
-  </div>
+<div id="dbAlbumList">
+  <%= render 'album_list' %>
 </div>
-<% end %>
 
 <%= link_to 'New album', new_db_album_path, { class: 'loz-link' } %><br>
 

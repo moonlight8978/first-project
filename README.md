@@ -1,24 +1,41 @@
-# README
+# **Nyoro2 Project**
+#### Album database and E-Commerce
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### About Project 
+* **Just for learning purpose**
+* Technologies: Ruby on Rails 5.x full stack
+* Features: 
+  * Authentication (+ Social login) / Authorization (gem devise)
+  * Chart (D3.js)
+  * Search (gem sunspot)
+  * Version management (Page is editable by both users and admins)
 
-Things you may want to cover:
+### Initialization
+* `$ bundle install`
+* `$ yarn install`
+* `$ rake db:drop db:create db:schema:load db:seed`
+* `$ rails s`
 
-* Ruby version
+### Environment
+##### Ruby Version: 
+* Ruby 2.4.1p111 (2017-03-22 revision 58053) [x86_64-linux]
+* Rails 5.1.3
 
-* System dependencies
+##### System dependencies
+* sunspot - JAVA: `$ sudo apt-get install default-jre`
+* sidekiq - redis: `$ sudo apt-get install redis-server`
+* Node.js
+* Yarn
 
-* Configuration
+##### Database - MySQL
+* Username: `root`
+* Password: none
+* Initialization: `$ rake db:drop db:create db:schema:load db:seed`
 
-* Database creation
+##### Services
+* sunspot: `$ rake sunspot:solr:start`
+* sidekiq: `$ redis-server`
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
+### Resources
+* [VGMdb](http://vgmdb.net/)
 * ...

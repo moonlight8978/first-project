@@ -35,12 +35,14 @@
       
         <%= yield :title %>
         
-        <div class="row">
-          <div class="col-lg-9">
-            <%= yield %>
-          </div>
-          <div class="col-lg-3">
-            <%= yield :sidebar %>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-9">
+              <%= yield %>
+            </div>
+            <div class="col-lg-3">
+              <%= yield :sidebar %>
+            </div>
           </div>
         </div>
       <% end %>
