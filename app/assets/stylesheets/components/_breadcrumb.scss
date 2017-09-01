@@ -1,0 +1,21 @@
+// <ol class="breadcrumb">
+//   <li class="breadcrumb-item">
+//     <a href="">link</a>
+//   </li>
+//   <li class="breadcrumb-item active">
+//     <a>active</a>
+//   </li>
+// </ol>
+
+.breadcrumb {
+  background-color: transparent;
+  padding: .25rem 0 1rem;
+  margin-bottom: 0;
+  a {
+    transition: color 0.3s ease;
+  }
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+  content: '»';
+}

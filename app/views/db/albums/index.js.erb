@@ -1,1 +1,5 @@
-$('#dbAlbumList').html("<%= escape_javascript(render 'album_list') %>");
+setTimeout(function () {
+    console.log('aadsasdas');
+    $('.loading').hide();
+    $('#dbAlbumList').html("<%= escape_javascript(render 'album_list') %>");
+}, 3000);

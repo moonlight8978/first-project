@@ -1,0 +1,8 @@
+.b-box {
+  background-color: white;
+  @include box(1);
+}
+
+.b-box-p {
+  padding: 1rem;
+}

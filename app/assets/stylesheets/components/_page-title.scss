@@ -1,0 +1,19 @@
+// <div class="page-title">
+//   <div class="container">
+//     <h3>Big title</h3>
+//     <h6>Small title</h6>
+//   </div>
+// </div>
+
+.page-title {
+  padding: 15px 0;
+  background-color: $white;
+  box-shadow: 0 2px 4px $box-shadow__color;
+  min-height: 91px;
+
+  h6 {
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}

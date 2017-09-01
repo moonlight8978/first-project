@@ -1,12 +1,11 @@
 <nav class="navbar fixed-top navbar-inverse navbar-expand-md 
-  animated fadeInDown" id="navFixed">
-  <button class="navbar-toggler navbar-toggler-left" type="button"
-    id="toggler" aria-expanded="false" aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
+  animated fadeInDown" id="navbar">
+  <button class="navbar-toggler" type="button">
+    <i class="fa fa-fw fa-bars"></i>
   </button>
+  
   <div class="container">
-    <a class="navbar-brand d-md-none" ui-sref="home">にょろにょろ</a>
+    <a class="navbar-brand d-md-none" href="/home">にょろにょろ</a>
 
     <div class="collapse navbar-collapse w-100">
       <div class="-main">
@@ -30,7 +29,7 @@
         </ul>
         <!-- END navbar left -->
         <form class="form-inline search-form" id="searchForm"
-          ng-submit="vm.goSearch()" name="navSearchForm">
+          name="navSearchForm">
           <!-- <select class="custom-select" id="searchCate" ng-model="vm.search.category" required>
             <option value="">カテゴリ</option>
             <option value="novel">ビジュアルノベル</option>
@@ -42,7 +41,7 @@
             <option value="character">キュラクター</option>
             <option value="tag">タグ</option>
           </select> -->
-          <div class="input-group search-cate-wrap" ng-class="{ 'has-danger': navSearchForm.$submitted && navSearchForm.category.$invalid }">
+          <!-- <div class="input-group search-cate-wrap" ng-class="{ 'has-danger': navSearchForm.$submitted && navSearchForm.category.$invalid }">
             <select class="form-control search-cate" name="category" id="searchCate" ng-model="vm.search.category" required>
               <option value="">カテゴリ</option>
               <option value="novel">ビジュアルノベル</option>
@@ -54,7 +53,7 @@
               <option value="character">キュラクター</option>
               <option value="tag">タグ</option>
             </select>
-          </div>
+          </div> -->
           <!-- <div class="stylish-input-group" id="inputGroup">
             <input class="form-control mr-sm-2" id="searchInput" type="text"
               placeholder="探しましょう" ng-model="vm.search.query"
@@ -66,24 +65,21 @@
               <i class="fa fa-search"></i>
             </button> -->
 
-          <div class="input-group search-query-wrap" ng-class="{ 'has-danger': navSearchForm.$submitted && navSearchForm.query.$invalid }">
+          <div class="input-group search-query-wrap">
             <input class="form-control search-query" id="searchInput"
-              name="query" type="text"
-              placeholder="探しましょう" ng-model="vm.search.query"
-              autocomplete="off" ng-change="vm.search()" ng-trim="false" 
-              ng-model-options="{ debounce: 500 }"
-              required>
+              name="query" type="text" placeholder="探しましょう"
+              autocomplete="off" required
+            >
             <div class="btn-group">
-              <button type="button" class="btn btn-clear" id="searchClear"
-                ng-click="vm.clearInput()">
-                <span>&#10006;</span>
+              <button type="button" class="btn btn-clear" id="searchClear">
+                <i class="fa fa-times"></i>
               </button>
               <button id="searchSubmit" class="btn btn-submit">
                 <i class="fa fa-search"></i>
               </button>
             </div>
 
-            <div class="live-search-results">
+            <!-- <div class="live-search-results">
               <a ui-sref="novel.detail({ id: novel.id })"
                 ng-repeat="novel in vm.search.results">
                 <div class="result">
@@ -98,7 +94,7 @@
                   </div>
                 </div>
               </a>
-            </div>
+            </div> -->
           </div>
           <div class="clearfix"></div>
         </form>

@@ -1,19 +1,25 @@
 <% @albums.each do |album| %>
-<div class="row">
-  <div class="col-3" style="background-image: url('<%= album.image %>')">
-    
+  <div class="b-box b-box-p mb-3">
+    <div class="row">
+      <div class="col-3">
+        <div class="b-img-placeholder b-ratio-1_1">
+          <div class="b-img-thumb" data-background-image="<%= album.image %>">
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-9">
+        <div class="" title="<%= album.title_pronounce %>">
+          <%= link_to db_album_path(album), { class: 'loz-link' } do %>
+            <%= album.title %>
+          <% end %>
+        </div>
+        <div class="">
+          <%= album.title_en %>
+        </div>
+      </div>
+    </div>    
   </div>
-  <div class="col-9">
-    <div class="" title="<%= album.title_pronounce %>">
-      <%= link_to db_album_path(album), { class: 'loz-link' } do %>
-        <%= album.title %>
-      <% end %>
-    </div>
-    <div class="">
-      <%= album.title_en %>
-    </div>
-  </div>
-</div>
 <% end %>
 
-<%= paginate @albums, remote: true %>
+<%= paginate @albums %>

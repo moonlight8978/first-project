@@ -1,14 +1,29 @@
 <% content_for :breadcrumb do %>
-  <div class="">
-    breadcrumb
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to 'ホーム', home_path %>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="#">データベース</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <span>アルバムリスト</span>
+      </li>
+    </ol>
   </div>
 <% end %>
 
 <% content_for :title do %>
-  <div class="">
-    Page title
+<div class="page-title">
+  <div class="container">
+    <h3>アルバムリスト</h3>
+    <h6>Album list</h6>
   </div>
+</div>
 <% end %>
+
+<%= render 'components/utils_index' %>
 
 <div id="dbAlbumList">
   <%= render 'album_list' %>
@@ -16,4 +31,4 @@
 
 <%= link_to 'New album', new_db_album_path, { class: 'loz-link' } %><br>
 
-<%= render 'sidebar' %>
+<%= render 'components/sidebar_db' %>

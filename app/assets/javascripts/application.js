@@ -25,12 +25,23 @@
     const wow = new WOW({
         offset: 100
     });
-    $(document).on('click', '.loz-link', () => console.log('loz'));
     
-    $(document).on('turbolinks:load', () => {
+    $(document).on('ready turbolinks:load', () => {
     	$(".lazy").lazyload({
     		effect : 'fadeIn'
     	});
     	wow.init();
+        $(document).on('click', '.loz-link', () => console.log('loz'));
+        const $loading = $('.loading');
+        
+        $(document)
+            .on('ajax:send', '.pagination a', () => {
+                console.log('asdasd')
+                $loading.show();
+            })
+            .on('ajax:error', '.pagination a', (xhr, status, err) => {
+                console.log(err);
+                $loading.show();
+            })
     });
 })();

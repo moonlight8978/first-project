@@ -13,4 +13,12 @@ class Db::Album < ApplicationRecord
     if: -> { image },
     format: { with: /.jpg|.png|.jpeg\Z/,
               message: '写真は(.jpg/.png/,jpeg)が許可されます。' }
+              
+  # default_scope { order(title_pronounce: :asc) }
+  searchable do
+    text :title, stored: true
+    text :title_en
+    text :title_pronounce
+    string :title_pronounce
+  end
 end

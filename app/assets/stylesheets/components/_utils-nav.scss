@@ -1,0 +1,49 @@
+.page-utility-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f3f4f5;
+  padding: 8px 0;
+  border: 1px solid $border-color;
+  margin-bottom: 15px; 
+  
+  @include responsive(md) {
+    margin-bottom: 25px;
+  }
+  
+  .page-utility-group {
+    display: flex;
+    flex-grow: 0;
+  }
+  
+  .page-utility {
+    padding: 0 10px;
+    border-left: 1px solid #ccc;
+    
+    &:first-child { border-left: 0; }
+    
+    .utility-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: #105c65;
+      font-weight: bold;
+      cursor: pointer;
+      @include transition-std(all);
+      
+      &:hover {
+        color: #009aab;
+      }
+    }
+    
+    .dropdown-menu {
+      font-size: 0.85rem;
+      @include box(1);
+      border: 0;
+    }
+  }
+  
+  .crud {
+    .utility-label {
+      font-size: 1rem;
+    }
+  }
+}

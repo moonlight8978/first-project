@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   get 'home', to: 'home#index'
   
   namespace :db do
-    resources :albums
+    resources :albums do
+      collection do
+        get 'search'
+      end
+    end
   end
   
   get '/sign_in', to: 'users/registrations#edit'
